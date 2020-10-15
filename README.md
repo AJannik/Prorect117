@@ -1,5 +1,6 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+This is a game where you loose skills instead of earning them.
+You start with a very good charakter and power down over time.
 
 # Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
