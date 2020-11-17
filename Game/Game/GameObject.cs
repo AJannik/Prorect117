@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Game
 {
-    internal class GameObject
+    public class GameObject
     {
-        // TODO: Component references
+        private Hashtable components = new Hashtable()
+        {
+            { "EXAMPLE1", "First component object" },
+        };
     }
 }
