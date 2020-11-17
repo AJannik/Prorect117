@@ -6,6 +6,8 @@ namespace Game
 {
     public interface IComponent
     {
+        public GameObject GameObject { get; set; }
+
         void Update();
     }
 }
