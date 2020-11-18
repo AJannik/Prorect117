@@ -19,7 +19,7 @@ namespace Game.Component
             {
                 if (MyGameObject.Parent != null)
                 {
-                    return pos + MyGameObject.Parent.transform.Position;
+                    return pos + MyGameObject.Parent.Transform.Position;
                 }
 
                 return pos;

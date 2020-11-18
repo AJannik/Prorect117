@@ -7,8 +7,6 @@ namespace Game
 {
     public class GameObject
     {
-        public CTransform transform = new CTransform();
-
         private List<IComponent> components = new List<IComponent>();
 
         public GameObject()
@@ -23,19 +21,26 @@ namespace Game
         public GameObject(GameObject parent)
         {
             Parent = parent;
-            AddMeToChildren();
+            Parent.AddChild(this);
         }
 
         public GameObject(string name, GameObject parent)
         {
             Name = name;
             Parent = parent;
-            AddMeToChildren();
+            Parent.AddChild(this);
         }
+
+        public CTransform Transform { get; set; } = new CTransform();
 
         public string Name { get; set; } = "GameObject";
 
         public GameObject Parent { get; set; } = null;
+
+        public int ChildCount
+        {
+            get { return Children.Count; }
+        }
 
         private List<GameObject> Children { get; } = new List<GameObject>();
 
@@ -53,23 +58,51 @@ namespace Game
         {
             T component = new T();
             component.MyGameObject = this;
-
-            // TODO: add component to hashtable
+            components.Add(component);
         }
 
         public T GetComponent<T>()
             where T : class, IComponent
         {
-            T component = null; // TODO: get component from hashtable
-            return component;
+            foreach (IComponent component in components)
+            {
+                if (component.GetType() == typeof(T))
+                {
+                    return (T)component;
+                }
+            }
+
+            return null;
         }
 
-        private void AddMeToChildren()
+        private void AddChild(GameObject child)
         {
-            if (!Parent.Children.Contains(this))
+            if (!Children.Contains(child))
             {
-                Parent.Children.Add(this);
+                Children.Add(child);
             }
         }
+
+        // TODO: T[] GetComponents()
+
+        // TODO: T GetComponentInChildren()
+
+        // TODO: T[] GetComponentsInChildren()
+
+        // TODO: T GetComponentInParent()
+
+        // TODO: T[] GetComponentsInChildren()
+
+        // TODO: RemoveComponent()
+
+        // TODO: RemoveChild()
+
+        // TODO: GameObject[] GetChildren
+
+        // TODO: GameObject GetChild()
+
+        // TODO: RemoveAllChildren()
+
+        // TODO: bool IsChildOf()
     }
 }
