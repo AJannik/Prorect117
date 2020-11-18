@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using Game.Component;
 
 namespace Game
@@ -21,18 +20,20 @@ namespace Game
 
         public GameObject(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         public GameObject(GameObject parent)
         {
-            this.Parent = parent;
+            Parent = parent;
+            AddMeToChildren();
         }
 
         public GameObject(string name, GameObject parent)
         {
-            this.Name = name;
-            this.Parent = parent;
+            Name = name;
+            Parent = parent;
+            AddMeToChildren();
         }
 
         public string Name { get; set; } = "GameObject";
@@ -64,6 +65,14 @@ namespace Game
         {
             T component = null; // TODO: get component from hashtable
             return component;
+        }
+
+        private void AddMeToChildren()
+        {
+            if (!Parent.Children.Contains(this))
+            {
+                Parent.Children.Add(this);
+            }
         }
     }
 }

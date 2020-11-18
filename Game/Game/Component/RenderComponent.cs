@@ -11,8 +11,8 @@ namespace Game
     {
         public RenderComponent()
         {
-            // this.texture = TextureTools.LoadFromResource("Content.default.png");
-            this.TexCoords = new Rect(0f, 0f, 1f, 1f);
+            // texture = TextureTools.LoadFromResource("Content.default.png");
+            TexCoords = new Rect(0f, 0f, 1f, 1f);
         }
 
         private int Texture { get; set; }
@@ -21,15 +21,15 @@ namespace Game
 
         private Rect TexCoords { get; set; }
 
-        public GameObject MyGameObject { get; set; }
+        public GameObject MyGameObject { get; set; } = null;
 
         // private Transform transform { get; }
-        public void Update()
+        public void Update(float deltaTime)
         {
             // update logic
-            // this.Boundary.MinX = Transform.X;
-            // this.Boundary.MinY = Transform.Y;
-            this.Draw();
+            // Boundary.MinX = Transform.X;
+            // Boundary.MinY = Transform.Y;
+            Draw();
         }
 
         public void Draw()
@@ -50,7 +50,7 @@ namespace Game
 
         public void SetTexture(string name)
         {
-            this.Texture = TextureTools.LoadFromResource(name);
+            Texture = TextureTools.LoadFromResource(name);
         }
     }
 }

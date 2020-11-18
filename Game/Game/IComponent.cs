@@ -8,6 +8,6 @@ namespace Game
     {
         public GameObject MyGameObject { get; set; }
 
-        void Update();
+        void Update(float deltaTime);
     }
 }

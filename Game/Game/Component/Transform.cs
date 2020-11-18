@@ -8,14 +8,14 @@ namespace Game.Component
     {
         public Transform()
         {
-            this.Position = new Vector2(0, 0);
+            Position = new Vector2(0, 0);
         }
 
         public Vector2 Position { get; set; }
 
         public GameObject MyGameObject { get; set; }
 
-        public void Update()
+        public void Update(float deltaTime)
         {
             return;
         }
