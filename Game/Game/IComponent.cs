@@ -6,7 +6,7 @@ namespace Game
 {
     public interface IComponent
     {
-        public GameObject GameObject { get; set; }
+        public GameObject MyGameObject { get; set; }
 
         void Update();
     }

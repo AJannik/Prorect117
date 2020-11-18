@@ -6,14 +6,14 @@ namespace Game.Component
 {
     public class Transform : IComponent
     {
-        public Vector2 Position { get; set; }
-
-        public GameObject GameObject { get; set; }
-
         public Transform()
         {
             this.Position = new Vector2(0, 0);
         }
+
+        public Vector2 Position { get; set; }
+
+        public GameObject MyGameObject { get; set; }
 
         public void Update()
         {

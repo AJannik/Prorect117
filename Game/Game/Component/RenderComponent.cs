@@ -21,7 +21,7 @@ namespace Game
 
         private Rect TexCoords { get; set; }
 
-        public GameObject GameObject { get; set; }
+        public GameObject MyGameObject { get; set; }
 
         // private Transform transform { get; }
         public void Update()
