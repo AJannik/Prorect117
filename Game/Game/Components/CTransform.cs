@@ -4,9 +4,9 @@ using System.Numerics;
 
 namespace Game.Component
 {
-    public class Transform : IComponent
+    public class CTransform : IComponent
     {
-        public Transform()
+        public CTransform()
         {
             Position = new Vector2(0, 0);
         }

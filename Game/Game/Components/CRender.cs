@@ -7,9 +7,9 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Game
 {
-    internal class RenderComponent : IComponent
+    internal class CRender : IComponent
     {
-        public RenderComponent()
+        public CRender()
         {
             // texture = TextureTools.LoadFromResource("Content.default.png");
             TexCoords = new Rect(0f, 0f, 1f, 1f);
@@ -37,14 +37,14 @@ namespace Game
             GL.BindTexture(TextureTarget.Texture2D, this.Texture);
 
             GL.Begin(PrimitiveType.Quads);
-            GL.TexCoord2(this.TexCoords.MinX, this.TexCoords.MinY);
-            GL.Vertex2(this.Boundary.MinX, this.Boundary.MinY);
-            GL.TexCoord2(this.TexCoords.MaxX, this.TexCoords.MinY);
-            GL.Vertex2(this.Boundary.MaxX, this.Boundary.MinY);
-            GL.TexCoord2(this.TexCoords.MaxX, this.TexCoords.MaxY);
-            GL.Vertex2(this.Boundary.MaxX, this.Boundary.MaxY);
-            GL.TexCoord2(this.TexCoords.MinX, this.TexCoords.MaxY);
-            GL.Vertex2(this.Boundary.MinX, this.Boundary.MaxY);
+            GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
+            GL.Vertex2(Boundary.MinX, Boundary.MinY);
+            GL.TexCoord2(TexCoords.MaxX, TexCoords.MinY);
+            GL.Vertex2(Boundary.MaxX, Boundary.MinY);
+            GL.TexCoord2(TexCoords.MaxX, TexCoords.MaxY);
+            GL.Vertex2(Boundary.MaxX, Boundary.MaxY);
+            GL.TexCoord2(TexCoords.MinX, TexCoords.MaxY);
+            GL.Vertex2(Boundary.MinX, Boundary.MaxY);
             GL.End();
         }
 

@@ -7,12 +7,9 @@ namespace Game
 {
     public class GameObject
     {
-        public Transform transform = new Transform();
+        public CTransform transform = new CTransform();
 
-        private Hashtable components = new Hashtable()
-        {
-            { "EXAMPLE1", "First component object" },
-        };
+        private List<IComponent> components = new List<IComponent>();
 
         public GameObject()
         {
