@@ -7,7 +7,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Game
 {
-    internal class CRender : IComponent
+    public class CRender : IComponent
     {
         public CRender()
         {

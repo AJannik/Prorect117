@@ -44,15 +44,6 @@ namespace Game
 
         private List<GameObject> Children { get; } = new List<GameObject>();
 
-        // Old code, will remove if the new method using generics has been tested
-        /*
-        public void AddComponent(IComponent component)
-        {
-            // TODO: add to hashtable
-            component.GameObject = this;
-        }
-        */
-
         public void AddComponent<T>()
             where T : IComponent, new()
         {
@@ -75,6 +66,24 @@ namespace Game
             return null;
         }
 
+        public void RemoveComponent<T>()
+            where T : class, IComponent
+        {
+            foreach (IComponent component in components)
+            {
+                if (component.GetType() == typeof(T))
+                {
+                    components.Remove(component);
+                    return;
+                }
+            }
+        }
+
+        public int GetNumberComponents()
+        {
+            return components.Count;
+        }
+
         private void AddChild(GameObject child)
         {
             if (!Children.Contains(child))
@@ -82,6 +91,8 @@ namespace Game
                 Children.Add(child);
             }
         }
+
+        // TODO: Check for loops in Parent - Child relation before adding new childs or changing parents
 
         // TODO: T[] GetComponents()
 
