@@ -79,6 +79,8 @@ namespace Game
             }
         }
 
+        // TODO: RemoveComponent<T>(T component)
+
         public int GetNumberComponents()
         {
             return components.Count;
@@ -103,8 +105,6 @@ namespace Game
         // TODO: T GetComponentInParent()
 
         // TODO: T[] GetComponentsInChildren()
-
-        // TODO: RemoveComponent()
 
         // TODO: RemoveChild()
 
