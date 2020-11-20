@@ -12,7 +12,7 @@ namespace Game
     {
         public CRender()
         {
-            // texture = TextureTools.LoadFromResource("Content.default.png");
+            Texture = TextureTools.LoadFromResource("Content.default.png");
             TexCoords = new Rect(0f, 0f, 1f, 1f);
         }
 
@@ -29,7 +29,7 @@ namespace Game
         public void Update(float deltaTime)
         {
             // pull Transform from object
-            // Transform = MyGameObject.GetComponent<CTransform>;
+            Transform = MyGameObject.Transform;
 
             Boundary.MinX = Transform.Position.X;
             Boundary.MinY = Transform.Position.Y;
