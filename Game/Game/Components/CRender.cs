@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks.Dataflow;
+using Game.Component;
 using Game.Tools;
 using OpenTK.Graphics.OpenGL;
 
@@ -11,9 +12,11 @@ namespace Game
     {
         public CRender()
         {
-            // texture = TextureTools.LoadFromResource("Content.default.png");
+            Texture = TextureTools.LoadFromResource("Content.default.png");
             TexCoords = new Rect(0f, 0f, 1f, 1f);
         }
+
+        public GameObject MyGameObject { get; set; } = null;
 
         private int Texture { get; set; }
 
@@ -21,14 +24,15 @@ namespace Game
 
         private Rect TexCoords { get; set; }
 
-        public GameObject MyGameObject { get; set; } = null;
+        private CTransform Transform { get; set; }
 
-        // private Transform transform { get; }
         public void Update(float deltaTime)
         {
-            // update logic
-            // Boundary.MinX = Transform.X;
-            // Boundary.MinY = Transform.Y;
+            // pull Transform from object
+            Transform = MyGameObject.Transform;
+
+            Boundary.MinX = Transform.Position.X;
+            Boundary.MinY = Transform.Position.Y;
             Draw();
         }
 
