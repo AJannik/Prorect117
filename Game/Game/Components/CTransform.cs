@@ -17,9 +17,9 @@ namespace Game.Component
         {
             get
             {
-                if (MyGameObject.Parent != null)
+                if (MyGameObject.GetParent() != null)
                 {
-                    return pos + MyGameObject.Parent.Transform.Position;
+                    return pos + MyGameObject.GetParent().Transform.Position;
                 }
 
                 return pos;
