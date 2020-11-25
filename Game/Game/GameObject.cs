@@ -20,7 +20,7 @@ namespace Game
 
         public GameObject(GameObject parent)
         {
-            if (SetParent(parent))
+            if (!SetParent(parent))
             {
                 Console.WriteLine($"Couldn't set parent for - {parent.Name} - (Cycle in hierarchy detected)");
             }
@@ -29,7 +29,7 @@ namespace Game
         public GameObject(string name, GameObject parent)
         {
             Name = name;
-            if (SetParent(parent))
+            if (!SetParent(parent))
             {
                 Console.WriteLine($"Couldn't set parent for - {parent.Name} - (Cycle in hierarchy detected)");
             }
@@ -96,7 +96,7 @@ namespace Game
                 }
             }
 
-            if (list.Count < 0)
+            if (list.Count > 0)
             {
                 return list.ToArray();
             }
@@ -168,11 +168,12 @@ namespace Game
             GameObject tmp = parent;
             while (tmp != null)
             {
-                tmp = parent.GetParent();
                 if (tmp == this)
                 {
                     return false; // can't set parent because of cycle
                 }
+
+                tmp = tmp.GetParent();
             }
 
             // check if this object had a parent before
@@ -240,7 +241,7 @@ namespace Game
 
         private void RemoveChild(GameObject child)
         {
-            foreach (GameObject gameObject in Children)
+            foreach (GameObject gameObject in Children.ToArray())
             {
                 if (gameObject == child)
                 {
