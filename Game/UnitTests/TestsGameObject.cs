@@ -10,9 +10,9 @@ namespace UnitTests
     public class TestsGameObject
     {
         /*
-         * 
+         *
          ### Component Storing ###
-         * 
+         *
         */
         [TestMethod]
         public void TestComponentStoring()

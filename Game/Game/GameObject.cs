@@ -249,7 +249,5 @@ namespace Game
                 }
             }
         }
-
-        // TODO: Check for loops in Parent - Child relation before adding new childs or changing parents
     }
 }

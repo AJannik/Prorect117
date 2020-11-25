@@ -52,6 +52,7 @@ namespace Game.Components
             }
         }
 
+        // TODO: radient or degrees?
         public float Rotation // world rotation
         {
             get
