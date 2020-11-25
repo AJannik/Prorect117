@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Game.Tools;
+﻿using Game.Tools;
 using OpenTK;
 
 namespace Game.Components
@@ -81,6 +79,8 @@ namespace Game.Components
         {
         }
 
+        // TODO: TESTS
+        // TODO: Adjust parent hierarchy. Eventually the top GameObject will be the Scene.
         private void UpdateLocalTransform()
         {
             Matrix4 posTransform = Transformation.Translate(pos);
