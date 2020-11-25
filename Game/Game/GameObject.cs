@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Game.Component;
+using Game.Components;
 
 namespace Game
 {
@@ -49,7 +49,7 @@ namespace Game
         private List<GameObject> Children { get; } = new List<GameObject>();
 
         /// <summary>
-        /// Adds a new component of type T to GameObject.
+        /// Instanciate new component of type T and add it to GameObject.
         /// </summary>
         /// <typeparam name="T">Class that implements IComponent.</typeparam>
         public void AddComponent<T>()

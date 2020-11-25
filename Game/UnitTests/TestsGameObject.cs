@@ -1,5 +1,5 @@
 ﻿using Game;
-using Game.Component;
+using Game.Components;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 

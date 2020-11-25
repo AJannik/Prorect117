@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks.Dataflow;
-using Game.Component;
+using Game.Components;
 using Game.Tools;
 using OpenTK.Graphics.OpenGL;
 
