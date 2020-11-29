@@ -10,15 +10,18 @@ namespace Game
         private List<IComponent> components = new List<IComponent>();
 
         public GameObject()
+            : this("GameObject", null)
         {
         }
 
         public GameObject(string name)
+            : this(name, null)
         {
             Name = name;
         }
 
         public GameObject(GameObject parent)
+            : this("GameObject", parent)
         {
             if (!SetParent(parent))
             {
@@ -29,13 +32,14 @@ namespace Game
         public GameObject(string name, GameObject parent)
         {
             Name = name;
-            if (!SetParent(parent))
+            Transform.MyGameObject = this;
+            if (parent != null && !SetParent(parent))
             {
                 Console.WriteLine($"Couldn't set parent for - {parent.Name} - (Cycle in hierarchy detected)");
             }
         }
 
-        public CTransform Transform { get; set; } = new CTransform();
+        public CTransform Transform { get; private set; } = new CTransform();
 
         public string Name { get; set; } = "GameObject";
 
@@ -47,6 +51,8 @@ namespace Game
         private GameObject Parent { get; set; } = null;
 
         private List<GameObject> Children { get; } = new List<GameObject>();
+
+        // TODO: AddComponent(IComponent component)
 
         /// <summary>
         /// Instanciate new component of type T and add it to GameObject.

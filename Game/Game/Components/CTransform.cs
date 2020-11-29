@@ -14,15 +14,13 @@ namespace Game.Components
             UpdateLocalTransform();
         }
 
-        public Vector2 Position // world coordinates
+        /// <summary>
+        /// Gets or Sets the position.
+        /// </summary>
+        public Vector2 Position // local coordinates
         {
             get
             {
-                if (MyGameObject.GetParent() != null)
-                {
-                    return Transformation.Transform(pos, MyGameObject.GetParent().Transform.TransformMatrix);
-                }
-
                 return pos;
             }
 
@@ -33,15 +31,29 @@ namespace Game.Components
             }
         }
 
-        public Vector2 Scale // world scale
+        /// <summary>
+        /// Gets the position which has been transformed to world position.
+        /// </summary>
+        public Vector2 WorldPosition // world coordinates
         {
             get
             {
                 if (MyGameObject.GetParent() != null)
                 {
-                    return Transformation.Transform(scale, MyGameObject.GetParent().Transform.TransformMatrix);
+                    return Transformation.Transform(pos, MyGameObject.GetParent().Transform.TransformMatrix);
                 }
 
+                return pos;
+            }
+        }
+
+        /// <summary>
+        /// Gets or Sets the scale.
+        /// </summary>
+        public Vector2 Scale // local scale
+        {
+            get
+            {
                 return scale;
             }
 
@@ -52,16 +64,32 @@ namespace Game.Components
             }
         }
 
-        // TODO: radient or degrees?
-        public float Rotation // world rotation
+        /// <summary>
+        /// Gets the scale which has been transformed to world scale.
+        /// </summary>
+        public Vector2 WorldScale // world scale
         {
             get
             {
                 if (MyGameObject.GetParent() != null)
                 {
-                    return Transformation.Transform(rotation, MyGameObject.GetParent().Transform.TransformMatrix).X;
+                    //return Transformation.Transform(scale, MyGameObject.GetParent().Transform.TransformMatrix);
+                    return Scale * MyGameObject.GetParent().Transform.scale;
                 }
 
+                return scale;
+            }
+        }
+
+        // TODO: radient or degrees?
+
+        /// <summary>
+        /// Gets or Sets rotation of Object in Radiant.
+        /// </summary>
+        public float Rotation // local rotation
+        {
+            get
+            {
                 return rotation.X;
             }
 
@@ -69,6 +97,23 @@ namespace Game.Components
             {
                 rotation.X = value;
                 UpdateLocalTransform();
+            }
+        }
+
+        /// <summary>
+        /// Gets the roation in Radiant which has been transformed to world rotation.
+        /// </summary>
+        public float WorldRotation // world rotation
+        {
+            get
+            {
+                if (MyGameObject.GetParent() != null)
+                {
+                    //return Transformation.Transform(rotation, MyGameObject.GetParent().Transform.TransformMatrix).X;
+                    return rotation.X + MyGameObject.GetParent().Transform.Rotation;
+                }
+
+                return rotation.X;
             }
         }
 
@@ -85,10 +130,10 @@ namespace Game.Components
         private void UpdateLocalTransform()
         {
             Matrix4 posTransform = Transformation.Translate(pos);
-            Matrix4 rotationTransform = Transformation.Rotation(rotation.X);
+            Matrix4 rotationTransform = Transformation.Rotation(Rotation);
             Matrix4 scaleTransform = Transformation.Scale(scale);
 
-            TransformMatrix = Transformation.Combine(posTransform, rotationTransform, scaleTransform);
+            TransformMatrix = Transformation.Combine(scaleTransform, rotationTransform, posTransform);
         }
     }
 }
