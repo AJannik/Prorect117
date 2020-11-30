@@ -4,7 +4,13 @@ using System.Text;
 
 namespace Game.Components
 {
-    class CCamera
+    public class CCamera : IComponent
     {
+        public GameObject MyGameObject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public void Update(float deltaTime)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

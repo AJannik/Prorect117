@@ -17,7 +17,8 @@ namespace UnitTests
         [TestMethod]
         public void TestComponentStoring()
         {
-            GameObject gameObject = new GameObject();
+            Scene scene = new Scene();
+            GameObject gameObject = new GameObject(scene);
             AddComponentToEmptyList(gameObject);
             GetOneComponent(gameObject);
             AddComponentToNotEmptyList(gameObject);
@@ -109,9 +110,10 @@ namespace UnitTests
         [TestMethod]
         public void TestParentHierarchy()
         {
-            GameObject parent = new GameObject();
-            GameObject child1 = new GameObject(parent);
-            GameObject child2 = new GameObject();
+            Scene scene = new Scene();
+            GameObject parent = new GameObject(scene);
+            GameObject child1 = new GameObject(scene, parent);
+            GameObject child2 = new GameObject(scene);
 
             // check if child1 is a child of parent
             Assert.AreEqual(child1, parent.GetChild(0));

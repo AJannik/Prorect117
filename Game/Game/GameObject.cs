@@ -9,19 +9,19 @@ namespace Game
     {
         private List<IComponent> components = new List<IComponent>();
 
-        public GameObject()
-            : this("GameObject", null)
+        public GameObject(Scene scene)
+            : this(scene, "GameObject", null)
         {
         }
 
-        public GameObject(string name)
-            : this(name, null)
+        public GameObject(Scene scene, string name)
+            : this(scene, name, null)
         {
             Name = name;
         }
 
-        public GameObject(GameObject parent)
-            : this("GameObject", parent)
+        public GameObject(Scene scene, GameObject parent)
+            : this(scene, "GameObject", parent)
         {
             if (!SetParent(parent))
             {
@@ -29,10 +29,17 @@ namespace Game
             }
         }
 
-        public GameObject(string name, GameObject parent)
+        public GameObject(Scene scene, string name, GameObject parent)
         {
+            if (parent != null && parent.Scene != scene)
+            {
+                throw new Exception($"GameObject '{name}' and the assigned parent are not in the same scene!");
+            }
+
             Name = name;
             Transform.MyGameObject = this;
+            Scene = scene;
+            Scene.AddGameObject(this);
             if (parent != null && !SetParent(parent))
             {
                 Console.WriteLine($"Couldn't set parent for - {parent.Name} - (Cycle in hierarchy detected)");
@@ -40,6 +47,8 @@ namespace Game
         }
 
         public CTransform Transform { get; private set; } = new CTransform();
+
+        public Scene Scene { get; set; }
 
         public string Name { get; set; } = "GameObject";
 

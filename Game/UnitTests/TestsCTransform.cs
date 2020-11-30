@@ -13,7 +13,8 @@ namespace UnitTests
         [TestMethod]
         public void TestSetAndGetSimplePosition()
         {
-            GameObject gameObject = new GameObject();
+            Scene scene = new Scene();
+            GameObject gameObject = new GameObject(scene);
             Vector2 pos = new Vector2(2.5f, 3f);
 
             gameObject.Transform.Position = pos;
@@ -23,7 +24,8 @@ namespace UnitTests
         [TestMethod]
         public void TestSetAndGetSimpleRotation()
         {
-            GameObject gameObject = new GameObject();
+            Scene scene = new Scene();
+            GameObject gameObject = new GameObject(scene);
             float rad = 1.3f;
 
             gameObject.Transform.Rotation = rad;
@@ -33,7 +35,8 @@ namespace UnitTests
         [TestMethod]
         public void TestSetAndGetSimpleScale()
         {
-            GameObject gameObject = new GameObject();
+            Scene scene = new Scene();
+            GameObject gameObject = new GameObject(scene);
             Vector2 scale = new Vector2(2f, 1.5f);
 
             gameObject.Transform.Scale = scale;
@@ -43,8 +46,9 @@ namespace UnitTests
         [TestMethod]
         public void TestGetPositionOfChild()
         {
-            GameObject parent = new GameObject();
-            GameObject child = new GameObject(parent);
+            Scene scene = new Scene();
+            GameObject parent = new GameObject(scene);
+            GameObject child = new GameObject(scene, parent);
             Vector2 posParent = new Vector2(2f, 1f);
             Vector2 posChild = new Vector2(1f, 3f);
 
@@ -59,8 +63,9 @@ namespace UnitTests
         [TestMethod]
         public void TestGetScaleOfChild()
         {
-            GameObject parent = new GameObject();
-            GameObject child = new GameObject(parent);
+            Scene scene = new Scene();
+            GameObject parent = new GameObject(scene);
+            GameObject child = new GameObject(scene, parent);
             Vector2 scaleParent = new Vector2(2f, 1f);
             Vector2 scaleChild = new Vector2(1f, 3f);
 
@@ -75,8 +80,9 @@ namespace UnitTests
         [TestMethod]
         public void TestGetRotationOfChild()
         {
-            GameObject parent = new GameObject();
-            GameObject child = new GameObject(parent);
+            Scene scene = new Scene();
+            GameObject parent = new GameObject(scene);
+            GameObject child = new GameObject(scene, parent);
             float rotParent = 1f;
             float rotChild = 1f;
 
@@ -95,8 +101,9 @@ namespace UnitTests
         [TestMethod]
         public void TestGetPositionOfChildFromRotatedParent()
         {
-            GameObject parent = new GameObject();
-            GameObject child = new GameObject(parent);
+            Scene scene = new Scene();
+            GameObject parent = new GameObject(scene);
+            GameObject child = new GameObject(scene, parent);
             float rotParent = 1f;
             Vector2 posChild = new Vector2(2f, 1f);
 
@@ -110,8 +117,9 @@ namespace UnitTests
         [TestMethod]
         public void TestGetPositionOfChildFromScaledParent()
         {
-            GameObject parent = new GameObject();
-            GameObject child = new GameObject(parent);
+            Scene scene = new Scene();
+            GameObject parent = new GameObject(scene);
+            GameObject child = new GameObject(scene, parent);
             Vector2 scaleParent = new Vector2(0.5f, 2f);
             Vector2 posChild = new Vector2(2f, 1f);
 
@@ -125,8 +133,9 @@ namespace UnitTests
         [TestMethod]
         public void TestGetPositionOfChildFromMovedRotatedScaledParent()
         {
-            GameObject parent = new GameObject();
-            GameObject child = new GameObject(parent);
+            Scene scene = new Scene();
+            GameObject parent = new GameObject(scene);
+            GameObject child = new GameObject(scene, parent);
             Vector2 posParent = new Vector2(1.5f, -2f);
             float rotParent = 10 * (MathF.PI / 180); // radians
             Vector2 scaleParent = new Vector2(0.5f, 2f);
