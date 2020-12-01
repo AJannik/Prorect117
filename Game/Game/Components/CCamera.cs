@@ -30,7 +30,7 @@ namespace Game.Components
 
         public Matrix4 CameraMatrix => cameraMatrix;
 
-        private GameObject FocusObject { get; set }
+        private GameObject FocusObject { get; set; }
 
         private CTransform Transform { get; set; }
 
