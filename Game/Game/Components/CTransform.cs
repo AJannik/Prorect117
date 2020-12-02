@@ -73,7 +73,7 @@ namespace Game.Components
             {
                 if (MyGameObject.GetParent() != null)
                 {
-                    //return Transformation.Transform(scale, MyGameObject.GetParent().Transform.TransformMatrix);
+                    // return Transformation.Transform(scale, MyGameObject.GetParent().Transform.TransformMatrix);
                     return Scale * MyGameObject.GetParent().Transform.scale;
                 }
 
@@ -109,7 +109,7 @@ namespace Game.Components
             {
                 if (MyGameObject.GetParent() != null)
                 {
-                    //return Transformation.Transform(rotation, MyGameObject.GetParent().Transform.TransformMatrix).X;
+                    // return Transformation.Transform(rotation, MyGameObject.GetParent().Transform.TransformMatrix).X;
                     return rotation.X + MyGameObject.GetParent().Transform.Rotation;
                 }
 
