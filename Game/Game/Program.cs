@@ -24,7 +24,7 @@ namespace Game
                 GL.End();
                 window.SwapBuffers(); // buffer swap needed for double buffering
             }
-            
+
             CRender cRender = new CRender();
             window.RenderFrame += (s, a) => Draw();
             window.Run();
