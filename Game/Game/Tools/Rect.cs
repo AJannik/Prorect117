@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Game.Tools
 {
-    internal class Rect
+    public class Rect
     {
         public Rect(float minX, float minY, float sizeX, float sizeY)
         {

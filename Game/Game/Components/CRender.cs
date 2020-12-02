@@ -33,7 +33,6 @@ namespace Game
 
             Boundary.MinX = Transform.Position.X;
             Boundary.MinY = Transform.Position.Y;
-            Draw();
         }
 
         public void Draw()
@@ -55,6 +54,11 @@ namespace Game
         public void SetTexture(string name)
         {
             Texture = TextureTools.LoadFromResource(name);
+        }
+
+        public void SetTexCoords(Rect newTexCoords)
+        {
+            TexCoords = newTexCoords;
         }
     }
 }
