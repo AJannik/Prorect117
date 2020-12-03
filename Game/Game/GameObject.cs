@@ -73,6 +73,9 @@ namespace Game
             T component = new T();
             component.MyGameObject = this;
             components.Add(component);
+
+            // update scene component lists
+            Scene.AddComponent(component);
         }
 
         /// <summary>
@@ -131,6 +134,8 @@ namespace Game
                 if (component.GetType() == typeof(T))
                 {
                     components.Remove(component);
+
+                    Scene.RemoveComponent(component);
                     return;
                 }
             }
@@ -149,6 +154,7 @@ namespace Game
                 if (comp.GetType() == typeof(T) && comp == component)
                 {
                     components.Remove(comp);
+                    Scene.RemoveComponent(component);
                     return;
                 }
             }

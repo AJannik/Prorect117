@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Game.Components;
 
 namespace Game
@@ -13,14 +12,15 @@ namespace Game
 
         public void Update(float deltaTime)
         {
-            foreach (CRender cRender in renderers)
-            {
-                cRender.Update(deltaTime);
-            }
-
             foreach (CCamera cCamera in cameras)
             {
                 cCamera.Update(deltaTime);
+            }
+
+            SortRenderers();
+            foreach (CRender cRender in renderers)
+            {
+                cRender.Update(deltaTime);
             }
         }
 
@@ -40,6 +40,54 @@ namespace Game
             RemoveComponentsFromLists(gameObject);
         }
 
+        public List<GameObject> GetGameObjects()
+        {
+            return gameObjects;
+        }
+
+        public List<CRender> GetCRenders()
+        {
+            return renderers;
+        }
+
+        public void AddComponent(IComponent component)
+        {
+            if (component.GetType() == typeof(CRender))
+            {
+                if (!renderers.Contains((CRender)component))
+                {
+                    int index = GetIndex((CRender)component);
+                    renderers.Insert(index, (CRender)component);
+                }
+            }
+
+            if (component.GetType() == typeof(CCamera))
+            {
+                if (!cameras.Contains((CCamera)component))
+                {
+                    cameras.Add((CCamera)component);
+                }
+            }
+        }
+
+        public void RemoveComponent(IComponent component)
+        {
+            if (component.GetType() == typeof(CRender))
+            {
+                renderers.Remove((CRender)component);
+            }
+
+            if (component.GetType() == typeof(CCamera))
+            {
+                cameras.Remove((CCamera)component);
+            }
+        }
+
+        private void SortRenderers()
+        {
+            renderers.Sort((x, y) => x.Layer.CompareTo(y.Layer));
+        }
+
         private void AddComponentsToLists(GameObject gameObject)
         {
             if (gameObject.GetComponent<CRender>() != null)
@@ -48,7 +96,8 @@ namespace Game
                 {
                     if (!renderers.Contains(cRender))
                     {
-                        renderers.Add(cRender);
+                        int index = GetIndex(cRender);
+                        renderers.Insert(index, cRender);
                     }
                 }
             }
@@ -65,16 +114,31 @@ namespace Game
             }
         }
 
+        private int GetIndex(CRender cRender)
+        {
+            if (renderers.Count == 0)
+            {
+                return 0;
+            }
+
+            for (int i = 1; i < renderers.Count; i++)
+            {
+                if (renderers[i].Layer >= cRender.Layer)
+                {
+                    return i - 1;
+                }
+            }
+
+            return renderers.Count;
+        }
+
         private void RemoveComponentsFromLists(GameObject gameObject)
         {
             if (gameObject.GetComponent<CRender>() != null)
             {
                 foreach (CRender cRender in gameObject.GetComponents<CRender>())
                 {
-                    if (!renderers.Contains(cRender))
-                    {
-                        renderers.Remove(cRender);
-                    }
+                    renderers.Remove(cRender);
                 }
             }
 
@@ -82,10 +146,7 @@ namespace Game
             {
                 foreach (CCamera cCamera in gameObject.GetComponents<CCamera>())
                 {
-                    if (!cameras.Contains(cCamera))
-                    {
-                        cameras.Remove(cCamera);
-                    }
+                    cameras.Remove(cCamera);
                 }
             }
         }
