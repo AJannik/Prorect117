@@ -81,8 +81,6 @@ namespace Game.Components
             }
         }
 
-        // TODO: radient or degrees?
-
         /// <summary>
         /// Gets or Sets rotation of Object in Radiant.
         /// </summary>
@@ -125,8 +123,6 @@ namespace Game.Components
         {
         }
 
-        // TODO: TESTS
-        // TODO: Adjust parent hierarchy. Eventually the top GameObject will be the Scene.
         private void UpdateLocalTransform()
         {
             Matrix4 posTransform = Transformation.Translate(pos);

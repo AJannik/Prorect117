@@ -61,8 +61,6 @@ namespace Game
 
         private List<GameObject> Children { get; } = new List<GameObject>();
 
-        // TODO: AddComponent(IComponent component)
-
         /// <summary>
         /// Instanciate new component of type T and add it to GameObject.
         /// </summary>
