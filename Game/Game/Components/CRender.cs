@@ -20,6 +20,8 @@ namespace Game
 
         private int Texture { get; set; }
 
+        private int Layer { get; set; }
+
         private Rect Boundary { get; set; }
 
         private Rect TexCoords { get; set; }
@@ -59,6 +61,11 @@ namespace Game
         public void SetTexCoords(Rect newTexCoords)
         {
             TexCoords = newTexCoords;
+        }
+
+        public int GetLayer()
+        {
+            return Layer;
         }
     }
 }
