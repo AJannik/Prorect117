@@ -18,11 +18,11 @@ namespace Game
 
         public GameObject MyGameObject { get; set; } = null;
 
+        public int Layer { get; set; }
+
         private int Texture { get; set; }
 
-        private int Layer { get; set; }
-
-        private Rect Boundary { get; set; }
+        private Rect Boundary { get; set; } = new Rect(1f, 1f, 1f, 1f);
 
         private Rect TexCoords { get; set; }
 
@@ -61,11 +61,6 @@ namespace Game
         public void SetTexCoords(Rect newTexCoords)
         {
             TexCoords = newTexCoords;
-        }
-
-        public int GetLayer()
-        {
-            return Layer;
         }
     }
 }
