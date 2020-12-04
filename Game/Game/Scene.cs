@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Components;
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
 
 namespace Game
 {
@@ -21,6 +23,15 @@ namespace Game
             foreach (CRender cRender in renderers)
             {
                 cRender.Update(deltaTime);
+            }
+        }
+
+        public void Draw()
+        {
+            GL.Clear(ClearBufferMask.ColorBufferBit);
+            foreach (CRender render in renderers)
+            {
+                render.Draw();
             }
         }
 

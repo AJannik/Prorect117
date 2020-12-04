@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks.Dataflow;
-using Game.Components;
-using Game.Tools;
+﻿using Game.Tools;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game
+namespace Game.Components
 {
     public class CRender : IComponent
     {
         public CRender()
         {
-            // Texture = TextureTools.LoadFromResource("Content.default.png");
+            Texture = TextureTools.LoadFromResource("Content.default.png");
             TexCoords = new Rect(0f, 0f, 1f, 1f);
         }
 

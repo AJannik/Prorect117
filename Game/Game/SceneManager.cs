@@ -19,14 +19,31 @@ namespace Game
             scenes[currentScene].Update(deltaTime);
         }
 
+        public void Draw()
+        {
+            scenes[currentScene].Draw();
+        }
+
         public void LoadNextScene()
         {
-            // TODO: Implement LoadNextScene()
+            if (currentScene < scenes.Length)
+            {
+                UnloadCurrentScene();
+                currentScene++;
+
+                // TODO: Implement LoadNextScene()
+            }
         }
 
         public void LoadLastScene()
         {
-            // TODO: Implement LoadLastScene()
+            if (currentScene > 1)
+            {
+                UnloadCurrentScene();
+                currentScene--;
+
+                // TODO: Implement LoadLastScene()
+            }
         }
 
         public void UnloadCurrentScene()
