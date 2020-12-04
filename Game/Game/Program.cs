@@ -29,6 +29,16 @@ namespace Game
                     if (counter <= 0f)
                     {
                         sceneManager.LoadNextScene();
+                        counter = 10f;
+                    }
+                }
+                else
+                {
+                    counter -= deltaTime;
+                    if (counter <= 0f)
+                    {
+                        window.Exit();
+                        return;
                     }
                 }
 

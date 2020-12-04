@@ -1,9 +1,9 @@
 ﻿using System;
 using Game;
+using Game.Components;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
-using Game.Components;
 
 namespace UnitTests
 {
