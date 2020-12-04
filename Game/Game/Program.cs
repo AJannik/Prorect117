@@ -14,25 +14,18 @@ namespace Game
             SceneManager sceneManager = new SceneManager(1);
 
             sceneManager.SetScene(0, BuildScene());
-            /*
-            void Draw()
-            {
-                // clear screen - what happens without?
-                GL.Clear(ClearBufferMask.ColorBufferBit);
+            GameObject quad = sceneManager.GetScene(0).GetGameObjects()[0];
 
-                // draw a quad
-                GL.Begin(PrimitiveType.Quads);
-                GL.Vertex2(0.0f, 0.0f); // draw first quad corner
-                GL.Vertex2(0.5f, 0.0f);
-                GL.Vertex2(0.5f, 0.5f);
-                GL.Vertex2(0.0f, 0.5f);
-                GL.End();
-                window.SwapBuffers(); // buffer swap needed for double buffering
-            }
-            */
             void Update(float deltaTime)
             {
                 sceneManager.Update(deltaTime);
+
+                // TODO: Remove this, only for testing
+                quad.Transform.Position += new Vector2(0.001f, 0f);
+                if (quad.Transform.Position.X >= 1.2f)
+                {
+                    quad.Transform.Position = new Vector2(-1f, 0.2f);
+                }
             }
 
             void Draw()
@@ -51,7 +44,6 @@ namespace Game
             Scene scene = new Scene();
             GameObject quad = new GameObject(scene);
             GameObject camera = new GameObject(scene);
-
             quad.AddComponent<CRender>();
             quad.Transform.Position = new Vector2(0.3f, 0.5f);
 
