@@ -17,7 +17,7 @@ namespace Game.Components
 
         private int Texture { get; set; }
 
-        private Rect Boundary { get; set; } = new Rect(1f, 1f, 1f, 1f);
+        private Rect Boundary { get; set; } = new Rect(0.1f, 0.1f, 0.2f, 0.2f);
 
         private Rect TexCoords { get; set; }
 
@@ -28,8 +28,8 @@ namespace Game.Components
             // pull Transform from object
             Transform = MyGameObject.Transform;
 
-            Boundary.MinX = Transform.Position.X;
-            Boundary.MinY = Transform.Position.Y;
+            Boundary.MinX = Transform.WorldPosition.X;
+            Boundary.MinY = Transform.WorldPosition.Y;
         }
 
         public void Draw()
