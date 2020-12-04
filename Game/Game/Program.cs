@@ -1,7 +1,6 @@
 ﻿using System;
 using Game.Components;
 using OpenTK;
-using OpenTK.Graphics.OpenGL;
 
 namespace Game
 {
@@ -11,20 +10,40 @@ namespace Game
         private static void Main()
         {
             var window = new GameWindow(512, 512);
-            SceneManager sceneManager = new SceneManager(1);
+            SceneManager sceneManager = new SceneManager(2);
+            float counter = 5f;
 
-            sceneManager.SetScene(0, BuildScene());
+            sceneManager.SetScene(0, BuildScene1());
+            sceneManager.SetScene(1, BuildScene2());
             GameObject quad = sceneManager.GetScene(0).GetGameObjects()[0];
+            GameObject parentQuad = sceneManager.GetScene(1).GetGameObjects()[0];
 
             void Update(float deltaTime)
             {
                 sceneManager.Update(deltaTime);
 
-                // TODO: Remove this, only for testing
-                quad.Transform.Position += new Vector2(0.001f, 0f);
-                if (quad.Transform.Position.X >= 1.2f)
+                // TODO: Remove this, it's only for testing
+                if (sceneManager.CurrentScene == 0)
                 {
-                    quad.Transform.Position = new Vector2(-1f, 0.2f);
+                    counter -= deltaTime;
+                    if (counter <= 0f)
+                    {
+                        sceneManager.LoadNextScene();
+                    }
+                }
+
+                // TODO: Remove this, it's only for testing
+                if (sceneManager.CurrentScene == 0)
+                {
+                    quad.Transform.Position += new Vector2(0.001f, 0f);
+                    if (quad.Transform.Position.X >= 1.2f)
+                    {
+                        quad.Transform.Position = new Vector2(-1f, 0.2f);
+                    }
+                }
+                else if (sceneManager.CurrentScene == 1)
+                {
+                    parentQuad.Transform.Rotation += deltaTime * 0.5f;
                 }
             }
 
@@ -39,7 +58,7 @@ namespace Game
             window.Run();
         }
 
-        private static Scene BuildScene()
+        private static Scene BuildScene1()
         {
             Scene scene = new Scene();
             GameObject quad = new GameObject(scene);
@@ -48,6 +67,19 @@ namespace Game
             quad.Transform.Position = new Vector2(0.3f, 0.5f);
 
             camera.AddComponent<CCamera>();
+
+            return scene;
+        }
+
+        private static Scene BuildScene2()
+        {
+            Scene scene = new Scene();
+            GameObject parentQuad = new GameObject(scene);
+            GameObject childQuad = new GameObject(scene, parentQuad);
+
+            parentQuad.AddComponent<CRender>();
+            childQuad.AddComponent<CRender>();
+            childQuad.Transform.Position = new Vector2(0.5f, 0f);
 
             return scene;
         }

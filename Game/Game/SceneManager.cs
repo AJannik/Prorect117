@@ -7,29 +7,30 @@ namespace Game
     public class SceneManager
     {
         private Scene[] scenes;
-        private int currentScene = 0;
 
         public SceneManager(int numScenes)
         {
             scenes = new Scene[numScenes];
         }
 
+        public int CurrentScene { get; private set; } = 0;
+
         public void Update(float deltaTime)
         {
-            scenes[currentScene].Update(deltaTime);
+            scenes[CurrentScene].Update(deltaTime);
         }
 
         public void Draw()
         {
-            scenes[currentScene].Draw();
+            scenes[CurrentScene].Draw();
         }
 
         public void LoadNextScene()
         {
-            if (currentScene < scenes.Length)
+            if (CurrentScene < scenes.Length - 1)
             {
                 UnloadCurrentScene();
-                currentScene++;
+                CurrentScene++;
 
                 // TODO: Implement LoadNextScene()
             }
@@ -37,10 +38,10 @@ namespace Game
 
         public void LoadLastScene()
         {
-            if (currentScene > 1)
+            if (CurrentScene >= 1)
             {
                 UnloadCurrentScene();
-                currentScene--;
+                CurrentScene--;
 
                 // TODO: Implement LoadLastScene()
             }
