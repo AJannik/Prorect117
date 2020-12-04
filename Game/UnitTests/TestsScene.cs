@@ -3,6 +3,7 @@ using Game;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
+using Game.Components;
 
 namespace UnitTests
 {
