@@ -26,7 +26,7 @@ namespace Game.Components
             }
         }
 
-        public GameObject MyGameObject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public GameObject MyGameObject { get; set; }
 
         public Matrix4 CameraMatrix => cameraMatrix;
 
@@ -36,7 +36,7 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         public void Draw()
