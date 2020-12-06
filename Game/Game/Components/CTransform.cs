@@ -40,7 +40,7 @@ namespace Game.Components
             {
                 if (MyGameObject.GetParent() != null)
                 {
-                    return Transformation.Transform(pos, MyGameObject.GetParent().Transform.TransformMatrix);
+                    return Transformation.Transform(pos, MyGameObject.GetParent().Transform.LocalTransformMatrix);
                 }
 
                 return pos;
@@ -117,7 +117,20 @@ namespace Game.Components
 
         public GameObject MyGameObject { get; set; }
 
-        public Matrix4 TransformMatrix { get; private set; }
+        public Matrix4 LocalTransformMatrix { get; private set; }
+
+        public Matrix4 WorldTransformMatrix
+        {
+            get
+            {
+                if (MyGameObject.GetParent() != null)
+                {
+                    return Transformation.Combine(LocalTransformMatrix, MyGameObject.GetParent().Transform.WorldTransformMatrix);
+                }
+
+                return LocalTransformMatrix;
+            }
+        }
 
         public void Update(float deltaTime)
         {
@@ -129,7 +142,7 @@ namespace Game.Components
             Matrix4 rotationTransform = Transformation.Rotation(Rotation);
             Matrix4 scaleTransform = Transformation.Scale(scale);
 
-            TransformMatrix = Transformation.Combine(scaleTransform, rotationTransform, posTransform);
+            LocalTransformMatrix = Transformation.Combine(scaleTransform, rotationTransform, posTransform);
         }
     }
 }
