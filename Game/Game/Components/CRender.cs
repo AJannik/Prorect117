@@ -9,7 +9,7 @@ namespace Game.Components
     {
         public CRender()
         {
-            // Texture = TextureTools.LoadFromResource("Content.default.png");
+            Texture = TextureTools.LoadFromResource("Content.default.png");
             TexCoords = new Rect(0f, 0f, 1f, 1f);
             Offset = new Vector2(0, 0);
             Transform = new CTransform();

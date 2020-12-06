@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using OpenTK.Graphics.OpenGL;
 
 namespace Game
 {
@@ -11,6 +12,10 @@ namespace Game
         public SceneManager(int numScenes)
         {
             scenes = new Scene[numScenes];
+
+            GL.Enable(EnableCap.Texture2D);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+            GL.Enable(EnableCap.Blend);
         }
 
         public int CurrentScene { get; private set; } = 0;
