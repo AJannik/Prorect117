@@ -22,13 +22,13 @@ namespace Game.Components
 
         private int Texture { get; set; }
 
-        private Rect Boundary { get; set; } = new Rect(0.0f, 0.0f, 0.2f, 0.2f);
+        private float SizeX { get; set; } = 1f;
+
+        private float SizeY { get; set; } = 1f;
 
         private Rect TexCoords { get; set; }
 
         private CTransform Transform { get; set; }
-
-        private Matrix3 RotationMatrix { get; set; }
 
         private Vector2 Offset { get; set; }
 
@@ -36,18 +36,16 @@ namespace Game.Components
         {
             // pull Transform from object
             Transform = MyGameObject.Transform;
-
-            UpdateRotationMatrix(Transform.WorldRotation);
         }
 
         public void Draw()
         {
             GL.BindTexture(TextureTarget.Texture2D, this.Texture);
 
-            Vector2 pos1 = new Vector2(Boundary.MinX + Offset.X, Boundary.MinY + Offset.Y);
-            Vector2 pos2 = new Vector2(Boundary.MaxX + Offset.X, Boundary.MinY + Offset.Y);
-            Vector2 pos3 = new Vector2(Boundary.MaxX + Offset.X, Boundary.MaxY + Offset.Y);
-            Vector2 pos4 = new Vector2(Boundary.MinX + Offset.X, Boundary.MaxY + Offset.Y);
+            Vector2 pos1 = new Vector2((-SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
+            Vector2 pos2 = new Vector2((SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
+            Vector2 pos3 = new Vector2((SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
+            Vector2 pos4 = new Vector2((-SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
 
             pos1 = Transformation.Transform(pos1, Transform.TransformMatrix);
             pos2 = Transformation.Transform(pos2, Transform.TransformMatrix);
@@ -81,12 +79,10 @@ namespace Game.Components
             Offset = new Vector2(x, y);
         }
 
-        private void UpdateRotationMatrix(float rotationAngle)
+        public void SetSize(float sizeX, float sizeY)
         {
-            RotationMatrix = new Matrix3(
-                new Vector3(MathF.Cos(rotationAngle), -MathF.Sin(rotationAngle), 0),
-                new Vector3(MathF.Sin(rotationAngle), -MathF.Cos(rotationAngle), 0),
-                new Vector3(0, 0, 1));
+            SizeX = sizeX;
+            SizeY = sizeY;
         }
     }
 }
