@@ -21,6 +21,14 @@ namespace Game.SimpleGeometry
             set { direction = value.Normalized(); }
         }
 
+        public Vector2 EndPos
+        {
+            get
+            {
+                return StartPos + (Direction * Length);
+            }
+        }
+
         public float Length { get; set; }
     }
 }
