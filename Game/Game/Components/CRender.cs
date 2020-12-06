@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.SimpleGeometry;
 using Game.Tools;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
@@ -21,7 +22,7 @@ namespace Game.Components
 
         private int Texture { get; set; }
 
-        private Rect Boundary { get; set; } = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+        private Rect Boundary { get; set; } = new Rect(0.0f, 0.0f, 0.2f, 0.2f);
 
         private Rect TexCoords { get; set; }
 
