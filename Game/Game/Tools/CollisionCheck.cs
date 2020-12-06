@@ -77,5 +77,10 @@ namespace Game.Tools
         {
             throw new NotImplementedException();
         }
+
+        public static bool AabbAndCircle(Rect rect, Circle circle)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

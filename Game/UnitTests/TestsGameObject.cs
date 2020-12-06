@@ -14,7 +14,7 @@ namespace UnitTests
          ### Component Storing ###
          *
         */
-        [TestMethod]
+        
         public void TestComponentStoring()
         {
             Scene scene = new Scene();
