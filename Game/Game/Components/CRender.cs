@@ -21,7 +21,9 @@ namespace Game.Components
 
         private int Texture { get; set; }
 
-        private Rect Boundary { get; set; } = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+        private float SizeX { get; set; } = 1f;
+
+        private float SizeY { get; set; } = 1f;
 
         private Rect TexCoords { get; set; }
 
@@ -39,10 +41,10 @@ namespace Game.Components
         {
             GL.BindTexture(TextureTarget.Texture2D, this.Texture);
 
-            Vector2 pos1 = new Vector2(Boundary.MinX + Offset.X, Boundary.MinY + Offset.Y);
-            Vector2 pos2 = new Vector2(Boundary.MaxX + Offset.X, Boundary.MinY + Offset.Y);
-            Vector2 pos3 = new Vector2(Boundary.MaxX + Offset.X, Boundary.MaxY + Offset.Y);
-            Vector2 pos4 = new Vector2(Boundary.MinX + Offset.X, Boundary.MaxY + Offset.Y);
+            Vector2 pos1 = new Vector2((-SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
+            Vector2 pos2 = new Vector2((SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
+            Vector2 pos3 = new Vector2((SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
+            Vector2 pos4 = new Vector2((-SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
 
             pos1 = Transformation.Transform(pos1, Transform.TransformMatrix);
             pos2 = Transformation.Transform(pos2, Transform.TransformMatrix);
@@ -74,6 +76,12 @@ namespace Game.Components
         public void SetOffset(float x, float y)
         {
             Offset = new Vector2(x, y);
+        }
+
+        public void SetSize(float sizeX, float sizeY)
+        {
+            SizeX = sizeX;
+            SizeY = sizeY;
         }
     }
 }
