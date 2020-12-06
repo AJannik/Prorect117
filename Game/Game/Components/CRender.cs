@@ -27,16 +27,12 @@ namespace Game.Components
 
         private CTransform Transform { get; set; }
 
-        private Matrix3 RotationMatrix { get; set; }
-
         private Vector2 Offset { get; set; }
 
         public void Update(float deltaTime)
         {
             // pull Transform from object
             Transform = MyGameObject.Transform;
-
-            UpdateRotationMatrix(Transform.WorldRotation);
         }
 
         public void Draw()
@@ -78,14 +74,6 @@ namespace Game.Components
         public void SetOffset(float x, float y)
         {
             Offset = new Vector2(x, y);
-        }
-
-        private void UpdateRotationMatrix(float rotationAngle)
-        {
-            RotationMatrix = new Matrix3(
-                new Vector3(MathF.Cos(rotationAngle), -MathF.Sin(rotationAngle), 0),
-                new Vector3(MathF.Sin(rotationAngle), -MathF.Cos(rotationAngle), 0),
-                new Vector3(0, 0, 1));
         }
     }
 }
