@@ -117,7 +117,7 @@ namespace Game.Components
 
         public GameObject MyGameObject { get; set; }
 
-        private Matrix4 TransformMatrix { get; set; }
+        public Matrix4 TransformMatrix { get; private set; }
 
         public void Update(float deltaTime)
         {
