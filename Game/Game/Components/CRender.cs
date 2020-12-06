@@ -12,6 +12,7 @@ namespace Game.Components
             // Texture = TextureTools.LoadFromResource("Content.default.png");
             TexCoords = new Rect(0f, 0f, 1f, 1f);
             Offset = new Vector2(0, 0);
+            Transform = new CTransform();
         }
 
         public GameObject MyGameObject { get; set; } = null;
@@ -20,7 +21,7 @@ namespace Game.Components
 
         private int Texture { get; set; }
 
-        private Rect Boundary { get; set; } = new Rect(0.1f, 0.1f, 0.2f, 0.2f);
+        private Rect Boundary { get; set; } = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
 
         private Rect TexCoords { get; set; }
 
@@ -47,13 +48,10 @@ namespace Game.Components
             Vector2 pos3 = new Vector2(Boundary.MaxX + Offset.X, Boundary.MaxY + Offset.Y);
             Vector2 pos4 = new Vector2(Boundary.MinX + Offset.X, Boundary.MaxY + Offset.Y);
 
-            if (Transform != null)
-            {
-                pos1.Transform(Transform.TransformMatrix);
-                pos2.Transform(Transform.TransformMatrix);
-                pos3.Transform(Transform.TransformMatrix);
-                pos4.Transform(Transform.TransformMatrix);
-            }
+            pos1 = Transformation.Transform(pos1, Transform.TransformMatrix);
+            pos2 = Transformation.Transform(pos2, Transform.TransformMatrix);
+            pos3 = Transformation.Transform(pos3, Transform.TransformMatrix);
+            pos4 = Transformation.Transform(pos4, Transform.TransformMatrix);
 
             GL.Begin(PrimitiveType.Quads);
             GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
