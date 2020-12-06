@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Components;
+using Game.Tools;
 using OpenTK;
 
 namespace Game
@@ -45,7 +46,8 @@ namespace Game
                 // TODO: Remove this, it's only for testing
                 if (sceneManager.CurrentScene == 0)
                 {
-                    quad.Transform.Position += new Vector2(0.001f, 0f);
+                    quad.Transform.Position += Transformation.TransformDirection(new Vector2(0.5f, 0f), quad.Transform.LocalTransformMatrix) * deltaTime;
+                    quad.Transform.Rotation = -1f;
                     if (quad.Transform.Position.X >= 1.2f)
                     {
                         quad.Transform.Position = new Vector2(-1f, 0.2f);
