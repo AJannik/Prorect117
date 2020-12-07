@@ -25,27 +25,27 @@ namespace Game.Tools
             }
 
             // 3x HIT cases:
-            //          -o->             --|-->  |            |  --|->
-            // Impale(t1 hit, t2 hit), Poke(t1 hit, t2 > 1), ExitWound(t1 < 0, t2 hit),
+            //          -o->                    --|-->  |                   |  --|->
+            // Impale(tmin hit, tmax hit), Poke(tmin hit, tmax > 1), ExitWound(tmin < 0, tmax hit),
 
             // 3x MISS cases:
-            //       ->  o                     o ->              | -> |
-            // FallShort(t1 > 1, t2 > 1), Past(t1 < 0,t2 < 0), CompletelyInside(t1 < 0, t2 > 1)
+            //             ->  o                     o ->              | -> |
+            // FallShort(tmin > 1, tmax > 1), Past(tmin < 0,tmax < 0), CompletelyInside(tmin < 0, tmax > 1)
             discriminant = MathF.Sqrt(discriminant);
-            float t1 = (-b - discriminant) / (2 * a);
-            float t2 = (-b + discriminant) / (2 * a);
+            float tmin = (-b - discriminant) / (2 * a);
+            float tmax = (-b + discriminant) / (2 * a);
 
-            if (t1 >= 0 && t1 <= 1)
+            if (tmin >= 0 && tmin <= 1)
             {
-                // t1 is the intersection, and it's closer than t2
-                // (since t1 uses -b - discriminant)
+                // tmin is the intersection, and it's closer than tmax
+                // (since tmin uses -b - discriminant)
                 // Impale, Poke
                 return true;
             }
 
-            // here t1 didn't intersect so we are either started
+            // here tmin didn't intersect so we are either started
             // inside the sphere or completely past it
-            if (t2 >= 0 && t2 <= 1)
+            if (tmax >= 0 && tmax <= 1)
             {
                 // ExitWound
                 return true;
@@ -70,7 +70,29 @@ namespace Game.Tools
 
         public static bool AabbAndLine(Rect rect, Ray ray)
         {
-            throw new NotImplementedException();
+            if (IsPointInAabb(rect, ray.StartPos) || IsPointInAabb(rect, ray.EndPos))
+            {
+                return true;
+            }
+
+            Vector2 unitVector = ray.Direction;
+            unitVector.X = (unitVector.X != 0) ? 1.0f / unitVector.X : 0f;
+            unitVector.Y = (unitVector.Y != 0) ? 1.0f / unitVector.Y : 0f;
+
+            Vector2 min = new Vector2(rect.MinX, rect.MinY);
+            min -= ray.StartPos * unitVector;
+            Vector2 max = new Vector2(rect.MaxX, rect.MaxY);
+            max -= ray.StartPos * unitVector;
+
+            float tmin = MathF.Max(MathF.Min(min.X, max.X), MathF.Min(min.Y, max.Y));
+            float tmax = MathF.Min(MathF.Max(min.X, max.X), MathF.Max(min.Y, max.Y));
+            if (tmax < 0 || tmin > tmax)
+            {
+                return false;
+            }
+
+            float t = (tmin < 0f) ? tmax : tmin;
+            return t > 0f && t * t < ray.Length * ray.Length;
         }
 
         public static bool AabbAndAabb(Rect rect1, Rect rect2)
@@ -81,6 +103,17 @@ namespace Game.Tools
         public static bool AabbAndCircle(Rect rect, Circle circle)
         {
             throw new NotImplementedException();
+        }
+
+        public static bool IsPointInAabb(Rect rect, Vector2 point)
+        {
+            if (point.X > rect.MinX && point.X < rect.MaxX &&
+                point.Y > rect.MinY && point.Y < rect.MaxY)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
