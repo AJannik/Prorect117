@@ -70,29 +70,38 @@ namespace Game.Tools
 
         public static bool AabbAndLine(Rect rect, Ray ray)
         {
-            if (IsPointInAabb(rect, ray.StartPos) || IsPointInAabb(rect, ray.EndPos))
-            {
-                return true;
-            }
+            float t1 = (rect.MinX - ray.StartPos.X) / ray.Direction.X;
+            float t2 = (rect.MaxX - ray.StartPos.X) / ray.Direction.X;
+            float t3 = (rect.MinY - ray.StartPos.Y) / ray.Direction.Y;
+            float t4 = (rect.MaxY - ray.StartPos.Y) / ray.Direction.Y;
 
-            Vector2 unitVector = ray.Direction;
-            unitVector.X = (unitVector.X != 0) ? 1.0f / unitVector.X : 0f;
-            unitVector.Y = (unitVector.Y != 0) ? 1.0f / unitVector.Y : 0f;
+            float tmin = MathF.Max(MathF.Min(t1, t2), MathF.Min(t3, t4));
+            float tmax = MathF.Min(MathF.Max(t1, t2), MathF.Max(t3, t4));
 
-            Vector2 min = new Vector2(rect.MinX, rect.MinY);
-            min -= ray.StartPos * unitVector;
-            Vector2 max = new Vector2(rect.MaxX, rect.MaxY);
-            max -= ray.StartPos * unitVector;
-
-            float tmin = MathF.Max(MathF.Min(min.X, max.X), MathF.Min(min.Y, max.Y));
-            float tmax = MathF.Min(MathF.Max(min.X, max.X), MathF.Max(min.Y, max.Y));
-            if (tmax < 0 || tmin > tmax)
+            // if tmax < 0, ray (line) is intersecting AABB, but whole AABB is behing us
+            if (tmax < 0)
             {
                 return false;
             }
 
-            float t = (tmin < 0f) ? tmax : tmin;
-            return t > 0f && t * t < ray.Length * ray.Length;
+            // if tmin > tmax, ray doesn't intersect AABB
+            if (tmin > tmax)
+            {
+                return false;
+            }
+
+            // ray stops before reaching the aabb
+            if (tmax > ray.Length)
+            {
+                return false;
+            }
+
+            if (tmin < 0f)
+            {
+                return true; // tmax
+            }
+
+            return true; // tmin
         }
 
         public static bool AabbAndAabb(Rect rect1, Rect rect2)
