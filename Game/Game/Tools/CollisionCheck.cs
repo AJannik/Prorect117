@@ -97,12 +97,21 @@ namespace Game.Tools
 
         public static bool AabbAndAabb(Rect rect1, Rect rect2)
         {
-            throw new NotImplementedException();
+            bool collisionX = rect1.MaxX >= rect2.MinX && rect2.MaxX >= rect1.MinX;
+            bool collisionY = rect1.MaxY >= rect2.MinY && rect2.MaxY >= rect2.MinY;
+
+            return collisionX && collisionY;
         }
 
         public static bool AabbAndCircle(Rect rect, Circle circle)
         {
-            throw new NotImplementedException();
+            Vector2 distance = circle.Center - new Vector2(rect.CenterX, rect.CenterY);
+            Vector2 rectHalfDistances = new Vector2(rect.SizeX / 2f, rect.SizeY / 2f);
+            Vector2 clampedDistance = Vector2.Clamp(distance, -rectHalfDistances, rectHalfDistances);
+            Vector2 closest = new Vector2(rect.CenterX, rect.CenterY) + clampedDistance;
+            distance = closest - circle.Center;
+
+            return distance.LengthSquared < circle.Radius * circle.Radius;
         }
 
         public static bool IsPointInAabb(Rect rect, Vector2 point)

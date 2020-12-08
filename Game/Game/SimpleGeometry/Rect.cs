@@ -21,5 +21,9 @@
         public float SizeX { get; set; }
 
         public float SizeY { get; set; }
+
+        public float CenterX => MinX + (SizeX / 2f);
+
+        public float CenterY => MinY + (SizeY / 2f);
     }
 }
