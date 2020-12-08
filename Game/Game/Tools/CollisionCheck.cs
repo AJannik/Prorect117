@@ -120,7 +120,7 @@ namespace Game.Tools
             Vector2 closest = new Vector2(rect.CenterX, rect.CenterY) + clampedDistance;
             distance = closest - circle.Center;
 
-            return distance.LengthSquared < circle.Radius * circle.Radius;
+            return distance.LengthSquared <= circle.Radius * circle.Radius;
         }
 
         public static bool IsPointInAabb(Rect rect, Vector2 point)
