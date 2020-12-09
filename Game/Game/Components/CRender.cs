@@ -47,10 +47,10 @@ namespace Game.Components
             Vector2 pos3 = new Vector2((SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
             Vector2 pos4 = new Vector2((-SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
 
-            pos1 = Transformation.Transform(pos1, Transform.LocalTransformMatrix);
-            pos2 = Transformation.Transform(pos2, Transform.LocalTransformMatrix);
-            pos3 = Transformation.Transform(pos3, Transform.LocalTransformMatrix);
-            pos4 = Transformation.Transform(pos4, Transform.LocalTransformMatrix);
+            pos1 = Transformation.Transform(pos1, Transform.WorldTransformMatrix);
+            pos2 = Transformation.Transform(pos2, Transform.WorldTransformMatrix);
+            pos3 = Transformation.Transform(pos3, Transform.WorldTransformMatrix);
+            pos4 = Transformation.Transform(pos4, Transform.WorldTransformMatrix);
 
             GL.Begin(PrimitiveType.Quads);
             GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
