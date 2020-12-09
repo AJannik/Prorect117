@@ -16,17 +16,19 @@ namespace Game.Components
 
         public GameObject MyGameObject { get; set; } = null;
 
-        private CRender Renderer { get; set; }
+        public Rect TexCoords { get; private set; }
 
-        private Rect TexCoords { get; set; }
+        public int ActiveRow { get; private set; }
+
+        public int ActiveColumn { get; private set; }
+
+        public int Frames { get; private set; }
+
+        private CRender Renderer { get; set; }
 
         private int Rows { get; set; }
 
         private int Columns { get; set; }
-
-        private int ActiveRow { get; set; }
-
-        private int ActiveColumn { get; set; }
 
         public void Update(float deltaTime)
         {
@@ -44,12 +46,19 @@ namespace Game.Components
         {
             Rows = rows;
             Columns = columns;
+            Frames = rows * columns;
+        }
+
+        public void SetActiveFrame(int frame)
+        {
+            frame = frame % Frames;
+            ActiveRow = (frame % Rows) + 1;
+            ActiveColumn = (frame / Columns) + 1;
         }
 
         private Rect CalculateTexCoords()
         {
-            // TODO: calc texCoords
-            return new Rect(0, 0, 1, 1);
+            return new Rect((1 / Rows) * (ActiveRow - 1), (1 / Columns) * (ActiveColumn - 1), (1 / Rows) * ActiveRow, (1 / Columns) * ActiveColumn);
         }
     }
 }

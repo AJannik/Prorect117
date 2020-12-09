@@ -13,7 +13,7 @@ namespace Game.Components
             Texture = TextureTools.LoadFromResource("Content.default.png");
             TexCoords = new Rect(0f, 0f, 1f, 1f);
             Offset = new Vector2(0, 0);
-            Transform = new CTransform();
+            Transform = MyGameObject.Transform;
         }
 
         public GameObject MyGameObject { get; set; } = null;
@@ -34,8 +34,7 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            // pull Transform from object
-            Transform = MyGameObject.Transform;
+            //empty
         }
 
         public void Draw()
