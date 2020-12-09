@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Components;
-using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
 namespace Game
@@ -11,6 +10,7 @@ namespace Game
         private List<GameObject> gameObjects = new List<GameObject>();
         private List<CRender> renderers = new List<CRender>();
         private List<CCamera> cameras = new List<CCamera>();
+        private List<IComponent> genericComponents = new List<IComponent>();
 
         public void Update(float deltaTime)
         {
@@ -23,6 +23,11 @@ namespace Game
             foreach (CRender cRender in renderers)
             {
                 cRender.Update(deltaTime);
+            }
+
+            foreach (IComponent component in genericComponents)
+            {
+                component.Update(deltaTime);
             }
         }
 
@@ -61,6 +66,11 @@ namespace Game
             return renderers;
         }
 
+        public List<IComponent> GetGenericComponents()
+        {
+            return genericComponents;
+        }
+
         public void AddComponent(IComponent component)
         {
             if (component.GetType() == typeof(CRender))
@@ -71,12 +81,18 @@ namespace Game
                     renderers.Insert(index, (CRender)component);
                 }
             }
-
-            if (component.GetType() == typeof(CCamera))
+            else if (component.GetType() == typeof(CCamera))
             {
                 if (!cameras.Contains((CCamera)component))
                 {
                     cameras.Add((CCamera)component);
+                }
+            }
+            else
+            {
+                if (!genericComponents.Contains(component))
+                {
+                    genericComponents.Add(component);
                 }
             }
         }
@@ -87,10 +103,13 @@ namespace Game
             {
                 renderers.Remove((CRender)component);
             }
-
-            if (component.GetType() == typeof(CCamera))
+            else if (component.GetType() == typeof(CCamera))
             {
                 cameras.Remove((CCamera)component);
+            }
+            else
+            {
+                genericComponents.Remove(component);
             }
         }
 
@@ -101,27 +120,11 @@ namespace Game
 
         private void AddComponentsToLists(GameObject gameObject)
         {
-            if (gameObject.GetComponent<CRender>() != null)
-            {
-                foreach (CRender cRender in gameObject.GetComponents<CRender>())
-                {
-                    if (!renderers.Contains(cRender))
-                    {
-                        int index = GetIndex(cRender);
-                        renderers.Insert(index, cRender);
-                    }
-                }
-            }
+            IComponent[] components = gameObject.GetAllComponents();
 
-            if (gameObject.GetComponent<CCamera>() != null)
+            foreach (IComponent component in components)
             {
-                foreach (CCamera cCamera in gameObject.GetComponents<CCamera>())
-                {
-                    if (!cameras.Contains(cCamera))
-                    {
-                        cameras.Add(cCamera);
-                    }
-                }
+                AddComponent(component);
             }
         }
 
@@ -145,20 +148,11 @@ namespace Game
 
         private void RemoveComponentsFromLists(GameObject gameObject)
         {
-            if (gameObject.GetComponent<CRender>() != null)
-            {
-                foreach (CRender cRender in gameObject.GetComponents<CRender>())
-                {
-                    renderers.Remove(cRender);
-                }
-            }
+            IComponent[] components = gameObject.GetAllComponents();
 
-            if (gameObject.GetComponent<CCamera>() != null)
+            foreach (IComponent component in components)
             {
-                foreach (CCamera cCamera in gameObject.GetComponents<CCamera>())
-                {
-                    cameras.Remove(cCamera);
-                }
+                RemoveComponent(component);
             }
         }
     }
