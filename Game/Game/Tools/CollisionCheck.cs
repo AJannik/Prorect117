@@ -70,39 +70,57 @@ namespace Game.Tools
 
         public static bool AabbAndLine(Rect rect, Ray ray)
         {
-            if (IsPointInAabb(rect, ray.StartPos) || IsPointInAabb(rect, ray.EndPos))
-            {
-                return true;
-            }
+            float t1 = (rect.MinX - ray.StartPos.X) / ray.Direction.X;
+            float t2 = (rect.MaxX - ray.StartPos.X) / ray.Direction.X;
+            float t3 = (rect.MinY - ray.StartPos.Y) / ray.Direction.Y;
+            float t4 = (rect.MaxY - ray.StartPos.Y) / ray.Direction.Y;
 
-            Vector2 unitVector = ray.Direction;
-            unitVector.X = (unitVector.X != 0) ? 1.0f / unitVector.X : 0f;
-            unitVector.Y = (unitVector.Y != 0) ? 1.0f / unitVector.Y : 0f;
+            float tmin = MathF.Max(MathF.Min(t1, t2), MathF.Min(t3, t4));
+            float tmax = MathF.Min(MathF.Max(t1, t2), MathF.Max(t3, t4));
 
-            Vector2 min = new Vector2(rect.MinX, rect.MinY);
-            min -= ray.StartPos * unitVector;
-            Vector2 max = new Vector2(rect.MaxX, rect.MaxY);
-            max -= ray.StartPos * unitVector;
-
-            float tmin = MathF.Max(MathF.Min(min.X, max.X), MathF.Min(min.Y, max.Y));
-            float tmax = MathF.Min(MathF.Max(min.X, max.X), MathF.Max(min.Y, max.Y));
-            if (tmax < 0 || tmin > tmax)
+            // if tmax < 0, ray (line) is intersecting AABB, but whole AABB is behing us
+            if (tmax < 0)
             {
                 return false;
             }
 
-            float t = (tmin < 0f) ? tmax : tmin;
-            return t > 0f && t * t < ray.Length * ray.Length;
+            // if tmin > tmax, ray doesn't intersect AABB
+            if (tmin > tmax)
+            {
+                return false;
+            }
+
+            // ray stops before reaching the aabb
+            if (tmax > ray.Length)
+            {
+                return false;
+            }
+
+            if (tmin < 0f)
+            {
+                return true; // tmax
+            }
+
+            return true; // tmin
         }
 
         public static bool AabbAndAabb(Rect rect1, Rect rect2)
         {
-            throw new NotImplementedException();
+            bool collisionX = rect1.MaxX >= rect2.MinX && rect2.MaxX >= rect1.MinX;
+            bool collisionY = rect1.MaxY >= rect2.MinY && rect2.MaxY >= rect2.MinY;
+
+            return collisionX && collisionY;
         }
 
         public static bool AabbAndCircle(Rect rect, Circle circle)
         {
-            throw new NotImplementedException();
+            Vector2 distance = circle.Center - new Vector2(rect.CenterX, rect.CenterY);
+            Vector2 rectHalfDistances = new Vector2(rect.SizeX / 2f, rect.SizeY / 2f);
+            Vector2 clampedDistance = Vector2.Clamp(distance, -rectHalfDistances, rectHalfDistances);
+            Vector2 closest = new Vector2(rect.CenterX, rect.CenterY) + clampedDistance;
+            distance = closest - circle.Center;
+
+            return distance.LengthSquared <= circle.Radius * circle.Radius;
         }
 
         public static bool IsPointInAabb(Rect rect, Vector2 point)
