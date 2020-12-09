@@ -1,9 +1,8 @@
 ﻿using System;
 using Game;
-using Game.Components;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
-using System.Collections.Generic;
+using UnitTests.DummyClasses;
 
 namespace UnitTests
 {
@@ -42,10 +41,10 @@ namespace UnitTests
             Scene scene = new Scene();
             GameObject gameObject1 = new GameObject(scene);
 
-            gameObject1.AddComponent<CRender>();
-            gameObject1.AddComponent<CRender>();
+            gameObject1.AddComponent<DummyComponent1>();
+            gameObject1.AddComponent<DummyComponent1>();
 
-            Assert.AreEqual(2, scene.GetCRenders().Count);
+            Assert.AreEqual(2, scene.GetGenericComponents().Count);
         }
 
         [TestMethod]
@@ -54,11 +53,11 @@ namespace UnitTests
             Scene scene = new Scene();
             GameObject gameObject1 = new GameObject(scene);
 
-            gameObject1.AddComponent<CRender>();
-            gameObject1.AddComponent<CRender>();
-            gameObject1.RemoveComponent<CRender>();
+            gameObject1.AddComponent<DummyComponent1>();
+            gameObject1.AddComponent<DummyComponent1>();
+            gameObject1.RemoveComponent<DummyComponent1>();
 
-            Assert.AreEqual(1, scene.GetCRenders().Count);
+            Assert.AreEqual(1, scene.GetGenericComponents().Count);
         }
 
         [TestMethod]
@@ -68,38 +67,11 @@ namespace UnitTests
             GameObject gameObject1 = new GameObject(scene);
             GameObject gameObject2 = new GameObject(scene);
 
-            gameObject1.AddComponent<CRender>();
-            gameObject2.AddComponent<CRender>();
+            gameObject1.AddComponent<DummyComponent1>();
+            gameObject2.AddComponent<DummyComponent1>();
             scene.RemoveGameObject(gameObject2);
             
-            Assert.AreEqual(1, scene.GetCRenders().Count);            
-        }
-
-        [TestMethod]
-        public void TestCRenderLayerOrder()
-        {
-            Scene scene = new Scene();
-            GameObject gameObject1 = new GameObject(scene);
-            Random rn = new Random();
-
-            gameObject1.AddComponent<CRender>();
-            gameObject1.AddComponent<CRender>();
-            gameObject1.AddComponent<CRender>();
-
-            // set random layers to render components so we can test if scene sorts the renderers list correctly
-            CRender[] renderers = gameObject1.GetComponents<CRender>();
-            foreach (CRender item in renderers)
-            {
-                item.Layer = rn.Next(0, 4);
-            }
-
-            scene.Update(0);
-
-            List<CRender> cRenders = scene.GetCRenders();
-            for (int i = 1; i < cRenders.Count; i++)
-            {
-                Assert.IsTrue(cRenders[i - 1].Layer <= cRenders[i].Layer);
-            }
+            Assert.AreEqual(1, scene.GetGenericComponents().Count);            
         }
     }
 }

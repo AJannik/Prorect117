@@ -96,6 +96,15 @@ namespace Game
         }
 
         /// <summary>
+        /// Returns all components as an IComponent array.
+        /// </summary>
+        /// <returns>All Components as array.</returns>
+        public IComponent[] GetAllComponents()
+        {
+            return components.ToArray();
+        }
+
+        /// <summary>
         /// Returns all components of type T or null if non of type T were found.
         /// </summary>
         /// <typeparam name="T">Class that implements IComponent.</typeparam>

@@ -78,7 +78,7 @@ namespace Game.Tools
             float tmin = MathF.Max(MathF.Min(t1, t2), MathF.Min(t3, t4));
             float tmax = MathF.Min(MathF.Max(t1, t2), MathF.Max(t3, t4));
 
-            // if tmax < 0, ray (line) is intersecting AABB, but whole AABB is behing us
+            // if tmax < 0, ray (line) is intersecting AABB, but whole AABB is behind us
             if (tmax < 0)
             {
                 return false;

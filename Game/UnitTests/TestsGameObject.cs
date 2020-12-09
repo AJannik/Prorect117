@@ -1,7 +1,7 @@
 ﻿using Game;
-using Game.Components;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
+using UnitTests.DummyClasses;
 
 namespace UnitTests
 {
@@ -19,6 +19,7 @@ namespace UnitTests
         {
             Scene scene = new Scene();
             GameObject gameObject = new GameObject(scene);
+
             AddComponentToEmptyList(gameObject);
             GetOneComponent(gameObject);
             AddComponentToNotEmptyList(gameObject);
@@ -34,21 +35,21 @@ namespace UnitTests
         [TestMethod]
         private void AddComponentToEmptyList(GameObject gameObject)
         {
-            gameObject.AddComponent<CTransform>();
+            gameObject.AddComponent<DummyComponent1>();
             Assert.AreEqual(1, gameObject.GetNumberComponents());
         }
 
         [TestMethod]
         private void GetOneComponent(GameObject gameObject)
         {            
-            Assert.IsNotNull(gameObject.GetComponent<CTransform>());
+            Assert.IsNotNull(gameObject.GetComponent<DummyComponent1>());
         }
 
         [TestMethod]
         private void AddComponentToNotEmptyList(GameObject gameObject)
         {
-            gameObject.AddComponent<CRender>();
-            Assert.IsNotNull(gameObject.GetComponent<CRender>());
+            gameObject.AddComponent<DummyComponent2>();
+            Assert.IsNotNull(gameObject.GetComponent<DummyComponent2>());
         }
 
         [TestMethod]
@@ -60,46 +61,46 @@ namespace UnitTests
         [TestMethod]
         private void RemoveOneComponent(GameObject gameObject)
         {
-            gameObject.RemoveComponent<CTransform>();
+            gameObject.RemoveComponent<DummyComponent1>();
             Assert.AreEqual(1, gameObject.GetNumberComponents());
-            Assert.IsNull(gameObject.GetComponent<CTransform>());
+            Assert.IsNull(gameObject.GetComponent<DummyComponent1>());
         }
 
         [TestMethod]
         private void AddComponentToAlreadyExistingType(GameObject gameObject)
         {
-            gameObject.AddComponent<CRender>();
+            gameObject.AddComponent<DummyComponent2>();
             Assert.AreEqual(2, gameObject.GetNumberComponents());
-            Assert.IsNotNull(gameObject.GetComponent<CRender>());
+            Assert.IsNotNull(gameObject.GetComponent<DummyComponent2>());
         }
 
         [TestMethod]
         private void CheckGetMultipleComponents(GameObject gameObject)
         {
-            Assert.AreEqual(2, gameObject.GetComponents<CRender>().Length);
+            Assert.AreEqual(2, gameObject.GetComponents<DummyComponent2>().Length);
         }
 
         [TestMethod]
         private void RemoveNotExistingComponent(GameObject gameObject)
         {
-            gameObject.RemoveComponent<CTransform>();
+            gameObject.RemoveComponent<DummyComponent1>();
             Assert.AreEqual(2, gameObject.GetNumberComponents());            
         }
 
         [TestMethod]
         private void TryGettingNotExistingComponent(GameObject gameObject)
         {
-            Assert.IsNull(gameObject.GetComponent<CTransform>());
+            Assert.IsNull(gameObject.GetComponent<DummyComponent1>());
         }
 
         [TestMethod]
         private void RemoveGivenComponent(GameObject gameObject)
         {
             // Test removing component T of given type
-            CRender cRender = gameObject.GetComponents<CRender>()[1];
-            gameObject.RemoveComponent(cRender);
+            DummyComponent2 dummy = gameObject.GetComponents<DummyComponent2>()[1];
+            gameObject.RemoveComponent(dummy);
             Assert.AreEqual(1, gameObject.GetNumberComponents());
-            Assert.AreNotEqual(cRender, gameObject.GetComponent<CRender>());
+            Assert.AreNotEqual(dummy, gameObject.GetComponent<DummyComponent2>());
         }
 
         /*

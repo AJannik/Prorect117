@@ -13,7 +13,6 @@ namespace Game.Components
             Texture = TextureTools.LoadFromResource("Content.default.png");
             TexCoords = new Rect(0f, 0f, 1f, 1f);
             Offset = new Vector2(0, 0);
-            Transform = MyGameObject.Transform;
         }
 
         public GameObject MyGameObject { get; set; } = null;
@@ -28,13 +27,10 @@ namespace Game.Components
 
         private Rect TexCoords { get; set; }
 
-        private CTransform Transform { get; set; }
-
         private Vector2 Offset { get; set; }
 
         public void Update(float deltaTime)
         {
-            //empty
         }
 
         public void Draw()
@@ -46,10 +42,10 @@ namespace Game.Components
             Vector2 pos3 = new Vector2((SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
             Vector2 pos4 = new Vector2((-SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
 
-            pos1 = Transformation.Transform(pos1, Transform.WorldTransformMatrix);
-            pos2 = Transformation.Transform(pos2, Transform.WorldTransformMatrix);
-            pos3 = Transformation.Transform(pos3, Transform.WorldTransformMatrix);
-            pos4 = Transformation.Transform(pos4, Transform.WorldTransformMatrix);
+            pos1 = Transformation.Transform(pos1, MyGameObject.Transform.WorldTransformMatrix);
+            pos2 = Transformation.Transform(pos2, MyGameObject.Transform.WorldTransformMatrix);
+            pos3 = Transformation.Transform(pos3, MyGameObject.Transform.WorldTransformMatrix);
+            pos4 = Transformation.Transform(pos4, MyGameObject.Transform.WorldTransformMatrix);
 
             GL.Begin(PrimitiveType.Quads);
             GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
