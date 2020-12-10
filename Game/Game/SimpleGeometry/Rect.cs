@@ -1,29 +1,31 @@
-﻿namespace Game.SimpleGeometry
+﻿using OpenTK;
+
+namespace Game.SimpleGeometry
 {
     public class Rect
     {
         public Rect(float minX, float minY, float sizeX, float sizeY)
         {
-            MinX = minX;
-            MinY = minY;
-            SizeX = sizeX;
-            SizeY = sizeY;
+            Center = new Vector2(minX + (sizeX / 2), minY + (sizeY / 2));
+            Size = new Vector2(sizeX, sizeY);
         }
 
-        public float MinX { get; set; }
+        public Rect(Vector2 center, Vector2 size)
+        {
+            Center = center;
+            Size = size;
+        }
 
-        public float MinY { get; set; }
+        public Vector2 Center { get; set; }
 
-        public float MaxX => MinX + SizeX;
+        public Vector2 Size { get; set; }
 
-        public float MaxY => MinY + SizeY;
+        public float MinX => Center.X - (Size.X / 2);
 
-        public float SizeX { get; set; }
+        public float MinY => Center.Y - (Size.Y / 2);
 
-        public float SizeY { get; set; }
+        public float MaxX => Center.X + (Size.X / 2);
 
-        public float CenterX => MinX + (SizeX / 2f);
-
-        public float CenterY => MinY + (SizeY / 2f);
+        public float MaxY => Center.Y + (Size.Y / 2);
     }
 }

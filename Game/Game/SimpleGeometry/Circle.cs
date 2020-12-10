@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using Game.Interfaces;
+using OpenTK;
 
 namespace Game.SimpleGeometry
 {

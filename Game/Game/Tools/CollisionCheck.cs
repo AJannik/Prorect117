@@ -114,10 +114,10 @@ namespace Game.Tools
 
         public static bool AabbAndCircle(Rect rect, Circle circle)
         {
-            Vector2 distance = circle.Center - new Vector2(rect.CenterX, rect.CenterY);
-            Vector2 rectHalfDistances = new Vector2(rect.SizeX / 2f, rect.SizeY / 2f);
+            Vector2 distance = circle.Center - rect.Center;
+            Vector2 rectHalfDistances = rect.Size / 2f;
             Vector2 clampedDistance = Vector2.Clamp(distance, -rectHalfDistances, rectHalfDistances);
-            Vector2 closest = new Vector2(rect.CenterX, rect.CenterY) + clampedDistance;
+            Vector2 closest = rect.Center + clampedDistance;
             distance = closest - circle.Center;
 
             return distance.LengthSquared <= circle.Radius * circle.Radius;
