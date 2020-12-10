@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Game.Interfaces;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 

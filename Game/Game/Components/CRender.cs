@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Interfaces;
 using Game.SimpleGeometry;
 using Game.Tools;
 using OpenTK;

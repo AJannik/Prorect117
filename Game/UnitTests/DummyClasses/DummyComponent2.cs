@@ -1,7 +1,6 @@
 ﻿using Game;
+using Game.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace UnitTests.DummyClasses
 {

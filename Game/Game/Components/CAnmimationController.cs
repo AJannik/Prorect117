@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game.Interfaces;
 using Game.SimpleGeometry;
 using OpenTK.Graphics.OpenGL;
 
