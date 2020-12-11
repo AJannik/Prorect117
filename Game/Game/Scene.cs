@@ -38,12 +38,20 @@ namespace Game
             }
         }
 
-        public void Draw()
+        public void Draw(bool debugMode)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
             foreach (CRender render in renderers)
             {
                 render.Draw();
+            }
+
+            if (debugMode)
+            {
+                foreach (CBoxCollider boxCollider in boxColliders)
+                {
+                    boxCollider.DebugDraw();
+                }
             }
         }
 

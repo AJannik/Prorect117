@@ -46,12 +46,6 @@ namespace Game
                 // TODO: Remove this, it's only for testing
                 if (sceneManager.CurrentScene == 0)
                 {
-                    quad.Transform.Position += Transformation.TransformDirection(new Vector2(0.5f, 0f), quad.Transform.LocalTransformMatrix) * deltaTime;
-                    quad.Transform.Rotation = -1f;
-                    if (quad.Transform.Position.X >= 1.2f)
-                    {
-                        quad.Transform.Position = new Vector2(-1f, 0.2f);
-                    }
                 }
                 else if (sceneManager.CurrentScene == 1)
                 {
@@ -74,11 +68,17 @@ namespace Game
         {
             Scene scene = new Scene();
             GameObject quad = new GameObject(scene);
-            GameObject camera = new GameObject(scene);
-            quad.AddComponent<CRender>();
-            quad.Transform.Position = new Vector2(0.3f, 0.5f);
+            GameObject floor = new GameObject(scene);
 
-            camera.AddComponent<CCamera>();
+            quad.AddComponent<CRender>();
+            quad.AddComponent<CBoxCollider>();
+            quad.AddComponent<CRigidBody>();
+            quad.Transform.Position = new Vector2(0f, 1f);
+            quad.GetComponent<CRigidBody>().Mass = 0.1f;
+
+            floor.AddComponent<CRender>();
+            floor.AddComponent<CBoxCollider>();
+            floor.Transform.Position = new Vector2(0f, -0.8f);
 
             return scene;
         }

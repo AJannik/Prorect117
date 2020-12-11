@@ -29,7 +29,7 @@ namespace Game
 
         public void Draw()
         {
-            scenes[CurrentScene].Draw();
+            scenes[CurrentScene].Draw(DebugMode);
         }
 
         public void LoadNextScene()
