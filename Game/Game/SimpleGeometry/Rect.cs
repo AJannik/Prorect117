@@ -1,8 +1,9 @@
-﻿using OpenTK;
+﻿using Game.Interfaces;
+using OpenTK;
 
 namespace Game.SimpleGeometry
 {
-    public class Rect
+    public class Rect : ISimpleGeometry
     {
         public Rect(float minX, float minY, float sizeX, float sizeY)
         {
