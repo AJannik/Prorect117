@@ -20,6 +20,8 @@ namespace Game
 
         public int CurrentScene { get; private set; } = 0;
 
+        public bool DebugMode { get; set; } = true;
+
         public void Update(float deltaTime)
         {
             scenes[CurrentScene].Update(deltaTime);

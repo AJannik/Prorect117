@@ -11,10 +11,16 @@ namespace Game
         private List<GameObject> gameObjects = new List<GameObject>();
         private List<CRender> renderers = new List<CRender>();
         private List<CCamera> cameras = new List<CCamera>();
+        private List<CBoxCollider> boxColliders = new List<CBoxCollider>();
         private List<IComponent> genericComponents = new List<IComponent>();
 
         public void Update(float deltaTime)
         {
+            foreach (CBoxCollider boxCollider in boxColliders)
+            {
+                boxCollider.Update(deltaTime);
+            }
+
             foreach (CCamera cCamera in cameras)
             {
                 cCamera.Update(deltaTime);
@@ -67,6 +73,11 @@ namespace Game
             return renderers;
         }
 
+        public List<CBoxCollider> GetCBoxColliders()
+        {
+            return boxColliders;
+        }
+
         public List<IComponent> GetGenericComponents()
         {
             return genericComponents;
@@ -89,6 +100,13 @@ namespace Game
                     cameras.Add((CCamera)component);
                 }
             }
+            else if (component.GetType() == typeof(CBoxCollider))
+            {
+                if (!boxColliders.Contains((CBoxCollider)component))
+                {
+                    boxColliders.Add((CBoxCollider)component);
+                }
+            }
             else
             {
                 if (!genericComponents.Contains(component))
@@ -107,6 +125,10 @@ namespace Game
             else if (component.GetType() == typeof(CCamera))
             {
                 cameras.Remove((CCamera)component);
+            }
+            else if (component.GetType() == typeof(CBoxCollider))
+            {
+                boxColliders.Remove((CBoxCollider)component);
             }
             else
             {
