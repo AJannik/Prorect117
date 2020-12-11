@@ -10,6 +10,6 @@ namespace Game.Interfaces
 
         public ISimpleGeometry Geometry { get; set; }
 
-        public void Draw();
+        public void DebugDraw();
     }
 }

@@ -104,10 +104,10 @@ namespace Game.Tools
             return true; // tmin
         }
 
-        public static bool AabbAndAabb(Rect rect1, Rect rect2)
+        public static bool AabbAndAabb(Rect rect1, Rect rect2, Vector2 movement)
         {
-            bool collisionX = rect1.MaxX >= rect2.MinX && rect2.MaxX >= rect1.MinX;
-            bool collisionY = rect1.MaxY >= rect2.MinY && rect2.MaxY >= rect2.MinY;
+            bool collisionX = rect1.MaxX + movement.X >= rect2.MinX && rect2.MaxX >= rect1.MinX + movement.X;
+            bool collisionY = rect1.MaxY + movement.Y >= rect2.MinY && rect2.MaxY >= rect1.MinY + movement.Y;
 
             return collisionX && collisionY;
         }

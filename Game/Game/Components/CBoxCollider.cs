@@ -1,6 +1,8 @@
 ﻿using System;
 using Game.Interfaces;
 using Game.SimpleGeometry;
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
 
 namespace Game.Components
 {
@@ -17,9 +19,18 @@ namespace Game.Components
             Geometry.Center = MyGameObject.Transform.WorldPosition;
         }
 
-        public void Draw()
+        public void DebugDraw()
         {
-            throw new NotImplementedException();
+            Rect x = (Rect)Geometry;
+            GL.Color4(Color.LimeGreen);
+            GL.LineWidth(1.5f);
+            GL.Begin(PrimitiveType.LineLoop);
+            GL.Vertex2(x.MinX, x.MinY);
+            GL.Vertex2(x.MaxX, x.MinY);
+            GL.Vertex2(x.MaxX, x.MaxY);
+            GL.Vertex2(x.MinX, x.MaxY);
+            GL.End();
+            GL.Color4(Color.White);
         }
     }
 }
