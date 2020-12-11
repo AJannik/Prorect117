@@ -11,7 +11,7 @@ namespace Game.Components
 
         public ICollider Collider { get; set; }
 
-        public Vector2 Gravitiy { get; private set; } = new Vector2(0f, -10f);
+        public float GravityScale { get; set; } = 1f;
 
         public bool Static { get; set; } = false;
 
@@ -21,9 +21,9 @@ namespace Game.Components
 
         public float Mass { get; set; } = 1f;
 
-        public Vector2 Force { get; private set; } = Vector2.Zero;
-
         public Vector2 Velocity { get; set; } = Vector2.Zero;
+
+        private Vector2 Force { get; set; } = Vector2.Zero;
 
         public void Update(float deltaTime)
         {
@@ -37,16 +37,22 @@ namespace Game.Components
                 return;
             }
 
+            Vector2 s = (Velocity + (Force / Mass * deltaTime)) * deltaTime;
+            if (UseGravity)
+            {
+                s += PhysicConstants.Gravity * GravityScale * deltaTime;
+            }
+
             foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
             {
                 if (boxCollider != Collider && !boxCollider.IsTrigger)
                 {
                     if (Collider.GetType() == typeof(CBoxCollider))
                     {
-                        // TODO: Mybe use predicted postition instead of current
-                        if (!CollisionCheck.AabbAndAabb((Rect)boxCollider.Geometry, (Rect)Collider.Geometry))
+                        // TODO: Use predicted postition instead of current
+                        if (!CollisionCheck.AabbAndAabb((Rect)Collider.Geometry, (Rect)boxCollider.Geometry, s))
                         {
-                            MyGameObject.Transform.Position += Force * deltaTime;
+                            MyGameObject.Transform.Position += s;
                         }
                     }
 
@@ -57,21 +63,14 @@ namespace Game.Components
             // TODO: CircleCollider
         }
 
-        public void AddForce(Vector2 direction, float thrust)
+        public void AddForce(Vector2 force)
         {
             if (Static)
             {
                 return;
             }
 
-            direction = direction.Normalized();
-            Vector2 acceleration = direction * thrust;
-            if (UseGravity)
-            {
-                acceleration += Gravitiy;
-            }
-
-            Force += Mass * acceleration;
+            Force += force;
         }
 
         public void ClearForce()
