@@ -23,7 +23,6 @@ namespace Game.Components
         {
             Rect x = (Rect)Geometry;
             GL.Color4(Color.LimeGreen);
-            GL.LineWidth(1.5f);
             GL.Begin(PrimitiveType.LineLoop);
             GL.Vertex2(x.MinX, x.MinY);
             GL.Vertex2(x.MaxX, x.MinY);

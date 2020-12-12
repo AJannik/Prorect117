@@ -22,7 +22,6 @@ namespace Game.Components
             float delta = 2f * MathF.PI / NumVerticies;
 
             GL.Color4(Color.LimeGreen);
-            GL.LineWidth(1.5f);
             GL.Begin(PrimitiveType.LineLoop);
             for (int i = 0; i < NumVerticies; i++)
             {
