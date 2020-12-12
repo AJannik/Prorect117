@@ -18,7 +18,7 @@ namespace UnitTests
             Rect rect1 = new Rect(-1f, -1f, 0.1f, 0.1f);
             Rect rect2 = new Rect(1f, 1f, 0.1f, 0.1f);
 
-            Assert.IsFalse(CollisionCheck.AabbAndAabb(rect1, rect2));
+            Assert.IsFalse(CollisionCheck.AabbAndAabb(rect1, rect2 , Vector2.Zero));
         }
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace UnitTests
             Rect rect1 = new Rect(-1f, -1f, 0.1f, 0.1f);
             Rect rect2 = new Rect(-1f, -0.9f, 0.1f, 0.1f);
 
-            Assert.IsTrue(CollisionCheck.AabbAndAabb(rect1, rect2));
+            Assert.IsTrue(CollisionCheck.AabbAndAabb(rect1, rect2, Vector2.Zero));
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@ namespace UnitTests
             Rect rect1 = new Rect(0f, 0f, 0.4f, 0.4f);
             Rect rect2 = new Rect(0.2f, 0.2f, 0.2f, 0.4f);
 
-            Assert.IsTrue(CollisionCheck.AabbAndAabb(rect1, rect2));
+            Assert.IsTrue(CollisionCheck.AabbAndAabb(rect1, rect2, Vector2.Zero));
         }
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace UnitTests
             Circle circle = new Circle(new Vector2(0f, 0f), 0.4f);
             Rect rect = new Rect(-1f, -1f, 0.1f, 0.1f);
 
-            Assert.IsFalse(CollisionCheck.AabbAndCircle(rect, circle));
+            Assert.IsFalse(CollisionCheck.AabbAndCircle(rect, circle, Vector2.Zero));
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace UnitTests
             Circle circle = new Circle(new Vector2(0f, 0f), 0.3f);
             Rect rect = new Rect(-0.5f, 0f, 0.2f, 0.2f);
 
-            Assert.IsTrue(CollisionCheck.AabbAndCircle(rect, circle));
+            Assert.IsTrue(CollisionCheck.AabbAndCircle(rect, circle, Vector2.UnitX * -0.1f));
         }
 
         [TestMethod]
@@ -90,7 +90,7 @@ namespace UnitTests
             Circle circle = new Circle(new Vector2(0f, 0f), 0.4f);
             Rect rect = new Rect(-0.5f, 0f, 0.4f, 0.4f);
 
-            Assert.IsTrue(CollisionCheck.AabbAndCircle(rect, circle));
+            Assert.IsTrue(CollisionCheck.AabbAndCircle(rect, circle, Vector2.Zero));
         }
     }
 }

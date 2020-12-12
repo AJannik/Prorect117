@@ -112,13 +112,13 @@ namespace Game.Tools
             return collisionX && collisionY;
         }
 
-        public static bool AabbAndCircle(Rect rect, Circle circle)
+        public static bool AabbAndCircle(Rect rect, Circle circle, Vector2 movement)
         {
-            Vector2 distance = circle.Center - rect.Center;
+            Vector2 distance = (circle.Center + movement) - rect.Center;
             Vector2 rectHalfDistances = rect.Size / 2f;
             Vector2 clampedDistance = Vector2.Clamp(distance, -rectHalfDistances, rectHalfDistances);
             Vector2 closest = rect.Center + clampedDistance;
-            distance = closest - circle.Center;
+            distance = closest - (circle.Center + movement);
 
             return distance.LengthSquared <= circle.Radius * circle.Radius;
         }
