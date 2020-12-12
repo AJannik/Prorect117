@@ -71,7 +71,7 @@ namespace Game
             GameObject floor = new GameObject(scene);
 
             quad.AddComponent<CRender>();
-            quad.AddComponent<CBoxCollider>();
+            quad.AddComponent<CCircleCollider>();
             quad.AddComponent<CRigidBody>();
             quad.Transform.Position = new Vector2(0f, 1f);
             quad.GetComponent<CRigidBody>().Mass = 0.1f;

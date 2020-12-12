@@ -10,7 +10,7 @@ namespace Game.Components
     {
         public GameObject MyGameObject { get; set; } = null;
 
-        public ISimpleGeometry Geometry { get; set; } = new Rect(0f, 0f, 0.2f, 0.2f);
+        public ISimpleGeometry Geometry { get; set; } = new Rect(0f, 0f, 0.4f, 0.2f);
 
         public bool IsTrigger { get; set; } = false;
 

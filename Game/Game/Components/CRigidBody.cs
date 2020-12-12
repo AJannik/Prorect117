@@ -9,7 +9,7 @@ namespace Game.Components
     {
         public GameObject MyGameObject { get; set; } = null;
 
-        public ICollider Collider { get; set; }
+        public ICollider Collider { get; set; } // TODO: use List
 
         public float GravityScale { get; set; } = 1f;
 
@@ -49,18 +49,23 @@ namespace Game.Components
                 {
                     if (Collider.GetType() == typeof(CBoxCollider))
                     {
-                        // TODO: Use predicted postition instead of current
                         if (!CollisionCheck.AabbAndAabb((Rect)Collider.Geometry, (Rect)boxCollider.Geometry, s))
                         {
                             MyGameObject.Transform.Position += s;
                         }
                     }
 
-                    // TODO: CircleCollider
+                    if (Collider.GetType() == typeof(CCircleCollider))
+                    {
+                        if (!CollisionCheck.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)Collider.Geometry, s))
+                        {
+                            MyGameObject.Transform.Position += s;
+                        }
+                    }
                 }
             }
 
-            // TODO: CircleCollider
+            // TODO: CircleColliders
         }
 
         public void AddForce(Vector2 force)
@@ -80,10 +85,11 @@ namespace Game.Components
 
         private void SetCollider()
         {
-            CBoxCollider[] colliders = MyGameObject.GetComponents<CBoxCollider>();
-            if (colliders.Length > 0)
+            CBoxCollider[] boxColliders = MyGameObject.GetComponents<CBoxCollider>();
+            CCircleCollider[] circleColliders = MyGameObject.GetComponents<CCircleCollider>();
+            if (boxColliders != null && boxColliders.Length > 0)
             {
-                foreach (CBoxCollider boxCollider in colliders)
+                foreach (CBoxCollider boxCollider in boxColliders)
                 {
                     if (!boxCollider.IsTrigger)
                     {
@@ -93,7 +99,17 @@ namespace Game.Components
                 }
             }
 
-            // TODO: CircleCollider
+            if (circleColliders != null && circleColliders.Length > 0)
+            {
+                foreach (CCircleCollider circleCollider in circleColliders)
+                {
+                    if (!circleCollider.IsTrigger)
+                    {
+                        Collider = circleCollider;
+                        return;
+                    }
+                }
+            }
         }
     }
 }

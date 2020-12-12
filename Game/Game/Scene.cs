@@ -12,6 +12,7 @@ namespace Game
         private List<CRender> renderers = new List<CRender>();
         private List<CCamera> cameras = new List<CCamera>();
         private List<CBoxCollider> boxColliders = new List<CBoxCollider>();
+        private List<CCircleCollider> circleColliders = new List<CCircleCollider>();
         private List<IComponent> genericComponents = new List<IComponent>();
 
         public void Update(float deltaTime)
@@ -19,6 +20,11 @@ namespace Game
             foreach (CBoxCollider boxCollider in boxColliders)
             {
                 boxCollider.Update(deltaTime);
+            }
+
+            foreach (CCircleCollider circleCollider in circleColliders)
+            {
+                circleCollider.Update(deltaTime);
             }
 
             foreach (CCamera cCamera in cameras)
@@ -51,6 +57,11 @@ namespace Game
                 foreach (CBoxCollider boxCollider in boxColliders)
                 {
                     boxCollider.DebugDraw();
+                }
+
+                foreach (CCircleCollider circleCollider in circleColliders)
+                {
+                    circleCollider.DebugDraw();
                 }
             }
         }
@@ -86,6 +97,11 @@ namespace Game
             return boxColliders;
         }
 
+        public List<CCircleCollider> GetCCircleColliders()
+        {
+            return circleColliders;
+        }
+
         public List<IComponent> GetGenericComponents()
         {
             return genericComponents;
@@ -115,6 +131,13 @@ namespace Game
                     boxColliders.Add((CBoxCollider)component);
                 }
             }
+            else if (component.GetType() == typeof(CCircleCollider))
+            {
+                if (!circleColliders.Contains((CCircleCollider)component))
+                {
+                    circleColliders.Add((CCircleCollider)component);
+                }
+            }
             else
             {
                 if (!genericComponents.Contains(component))
@@ -137,6 +160,10 @@ namespace Game
             else if (component.GetType() == typeof(CBoxCollider))
             {
                 boxColliders.Remove((CBoxCollider)component);
+            }
+            else if (component.GetType() == typeof(CCircleCollider))
+            {
+                circleColliders.Remove((CCircleCollider)component);
             }
             else
             {
