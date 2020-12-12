@@ -1,4 +1,6 @@
-﻿using Game.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using Game.Interfaces;
 using Game.SimpleGeometry;
 using Game.Tools;
 using OpenTK;
@@ -9,7 +11,7 @@ namespace Game.Components
     {
         public GameObject MyGameObject { get; set; } = null;
 
-        public ICollider Collider { get; set; } // TODO: use List
+        public List<ICollider> Colliders { get; set; } = new List<ICollider>();
 
         public float GravityScale { get; set; } = 1f;
 
@@ -27,9 +29,9 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (Collider == null)
+            if (Colliders.Count == 0)
             {
-                SetCollider();
+                SetColliders();
             }
 
             if (!Simulated || Static)
@@ -43,29 +45,14 @@ namespace Game.Components
                 s += PhysicConstants.Gravity * GravityScale * deltaTime;
             }
 
-            foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
+            if (!IsColliding(3f * s))
             {
-                if (boxCollider != Collider && !boxCollider.IsTrigger)
-                {
-                    if (Collider.GetType() == typeof(CBoxCollider))
-                    {
-                        if (!CollisionCheck.AabbAndAabb((Rect)Collider.Geometry, (Rect)boxCollider.Geometry, s))
-                        {
-                            MyGameObject.Transform.Position += s;
-                        }
-                    }
-
-                    if (Collider.GetType() == typeof(CCircleCollider))
-                    {
-                        if (!CollisionCheck.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)Collider.Geometry, s))
-                        {
-                            MyGameObject.Transform.Position += s;
-                        }
-                    }
-                }
+                MyGameObject.Transform.Position += s;
             }
-
-            // TODO: CircleColliders
+            else
+            {
+                Velocity = Vector2.Zero;
+            }
         }
 
         public void AddForce(Vector2 force)
@@ -83,7 +70,84 @@ namespace Game.Components
             Force = Vector2.Zero;
         }
 
-        private void SetCollider()
+        private bool IsColliding(Vector2 movement)
+        {
+            foreach (ICollider myCollider in Colliders)
+            {
+                if (myCollider.GetType() == typeof(CBoxCollider))
+                {
+                    if (CheckBoxColliderCollisions((CBoxCollider)myCollider, movement))
+                    {
+                        return true;
+                    }
+                }
+                else if (myCollider.GetType() == typeof(CCircleCollider))
+                {
+                    if (CheckCircleColliderCollisions((CCircleCollider)myCollider, movement))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private bool CheckBoxColliderCollisions(CBoxCollider myCollider, Vector2 movement)
+        {
+            foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
+            {
+                if (boxCollider != myCollider && !boxCollider.IsTrigger)
+                {
+                    if (CollisionCheck.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry, movement))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            foreach (CCircleCollider circelCollider in MyGameObject.Scene.GetCCircleColliders())
+            {
+                if (!circelCollider.IsTrigger)
+                {
+                    if (CollisionCheck.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry, movement))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private bool CheckCircleColliderCollisions(CCircleCollider myCollider, Vector2 movement)
+        {
+            foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
+            {
+                if (!boxCollider.IsTrigger)
+                {
+                    if (CollisionCheck.AabbAndCircle((Circle)myCollider.Geometry, (Rect)boxCollider.Geometry, movement))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            foreach (CCircleCollider circelCollider in MyGameObject.Scene.GetCCircleColliders())
+            {
+                if (myCollider != circelCollider && !circelCollider.IsTrigger)
+                {
+                    if (CollisionCheck.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry, movement))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private void SetColliders()
         {
             CBoxCollider[] boxColliders = MyGameObject.GetComponents<CBoxCollider>();
             CCircleCollider[] circleColliders = MyGameObject.GetComponents<CCircleCollider>();
@@ -91,10 +155,9 @@ namespace Game.Components
             {
                 foreach (CBoxCollider boxCollider in boxColliders)
                 {
-                    if (!boxCollider.IsTrigger)
+                    if (!boxCollider.IsTrigger && !Colliders.Contains(boxCollider))
                     {
-                        Collider = boxCollider;
-                        return;
+                        Colliders.Add(boxCollider);
                     }
                 }
             }
@@ -103,10 +166,9 @@ namespace Game.Components
             {
                 foreach (CCircleCollider circleCollider in circleColliders)
                 {
-                    if (!circleCollider.IsTrigger)
+                    if (!circleCollider.IsTrigger && !Colliders.Contains(circleCollider))
                     {
-                        Collider = circleCollider;
-                        return;
+                        Colliders.Add(circleCollider);
                     }
                 }
             }

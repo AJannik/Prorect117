@@ -55,9 +55,9 @@ namespace Game.Tools
             return false;
         }
 
-        public static bool CircleAndCircle(Circle circle1, Circle circle2)
+        public static bool CircleAndCircle(Circle circle1, Circle circle2, Vector2 movement)
         {
-            float squaredDistanceCircles = Vector2.DistanceSquared(circle1.Center, circle2.Center);
+            float squaredDistanceCircles = Vector2.DistanceSquared(circle1.Center + movement, circle2.Center);
             float squaredRadii = (circle1.Radius + circle2.Radius) * (circle1.Radius + circle2.Radius);
 
             if (squaredDistanceCircles <= squaredRadii)
@@ -112,15 +112,26 @@ namespace Game.Tools
             return collisionX && collisionY;
         }
 
-        public static bool AabbAndCircle(Rect rect, Circle circle, Vector2 movement)
+        public static bool AabbAndCircle(Rect activeRect, Circle passiveCircle, Vector2 movement)
         {
-            Vector2 distance = (circle.Center + movement) - rect.Center;
-            Vector2 rectHalfDistances = rect.Size / 2f;
+            Vector2 distance = passiveCircle.Center - (activeRect.Center + movement);
+            Vector2 rectHalfDistances = activeRect.Size / 2f;
             Vector2 clampedDistance = Vector2.Clamp(distance, -rectHalfDistances, rectHalfDistances);
-            Vector2 closest = rect.Center + clampedDistance;
-            distance = closest - (circle.Center + movement);
+            Vector2 closest = activeRect.Center + clampedDistance;
+            distance = (closest + movement) - passiveCircle.Center;
 
-            return distance.LengthSquared <= circle.Radius * circle.Radius;
+            return distance.LengthSquared <= passiveCircle.Radius * passiveCircle.Radius;
+        }
+
+        public static bool AabbAndCircle(Circle activeCircle, Rect passiveRect, Vector2 movement)
+        {
+            Vector2 distance = (activeCircle.Center + movement) - passiveRect.Center;
+            Vector2 rectHalfDistances = passiveRect.Size / 2f;
+            Vector2 clampedDistance = Vector2.Clamp(distance, -rectHalfDistances, rectHalfDistances);
+            Vector2 closest = passiveRect.Center + clampedDistance;
+            distance = closest - (activeCircle.Center + movement);
+
+            return distance.LengthSquared <= activeCircle.Radius * activeCircle.Radius;
         }
 
         public static bool IsPointInAabb(Rect rect, Vector2 point)
