@@ -97,7 +97,7 @@ namespace Game.Components
         {
             foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
             {
-                if (boxCollider != myCollider && !boxCollider.IsTrigger)
+                if (!Colliders.Contains(boxCollider) && !boxCollider.IsTrigger)
                 {
                     if (CollisionCheck.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry, movement))
                     {
@@ -108,7 +108,7 @@ namespace Game.Components
 
             foreach (CCircleCollider circelCollider in MyGameObject.Scene.GetCCircleColliders())
             {
-                if (!circelCollider.IsTrigger)
+                if (!Colliders.Contains(circelCollider) && !circelCollider.IsTrigger)
                 {
                     if (CollisionCheck.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry, movement))
                     {
@@ -124,7 +124,7 @@ namespace Game.Components
         {
             foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
             {
-                if (!boxCollider.IsTrigger)
+                if (!Colliders.Contains(boxCollider) && !boxCollider.IsTrigger)
                 {
                     if (CollisionCheck.AabbAndCircle((Circle)myCollider.Geometry, (Rect)boxCollider.Geometry, movement))
                     {
@@ -135,7 +135,7 @@ namespace Game.Components
 
             foreach (CCircleCollider circelCollider in MyGameObject.Scene.GetCCircleColliders())
             {
-                if (myCollider != circelCollider && !circelCollider.IsTrigger)
+                if (!Colliders.Contains(circelCollider) && !circelCollider.IsTrigger)
                 {
                     if (CollisionCheck.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry, movement))
                     {
