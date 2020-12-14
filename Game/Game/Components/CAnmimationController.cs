@@ -15,17 +15,15 @@ namespace Game.Components
             Rows = 1;
             Columns = 1;
             Frames = 1;
-            ActiveRow = 1;
-            ActiveColumn = 1;
+            if (MyGameObject != null)
+            {
+                Renderer = MyGameObject.GetComponent<CRender>();
+            }
         }
 
         public GameObject MyGameObject { get; set; } = null;
 
         public Rect TexCoords { get; private set; }
-
-        public int ActiveRow { get; private set; }
-
-        public int ActiveColumn { get; private set; }
 
         public int Frames { get; private set; }
 
@@ -43,14 +41,12 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            Renderer = MyGameObject.GetComponent<CRender>();
             if (Renderer == null)
             {
                 return;
             }
 
             ActiveAnimation.Update(deltaTime);
-            TexCoords = CalculateTexCoords();
             Renderer.SetTexCoords(TexCoords);
         }
 
@@ -69,12 +65,14 @@ namespace Game.Components
         /// <summary>
         /// Sets the Active Frame.
         /// </summary>
-        /// <param name="frame">Active Frame (starts at 1).</param>
-        public void SetActiveFrame(int frame)
+        /// <param name="frameID">Active Frame (starts at 0).</param>
+        public void SetActiveFrame(int frameID)
         {
-            frame = frame % Frames;
-            ActiveRow = (frame % Rows) + 1;
-            ActiveColumn = frame / Columns;
+            frameID = frameID % Frames;
+            int activeRow = frameID / Columns;
+            int activeColumn = frameID % Columns;
+
+            TexCoords = new Rect(activeColumn / (float)Columns, 1f - ((activeRow + 1f) / Rows), 1 / Columns, 1 / Rows);
         }
 
         /// <summary>
@@ -112,11 +110,6 @@ namespace Game.Components
         public void SetStartAnimation(Animation animation)
         {
             StartAnimation = animation;
-        }
-
-        private Rect CalculateTexCoords()
-        {
-            return new Rect((1 / Rows) * (ActiveRow - 1), (1 / Columns) * (ActiveColumn - 1), (1 / Rows) * ActiveRow, (1 / Columns) * ActiveColumn);
         }
     }
 }

@@ -13,27 +13,16 @@ namespace UnitTests
     public class TestsAnimationController
     {
         //[TestMethod]
-        public void TestSetActiveFrame()
-        {
-            CAnmimationController controller = new CAnmimationController();
-
-            controller.SetRowsAndColumns(2, 2);
-            controller.SetActiveFrame(4);
-            Console.WriteLine(controller.ActiveColumn + controller.ActiveRow);
-            Assert.IsTrue(controller.ActiveRow == 2 && controller.ActiveColumn == 2);
-        }
-
-        //[TestMethod]
         public void TestCalculateTexCoords()
         {
-            Scene scene = new Scene();
-            GameObject gameObject = new GameObject(scene);
-            gameObject.AddComponent<CAnmimationController>();
-
-            CAnmimationController controller = gameObject.GetComponent<CAnmimationController>();
-            controller.SetActiveFrame(4);
-            controller.Update(1f);
-            Assert.IsTrue(controller.TexCoords == new Game.SimpleGeometry.Rect(0.5f,0.5f,1,1));
+            CAnmimationController acontroller = new CAnmimationController();
+            acontroller.SetRowsAndColumns(2, 2);
+            acontroller.SetActiveFrame(3);
+            acontroller.Update(1f);
+            Assert.IsTrue(acontroller.TexCoords.MinX == 0.5f);
+            Assert.IsTrue(acontroller.TexCoords.MinY == 0.0f);
+            Assert.IsTrue(acontroller.TexCoords.MaxX == 1f);
+            Assert.IsTrue(acontroller.TexCoords.MaxY == 0.5f);
         }
     }
 }
