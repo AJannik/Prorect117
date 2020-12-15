@@ -70,6 +70,7 @@ namespace Game
             GameObject quad = new GameObject(scene);
             GameObject floor = new GameObject(scene);
 
+            quad.AddComponent<CCamera>();
             quad.AddComponent<CRender>();
             quad.AddComponent<CBoxCollider>();
             quad.AddComponent<CRigidBody>();
