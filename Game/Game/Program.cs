@@ -117,6 +117,7 @@ namespace Game
             GameObject childQuad = new GameObject(scene, parentQuad);
 
             parentQuad.AddComponent<CRender>();
+            parentQuad.AddComponent<CCamera>();
             childQuad.AddComponent<CRender>();
             childQuad.Transform.Position = new Vector2(0.5f, 0f);
 
