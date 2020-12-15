@@ -71,6 +71,7 @@ namespace Game
 
             window.UpdateFrame += (_, args) => Update((float)args.Time);
             window.RenderFrame += (s, a) => Draw();
+            window.Resize += (_, args) => sceneManager.Resize(window.Width, window.Height);
             window.Run();
         }
 

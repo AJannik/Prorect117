@@ -17,6 +17,11 @@ namespace Game
 
         public void Update(float deltaTime)
         {
+            foreach (CCamera cCamera in cameras)
+            {
+                cCamera.Update(deltaTime);
+            }
+
             foreach (CBoxCollider boxCollider in boxColliders)
             {
                 boxCollider.Update(deltaTime);
@@ -25,11 +30,6 @@ namespace Game
             foreach (CCircleCollider circleCollider in circleColliders)
             {
                 circleCollider.Update(deltaTime);
-            }
-
-            foreach (CCamera cCamera in cameras)
-            {
-                cCamera.Update(deltaTime);
             }
 
             SortRenderers();
@@ -41,6 +41,14 @@ namespace Game
             foreach (IComponent component in genericComponents)
             {
                 component.Update(deltaTime);
+            }
+        }
+
+        public void Resize(int width, int height)
+        {
+            foreach (CCamera camera in cameras)
+            {
+                camera.Resize(width, height);
             }
         }
 

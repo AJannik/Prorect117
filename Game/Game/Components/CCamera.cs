@@ -41,7 +41,7 @@ namespace Game.Components
 
         public void UpdateMatrix()
         {
-            cameraMatrix = Tools.Transformation.Translate(MyGameObject.Transform.WorldPosition);
+            cameraMatrix = Tools.Transformation.Translate(-MyGameObject.Transform.WorldPosition);
         }
     }
 }
