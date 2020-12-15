@@ -45,13 +45,13 @@ namespace Game.Components
                 s += PhysicConstants.Gravity * GravityScale * deltaTime;
             }
 
-            if (!IsColliding(3f * s))
+            MyGameObject.Transform.Position += s;
+
+            if (IsColliding())
             {
-                MyGameObject.Transform.Position += s;
             }
             else
             {
-                Velocity = Vector2.Zero;
             }
         }
 
@@ -70,20 +70,20 @@ namespace Game.Components
             Force = Vector2.Zero;
         }
 
-        private bool IsColliding(Vector2 movement)
+        private bool IsColliding()
         {
             foreach (ICollider myCollider in Colliders)
             {
                 if (myCollider.GetType() == typeof(CBoxCollider))
                 {
-                    if (CheckBoxColliderCollisions((CBoxCollider)myCollider, movement))
+                    if (CheckBoxColliderCollisions((CBoxCollider)myCollider))
                     {
                         return true;
                     }
                 }
                 else if (myCollider.GetType() == typeof(CCircleCollider))
                 {
-                    if (CheckCircleColliderCollisions((CCircleCollider)myCollider, movement))
+                    if (CheckCircleColliderCollisions((CCircleCollider)myCollider))
                     {
                         return true;
                     }
@@ -93,25 +93,29 @@ namespace Game.Components
             return false;
         }
 
-        private bool CheckBoxColliderCollisions(CBoxCollider myCollider, Vector2 movement)
+        private bool CheckBoxColliderCollisions(CBoxCollider myCollider)
         {
+            // Going through every non owned and non trigger CBoxCollider in the Scene
             foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
             {
                 if (!Colliders.Contains(boxCollider) && !boxCollider.IsTrigger)
                 {
-                    if (CollisionCheck.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry, movement))
+                    if (CollisionCheck.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry))
                     {
+                        MyGameObject.Transform.Position += PenetrationDepths.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry) * -1f;
                         return true;
                     }
                 }
             }
 
+            // Going through every non owned and non trigger CCircleCollider in the Scene
             foreach (CCircleCollider circelCollider in MyGameObject.Scene.GetCCircleColliders())
             {
                 if (!Colliders.Contains(circelCollider) && !circelCollider.IsTrigger)
                 {
-                    if (CollisionCheck.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry, movement))
+                    if (CollisionCheck.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry))
                     {
+                        MyGameObject.Transform.Position += PenetrationDepths.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry) * -1f;
                         return true;
                     }
                 }
@@ -120,25 +124,29 @@ namespace Game.Components
             return false;
         }
 
-        private bool CheckCircleColliderCollisions(CCircleCollider myCollider, Vector2 movement)
+        private bool CheckCircleColliderCollisions(CCircleCollider myCollider)
         {
+            // Going through every non owned and non trigger CBoxCollider in the Scene
             foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
             {
                 if (!Colliders.Contains(boxCollider) && !boxCollider.IsTrigger)
                 {
-                    if (CollisionCheck.AabbAndCircle((Circle)myCollider.Geometry, (Rect)boxCollider.Geometry, movement))
+                    if (CollisionCheck.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)myCollider.Geometry))
                     {
+                        MyGameObject.Transform.Position += PenetrationDepths.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)myCollider.Geometry) * 1f;
                         return true;
                     }
                 }
             }
 
+            // Going through every non owned and non trigger CCircleCollider in the Scene
             foreach (CCircleCollider circelCollider in MyGameObject.Scene.GetCCircleColliders())
             {
                 if (!Colliders.Contains(circelCollider) && !circelCollider.IsTrigger)
                 {
-                    if (CollisionCheck.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry, movement))
+                    if (CollisionCheck.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry))
                     {
+                        MyGameObject.Transform.Position += PenetrationDepths.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry) * 1f;
                         return true;
                     }
                 }

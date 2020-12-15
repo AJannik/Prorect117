@@ -71,15 +71,21 @@ namespace Game
             GameObject floor = new GameObject(scene);
 
             quad.AddComponent<CRender>();
-            quad.AddComponent<CCircleCollider>();
+            quad.AddComponent<CBoxCollider>();
             quad.AddComponent<CRigidBody>();
             quad.Transform.Position = new Vector2(0f, 1f);
+            quad.GetComponent<CRigidBody>().UseGravity = true;
             quad.GetComponent<CRigidBody>().Mass = 0.1f;
+            quad.GetComponent<CRigidBody>().AddForce(Vector2.UnitX);
 
             floor.AddComponent<CRender>();
             floor.AddComponent<CBoxCollider>();
+            floor.AddComponent<CRigidBody>();
+            floor.GetComponent<CRigidBody>().UseGravity = false;
+            floor.GetComponent<CRigidBody>().Static = true;
             floor.Transform.Position = new Vector2(0f, -0.8f);
 
+            // floor.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(2f, 0.2f);
             return scene;
         }
 
