@@ -11,35 +11,24 @@ namespace Game.Components
         private float windowAspectRatio;
         private Matrix4 cameraMatrix = Matrix4.Identity;
 
-        public Vector2 Center
+        public CCamera()
         {
-            get
-            {
-                return center;
-            }
-
-            set
-            {
-                center = value;
-                UpdateMatrix();
-            }
         }
 
         public GameObject MyGameObject { get; set; }
 
         public Matrix4 CameraMatrix => cameraMatrix;
 
-        private GameObject FocusObject { get; set; }
-
         private CTransform Transform { get; set; }
 
         public void Update(float deltaTime)
         {
-            // throw new NotImplementedException();
+            UpdateMatrix();
         }
 
         public void Draw()
         {
+            UpdateMatrix();
             GL.LoadMatrix(ref cameraMatrix);
         }
 
@@ -52,12 +41,7 @@ namespace Game.Components
 
         public void UpdateMatrix()
         {
-            // TODO: Implement window aspect ratio scaling
-            // TODO: Implement camera scaling
-            // TODO: Implement rotation around position
-            // TODO: Implement panning
-            // TODO: Calculate the resulting camera matrix
-            throw new NotImplementedException();
+            cameraMatrix = Tools.Transformation.Translate(MyGameObject.Transform.WorldPosition);
         }
     }
 }

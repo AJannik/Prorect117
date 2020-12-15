@@ -47,6 +47,11 @@ namespace Game
         public void Draw(bool debugMode)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
+            foreach (CCamera camera in cameras)
+            {
+                camera.Draw();
+            }
+
             foreach (CRender render in renderers)
             {
                 render.Draw();
