@@ -55,7 +55,7 @@ namespace Game.Components
             Animations.Add(animation);
         }
 
-        public void SetRowsAndColumns(int rows, int columns)
+        public void SetColumnsAndRows(int columns, int rows)
         {
             Rows = rows;
             Columns = columns;

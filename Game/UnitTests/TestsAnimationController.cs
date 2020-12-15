@@ -16,7 +16,7 @@ namespace UnitTests
         public void TestCalculateTexCoords()
         {
             CAnmimationController acontroller = new CAnmimationController();
-            acontroller.SetRowsAndColumns(2, 2);
+            acontroller.SetColumnsAndRows(2, 2);
             acontroller.SetActiveFrame(3);
             acontroller.Update(1f);
             Assert.IsTrue(acontroller.TexCoords.MinX == 0.5f);
