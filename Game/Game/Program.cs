@@ -11,8 +11,10 @@ namespace Game
         private static void Main()
         {
             var window = new GameWindow(512, 512);
+            window.VSync = VSyncMode.On;
             SceneManager sceneManager = new SceneManager(2);
-            float counter = 5f;
+            float counter = 7f;
+            int skipedFrames = 0;
 
             sceneManager.SetScene(0, BuildScene1());
             sceneManager.SetScene(1, BuildScene2());
@@ -21,6 +23,13 @@ namespace Game
 
             void Update(float deltaTime)
             {
+                // Skip frame if deltaTime is to big because an untypically big deltaTime can cause physic bugs
+                if (deltaTime > 0.03f)
+                {
+                    skipedFrames++;
+                    return;
+                }
+
                 sceneManager.Update(deltaTime);
 
                 // TODO: Remove this, it's only for testing
@@ -38,6 +47,7 @@ namespace Game
                     counter -= deltaTime;
                     if (counter <= 0f)
                     {
+                        Console.WriteLine($"A total of {skipedFrames} Update-Frames were skiped.");
                         window.Exit();
                         return;
                     }
@@ -73,10 +83,19 @@ namespace Game
             quad.AddComponent<CRender>();
             quad.AddComponent<CBoxCollider>();
             quad.AddComponent<CRigidBody>();
+            quad.AddComponent<CBoxCollider>();
+            quad.AddComponent<CTriggerEventTest>();
             quad.Transform.Position = new Vector2(0f, 1f);
-            quad.GetComponent<CRigidBody>().UseGravity = true;
-            quad.GetComponent<CRigidBody>().Mass = 0.1f;
-            quad.GetComponent<CRigidBody>().AddForce(Vector2.UnitX);
+
+            CBoxCollider trigger = quad.GetComponents<CBoxCollider>()[1];
+            trigger.IsTrigger = true;
+            trigger.Offset = new Vector2(0f, -0.05f);
+            trigger.Geometry.Size = new Vector2(0.4f, 0.1f);
+
+            CRigidBody rb = quad.GetComponent<CRigidBody>();
+            rb.UseGravity = true;
+            rb.Mass = 0.1f;
+            rb.AddForce(Vector2.UnitX);
 
             floor.AddComponent<CRender>();
             floor.AddComponent<CBoxCollider>();
