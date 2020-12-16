@@ -15,6 +15,8 @@ namespace Game
         private List<CCircleCollider> circleColliders = new List<CCircleCollider>();
         private List<IComponent> genericComponents = new List<IComponent>();
 
+        public Debug Debug { get; } = new Debug();
+
         public void Update(float deltaTime)
         {
             foreach (CCamera cCamera in cameras)
@@ -76,6 +78,8 @@ namespace Game
                 {
                     circleCollider.DebugDraw();
                 }
+
+                Debug.DebugDraw();
             }
         }
 
