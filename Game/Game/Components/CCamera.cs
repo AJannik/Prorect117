@@ -28,7 +28,6 @@ namespace Game.Components
 
         public void Draw()
         {
-            UpdateMatrix();
             GL.LoadMatrix(ref cameraMatrix);
         }
 

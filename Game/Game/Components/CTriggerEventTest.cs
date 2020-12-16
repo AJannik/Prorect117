@@ -1,4 +1,6 @@
 ﻿using Game.Interfaces;
+using Game.RaycastSystem;
+using OpenTK;
 
 namespace Game.Components
 {
@@ -10,12 +12,26 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (Trigger == null)
+            if (false && Trigger == null)
             {
                 Trigger = MyGameObject.GetComponents<CBoxCollider>()[1];
                 Trigger.TriggerEntered += OnTriggerEntered;
                 Trigger.TriggerExited += OnTriggerExited;
             }
+
+            Ray ray = new Ray(MyGameObject.Transform.WorldPosition - (Vector2.UnitY * 0.3f), -Vector2.UnitY, 0.5f);
+            RaycastHit hit;
+            if (Raycast.Cast(MyGameObject.Scene, false, ray, out hit))
+            {
+                ray.Color = Color.Red;
+                ray.Length = (ray.StartPos - hit.HitPoint).Length;
+            }
+            else
+            {
+                ray.Color = Color.Green;
+            }
+
+            MyGameObject.Scene.Debug.DrawRay(ray);
         }
 
         private void OnTriggerExited(object sender, ICollider e)

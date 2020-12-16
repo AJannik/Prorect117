@@ -11,7 +11,6 @@ namespace Game
         private static void Main()
         {
             var window = new GameWindow(512, 512);
-            window.VSync = VSyncMode.On;
             SceneManager sceneManager = new SceneManager(2);
             float counter = 7f;
             int skipedFrames = 0;
@@ -91,7 +90,7 @@ namespace Game
 
             CBoxCollider trigger = quad.GetComponents<CBoxCollider>()[1];
             trigger.IsTrigger = true;
-            trigger.Offset = new Vector2(0f, -0.05f);
+            trigger.Offset = new Vector2(0f, -0.06f);
             trigger.Geometry.Size = new Vector2(0.4f, 0.1f);
 
             CRigidBody rb = quad.GetComponent<CRigidBody>();
@@ -100,7 +99,7 @@ namespace Game
             rb.AddForce(Vector2.UnitX);
 
             floor.AddComponent<CRender>();
-            floor.AddComponent<CBoxCollider>();
+            floor.AddComponent<CCircleCollider>();
             floor.AddComponent<CRigidBody>();
             floor.GetComponent<CRigidBody>().UseGravity = false;
             floor.GetComponent<CRigidBody>().Static = true;
