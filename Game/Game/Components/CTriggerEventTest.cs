@@ -21,7 +21,7 @@ namespace Game.Components
 
             Ray ray = new Ray(MyGameObject.Transform.WorldPosition - (Vector2.UnitY * 0.3f), -Vector2.UnitY, 0.5f);
             RaycastHit hit;
-            if (Raycast.Cast(MyGameObject.Scene, false, ray, out hit))
+            if (Raycast.BasicRaycast(MyGameObject.Scene, false, ray, out hit))
             {
                 ray.Color = Color.Red;
                 ray.Length = (ray.StartPos - hit.HitPoint).Length;

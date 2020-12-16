@@ -5,7 +5,11 @@ namespace Game.RaycastSystem
 {
     public static class Raycast
     {
-        public static bool Cast(Scene scene, bool querryTrigger, Ray ray, out RaycastHit hit)
+        /// <summary>
+        /// Performs a raycast. If it hits a collider then true is returned and the hitinformation is stored inside the RaycastHit object.
+        /// </summary>
+        /// <returns><see langword="true"/> if there was a hit and <see langword="false"/> if there was no hit.</returns>
+        public static bool BasicRaycast(Scene scene, bool querryTrigger, Ray ray, out RaycastHit hit)
         {
             hit = new RaycastHit();
 

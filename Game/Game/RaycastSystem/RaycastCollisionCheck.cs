@@ -38,7 +38,7 @@ namespace Game.RaycastSystem
             }
 
             hit.HitPoint = ray.StartPos + (ray.Direction * t);
-            hit.HitNormal = hit.HitPoint - circle.Center;
+            hit.ObjectNormal = hit.HitPoint - circle.Center;
 
             return true;
         }
@@ -71,6 +71,7 @@ namespace Game.RaycastSystem
                 return false;
             }
 
+            // TODO: Calculate hit normal
             if (tmin < 0f)
             {
                 hit.HitPoint = ray.StartPos + (ray.Direction * tmax);
