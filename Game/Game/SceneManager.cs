@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using OpenTK.Graphics.OpenGL;
 
 namespace Game
@@ -30,6 +28,11 @@ namespace Game
         public void Draw()
         {
             scenes[CurrentScene].Draw(DebugMode);
+        }
+
+        public void Resize(int width, int height)
+        {
+            scenes[CurrentScene].Resize(width, height);
         }
 
         public void LoadNextScene()

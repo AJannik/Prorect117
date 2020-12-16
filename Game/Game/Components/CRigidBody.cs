@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Interfaces;
 using Game.SimpleGeometry;
 using Game.Tools;

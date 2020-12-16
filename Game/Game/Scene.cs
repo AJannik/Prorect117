@@ -15,8 +15,15 @@ namespace Game
         private List<CCircleCollider> circleColliders = new List<CCircleCollider>();
         private List<IComponent> genericComponents = new List<IComponent>();
 
+        public Debug Debug { get; } = new Debug();
+
         public void Update(float deltaTime)
         {
+            foreach (CCamera cCamera in cameras)
+            {
+                cCamera.Update(deltaTime);
+            }
+
             foreach (CBoxCollider boxCollider in boxColliders)
             {
                 boxCollider.Update(deltaTime);
@@ -25,11 +32,6 @@ namespace Game
             foreach (CCircleCollider circleCollider in circleColliders)
             {
                 circleCollider.Update(deltaTime);
-            }
-
-            foreach (CCamera cCamera in cameras)
-            {
-                cCamera.Update(deltaTime);
             }
 
             SortRenderers();
@@ -44,9 +46,22 @@ namespace Game
             }
         }
 
+        public void Resize(int width, int height)
+        {
+            foreach (CCamera camera in cameras)
+            {
+                camera.Resize(width, height);
+            }
+        }
+
         public void Draw(bool debugMode)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
+            foreach (CCamera camera in cameras)
+            {
+                camera.Draw();
+            }
+
             foreach (CRender render in renderers)
             {
                 render.Draw();
@@ -63,6 +78,8 @@ namespace Game
                 {
                     circleCollider.DebugDraw();
                 }
+
+                Debug.DebugDraw();
             }
         }
 

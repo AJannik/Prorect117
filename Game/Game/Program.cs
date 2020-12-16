@@ -12,7 +12,8 @@ namespace Game
         {
             var window = new GameWindow(512, 512);
             SceneManager sceneManager = new SceneManager(2);
-            float counter = 5f;
+            float counter = 7f;
+            int skipedFrames = 0;
 
             sceneManager.SetScene(0, BuildScene1());
             sceneManager.SetScene(1, BuildScene2());
@@ -21,6 +22,13 @@ namespace Game
 
             void Update(float deltaTime)
             {
+                // Skip frame if deltaTime is to big because an untypically big deltaTime can cause physic bugs
+                if (deltaTime > 0.03f)
+                {
+                    skipedFrames++;
+                    return;
+                }
+
                 sceneManager.Update(deltaTime);
 
                 // TODO: Remove this, it's only for testing
@@ -38,6 +46,7 @@ namespace Game
                     counter -= deltaTime;
                     if (counter <= 0f)
                     {
+                        Console.WriteLine($"A total of {skipedFrames} Update-Frames were skiped.");
                         window.Exit();
                         return;
                     }
@@ -61,6 +70,7 @@ namespace Game
 
             window.UpdateFrame += (_, args) => Update((float)args.Time);
             window.RenderFrame += (s, a) => Draw();
+            window.Resize += (_, args) => sceneManager.Resize(window.Width, window.Height);
             window.Run();
         }
 
@@ -70,13 +80,23 @@ namespace Game
             GameObject quad = new GameObject(scene);
             GameObject floor = new GameObject(scene);
 
+            quad.AddComponent<CCamera>();
             quad.AddComponent<CRender>();
             quad.AddComponent<CBoxCollider>();
             quad.AddComponent<CRigidBody>();
+            quad.AddComponent<CBoxCollider>();
+            quad.AddComponent<CTriggerEventTest>();
             quad.Transform.Position = new Vector2(0f, 1f);
-            quad.GetComponent<CRigidBody>().UseGravity = true;
-            quad.GetComponent<CRigidBody>().Mass = 0.1f;
-            quad.GetComponent<CRigidBody>().AddForce(Vector2.UnitX);
+
+            CBoxCollider trigger = quad.GetComponents<CBoxCollider>()[1];
+            trigger.IsTrigger = true;
+            trigger.Offset = new Vector2(0f, -0.06f);
+            trigger.Geometry.Size = new Vector2(0.4f, 0.1f);
+
+            CRigidBody rb = quad.GetComponent<CRigidBody>();
+            rb.UseGravity = true;
+            rb.Mass = 0.1f;
+            rb.AddForce(Vector2.UnitX);
 
             floor.AddComponent<CRender>();
             floor.AddComponent<CBoxCollider>();
@@ -96,6 +116,7 @@ namespace Game
             GameObject childQuad = new GameObject(scene, parentQuad);
 
             parentQuad.AddComponent<CRender>();
+            parentQuad.AddComponent<CCamera>();
             childQuad.AddComponent<CRender>();
             childQuad.Transform.Position = new Vector2(0.5f, 0f);
 

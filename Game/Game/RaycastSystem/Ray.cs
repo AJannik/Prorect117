@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace Game.SimpleGeometry
+namespace Game.RaycastSystem
 {
     public class Ray
     {
@@ -30,5 +30,7 @@ namespace Game.SimpleGeometry
         }
 
         public float Length { get; set; }
+
+        public Color Color { get; set; } = Color.White;
     }
 }
