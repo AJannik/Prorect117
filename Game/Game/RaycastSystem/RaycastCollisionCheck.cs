@@ -75,11 +75,39 @@ namespace Game.RaycastSystem
             if (tmin < 0f)
             {
                 hit.HitPoint = ray.StartPos + (ray.Direction * tmax);
+                hit.ObjectNormal = CalculateNormal(hit.HitPoint, rect);
                 return true; // tmax
             }
 
             hit.HitPoint = ray.StartPos + (ray.Direction * tmin);
+            hit.ObjectNormal = CalculateNormal(hit.HitPoint, rect);
             return true; // tmin
+        }
+
+        private static Vector2 CalculateNormal(Vector2 hitPos, Rect rect)
+        {
+            Vector2 normal = Vector2.Zero;
+            if (hitPos.X - rect.MinX == 0)
+            {
+                normal += -Vector2.UnitX;
+            }
+
+            if (hitPos.X - rect.MaxX == 0)
+            {
+                normal += Vector2.UnitX;
+            }
+
+            if (hitPos.Y - rect.MinY == 0)
+            {
+                normal += -Vector2.UnitY;
+            }
+
+            if (hitPos.Y - rect.MaxY == 0)
+            {
+                normal += Vector2.UnitY;
+            }
+
+            return normal;
         }
     }
 }

@@ -25,6 +25,9 @@ namespace Game.Components
             {
                 ray.Color = Color.Red;
                 ray.Length = (ray.StartPos - hit.HitPoint).Length;
+                Ray normal = new Ray(hit.HitPoint, hit.ObjectNormal, 0.2f);
+                normal.Color = Color.Blue;
+                MyGameObject.Scene.Debug.DrawRay(normal);
             }
             else
             {

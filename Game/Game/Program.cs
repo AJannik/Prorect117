@@ -99,7 +99,7 @@ namespace Game
             rb.AddForce(Vector2.UnitX);
 
             floor.AddComponent<CRender>();
-            floor.AddComponent<CCircleCollider>();
+            floor.AddComponent<CBoxCollider>();
             floor.AddComponent<CRigidBody>();
             floor.GetComponent<CRigidBody>().UseGravity = false;
             floor.GetComponent<CRigidBody>().Static = true;
