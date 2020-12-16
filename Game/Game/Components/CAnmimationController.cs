@@ -46,7 +46,16 @@ namespace Game.Components
                 return;
             }
 
-            ActiveAnimation.Update(deltaTime);
+            int retFrame = ActiveAnimation.Update(deltaTime);
+            if (retFrame == -1)
+            {
+                GoToNextAnimation();
+            }
+            else
+            {
+                SetActiveFrame(retFrame);
+            }
+
             Renderer.SetTexCoords(TexCoords);
         }
 
