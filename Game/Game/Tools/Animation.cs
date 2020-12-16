@@ -17,6 +17,20 @@ namespace Game.Tools
             Loop = isLoop;
         }
 
+        public Animation(string name, int frames, int startFrame, bool isLoop, bool hasSeperateTexture, string seperateTexturePath)
+        {
+            Name = name;
+            Frames = frames;
+            StartFrame = startFrame;
+            ActiveFrame = StartFrame;
+            Loop = isLoop;
+            HasSeperateTexture = hasSeperateTexture;
+            if (hasSeperateTexture)
+            {
+                Texture = TextureTools.LoadFromResource(seperateTexturePath);
+            }
+        }
+
         public int Frames { get; private set; }
 
         public int StartFrame { get; private set; }
@@ -28,6 +42,10 @@ namespace Game.Tools
         public Animation NextAnimation { get; set; } = null;
 
         public float TimeBetweenTwoFrames { get; set; } = 0.2f;
+
+        public bool HasSeperateTexture { get; private set; } = false;
+
+        public int Texture { get; private set; }
 
         private float TimeToNextFrame { get; set; } = 0f;
 
@@ -66,5 +84,7 @@ namespace Game.Tools
 
             return ActiveFrame;
         }
+
+
     }
 }

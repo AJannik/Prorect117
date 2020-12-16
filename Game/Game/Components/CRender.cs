@@ -22,7 +22,7 @@ namespace Game.Components
 
         public bool Flipped { get; set; } = false;
 
-        private int Texture { get; set; }
+        public int Texture { get; private set; }
 
         private float SizeX { get; set; } = 0.2f;
 
@@ -101,9 +101,14 @@ namespace Game.Components
             GL.End();
         }
 
-        public void SetTexture(string name)
+        public void LoadAndSetTexture(string name)
         {
             Texture = TextureTools.LoadFromResource(name);
+        }
+
+        public void SetTexture(int tex)
+        {
+            Texture = tex;
         }
 
         public void SetTexCoords(Rect newTexCoords)
