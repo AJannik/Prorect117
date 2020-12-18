@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Game.SimpleGeometry;
 using OpenTK;
 
-namespace Game.Tools
+namespace Game.Physics
 {
-    public static class PenetrationDepths
+    internal static class PenetrationDepths
     {
         public static Vector2 AabbAndAabb(Rect rect1, Rect rect2)
         {

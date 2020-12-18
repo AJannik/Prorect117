@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Interfaces;
+using Game.Physics;
 using Game.SimpleGeometry;
-using Game.Tools;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 

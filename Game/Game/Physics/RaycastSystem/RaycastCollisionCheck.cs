@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Game.SimpleGeometry;
 using OpenTK;
 
-namespace Game.RaycastSystem
+[assembly: InternalsVisibleTo("UnitTests")]
+
+namespace Game.Physics.RaycastSystem
 {
-    public static class RaycastCollisionCheck
+    internal static class RaycastCollisionCheck
     {
-        public static bool CircleAndLine(Circle circle, Ray ray, RaycastHit hit)
+        internal static bool CircleAndLine(Circle circle, Ray ray, RaycastHit hit)
         {
             Vector2 circleToRayStart = circle.Center - ray.StartPos;
             float radiusSquared = circle.Radius * circle.Radius;
@@ -43,7 +46,7 @@ namespace Game.RaycastSystem
             return true;
         }
 
-        public static bool AabbAndLine(Rect rect, Ray ray, RaycastHit hit)
+        internal static bool AabbAndLine(Rect rect, Ray ray, RaycastHit hit)
         {
             float t1 = (rect.MinX - ray.StartPos.X) / ray.Direction.X;
             float t2 = (rect.MaxX - ray.StartPos.X) / ray.Direction.X;
@@ -71,7 +74,6 @@ namespace Game.RaycastSystem
                 return false;
             }
 
-            // TODO: Calculate hit normal
             if (tmin < 0f)
             {
                 hit.HitPoint = ray.StartPos + (ray.Direction * tmax);

@@ -1,10 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Game.SimpleGeometry;
-using Game.Tools;
 using OpenTK;
+using Game.Physics;
 
 namespace UnitTests
 {

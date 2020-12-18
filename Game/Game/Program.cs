@@ -1,6 +1,6 @@
 ﻿using System;
 using Game.Components;
-using Game.Tools;
+using Game.SceneLevel;
 using OpenTK;
 
 namespace Game

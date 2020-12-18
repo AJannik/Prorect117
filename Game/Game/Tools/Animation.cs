@@ -84,7 +84,5 @@ namespace Game.Tools
 
             return ActiveFrame;
         }
-
-
     }
 }

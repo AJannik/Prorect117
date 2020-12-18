@@ -2,8 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using OpenTK;
 using Game.SimpleGeometry;
-using Game.Tools;
-using Game.RaycastSystem;
+using Game.Physics.RaycastSystem;
 
 namespace UnitTests
 {
@@ -14,7 +13,7 @@ namespace UnitTests
         [TestMethod]
         public void TestRaycastImpalesCircle()
         {
-            // Raycast enters and exits circle
+            // Raycast enters and exits circle            
             Ray ray = new Ray(new Vector2(-0.9f, 0.0f), new Vector2(1f, 0f), 10f);
             RaycastHit hit = new RaycastHit();
             Circle circle = new Circle(new Vector2(0f, 0f), 0.2f);

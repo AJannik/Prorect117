@@ -1,5 +1,5 @@
 ﻿using Game.Interfaces;
-using Game.RaycastSystem;
+using Game.Physics.RaycastSystem;
 using OpenTK;
 
 namespace Game.Components

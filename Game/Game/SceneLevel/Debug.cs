@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Game.RaycastSystem;
+using Game.Physics.RaycastSystem;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game
+namespace Game.SceneLevel
 {
     public class Debug
     {

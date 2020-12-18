@@ -1,7 +1,7 @@
 ﻿using Game.Interfaces;
 using OpenTK;
 
-namespace Game.RaycastSystem
+namespace Game.Physics.RaycastSystem
 {
     public class RaycastHit
     {

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Components;
 using Game.Interfaces;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game
+namespace Game.SceneLevel
 {
     public class Scene
     {

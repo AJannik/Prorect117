@@ -1,12 +1,13 @@
 ﻿using Game.Components;
+using Game.SceneLevel;
 using Game.SimpleGeometry;
 
-namespace Game.RaycastSystem
+namespace Game.Physics.RaycastSystem
 {
     public static class Raycast
     {
         /// <summary>
-        /// Performs a raycast. If it hits a collider then true is returned and the hitinformation is stored inside the RaycastHit object.
+        /// Performs a normal raycast. If it hits a collider then true is returned and the hit information is stored inside the RaycastHit object.
         /// </summary>
         /// <returns><see langword="true"/> if there was a hit and <see langword="false"/> if there was no hit.</returns>
         public static bool BasicRaycast(Scene scene, bool querryTrigger, Ray ray, out RaycastHit hit)

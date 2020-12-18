@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 using OpenTK;
 using System;
+using Game.SceneLevel;
 
 namespace UnitTests
 {

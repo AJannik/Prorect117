@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace Game.RaycastSystem
+namespace Game.Physics.RaycastSystem
 {
     public class Ray
     {

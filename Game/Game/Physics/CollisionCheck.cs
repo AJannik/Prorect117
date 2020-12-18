@@ -1,11 +1,14 @@
-﻿using Game.SimpleGeometry;
+﻿using System.Runtime.CompilerServices;
+using Game.SimpleGeometry;
 using OpenTK;
 
-namespace Game.Tools
+[assembly: InternalsVisibleTo("UnitTests")]
+
+namespace Game.Physics
 {
-    public static class CollisionCheck
+    internal static class CollisionCheck
     {
-        public static bool CircleAndCircle(Circle circle1, Circle circle2)
+        internal static bool CircleAndCircle(Circle circle1, Circle circle2)
         {
             float squaredDistanceCircles = Vector2.DistanceSquared(circle1.Center, circle2.Center);
             float squaredRadii = (circle1.Radius + circle2.Radius) * (circle1.Radius + circle2.Radius);
@@ -18,7 +21,7 @@ namespace Game.Tools
             return false;
         }
 
-        public static bool AabbAndAabb(Rect rect1, Rect rect2)
+        internal static bool AabbAndAabb(Rect rect1, Rect rect2)
         {
             bool collisionX = rect1.MaxX >= rect2.MinX && rect2.MaxX >= rect1.MinX;
             bool collisionY = rect1.MaxY >= rect2.MinY && rect2.MaxY >= rect1.MinY;
@@ -26,7 +29,7 @@ namespace Game.Tools
             return collisionX && collisionY;
         }
 
-        public static bool AabbAndCircle(Rect activeRect, Circle passiveCircle)
+        internal static bool AabbAndCircle(Rect activeRect, Circle passiveCircle)
         {
             Vector2 distance = passiveCircle.Center - activeRect.Center;
             Vector2 rectHalfDistances = activeRect.Size / 2f;
@@ -37,7 +40,7 @@ namespace Game.Tools
             return distance.LengthSquared <= passiveCircle.Radius * passiveCircle.Radius;
         }
 
-        public static bool IsPointInAabb(Rect rect, Vector2 point)
+        internal static bool IsPointInAabb(Rect rect, Vector2 point)
         {
             if (point.X > rect.MinX && point.X < rect.MaxX &&
                 point.Y > rect.MinY && point.Y < rect.MaxY)

@@ -1,7 +1,6 @@
-﻿using System;
-using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics.OpenGL;
 
-namespace Game
+namespace Game.SceneLevel
 {
     public class SceneManager
     {
