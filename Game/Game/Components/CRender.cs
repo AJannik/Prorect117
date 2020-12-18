@@ -24,9 +24,9 @@ namespace Game.Components
 
         public int Texture { get; private set; }
 
-        private float SizeX { get; set; } = 0.2f;
+        private float SizeX { get; set; } = 1f;
 
-        private float SizeY { get; set; } = 0.2f;
+        private float SizeY { get; set; } = 1f;
 
         private Rect TexCoords { get; set; }
 
