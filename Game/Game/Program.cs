@@ -19,6 +19,7 @@ namespace Game
             sceneManager.SetScene(1, BuildScene2());
             GameObject quad = sceneManager.GetScene(0).GetGameObjects()[0];
             GameObject parentQuad = sceneManager.GetScene(1).GetGameObjects()[0];
+            GameObject childQuad = sceneManager.GetScene(1).GetGameObjects()[1];
 
             void Update(float deltaTime)
             {
@@ -59,6 +60,7 @@ namespace Game
                 else if (sceneManager.CurrentScene == 1)
                 {
                     parentQuad.Transform.Rotation += deltaTime * 0.5f;
+                    childQuad.Transform.Rotation += deltaTime * 1f;
                 }
             }
 
@@ -114,11 +116,16 @@ namespace Game
             Scene scene = new Scene();
             GameObject parentQuad = new GameObject(scene);
             GameObject childQuad = new GameObject(scene, parentQuad);
+            GameObject childChildQuad = new GameObject(scene, childQuad);
 
             parentQuad.AddComponent<CRender>();
             parentQuad.AddComponent<CCamera>();
             childQuad.AddComponent<CRender>();
-            childQuad.Transform.Position = new Vector2(0.5f, 0f);
+            childChildQuad.AddComponent<CRender>();
+            childQuad.Transform.Position = new Vector2(0.7f, 0f);
+            childQuad.Transform.Scale = new Vector2(0.8f, 0.8f);
+            childChildQuad.Transform.Scale = new Vector2(0.8f, 0.8f);
+            childChildQuad.Transform.Position = new Vector2(0.3f, 0f);
 
             return scene;
         }
