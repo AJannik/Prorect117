@@ -20,7 +20,9 @@ namespace Game.Components
 
         public int Layer { get; set; }
 
-        private int Texture { get; set; }
+        public bool Flipped { get; set; } = false;
+
+        public int Texture { get; private set; }
 
         private float SizeX { get; set; } = 0.2f;
 
@@ -38,31 +40,75 @@ namespace Game.Components
         {
             GL.BindTexture(TextureTarget.Texture2D, this.Texture);
 
+            // calculate the corners
             Vector2 pos1 = new Vector2((-SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
             Vector2 pos2 = new Vector2((SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
             Vector2 pos3 = new Vector2((SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
             Vector2 pos4 = new Vector2((-SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
 
+            // transform the corners
             pos1 = Transformation.Transform(pos1, MyGameObject.Transform.WorldTransformMatrix);
             pos2 = Transformation.Transform(pos2, MyGameObject.Transform.WorldTransformMatrix);
             pos3 = Transformation.Transform(pos3, MyGameObject.Transform.WorldTransformMatrix);
             pos4 = Transformation.Transform(pos4, MyGameObject.Transform.WorldTransformMatrix);
 
+            // Draw (flipped)
             GL.Begin(PrimitiveType.Quads);
-            GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
+            if (Flipped)
+            {
+                GL.TexCoord2(TexCoords.MaxX, TexCoords.MinY);
+            }
+            else
+            {
+                GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
+            }
+
             GL.Vertex2(pos1);
-            GL.TexCoord2(TexCoords.MaxX, TexCoords.MinY);
+
+            if (Flipped)
+            {
+                GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
+            }
+            else
+            {
+                GL.TexCoord2(TexCoords.MaxX, TexCoords.MinY);
+            }
+
             GL.Vertex2(pos2);
-            GL.TexCoord2(TexCoords.MaxX, TexCoords.MaxY);
+
+            if (Flipped)
+            {
+                GL.TexCoord2(TexCoords.MinX, TexCoords.MaxY);
+            }
+            else
+            {
+                GL.TexCoord2(TexCoords.MaxX, TexCoords.MaxY);
+            }
+
             GL.Vertex2(pos3);
-            GL.TexCoord2(TexCoords.MinX, TexCoords.MaxY);
+
+            if (Flipped)
+            {
+                GL.TexCoord2(TexCoords.MaxX, TexCoords.MaxY);
+            }
+            else
+            {
+                GL.TexCoord2(TexCoords.MinX, TexCoords.MaxY);
+            }
+
             GL.Vertex2(pos4);
+
             GL.End();
         }
 
-        public void SetTexture(string name)
+        public void LoadAndSetTexture(string name)
         {
             Texture = TextureTools.LoadFromResource(name);
+        }
+
+        public void SetTexture(int tex)
+        {
+            Texture = tex;
         }
 
         public void SetTexCoords(Rect newTexCoords)

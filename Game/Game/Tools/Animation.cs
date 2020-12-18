@@ -7,14 +7,28 @@ namespace Game.Tools
 {
     public class Animation
     {
-        public Animation(string name, int frames, int startFrame, CAnmimationController controller, bool isLoop)
+        // TODO: remove usage of animationcontroller!
+        public Animation(string name, int frames, int startFrame, bool isLoop)
         {
             Name = name;
             Frames = frames;
             StartFrame = startFrame;
             ActiveFrame = StartFrame;
-            MyController = controller;
             Loop = isLoop;
+        }
+
+        public Animation(string name, int frames, int startFrame, bool isLoop, bool hasSeperateTexture, string seperateTexturePath)
+        {
+            Name = name;
+            Frames = frames;
+            StartFrame = startFrame;
+            ActiveFrame = StartFrame;
+            Loop = isLoop;
+            HasSeperateTexture = hasSeperateTexture;
+            if (hasSeperateTexture)
+            {
+                Texture = TextureTools.LoadFromResource(seperateTexturePath);
+            }
         }
 
         public int Frames { get; private set; }
@@ -27,15 +41,17 @@ namespace Game.Tools
 
         public Animation NextAnimation { get; set; } = null;
 
-        public CAnmimationController MyController { get; set; }
-
         public float TimeBetweenTwoFrames { get; set; } = 0.2f;
+
+        public bool HasSeperateTexture { get; private set; } = false;
+
+        public int Texture { get; private set; }
 
         private float TimeToNextFrame { get; set; } = 0f;
 
         private bool Loop { get; set; } = false;
 
-        public void Update(float deltaTime)
+        public int Update(float deltaTime)
         {
             TimeToNextFrame -= deltaTime;
 
@@ -56,12 +72,19 @@ namespace Game.Tools
                     {
                         // reset to start and go to next animation
                         ActiveFrame = StartFrame;
-                        MyController.GoToNextAnimation();
+
+                        // return gotonext
+                        return -1;
                     }
                 }
 
-                MyController.SetActiveFrame(ActiveFrame);
+                // return Active Frame
+                return ActiveFrame;
             }
+
+            return ActiveFrame;
         }
+
+
     }
 }

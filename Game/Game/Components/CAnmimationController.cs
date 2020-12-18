@@ -18,6 +18,7 @@ namespace Game.Components
             if (MyGameObject != null)
             {
                 Renderer = MyGameObject.GetComponent<CRender>();
+                DefaultTexture = Renderer.Texture;
             }
         }
 
@@ -39,6 +40,8 @@ namespace Game.Components
 
         private int Columns { get; set; }
 
+        private int DefaultTexture { get; set; }
+
         public void Update(float deltaTime)
         {
             if (Renderer == null)
@@ -46,7 +49,16 @@ namespace Game.Components
                 return;
             }
 
-            ActiveAnimation.Update(deltaTime);
+            int retFrame = ActiveAnimation.Update(deltaTime);
+            if (retFrame == -1)
+            {
+                GoToNextAnimation();
+            }
+            else
+            {
+                SetActiveFrame(retFrame);
+            }
+
             Renderer.SetTexCoords(TexCoords);
         }
 
@@ -82,6 +94,14 @@ namespace Game.Components
         {
             ActiveAnimation = ActiveAnimation.NextAnimation;
             ActiveAnimation.Update(0f);
+            if (ActiveAnimation.HasSeperateTexture)
+            {
+                Renderer.SetTexture(ActiveAnimation.Texture);
+            }
+            else
+            {
+                Renderer.SetTexture(DefaultTexture);
+            }
         }
 
         /// <summary>
@@ -95,6 +115,15 @@ namespace Game.Components
                 if (animation.Name == name)
                 {
                     ActiveAnimation = animation;
+                    if (animation.HasSeperateTexture)
+                    {
+                        Renderer.SetTexture(animation.Texture);
+                    }
+                    else
+                    {
+                        Renderer.SetTexture(DefaultTexture);
+                    }
+
                     return;
                 }
             }
