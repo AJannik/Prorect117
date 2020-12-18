@@ -9,7 +9,6 @@ namespace Game.Components
     {
         public CPowerDownScript()
         {
-
         }
 
         public GameObject MyGameObject { get; set; } = null;

@@ -10,7 +10,6 @@ namespace Game.Components
     {
         public CPlayerController()
         {
-
         }
 
         public GameObject MyGameObject { get; set; } = null;
