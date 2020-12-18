@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Game.Components;
 using Game.Interfaces;
-using Game.SceneLevel;
+using Game.SceneSystem;
 
 namespace Game
 {

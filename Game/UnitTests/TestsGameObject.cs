@@ -1,5 +1,5 @@
 ﻿using Game;
-using Game.SceneLevel;
+using Game.SceneSystem;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 using UnitTests.DummyClasses;

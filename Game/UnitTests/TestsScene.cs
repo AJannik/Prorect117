@@ -3,7 +3,7 @@ using Game;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 using UnitTests.DummyClasses;
-using Game.SceneLevel;
+using Game.SceneSystem;
 
 namespace UnitTests
 {

@@ -3,7 +3,7 @@ using Game.Physics.RaycastSystem;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game.SceneLevel
+namespace Game.SceneSystem
 {
     public class Debug
     {

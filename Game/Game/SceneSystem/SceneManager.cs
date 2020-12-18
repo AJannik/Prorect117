@@ -1,6 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 
-namespace Game.SceneLevel
+namespace Game.SceneSystem
 {
     public class SceneManager
     {

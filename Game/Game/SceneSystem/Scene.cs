@@ -3,7 +3,7 @@ using Game.Components;
 using Game.Interfaces;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game.SceneLevel
+namespace Game.SceneSystem
 {
     public class Scene
     {
