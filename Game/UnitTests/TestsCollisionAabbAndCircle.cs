@@ -92,5 +92,23 @@ namespace UnitTests
 
             Assert.IsTrue(CollisionCheck.AabbAndCircle(rect, circle));
         }
+
+        [TestMethod]
+        public void TestPointIsNotInAabb()
+        {
+            Vector2 point = Vector2.Zero;
+            Rect rect = new Rect(1f, 1f, 0.4f, 0.4f);
+
+            Assert.IsFalse(CollisionCheck.IsPointInAabb(rect, point));
+        }
+
+        [TestMethod]
+        public void TestPointIsInAabb()
+        {
+            Vector2 point = Vector2.Zero;
+            Rect rect = new Rect(-0.2f, -0.2f, 0.4f, 0.4f);
+
+            Assert.IsTrue(CollisionCheck.IsPointInAabb(rect, point));
+        }
     }
 }
