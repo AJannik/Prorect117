@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Game.Components;
+﻿using Game.Components;
 using Game.SceneSystem;
 using OpenTK;
 
@@ -9,12 +6,12 @@ namespace Game.GameObjectFactory
 {
     public static class ObjectFactory
     {
-        public static GameObject BuildFloor(Scene scene)
+        public static GameObject BuildFloor(Scene scene, Vector2 position)
         {
-            Vector2 size = new Vector2(2f, 0.2f);
+            Vector2 size = new Vector2(4f, 0.2f);
 
             GameObject floor = new GameObject(scene, "Floor");
-            floor.Transform.Position = new Vector2(0f, 0f);
+            floor.Transform.Position = position;
             floor.Transform.Scale = size;
 
             floor.AddComponent<CRender>();
@@ -28,15 +25,15 @@ namespace Game.GameObjectFactory
             return floor;
         }
 
-        public static GameObject BuildBall(Scene scene)
+        public static GameObject BuildBall(Scene scene, Vector2 position)
         {
             GameObject ball = new GameObject(scene, "Ball");
-            ball.Transform.Position = new Vector2(0.5f, 4f);
+            ball.Transform.Position = position;
 
             ball.AddComponent<CRender>();
             ball.GetComponent<CRender>().SetSize(0.2f, 0.2f);
-            ball.AddComponent<CCamera>();
             ball.AddComponent<CCircleCollider>();
+            ball.GetComponent<CCircleCollider>().Geometry.Size = new Vector2(0.2f, 0f);
             ball.AddComponent<CTriggerEventTest>();
             ball.AddComponent<CRigidBody>();
 
@@ -46,28 +43,27 @@ namespace Game.GameObjectFactory
             trigger.Offset = new Vector2(0f, -0.2f);
             trigger.Geometry.Size = new Vector2(0.2f, 0.1f);
 
-            ball.GetComponent<CCamera>().Scale = 2f;
-
             return ball;
         }
 
-        public static GameObject BuildPlayer(Scene scene)
+        public static GameObject BuildSprite(Scene scene, Vector2 position)
         {
-            GameObject player = new GameObject(scene, "Player");
-            player.AddComponent<CRender>();
-            player.GetComponent<CRender>().SetSize(2.0f, 2.0f);
-            player.GetComponent<CRender>().LoadAndSetTexture("KnightIdle.png");
-            player.AddComponent<CRigidBody>();
-            player.AddComponent<CBoxCollider>();
-            player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(1.0f, 2.0f);
-            player.AddComponent<CPlayerController>();
+            GameObject sprite = new GameObject(scene);
+            sprite.Transform.Position = position;
 
-            // add all animations
-            player.AddComponent<CAnmimationController>();
-            CAnmimationController controll = player.GetComponent<CAnmimationController>();
-            controll.AddAnimation(new Tools.Animation("Idle", 15, 0, true));
+            sprite.AddComponent<CRender>();
 
-            return player;
+            return sprite;
+        }
+
+        public static GameObject BuildCamera(Scene scene, Vector2 position)
+        {
+            GameObject camera = new GameObject(scene, "Camera");
+            camera.Transform.Position = position;
+
+            camera.AddComponent<CCamera>();
+
+            return camera;
         }
     }
 }
