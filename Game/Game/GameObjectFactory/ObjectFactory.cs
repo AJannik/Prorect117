@@ -65,5 +65,25 @@ namespace Game.GameObjectFactory
 
             return camera;
         }
+
+        public static GameObject BuildPlayer(Scene scene, Vector2 position)
+        {
+            GameObject player = new GameObject(scene, "Player");
+            player.Transform.Position = position;
+            player.AddComponent<CRender>();
+            player.GetComponent<CRender>().SetSize(2.0f, 2.0f);
+            player.GetComponent<CRender>().LoadAndSetTexture("KnightIdle.png");
+            player.AddComponent<CRigidBody>();
+            player.AddComponent<CBoxCollider>();
+            player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(1.0f, 2.0f);
+            player.AddComponent<CPlayerController>();
+
+            // add all animations
+            player.AddComponent<CAnmimationController>();
+            CAnmimationController controll = player.GetComponent<CAnmimationController>();
+            controll.AddAnimation(new Tools.Animation("Idle", 15, 0, true));
+
+            return player;
+        }
     }
 }
