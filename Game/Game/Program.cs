@@ -1,6 +1,4 @@
 ﻿using System;
-using Game.Components;
-using Game.GameObjectFactory;
 using Game.SceneSystem;
 using OpenTK;
 
@@ -12,15 +10,13 @@ namespace Game
         private static void Main()
         {
             var window = new GameWindow(1366, 768);
-            SceneManager sceneManager = new SceneManager(2);
+            SceneManager sceneManager = new SceneManager();
             float counter = 7f;
             int skipedFrames = 0;
 
-            sceneManager.SetScene(0, BuildScene1());
-            sceneManager.SetScene(1, BuildScene2());
             GameObject quad = sceneManager.GetScene(0).GetGameObjects()[0];
-            GameObject parentQuad = sceneManager.GetScene(1).GetGameObjects()[0];
-            GameObject childQuad = sceneManager.GetScene(1).GetGameObjects()[1];
+            GameObject parentQuad = sceneManager.GetScene(1).GetGameObjects()[1];
+            GameObject childQuad = sceneManager.GetScene(1).GetGameObjects()[2];
 
             void Update(float deltaTime)
             {
@@ -75,35 +71,6 @@ namespace Game
             window.RenderFrame += (s, a) => Draw();
             window.Resize += (_, args) => sceneManager.Resize(window.Width, window.Height);
             window.Run();
-        }
-
-        private static Scene BuildScene1()
-        {
-            Scene scene = new Scene();
-            ObjectFactory.BuildBall(scene);
-            ObjectFactory.BuildFloor(scene);
-
-            return scene;
-        }
-
-        private static Scene BuildScene2()
-        {
-            Scene scene = new Scene();
-            GameObject parentQuad = new GameObject(scene);
-            GameObject childQuad = new GameObject(scene, parentQuad);
-            GameObject childChildQuad = new GameObject(scene, childQuad);
-
-            parentQuad.AddComponent<CRender>();
-            parentQuad.AddComponent<CCamera>();
-            parentQuad.GetComponent<CCamera>().Scale = 5f;
-            childQuad.AddComponent<CRender>();
-            childChildQuad.AddComponent<CRender>();
-            childQuad.Transform.Position = new Vector2(3f, 0f);
-            childQuad.Transform.Scale = new Vector2(0.8f, 0.8f);
-            childChildQuad.Transform.Scale = new Vector2(0.8f, 0.8f);
-            childChildQuad.Transform.Position = new Vector2(1.5f, 0f);
-
-            return scene;
         }
     }
 }

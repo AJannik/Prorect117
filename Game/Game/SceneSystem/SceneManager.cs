@@ -5,12 +5,16 @@ namespace Game.SceneSystem
     public class SceneManager
     {
         private Scene[] scenes;
+        private SceneFactory sceneFactory;
         private int screenWidth = 0;
         private int screenHeight = 0;
 
-        public SceneManager(int numScenes)
+        public SceneManager()
         {
-            scenes = new Scene[numScenes];
+            // Building all scenes
+            sceneFactory = new SceneFactory();
+            scenes = new Scene[sceneFactory.NumScenes];
+            BuildScenes();
 
             GL.Enable(EnableCap.Texture2D);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -65,14 +69,17 @@ namespace Game.SceneSystem
             // TODO: Implement UnloadCurrentScene()
         }
 
-        public void SetScene(int index, Scene scene)
-        {
-            scenes[index] = scene;
-        }
-
         public Scene GetScene(int index)
         {
             return scenes[index];
+        }
+
+        private void BuildScenes()
+        {
+            for (int i = 0; i < scenes.Length; i++)
+            {
+                scenes[i] = sceneFactory.BuildScene(i);
+            }
         }
     }
 }
