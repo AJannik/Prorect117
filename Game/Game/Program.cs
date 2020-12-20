@@ -11,7 +11,7 @@ namespace Game
         [STAThread]
         private static void Main()
         {
-            var window = new GameWindow(512, 512);
+            var window = new GameWindow(1366, 768);
             SceneManager sceneManager = new SceneManager(2);
             float counter = 7f;
             int skipedFrames = 0;

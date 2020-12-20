@@ -20,7 +20,7 @@ namespace Game.Components
 
         public Vector2 Offset { get; set; } = Vector2.Zero;
 
-        public ISimpleGeometry Geometry { get; set; } = new Circle(Vector2.Zero, 0.2f);
+        public ISimpleGeometry Geometry { get; set; } = new Circle(Vector2.Zero, 1f);
 
         private List<ICollider> TriggerHits { get; set; } = new List<ICollider>();
 

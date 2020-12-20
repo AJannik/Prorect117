@@ -5,6 +5,8 @@ namespace Game.SceneSystem
     public class SceneManager
     {
         private Scene[] scenes;
+        private int screenWidth = 0;
+        private int screenHeight = 0;
 
         public SceneManager(int numScenes)
         {
@@ -31,7 +33,9 @@ namespace Game.SceneSystem
 
         public void Resize(int width, int height)
         {
-            scenes[CurrentScene].Resize(width, height);
+            screenWidth = width;
+            screenHeight = height;
+            scenes[CurrentScene].Resize(screenWidth, screenHeight);
         }
 
         public void LoadNextScene()
@@ -41,7 +45,7 @@ namespace Game.SceneSystem
                 UnloadCurrentScene();
                 CurrentScene++;
 
-                // TODO: Implement LoadNextScene()
+                Resize(screenWidth, screenHeight);
             }
         }
 
@@ -52,7 +56,7 @@ namespace Game.SceneSystem
                 UnloadCurrentScene();
                 CurrentScene--;
 
-                // TODO: Implement LoadLastScene()
+                Resize(screenWidth, screenHeight);
             }
         }
 

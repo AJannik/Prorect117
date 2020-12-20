@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Game.Components;
+﻿using Game.Components;
 using Game.SceneSystem;
 using OpenTK;
 
@@ -11,7 +8,7 @@ namespace Game.GameObjectFactory
     {
         public static GameObject BuildFloor(Scene scene)
         {
-            Vector2 size = new Vector2(2f, 0.2f);
+            Vector2 size = new Vector2(4f, 0.2f);
 
             GameObject floor = new GameObject(scene, "Floor");
             floor.Transform.Position = new Vector2(0f, 0f);
@@ -37,6 +34,7 @@ namespace Game.GameObjectFactory
             ball.GetComponent<CRender>().SetSize(0.2f, 0.2f);
             ball.AddComponent<CCamera>();
             ball.AddComponent<CCircleCollider>();
+            ball.GetComponent<CCircleCollider>().Geometry.Size = new Vector2(0.2f, 0f);
             ball.AddComponent<CTriggerEventTest>();
             ball.AddComponent<CRigidBody>();
 

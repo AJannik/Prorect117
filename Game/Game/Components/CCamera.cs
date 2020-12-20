@@ -9,7 +9,6 @@ namespace Game.Components
     public class CCamera : IComponent
     {
         private float scale = 1f;
-        private float invWindowAspectRatio = 1f;
         private Matrix4 cameraMatrix = Matrix4.Identity;
 
         public GameObject MyGameObject { get; set; }
@@ -40,19 +39,29 @@ namespace Game.Components
 
         public void Resize(int width, int height)
         {
-            // TODO: Make AspectRatio fixed to 16:9
-            GL.Viewport(0, 0, width, height);
-            invWindowAspectRatio = height / (float)width;
+            // Fixed aspect ratio of 16:9
+            int viewportX = 0;
+            int viewportY = 0;
+            int viewportWidth = width;
+            int viewportHeight = height;
+            if (width * 9 > height * 16)
+            {
+                viewportWidth = height * 16 / 9;
+                viewportX = (width - viewportWidth) / 2;
+            }
+            else if (width * 9 < height * 16)
+            {
+                viewportHeight = width * 9 / 16;
+                viewportY = (height - viewportHeight) / 2;
+            }
 
-            InvViewportMatrix = Transformation.Combine(Transformation.Scale(2f / width, 2f / height), Transformation.Translate(-Vector2.One));
+            GL.Viewport(viewportX, viewportY, viewportWidth, viewportHeight);
+
             UpdateMatrix();
         }
 
         public void UpdateMatrix()
         {
-            // Implement window aspect ratio scaling
-            Matrix4 aspect = Transformation.Scale(invWindowAspectRatio, 1f);
-
             // Implement camera scaling
             Matrix4 cameraScale = Transformation.Scale(1f / Scale);
 
@@ -60,7 +69,7 @@ namespace Game.Components
             Matrix4 translate = Transformation.Translate(-MyGameObject.Transform.WorldPosition);
 
             // Calculate the resulting camera matrix
-            cameraMatrix = Transformation.Combine(translate, cameraScale, aspect);
+            cameraMatrix = Transformation.Combine(translate, cameraScale);
         }
     }
 }
