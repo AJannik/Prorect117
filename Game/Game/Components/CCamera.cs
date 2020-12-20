@@ -62,6 +62,8 @@ namespace Game.Components
 
         public void UpdateMatrix()
         {
+            Matrix4 aspect = Transformation.Scale(9f / 16f, 1f);
+
             // Implement camera scaling
             Matrix4 cameraScale = Transformation.Scale(1f / Scale);
 
@@ -69,7 +71,7 @@ namespace Game.Components
             Matrix4 translate = Transformation.Translate(-MyGameObject.Transform.WorldPosition);
 
             // Calculate the resulting camera matrix
-            cameraMatrix = Transformation.Combine(translate, cameraScale);
+            cameraMatrix = Transformation.Combine(translate, cameraScale, aspect);
         }
     }
 }
