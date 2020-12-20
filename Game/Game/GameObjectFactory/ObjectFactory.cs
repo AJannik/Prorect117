@@ -1,5 +1,6 @@
 ﻿using Game.Components;
 using Game.SceneSystem;
+using Game.Tools;
 using OpenTK;
 
 namespace Game.GameObjectFactory
@@ -77,11 +78,14 @@ namespace Game.GameObjectFactory
             player.AddComponent<CBoxCollider>();
             player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(1.0f, 2.0f);
             player.AddComponent<CPlayerController>();
+            player.GetComponent<CPlayerController>().RigidBody = player.GetComponent<CRigidBody>();
 
             // add all animations
             player.AddComponent<CAnmimationController>();
             CAnmimationController controll = player.GetComponent<CAnmimationController>();
-            controll.AddAnimation(new Tools.Animation("Idle", 15, 0, true));
+            Animation idle = new Tools.Animation("Idle", 15, 0, true);
+            controll.AddAnimation(idle);
+            controll.SetStartAnimation(idle);
 
             return player;
         }
