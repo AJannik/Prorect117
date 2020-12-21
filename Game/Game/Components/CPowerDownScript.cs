@@ -13,14 +13,20 @@ namespace Game.Components
 
         public GameObject MyGameObject { get; set; } = null;
 
-        public CCircleCollider Collider { get; set; }
+        public CCircleCollider Trigger { get; set; }
 
         public void Update(float deltaTime)
         {
-            // if (Collider.TriggerEntered)
+            if (Trigger == null)
             {
-                // Apply Effect
+                Trigger = MyGameObject.GetComponent<CCircleCollider>();
+                Trigger.TriggerEntered += OnTriggerEntered;
             }
+        }
+
+        private void OnTriggerEntered(object sender, ICollider e)
+        {
+            // TODO: implement effect
         }
     }
 }

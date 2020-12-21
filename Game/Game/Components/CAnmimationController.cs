@@ -15,6 +15,7 @@ namespace Game.Components
             Rows = 1;
             Columns = 1;
             Frames = 1;
+            Animations = new List<Animation>();
             if (MyGameObject != null)
             {
                 Renderer = MyGameObject.GetComponent<CRender>();
@@ -68,6 +69,11 @@ namespace Game.Components
 
         public void AddAnimation(Animation animation)
         {
+            if (animation == null)
+            {
+                return;
+            }
+
             Animations.Add(animation);
         }
 

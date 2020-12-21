@@ -73,7 +73,7 @@ namespace Game.GameObjectFactory
             player.Transform.Position = position;
             player.AddComponent<CRender>();
             player.GetComponent<CRender>().SetSize(2.0f, 2.0f);
-            player.GetComponent<CRender>().LoadAndSetTexture("KnightIdle.png");
+            player.GetComponent<CRender>().LoadAndSetTexture("Content.KnightIdle.png");
             player.GetComponent<CRender>().SetTexCoords(new SimpleGeometry.Rect(0.0f, 0.0f, 1f / 15f, 1.0f));
 
             player.AddComponent<CBoxCollider>();
@@ -94,7 +94,7 @@ namespace Game.GameObjectFactory
             // add all animations
             player.AddComponent<CAnmimationController>();
             CAnmimationController controll = player.GetComponent<CAnmimationController>();
-            Animation idle = new Tools.Animation("Idle", 15, 0, true);
+            Animation idle = new Animation("Idle", 15, 0, true);
             controll.AddAnimation(idle);
             controll.SetStartAnimation(idle);
 
