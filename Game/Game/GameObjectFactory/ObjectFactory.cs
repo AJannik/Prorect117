@@ -26,6 +26,25 @@ namespace Game.GameObjectFactory
             return floor;
         }
 
+        public static GameObject BuildGround(Scene scene, Vector2 position)
+        {
+            Vector2 size = new Vector2(30f, 0.2f);
+
+            GameObject floor = new GameObject(scene, "Floor");
+            floor.Transform.Position = position;
+            floor.Transform.Scale = size;
+
+            floor.AddComponent<CRender>();
+            floor.AddComponent<CBoxCollider>();
+            floor.GetComponent<CBoxCollider>().Geometry.Size = size;
+
+            floor.AddComponent<CRigidBody>();
+            CRigidBody rb = floor.GetComponent<CRigidBody>();
+            rb.Static = true;
+
+            return floor;
+        }
+
         public static GameObject BuildBall(Scene scene, Vector2 position)
         {
             GameObject ball = new GameObject(scene, "Ball");

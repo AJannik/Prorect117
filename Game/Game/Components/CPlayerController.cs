@@ -64,7 +64,7 @@ namespace Game.Components
                 RigidBody.GravityScale = 1f;
             }
 
-            // updating facingRight
+            // updating facingRight and animations
             if (RigidBody.Velocity.X > 0f)
             {
                 FacingRight = true;
@@ -73,7 +73,8 @@ namespace Game.Components
                     Running = true;
                     AnimationSystem.PlayAnimation("Run");
                 }
-            }else if (RigidBody.Velocity.X < 0f)
+            }
+            else if (RigidBody.Velocity.X < 0f)
             {
                 FacingRight = false;
                 if (Running == false)
@@ -107,8 +108,10 @@ namespace Game.Components
 
         private void Jump()
         {
-            if (!Jumping && !OnGround && JumpCooldown <= 0f)
+            if (!Jumping && OnGround && JumpCooldown <= 0f)
             {
+                Console.WriteLine("Jumping");
+                RigidBody.Velocity = new OpenTK.Vector2(RigidBody.Velocity.Y, 0f);
                 RigidBody.AddForce(new OpenTK.Vector2(0, JumpForce));
                 Jumping = true;
                 JumpCooldown = 0.1f;

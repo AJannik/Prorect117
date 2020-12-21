@@ -36,7 +36,7 @@ namespace Game
                     if (counter <= 0f)
                     {
                         sceneManager.LoadNextScene();
-                        counter = 10f;
+                        counter = 5f;
                     }
                 }
                 else
