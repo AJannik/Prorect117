@@ -79,7 +79,6 @@ namespace Game.GameObjectFactory
             player.AddComponent<CBoxCollider>();
             player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(1.0f, 1.8f);
             player.AddComponent<CRigidBody>();
-            player.GetComponent<CRigidBody>().Colliders.Add(player.GetComponent<CBoxCollider>());
             player.AddComponent<CPlayerController>();
             player.GetComponent<CPlayerController>().RigidBody = player.GetComponent<CRigidBody>();
 

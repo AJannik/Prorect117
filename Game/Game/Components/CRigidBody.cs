@@ -10,8 +10,6 @@ namespace Game.Components
     {
         public GameObject MyGameObject { get; set; } = null;
 
-        public List<ICollider> Colliders { get; set; } = new List<ICollider>();
-
         public float GravityScale { get; set; } = 1f;
 
         public bool Static { get; set; } = false;
@@ -23,6 +21,8 @@ namespace Game.Components
         public float Mass { get; set; } = 1f;
 
         public Vector2 Velocity { get; set; } = Vector2.Zero;
+
+        private List<ICollider> Colliders { get; set; } = new List<ICollider>();
 
         private Vector2 Force { get; set; } = Vector2.Zero;
 
