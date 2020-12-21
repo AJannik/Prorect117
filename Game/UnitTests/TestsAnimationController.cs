@@ -15,7 +15,7 @@ namespace UnitTests
         [TestMethod]
         public void TestCalculateTexCoords1x1()
         {
-            CAnmimationSystem acontroller = new CAnmimationSystem();
+            CAnimationSystem acontroller = new CAnimationSystem();
             acontroller.SetColumnsAndRows(1, 1);
             acontroller.SetActiveFrame(0);
             acontroller.Update(1f);
@@ -28,7 +28,7 @@ namespace UnitTests
         [TestMethod]
         public void TestCalculateTexCoords4x1()
         {
-            CAnmimationSystem acontroller = new CAnmimationSystem();
+            CAnimationSystem acontroller = new CAnimationSystem();
             acontroller.SetColumnsAndRows(4, 1);
             acontroller.SetActiveFrame(1);
             acontroller.Update(0f);
@@ -41,7 +41,7 @@ namespace UnitTests
         [TestMethod]
         public void TestCalculateTexCoords1x4()
         {
-            CAnmimationSystem acontroller = new CAnmimationSystem();
+            CAnimationSystem acontroller = new CAnimationSystem();
             acontroller.SetColumnsAndRows(1, 4);
             acontroller.SetActiveFrame(3);
             acontroller.Update(0f);

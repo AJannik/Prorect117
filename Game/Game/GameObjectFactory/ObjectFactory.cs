@@ -76,14 +76,16 @@ namespace Game.GameObjectFactory
             render.SetSize(3.0f, 3.0f);
             render.LoadAndSetTexture("Content.KnightIdle.png");
             render.SetTexCoords(new SimpleGeometry.Rect(0.0f, 0.0f, 1f / 15f, 1.0f));
-            render.SetOffset(-0.1f, -0.1f);
+            render.SetOffset(0.0f, -0.1f);
 
             player.AddComponent<CBoxCollider>();
             player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(0.75f, 1.5f);
             player.AddComponent<CRigidBody>();
             player.GetComponent<CRigidBody>().Colliders.Add(player.GetComponent<CBoxCollider>());
+            player.GetComponent<CRigidBody>().Mass = 3f;
             player.AddComponent<CPlayerController>();
             player.GetComponent<CPlayerController>().RigidBody = player.GetComponent<CRigidBody>();
+            player.GetComponent<CPlayerController>().Render = player.GetComponent<CRender>();
 
             // add ground trigger for playercontroller
             player.AddComponent<CBoxCollider>();
@@ -94,14 +96,18 @@ namespace Game.GameObjectFactory
             player.GetComponent<CPlayerController>().SetUpGroundTrigger(trigger);
 
             // add all animations
-            player.AddComponent<CAnmimationSystem>();
-            CAnmimationSystem controll = player.GetComponent<CAnmimationSystem>();
+            player.AddComponent<CAnimationSystem>();
+            CAnimationSystem controll = player.GetComponent<CAnimationSystem>();
             controll.Renderer = player.GetComponent<CRender>();
             controll.DefaultTexture = controll.Renderer.Texture;
             controll.SetDefaultColumnsAndRows(15, 1);
             Animation idle = new Animation("Idle", 15, 0, true);
             controll.AddAnimation(idle);
             controll.SetStartAnimation(idle);
+            Animation run = new Animation("Run", 8, 0, true, true, "Content.KnightRun.png", 8, 1);
+            controll.AddAnimation(run);
+            controll.LinkAnimation(run, idle);
+            player.GetComponent<CPlayerController>().AnimationSystem = controll;
 
             return player;
         }

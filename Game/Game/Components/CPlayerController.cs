@@ -18,15 +18,23 @@ namespace Game.Components
 
         public CBoxCollider GroundTrigger { get; set; }
 
+        public CRender Render { get; set; }
+
+        public CAnimationSystem AnimationSystem { get; set; }
+
         public float PlayerSpeed { get; private set; } = 10f;
 
-        public float JumpForce { get; private set; } = 30f;
+        public float JumpForce { get; private set; } = 300f;
 
         private float JumpCooldown { get; set; }
 
         private bool Jumping { get; set; } = false;
 
         private bool OnGround { get; set; } = true;
+
+        private bool Running { get; set; } = false;
+
+        private bool FacingRight { get; set; } = true;
 
         public void SetUpGroundTrigger(CBoxCollider trigger)
         {
@@ -56,6 +64,41 @@ namespace Game.Components
                 RigidBody.GravityScale = 1f;
             }
 
+            // updating facingRight
+            if (RigidBody.Velocity.X > 0f)
+            {
+                FacingRight = true;
+                if (Running == false)
+                {
+                    Running = true;
+                    AnimationSystem.PlayAnimation("Run");
+                }
+            }else if (RigidBody.Velocity.X < 0f)
+            {
+                FacingRight = false;
+                if (Running == false)
+                {
+                    Running = true;
+                    AnimationSystem.PlayAnimation("Run");
+                }
+            }
+
+            if (RigidBody.Velocity.X == 0)
+            {
+                Running = false;
+                AnimationSystem.PlayAnimation("Idle");
+            }
+
+            // update Render
+            if (FacingRight)
+            {
+                Render.Flipped = false;
+            }
+            else
+            {
+                Render.Flipped = true;
+            }
+
             if (OnGround && JumpCooldown > 0)
             {
                 JumpCooldown -= deltaTime;
@@ -79,6 +122,7 @@ namespace Game.Components
 
         private void OnTriggerEntered(object sender, ICollider e)
         {
+            Console.WriteLine("Entered" + sender);
             OnGround = true;
             Jumping = false;
         }

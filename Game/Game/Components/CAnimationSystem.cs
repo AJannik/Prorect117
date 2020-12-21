@@ -8,9 +8,9 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Game.Components
 {
-    public class CAnmimationSystem : IComponent
+    public class CAnimationSystem : IComponent
     {
-        public CAnmimationSystem()
+        public CAnimationSystem()
         {
         }
 
@@ -117,13 +117,13 @@ namespace Game.Components
             {
                 Renderer.SetTexture(ActiveAnimation.Texture);
                 SetColumnsAndRows(ActiveAnimation.Columns, ActiveAnimation.Rows);
-                Frames = DefaultFrames;
+                Frames = ActiveAnimation.Frames + ActiveAnimation.StartFrame;
             }
             else
             {
                 Renderer.SetTexture(DefaultTexture);
                 SetColumnsAndRows(DefaultColumns, DefaultRows);
-                Frames = ActiveAnimation.Frames + ActiveAnimation.StartFrame;
+                Frames = DefaultFrames;
             }
         }
 
@@ -141,10 +141,14 @@ namespace Game.Components
                     if (animation.HasSeperateTexture)
                     {
                         Renderer.SetTexture(animation.Texture);
+                        SetColumnsAndRows(ActiveAnimation.Columns, ActiveAnimation.Rows);
+                        Frames = ActiveAnimation.Frames + ActiveAnimation.StartFrame;
                     }
                     else
                     {
                         Renderer.SetTexture(DefaultTexture);
+                        SetColumnsAndRows(DefaultColumns, DefaultRows);
+                        Frames = DefaultFrames;
                     }
 
                     return;
