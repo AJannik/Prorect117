@@ -62,11 +62,12 @@ namespace Game.SceneSystem
 
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             ObjectFactory.BuildFloor(scene, new Vector2(0f, -4f));
+            ObjectFactory.BuildFloor(scene, new Vector2(5f, -4f));
 
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(0f,3.0f));
             camera.SetParent(player);
 
-            camera.GetComponent<CCamera>().Scale = 5f;
+            camera.GetComponent<CCamera>().Scale = 3f;
 
             return scene;
         }

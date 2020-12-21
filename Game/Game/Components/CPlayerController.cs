@@ -20,7 +20,7 @@ namespace Game.Components
 
         public float PlayerSpeed { get; private set; } = 10f;
 
-        public float JumpForce { get; private set; } = 10f;
+        public float JumpForce { get; private set; } = 30f;
 
         private float JumpCooldown { get; set; }
 
@@ -40,11 +40,20 @@ namespace Game.Components
             var keyboard = Keyboard.GetState();
 
             float axisLeftRight = keyboard.IsKeyDown(Key.A) ? -1.0f : keyboard.IsKeyDown(Key.D) ? 1.0f : 0.0f;
-            RigidBody.AddForce(new OpenTK.Vector2(axisLeftRight * PlayerSpeed, 0f));
+            RigidBody.Velocity = new OpenTK.Vector2(axisLeftRight * PlayerSpeed, 0f);
 
             if (keyboard.IsKeyDown(Key.Space))
             {
                 Jump();
+            }
+
+            if (Jumping && RigidBody.Velocity.Y > 0)
+            {
+                RigidBody.GravityScale = 0.4f;
+            }
+            else
+            {
+                RigidBody.GravityScale = 1f;
             }
 
             if (OnGround && JumpCooldown > 0)
@@ -58,6 +67,7 @@ namespace Game.Components
             if (!Jumping && !OnGround && JumpCooldown <= 0f)
             {
                 RigidBody.AddForce(new OpenTK.Vector2(0, JumpForce));
+                Jumping = true;
                 JumpCooldown = 0.1f;
             }
         }
@@ -70,6 +80,7 @@ namespace Game.Components
         private void OnTriggerEntered(object sender, ICollider e)
         {
             OnGround = true;
+            Jumping = false;
         }
     }
 }

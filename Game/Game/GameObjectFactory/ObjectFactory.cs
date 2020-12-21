@@ -72,12 +72,14 @@ namespace Game.GameObjectFactory
             GameObject player = new GameObject(scene, "Player");
             player.Transform.Position = position;
             player.AddComponent<CRender>();
-            player.GetComponent<CRender>().SetSize(2.0f, 2.0f);
-            player.GetComponent<CRender>().LoadAndSetTexture("Content.KnightIdle.png");
-            player.GetComponent<CRender>().SetTexCoords(new SimpleGeometry.Rect(0.0f, 0.0f, 1f / 15f, 1.0f));
+            CRender render = player.GetComponent<CRender>();
+            render.SetSize(3.0f, 3.0f);
+            render.LoadAndSetTexture("Content.KnightIdle.png");
+            render.SetTexCoords(new SimpleGeometry.Rect(0.0f, 0.0f, 1f / 15f, 1.0f));
+            render.SetOffset(-0.1f, -0.1f);
 
             player.AddComponent<CBoxCollider>();
-            player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(1.0f, 1.8f);
+            player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(0.75f, 1.5f);
             player.AddComponent<CRigidBody>();
             player.GetComponent<CRigidBody>().Colliders.Add(player.GetComponent<CBoxCollider>());
             player.AddComponent<CPlayerController>();
@@ -87,13 +89,16 @@ namespace Game.GameObjectFactory
             player.AddComponent<CBoxCollider>();
             CBoxCollider trigger = player.GetComponents<CBoxCollider>()[1];
             trigger.IsTrigger = true;
-            trigger.Offset = new Vector2(0f, -0.2f);
-            trigger.Geometry.Size = new Vector2(0.2f, 0.1f);
-            player.GetComponent<CPlayerController>().GroundTrigger = trigger;
+            trigger.Offset = new Vector2(0f, -0.7f);
+            trigger.Geometry.Size = new Vector2(0.75f, 0.2f);
+            player.GetComponent<CPlayerController>().SetUpGroundTrigger(trigger);
 
             // add all animations
-            player.AddComponent<CAnmimationController>();
-            CAnmimationController controll = player.GetComponent<CAnmimationController>();
+            player.AddComponent<CAnmimationSystem>();
+            CAnmimationSystem controll = player.GetComponent<CAnmimationSystem>();
+            controll.Renderer = player.GetComponent<CRender>();
+            controll.DefaultTexture = controll.Renderer.Texture;
+            controll.SetDefaultColumnsAndRows(15, 1);
             Animation idle = new Animation("Idle", 15, 0, true);
             controll.AddAnimation(idle);
             controll.SetStartAnimation(idle);

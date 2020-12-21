@@ -30,7 +30,7 @@ namespace Game
                 sceneManager.Update(deltaTime);
 
                 // TODO: Remove this, it's only for testing
-                if (sceneManager.CurrentScene == 0)
+                if (sceneManager.CurrentScene == 0 || sceneManager.CurrentScene == 1)
                 {
                     counter -= deltaTime;
                     if (counter <= 0f)
@@ -41,7 +41,7 @@ namespace Game
                 }
                 else
                 {
-                    counter -= deltaTime;
+                    // counter -= deltaTime;
                     if (counter <= 0f)
                     {
                         Console.WriteLine($"A total of {skipedFrames} Update-Frames were skiped.");
