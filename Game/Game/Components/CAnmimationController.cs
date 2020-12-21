@@ -36,6 +36,10 @@ namespace Game.Components
 
         private CRender Renderer { get; set; }
 
+        private int DefaultRows { get; set; } = 1;
+
+        private int DefaultColumns { get; set; } = 1;
+
         private int Rows { get; set; }
 
         private int Columns { get; set; }
@@ -67,6 +71,12 @@ namespace Game.Components
             Animations.Add(animation);
         }
 
+        public void SetDefaultColumnsAndRows(int columns, int rows)
+        {
+            DefaultColumns = columns;
+            DefaultRows = rows;
+        }
+
         public void SetColumnsAndRows(int columns, int rows)
         {
             Rows = rows;
@@ -92,15 +102,25 @@ namespace Game.Components
         /// </summary>
         public void GoToNextAnimation()
         {
-            ActiveAnimation = ActiveAnimation.NextAnimation;
+            if (ActiveAnimation.NextAnimation == null)
+            {
+                ActiveAnimation = StartAnimation;
+            }
+            else
+            {
+                ActiveAnimation = ActiveAnimation.NextAnimation;
+            }
+
             ActiveAnimation.Update(0f);
             if (ActiveAnimation.HasSeperateTexture)
             {
                 Renderer.SetTexture(ActiveAnimation.Texture);
+                SetColumnsAndRows(ActiveAnimation.Columns, ActiveAnimation.Rows);
             }
             else
             {
                 Renderer.SetTexture(DefaultTexture);
+                SetColumnsAndRows(DefaultColumns, DefaultRows);
             }
         }
 
@@ -131,6 +151,24 @@ namespace Game.Components
             Console.WriteLine("Couldnt find Animation with that Name: " + name);
         }
 
+        /// <summary>
+        /// Returns the Animation with given Name. If not found returns null.
+        /// </summary>
+        /// <param name="name">Name of the Animation.</param>
+        /// <returns>Animation with the Name.</returns>
+        public Animation GetAnimation(string name)
+        {
+            foreach (Animation animation in Animations)
+            {
+                if (animation.Name == name)
+                {
+                    return animation;
+                }
+            }
+
+            return null;
+        }
+
         public void LinkAnimation(Animation startAnimation, Animation targetAnimation)
         {
             startAnimation.NextAnimation = targetAnimation;
@@ -139,6 +177,7 @@ namespace Game.Components
         public void SetStartAnimation(Animation animation)
         {
             StartAnimation = animation;
+            ActiveAnimation = StartAnimation;
         }
     }
 }

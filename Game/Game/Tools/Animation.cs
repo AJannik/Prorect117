@@ -7,7 +7,6 @@ namespace Game.Tools
 {
     public class Animation
     {
-        // TODO: remove usage of animationcontroller!
         public Animation(string name, int frames, int startFrame, bool isLoop)
         {
             Name = name;
@@ -17,7 +16,7 @@ namespace Game.Tools
             Loop = isLoop;
         }
 
-        public Animation(string name, int frames, int startFrame, bool isLoop, bool hasSeperateTexture, string seperateTexturePath)
+        public Animation(string name, int frames, int startFrame, bool isLoop, bool hasSeperateTexture, string seperateTexturePath, int columns, int rows)
         {
             Name = name;
             Frames = frames;
@@ -25,6 +24,8 @@ namespace Game.Tools
             ActiveFrame = StartFrame;
             Loop = isLoop;
             HasSeperateTexture = hasSeperateTexture;
+            Columns = columns;
+            Rows = rows;
             if (hasSeperateTexture)
             {
                 Texture = TextureTools.LoadFromResource(seperateTexturePath);
@@ -41,9 +42,13 @@ namespace Game.Tools
 
         public Animation NextAnimation { get; set; } = null;
 
-        public float TimeBetweenTwoFrames { get; set; } = 0.2f;
+        public float TimeBetweenTwoFrames { get; set; } = 1 / 12f;
 
         public bool HasSeperateTexture { get; private set; } = false;
+
+        public int Columns { get; private set; } = 0;
+
+        public int Rows { get; private set; } = 0;
 
         public int Texture { get; private set; }
 
@@ -51,6 +56,11 @@ namespace Game.Tools
 
         private bool Loop { get; set; } = false;
 
+        /// <summary>
+        /// Updates animation and returns the FrameID or -1 for GoToNext.
+        /// </summary>
+        /// <param name="deltaTime">Time between calculated frames.</param>
+        /// <returns>FrameID of current frame. Returns -1 if the animation ended.</returns>
         public int Update(float deltaTime)
         {
             TimeToNextFrame -= deltaTime;

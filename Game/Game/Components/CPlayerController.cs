@@ -16,6 +16,8 @@ namespace Game.Components
 
         public CRigidBody RigidBody { get; set; } = null;
 
+        public CBoxCollider GroundTrigger { get; set; }
+
         public float PlayerSpeed { get; private set; } = 10f;
 
         public float JumpForce { get; private set; } = 10f;
@@ -24,6 +26,15 @@ namespace Game.Components
 
         private bool Jumping { get; set; } = false;
 
+        private bool OnGround { get; set; } = true;
+
+        public void SetUpGroundTrigger(CBoxCollider trigger)
+        {
+            GroundTrigger = trigger;
+            GroundTrigger.TriggerEntered += OnTriggerEntered;
+            GroundTrigger.TriggerExited += OnTriggerExited;
+        }
+
         public void Update(float deltaTime)
         {
             var keyboard = Keyboard.GetState();
@@ -31,18 +42,34 @@ namespace Game.Components
             float axisLeftRight = keyboard.IsKeyDown(Key.A) ? -1.0f : keyboard.IsKeyDown(Key.D) ? 1.0f : 0.0f;
             RigidBody.AddForce(new OpenTK.Vector2(axisLeftRight * PlayerSpeed, 0f));
 
-            // if(onGround && JumpCooldown > 0)
-            // JumpCooldown -= deltaTime;
+            if (keyboard.IsKeyDown(Key.Space))
+            {
+                Jump();
+            }
+
+            if (OnGround && JumpCooldown > 0)
+            {
+                JumpCooldown -= deltaTime;
+            }
         }
 
         private void Jump()
         {
-            // and not onGround
-            if (!Jumping)
+            if (!Jumping && !OnGround && JumpCooldown <= 0f)
             {
                 RigidBody.AddForce(new OpenTK.Vector2(0, JumpForce));
                 JumpCooldown = 0.1f;
             }
+        }
+
+        private void OnTriggerExited(object sender, ICollider e)
+        {
+            OnGround = false;
+        }
+
+        private void OnTriggerEntered(object sender, ICollider e)
+        {
+            OnGround = true;
         }
     }
 }

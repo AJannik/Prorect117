@@ -74,11 +74,22 @@ namespace Game.GameObjectFactory
             player.AddComponent<CRender>();
             player.GetComponent<CRender>().SetSize(2.0f, 2.0f);
             player.GetComponent<CRender>().LoadAndSetTexture("KnightIdle.png");
-            player.AddComponent<CRigidBody>();
+            player.GetComponent<CRender>().SetTexCoords(new SimpleGeometry.Rect(0.0f, 0.0f, 1f / 15f, 1.0f));
+
             player.AddComponent<CBoxCollider>();
-            player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(1.0f, 2.0f);
+            player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(1.0f, 1.8f);
+            player.AddComponent<CRigidBody>();
+            player.GetComponent<CRigidBody>().Colliders.Add(player.GetComponent<CBoxCollider>());
             player.AddComponent<CPlayerController>();
             player.GetComponent<CPlayerController>().RigidBody = player.GetComponent<CRigidBody>();
+
+            // add ground trigger for playercontroller
+            player.AddComponent<CBoxCollider>();
+            CBoxCollider trigger = player.GetComponents<CBoxCollider>()[1];
+            trigger.IsTrigger = true;
+            trigger.Offset = new Vector2(0f, -0.2f);
+            trigger.Geometry.Size = new Vector2(0.2f, 0.1f);
+            player.GetComponent<CPlayerController>().GroundTrigger = trigger;
 
             // add all animations
             player.AddComponent<CAnmimationController>();
