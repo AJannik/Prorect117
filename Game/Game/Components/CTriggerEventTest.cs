@@ -12,7 +12,7 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (Trigger == null)
+            if (false && Trigger == null)
             {
                 Trigger = MyGameObject.GetComponent<CBoxCollider>();
                 Trigger.TriggerEntered += OnTriggerEntered;

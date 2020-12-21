@@ -26,6 +26,8 @@ namespace Game.Components
 
         private Vector2 Force { get; set; } = Vector2.Zero;
 
+        private Vector2 PenRes { get; set; } = Vector2.Zero;
+
         public void Update(float deltaTime)
         {
             if (Colliders.Count == 0)
@@ -44,14 +46,25 @@ namespace Game.Components
                 s += PhysicConstants.Gravity * GravityScale * deltaTime;
             }
 
-            MyGameObject.Transform.Position += s;
-
-            if (IsColliding())
+            if (IsColliding(s))
             {
+                s += PenRes;
+                if (s.X < 0.00001f && s.X > -0.00001f)
+                {
+                    s.X = 0f;
+                }
+
+                if (s.Y < 0.00001f && s.Y > -0.00001f)
+                {
+                    s.Y = 0f;
+                }
             }
             else
             {
             }
+
+            MyGameObject.Transform.Position += s;
+            PenRes = Vector2.Zero;
         }
 
         public void AddForce(Vector2 force)
@@ -69,10 +82,11 @@ namespace Game.Components
             Force = Vector2.Zero;
         }
 
-        private bool IsColliding()
+        private bool IsColliding(Vector2 s)
         {
             foreach (ICollider myCollider in Colliders)
             {
+                myCollider.Geometry.Center += s;
                 if (myCollider.GetType() == typeof(CBoxCollider))
                 {
                     if (CheckBoxColliderCollisions((CBoxCollider)myCollider))
@@ -101,7 +115,7 @@ namespace Game.Components
                 {
                     if (CollisionCheck.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry))
                     {
-                        MyGameObject.Transform.Position += PenetrationDepths.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry) * -1f;
+                        PenRes += PenetrationDepths.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry) * -1f;
                         return true;
                     }
                 }
@@ -114,7 +128,7 @@ namespace Game.Components
                 {
                     if (CollisionCheck.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry))
                     {
-                        MyGameObject.Transform.Position += PenetrationDepths.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry) * -1f;
+                        PenRes += PenetrationDepths.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry) * -1f;
                         return true;
                     }
                 }
@@ -132,7 +146,7 @@ namespace Game.Components
                 {
                     if (CollisionCheck.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)myCollider.Geometry))
                     {
-                        MyGameObject.Transform.Position += PenetrationDepths.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)myCollider.Geometry) * 1f;
+                        PenRes += PenetrationDepths.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)myCollider.Geometry) * 1f;
                         return true;
                     }
                 }
@@ -145,7 +159,7 @@ namespace Game.Components
                 {
                     if (CollisionCheck.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry))
                     {
-                        MyGameObject.Transform.Position += PenetrationDepths.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry) * 1f;
+                        PenRes += PenetrationDepths.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry) * 1f;
                         return true;
                     }
                 }
