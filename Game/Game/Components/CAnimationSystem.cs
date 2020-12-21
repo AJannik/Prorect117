@@ -8,44 +8,37 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Game.Components
 {
-    public class CAnmimationController : IComponent
+    public class CAnimationSystem : IComponent
     {
-        public CAnmimationController()
+        public CAnimationSystem()
         {
-            Rows = 1;
-            Columns = 1;
-            Frames = 1;
-            Animations = new List<Animation>();
-            if (MyGameObject != null)
-            {
-                Renderer = MyGameObject.GetComponent<CRender>();
-                DefaultTexture = Renderer.Texture;
-            }
         }
 
         public GameObject MyGameObject { get; set; } = null;
 
         public Rect TexCoords { get; private set; }
 
-        public int Frames { get; private set; }
+        public int DefaultFrames { get; private set; } = 1;
 
-        public List<Animation> Animations { get; set; }
+        public int Frames { get; private set; } = 1;
+
+        public List<Animation> Animations { get; set; } = new List<Animation>();
 
         public Animation ActiveAnimation { get; set; }
 
         public Animation StartAnimation { get; private set; }
 
-        private CRender Renderer { get; set; }
+        public CRender Renderer { get; set; }
+
+        public int DefaultTexture { get; set; }
 
         private int DefaultRows { get; set; } = 1;
 
         private int DefaultColumns { get; set; } = 1;
 
-        private int Rows { get; set; }
+        private int Rows { get; set; } = 1;
 
-        private int Columns { get; set; }
-
-        private int DefaultTexture { get; set; }
+        private int Columns { get; set; } = 1;
 
         public void Update(float deltaTime)
         {
@@ -80,7 +73,10 @@ namespace Game.Components
         public void SetDefaultColumnsAndRows(int columns, int rows)
         {
             DefaultColumns = columns;
+            Columns = columns;
             DefaultRows = rows;
+            Rows = rows;
+            DefaultFrames = rows * columns;
         }
 
         public void SetColumnsAndRows(int columns, int rows)
@@ -96,11 +92,10 @@ namespace Game.Components
         /// <param name="frameID">Active Frame (starts at 0).</param>
         public void SetActiveFrame(int frameID)
         {
-            frameID = frameID % Frames;
             int activeRow = frameID / Columns;
             int activeColumn = frameID % Columns;
 
-            TexCoords = new Rect(activeColumn / (float)Columns, 1f - ((activeRow + 1f) / Rows), 1 / Columns, 1 / Rows);
+            TexCoords = new Rect(activeColumn / (float)Columns, 1f - ((activeRow + 1f) / Rows), 1f / Columns, 1f / Rows);
         }
 
         /// <summary>
@@ -122,11 +117,13 @@ namespace Game.Components
             {
                 Renderer.SetTexture(ActiveAnimation.Texture);
                 SetColumnsAndRows(ActiveAnimation.Columns, ActiveAnimation.Rows);
+                Frames = ActiveAnimation.Frames + ActiveAnimation.StartFrame;
             }
             else
             {
                 Renderer.SetTexture(DefaultTexture);
                 SetColumnsAndRows(DefaultColumns, DefaultRows);
+                Frames = DefaultFrames;
             }
         }
 
@@ -134,7 +131,7 @@ namespace Game.Components
         /// Goes to Animation with Name.
         /// </summary>
         /// <param name="name">Name of the Animation.</param>
-        public void GoToAnimation(string name)
+        public void PlayAnimation(string name)
         {
             foreach (Animation animation in Animations)
             {
@@ -144,10 +141,14 @@ namespace Game.Components
                     if (animation.HasSeperateTexture)
                     {
                         Renderer.SetTexture(animation.Texture);
+                        SetColumnsAndRows(ActiveAnimation.Columns, ActiveAnimation.Rows);
+                        Frames = ActiveAnimation.Frames + ActiveAnimation.StartFrame;
                     }
                     else
                     {
                         Renderer.SetTexture(DefaultTexture);
+                        SetColumnsAndRows(DefaultColumns, DefaultRows);
+                        Frames = DefaultFrames;
                     }
 
                     return;
