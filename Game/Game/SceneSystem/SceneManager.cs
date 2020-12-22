@@ -4,7 +4,7 @@ namespace Game.SceneSystem
 {
     public class SceneManager
     {
-        private Scene[] scenes;
+        public Scene[] scenes;
         private SceneFactory sceneFactory;
         private int screenWidth = 0;
         private int screenHeight = 0;

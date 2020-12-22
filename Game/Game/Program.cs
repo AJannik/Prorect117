@@ -33,7 +33,7 @@ namespace Game
                 sceneManager.Update(deltaTime);
 
                 // TODO: Remove this, it's only for testing
-                if (sceneManager.CurrentScene == 0 || sceneManager.CurrentScene == 1)
+                if (sceneManager.CurrentScene < sceneManager.scenes.Length - 1)
                 {
                     counter -= deltaTime;
                     if (counter <= 0f)
