@@ -37,12 +37,12 @@ namespace Game.Components
             MyGameObject.Scene.Debug.DrawRay(ray);
         }
 
-        private void OnTriggerExited(object sender, ICollider e)
+        private void OnTriggerExited(object sender, IComponent e)
         {
             MyGameObject.GetComponent<CRigidBody>().UseGravity = true;
         }
 
-        private void OnTriggerEntered(object sender, ICollider e)
+        private void OnTriggerEntered(object sender, IComponent e)
         {
             MyGameObject.GetComponent<CRigidBody>().UseGravity = false;
         }

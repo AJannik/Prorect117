@@ -24,7 +24,7 @@ namespace Game.Components
             }
         }
 
-        private void OnTriggerEntered(object sender, ICollider e)
+        private void OnTriggerEntered(object sender, IComponent e)
         {
             // TODO: implement effect
         }

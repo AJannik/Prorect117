@@ -10,9 +10,9 @@ namespace Game.Components
 {
     public class CCircleCollider : IComponent, ICollider
     {
-        public event EventHandler<ICollider> TriggerEntered;
+        public event EventHandler<IComponent> TriggerEntered;
 
-        public event EventHandler<ICollider> TriggerExited;
+        public event EventHandler<IComponent> TriggerExited;
 
         public GameObject MyGameObject { get; set; } = null;
 
@@ -22,7 +22,7 @@ namespace Game.Components
 
         public ISimpleGeometry Geometry { get; set; } = new Circle(Vector2.Zero, 1f);
 
-        private List<ICollider> TriggerHits { get; set; } = new List<ICollider>();
+        private List<IComponent> TriggerHits { get; set; } = new List<IComponent>();
 
         private int NumVerticies { get; set; } = 18;
 
