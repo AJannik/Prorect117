@@ -26,7 +26,7 @@ namespace Game.GameObjectFactory
 
             return wall;
         }
-        
+
         public static GameObject BuildFloor(Scene scene, Vector2 position)
         {
             Vector2 size = new Vector2(4f, 0.2f);
@@ -152,6 +152,46 @@ namespace Game.GameObjectFactory
             player.GetComponent<CPlayerController>().AnimationSystem = controll;
 
             return player;
+        }
+
+        public static GameObject BuildSkeletonEnemy(Scene scene, Vector2 position)
+        {
+            GameObject enemy = new GameObject(scene, "Enemy");
+            enemy.Transform.Position = position;
+
+            // render
+            enemy.AddComponent<CRender>();
+            CRender render = enemy.GetComponent<CRender>();
+            render.LoadAndSetTexture("Content.Skeleton.SkeletonIdle.png");
+            render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 1f / 11f, 1f));
+            render.SetSize(2f, 2f);
+
+            // hitboxes and triggers
+            enemy.AddComponent<CBoxCollider>();
+            CBoxCollider hitbox = enemy.GetComponent<CBoxCollider>();
+            hitbox.Geometry.Size = new Vector2(0.75f, 1.8f);
+            enemy.AddComponent<CBoxCollider>();
+            CBoxCollider left = enemy.GetComponents<CBoxCollider>()[1];
+            enemy.AddComponent<CBoxCollider>();
+            CBoxCollider right = enemy.GetComponents<CBoxCollider>()[2];
+            left.IsTrigger = true;
+            right.IsTrigger = true;
+            left.Geometry.Size = new Vector2(0.5f, 1.8f);
+            right.Geometry.Size = new Vector2(0.5f, 1.8f);
+            left.Offset = new Vector2(-0.3f, 0f);
+            right.Offset = new Vector2(0.3f, 0f);
+
+            enemy.AddComponent<CRigidBody>();
+            enemy.GetComponent<CRigidBody>().Mass = 3f;
+
+            enemy.AddComponent<CEnemyAI>();
+            CEnemyAI ai = enemy.GetComponent<CEnemyAI>();
+            ai.LeftTrigger = left;
+            ai.RightTrigger = right;
+            ai.RigidBody = enemy.GetComponent<CRigidBody>();
+            ai.RigidBody.Velocity = new Vector2(ai.MoveSpeed, 0f);
+
+            return enemy;
         }
 
         public static GameObject BuildPowerDown(Scene scene, Vector2 position)
