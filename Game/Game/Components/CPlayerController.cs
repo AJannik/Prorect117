@@ -127,12 +127,12 @@ namespace Game.Components
             }
         }
 
-        private void OnGroundTriggerExited(object sender, ICollider e)
+        private void OnGroundTriggerExited(object sender, IComponent e)
         {
             OnGround = false;
         }
 
-        private void OnGroundTriggerEntered(object sender, ICollider e)
+        private void OnGroundTriggerEntered(object sender, IComponent e)
         {
             Console.WriteLine("Entered" + sender);
             OnGround = true;
