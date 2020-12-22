@@ -10,7 +10,7 @@ namespace Game.GameObjectFactory
     {
         public static GameObject BuildWall(Scene scene, Vector2 position)
         {
-            Vector2 size = new Vector2(0.2f, 4f);
+            Vector2 size = new Vector2(0.2f, 2f);
 
             GameObject wall = new GameObject(scene, "Wall");
             wall.Transform.Position = position;
@@ -26,11 +26,27 @@ namespace Game.GameObjectFactory
 
             return wall;
         }
-        
-        public static GameObject BuildFloor(Scene scene, Vector2 position)
+
+        public static GameObject BuildFloor2(Scene scene, Vector2 position)
         {
             Vector2 size = new Vector2(4f, 0.2f);
+            return BuildFloor(scene, position, size);
+        }
 
+        public static GameObject BuildFloor3(Scene scene, Vector2 position)
+        {
+            Vector2 size = new Vector2(4f, 0.2f);
+            return BuildFloor(scene, position, size);
+        }
+
+        public static GameObject BuildFloor4(Scene scene, Vector2 position)
+        {
+            Vector2 size = new Vector2(4f, 0.2f);
+            return BuildFloor(scene, position, size);
+        }
+
+        private static GameObject BuildFloor(Scene scene, Vector2 position, Vector2 size)
+        {
             GameObject floor = new GameObject(scene, "Floor");
             floor.Transform.Position = position;
             floor.Transform.Scale = size;

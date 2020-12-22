@@ -31,7 +31,7 @@ namespace Game.SceneSystem
             Scene scene = new Scene();
 
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
-            ObjectFactory.BuildFloor(scene, new Vector2(0f, -4f));
+            ObjectFactory.BuildFloor4(scene, new Vector2(0f, -4f));
             GameObject ball = ObjectFactory.BuildBall(scene, Vector2.Zero);
 
             camera.SetParent(ball);
@@ -63,8 +63,8 @@ namespace Game.SceneSystem
             Scene scene = new Scene();
 
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
-            ObjectFactory.BuildFloor(scene, new Vector2(0f, -4f));
-            ObjectFactory.BuildFloor(scene, new Vector2(5f, -4f));
+            ObjectFactory.BuildFloor4(scene, new Vector2(0f, -4f));
+            ObjectFactory.BuildFloor4(scene, new Vector2(5f, -4f));
             ObjectFactory.BuildGround(scene, new Vector2(0f, -6f));
 
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(0f, 3.0f));
@@ -78,16 +78,16 @@ namespace Game.SceneSystem
         private Scene BuildScene3()
         {
             Scene scene = new Scene();
-            
+
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(0f, 3.0f));
-            
+
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 3f;
+            camera.GetComponent<CCamera>().Scale = 12f;
 
             ObjectFactory.BuildGround(scene, new Vector2(0f, 0f));
-            ObjectFactory.BuildWall(scene, new Vector2(-3f, 2f));
-            ObjectFactory.BuildWall(scene, new Vector2(3f, 2f));
+            ObjectFactory.BuildWall(scene, new Vector2(-10.6f, 1f));
+            ObjectFactory.BuildWall(scene, new Vector2(10.6f, 1f));
 
             return scene;
         }
