@@ -44,11 +44,26 @@ namespace Game.Components
         {
             GL.BindTexture(TextureTarget.Texture2D, this.Texture);
 
+            Vector2 pos1;
+            Vector2 pos2;
+            Vector2 pos3;
+            Vector2 pos4;
+
             // calculate the corners
-            Vector2 pos1 = new Vector2((-SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
-            Vector2 pos2 = new Vector2((SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
-            Vector2 pos3 = new Vector2((SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
-            Vector2 pos4 = new Vector2((-SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
+            if (Flipped)
+            {
+                pos1 = new Vector2((-SizeX / 2) - Offset.X, (-SizeY / 2) + Offset.Y);
+                pos2 = new Vector2((SizeX / 2) - Offset.X, (-SizeY / 2) + Offset.Y);
+                pos3 = new Vector2((SizeX / 2) - Offset.X, (SizeY / 2) + Offset.Y);
+                pos4 = new Vector2((-SizeX / 2) - Offset.X, (SizeY / 2) + Offset.Y);
+            }
+            else
+            {
+                pos1 = new Vector2((-SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
+                pos2 = new Vector2((SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
+                pos3 = new Vector2((SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
+                pos4 = new Vector2((-SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
+            }
 
             // transform the corners
             pos1 = Transformation.Transform(pos1, MyGameObject.Transform.WorldTransformMatrix);
@@ -61,46 +76,25 @@ namespace Game.Components
             if (Flipped)
             {
                 GL.TexCoord2(TexCoords.MaxX, TexCoords.MinY);
+                GL.Vertex2(pos1);
+                GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
+                GL.Vertex2(pos2);
+                GL.TexCoord2(TexCoords.MinX, TexCoords.MaxY);
+                GL.Vertex2(pos3);
+                GL.TexCoord2(TexCoords.MaxX, TexCoords.MaxY);
+                GL.Vertex2(pos4);
             }
             else
             {
                 GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
-            }
-
-            GL.Vertex2(pos1);
-
-            if (Flipped)
-            {
-                GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
-            }
-            else
-            {
+                GL.Vertex2(pos1);
                 GL.TexCoord2(TexCoords.MaxX, TexCoords.MinY);
-            }
-
-            GL.Vertex2(pos2);
-
-            if (Flipped)
-            {
-                GL.TexCoord2(TexCoords.MinX, TexCoords.MaxY);
-            }
-            else
-            {
+                GL.Vertex2(pos2);
                 GL.TexCoord2(TexCoords.MaxX, TexCoords.MaxY);
-            }
-
-            GL.Vertex2(pos3);
-
-            if (Flipped)
-            {
-                GL.TexCoord2(TexCoords.MaxX, TexCoords.MaxY);
-            }
-            else
-            {
+                GL.Vertex2(pos3);
                 GL.TexCoord2(TexCoords.MinX, TexCoords.MaxY);
+                GL.Vertex2(pos4);
             }
-
-            GL.Vertex2(pos4);
 
             GL.End();
         }

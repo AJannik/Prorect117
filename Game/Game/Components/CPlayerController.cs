@@ -22,7 +22,7 @@ namespace Game.Components
 
         public float PlayerSpeed { get; private set; } = 10f;
 
-        public float JumpForce { get; private set; } = 300f;
+        public float JumpForce { get; private set; } = 30f;
 
         private float JumpCooldown { get; set; }
 
@@ -118,8 +118,7 @@ namespace Game.Components
         {
             if (!Jumping && OnGround && JumpCooldown <= 0f)
             {
-                RigidBody.Velocity = new OpenTK.Vector2(RigidBody.Velocity.Y, 0f);
-                RigidBody.AddForce(new OpenTK.Vector2(0, JumpForce));
+                RigidBody.Velocity = new OpenTK.Vector2(RigidBody.Velocity.X, JumpForce);
                 Jumping = true;
                 JumpCooldown = 0.1f;
                 Console.WriteLine("Jumping");
