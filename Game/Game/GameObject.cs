@@ -38,6 +38,7 @@ namespace Game
             }
 
             Name = name;
+            Active = true;
             Transform.MyGameObject = this;
             Scene = scene;
             Scene.AddGameObject(this);
@@ -52,6 +53,8 @@ namespace Game
         public Scene Scene { get; set; }
 
         public string Name { get; set; } = "GameObject";
+        
+        public bool Active { get; set; }
 
         public int ChildCount
         {
