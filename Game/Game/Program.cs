@@ -35,7 +35,7 @@ namespace Game
                 // TODO: Remove this, it's only for testing
                 if (sceneManager.CurrentScene < sceneManager.scenes.Length - 1)
                 {
-                    counter -= deltaTime;
+                    // counter -= deltaTime;
                     if (counter <= 0f)
                     {
                         sceneManager.LoadNextScene();

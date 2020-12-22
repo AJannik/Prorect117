@@ -143,7 +143,7 @@ namespace Game.GameObjectFactory
             render.SetOffset(0.0f, 0.1f);
 
             player.AddComponent<CBoxCollider>();
-            player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(0.75f, 1.6f);
+            player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(0.85f, 1.6f);
             player.AddComponent<CRigidBody>();
             player.GetComponent<CRigidBody>().Mass = 3f;
             player.AddComponent<CPlayerController>();
@@ -203,8 +203,8 @@ namespace Game.GameObjectFactory
             right.IsTrigger = true;
             left.Geometry.Size = new Vector2(0.5f, 1.8f);
             right.Geometry.Size = new Vector2(0.5f, 1.8f);
-            left.Offset = new Vector2(-0.3f, 0f);
-            right.Offset = new Vector2(0.3f, 0f);
+            left.Offset = new Vector2(-0.4f, 0f);
+            right.Offset = new Vector2(0.4f, 0f);
 
             enemy.AddComponent<CRigidBody>();
             enemy.GetComponent<CRigidBody>().Mass = 3f;
@@ -214,7 +214,16 @@ namespace Game.GameObjectFactory
             ai.LeftTrigger = left;
             ai.RightTrigger = right;
             ai.RigidBody = enemy.GetComponent<CRigidBody>();
-            ai.RigidBody.Velocity = new Vector2(ai.MoveSpeed, 0f);
+            // ai.RigidBody.Velocity = new Vector2(ai.MoveSpeed, 0f);
+
+            // animations
+            enemy.AddComponent<CAnimationSystem>();
+            CAnimationSystem animationSystem = enemy.GetComponent<CAnimationSystem>();
+            Animation idle = new Animation("Idle", 11, 0, true);
+            animationSystem.Renderer = render;
+            animationSystem.AddAnimation(idle);
+            animationSystem.SetDefaultColumnsAndRows(11, 1);
+            animationSystem.SetStartAnimation(idle);
 
             return enemy;
         }
