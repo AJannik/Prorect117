@@ -190,21 +190,22 @@ namespace Game.GameObjectFactory
             render.LoadAndSetTexture("Content.Skeleton.SkeletonIdle.png");
             render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 1f / 11f, 1f));
             render.SetSize(2f, 2f);
+            render.SetOffset(0.3f, 0f);
 
             // hitboxes and triggers
             enemy.AddComponent<CBoxCollider>();
             CBoxCollider hitbox = enemy.GetComponent<CBoxCollider>();
-            hitbox.Geometry.Size = new Vector2(0.75f, 1.8f);
+            hitbox.Geometry.Size = new Vector2(1f, 1.6f);
             enemy.AddComponent<CBoxCollider>();
             CBoxCollider left = enemy.GetComponents<CBoxCollider>()[1];
             enemy.AddComponent<CBoxCollider>();
             CBoxCollider right = enemy.GetComponents<CBoxCollider>()[2];
             left.IsTrigger = true;
             right.IsTrigger = true;
-            left.Geometry.Size = new Vector2(0.5f, 1.8f);
-            right.Geometry.Size = new Vector2(0.5f, 1.8f);
-            left.Offset = new Vector2(-0.4f, 0f);
-            right.Offset = new Vector2(0.4f, 0f);
+            left.Geometry.Size = new Vector2(0.7f, 1.8f);
+            right.Geometry.Size = new Vector2(0.7f, 1.8f);
+            left.Offset = new Vector2(-0.6f, 0f);
+            right.Offset = new Vector2(0.6f, 0f);
 
             enemy.AddComponent<CRigidBody>();
             enemy.GetComponent<CRigidBody>().Mass = 3f;
@@ -214,6 +215,7 @@ namespace Game.GameObjectFactory
             ai.LeftTrigger = left;
             ai.RightTrigger = right;
             ai.RigidBody = enemy.GetComponent<CRigidBody>();
+
             // ai.RigidBody.Velocity = new Vector2(ai.MoveSpeed, 0f);
 
             // animations
@@ -224,6 +226,8 @@ namespace Game.GameObjectFactory
             animationSystem.AddAnimation(idle);
             animationSystem.SetDefaultColumnsAndRows(11, 1);
             animationSystem.SetStartAnimation(idle);
+            Animation walk = new Animation("Walk", 13, 0, true, true, "Content.Skeleton.SkeletonWalk.png", 13, 1);
+            animationSystem.AddAnimation(walk);
 
             return enemy;
         }
