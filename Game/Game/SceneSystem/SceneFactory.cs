@@ -7,7 +7,7 @@ namespace Game.SceneSystem
 {
     internal class SceneFactory
     {
-        internal int NumScenes { get; } = 3;
+        internal int NumScenes { get; } = 4;
 
         public Scene BuildScene(int num)
         {
@@ -19,6 +19,8 @@ namespace Game.SceneSystem
                     return BuildScene1();
                 case 2:
                     return BuildScene2();
+                case 3:
+                    return BuildScene3();
                 default:
                     throw new ArgumentOutOfRangeException($"There is no Scene numbered {num}!");
             }
@@ -28,9 +30,9 @@ namespace Game.SceneSystem
         {
             Scene scene = new Scene();
 
+            GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             ObjectFactory.BuildFloor(scene, new Vector2(0f, -4f));
             GameObject ball = ObjectFactory.BuildBall(scene, Vector2.Zero);
-            GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
 
             camera.SetParent(ball);
             camera.GetComponent<CCamera>().Scale = 2f;
@@ -69,6 +71,23 @@ namespace Game.SceneSystem
             camera.SetParent(player);
 
             camera.GetComponent<CCamera>().Scale = 3f;
+
+            return scene;
+        }
+
+        private Scene BuildScene3()
+        {
+            Scene scene = new Scene();
+            
+            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(0f, 3.0f));
+            
+            GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
+            camera.SetParent(player);
+            camera.GetComponent<CCamera>().Scale = 3f;
+
+            ObjectFactory.BuildGround(scene, new Vector2(0f, 0f));
+            ObjectFactory.BuildWall(scene, new Vector2(-3f, 2f));
+            ObjectFactory.BuildWall(scene, new Vector2(3f, 2f));
 
             return scene;
         }
