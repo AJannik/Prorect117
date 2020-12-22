@@ -46,6 +46,11 @@ namespace Game.Components
             {
                 // attack left
             }
+
+            if (e.MyGameObject.Name == "Wall")
+            {
+                RigidBody.Velocity = new OpenTK.Vector2(1 * MoveSpeed, RigidBody.Velocity.Y);
+            }
         }
 
         private void LeftFootExited(object sender, IComponent e)
@@ -61,6 +66,11 @@ namespace Game.Components
             if (e.MyGameObject.Name == "Player")
             {
                 // attack right
+            }
+
+            if (e.MyGameObject.Name == "Wall")
+            {
+                RigidBody.Velocity = new OpenTK.Vector2(-1 * MoveSpeed, RigidBody.Velocity.Y);
             }
         }
 
