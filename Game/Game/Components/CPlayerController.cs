@@ -22,7 +22,7 @@ namespace Game.Components
 
         public float PlayerSpeed { get; private set; } = 10f;
 
-        public float JumpForce { get; private set; } = 30f;
+        public float JumpForce { get; private set; } = 150f;
 
         private float JumpCooldown { get; set; }
 

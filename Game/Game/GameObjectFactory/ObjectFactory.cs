@@ -111,7 +111,6 @@ namespace Game.GameObjectFactory
             player.AddComponent<CBoxCollider>();
             player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(0.85f, 1.6f);
             player.AddComponent<CRigidBody>();
-            player.GetComponent<CRigidBody>().Mass = 3f;
             player.AddComponent<CPlayerController>();
             player.GetComponent<CPlayerController>().RigidBody = player.GetComponent<CRigidBody>();
             player.GetComponent<CPlayerController>().Render = player.GetComponent<CRender>();
@@ -174,7 +173,6 @@ namespace Game.GameObjectFactory
             right.Offset = new Vector2(0.6f, 0f);
 
             enemy.AddComponent<CRigidBody>();
-            enemy.GetComponent<CRigidBody>().Mass = 3f;
 
             enemy.AddComponent<CEnemyAI>();
             CEnemyAI ai = enemy.GetComponent<CEnemyAI>();
