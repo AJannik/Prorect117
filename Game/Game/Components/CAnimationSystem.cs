@@ -99,10 +99,11 @@ namespace Game.Components
         }
 
         /// <summary>
-        /// Goes to NextAnimation linked.
+        /// Goes to NextAnimation linked. IF there is none goes back to StartAnimation.
         /// </summary>
         public void GoToNextAnimation()
         {
+            ActiveAnimation.ActiveFrame = ActiveAnimation.StartFrame;
             if (ActiveAnimation.NextAnimation == null)
             {
                 ActiveAnimation = StartAnimation;
@@ -137,6 +138,7 @@ namespace Game.Components
             {
                 if (animation.Name == name)
                 {
+                    ActiveAnimation.ActiveFrame = ActiveAnimation.StartFrame;
                     ActiveAnimation = animation;
                     if (animation.HasSeperateTexture)
                     {

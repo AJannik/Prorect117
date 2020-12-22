@@ -36,7 +36,7 @@ namespace Game.Tools
 
         public int StartFrame { get; private set; }
 
-        public int ActiveFrame { get; private set; }
+        public int ActiveFrame { get; set; }
 
         public string Name { get; private set; }
 

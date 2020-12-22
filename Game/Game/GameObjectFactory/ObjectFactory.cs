@@ -124,7 +124,8 @@ namespace Game.GameObjectFactory
             controll.SetStartAnimation(idle);
             Animation run = new Animation("Run", 6, 8, true);
             controll.AddAnimation(run);
-            controll.LinkAnimation(run, idle);
+            Animation jump = new Animation("Jump", 2, 16, false);
+            controll.AddAnimation(jump);
             player.GetComponent<CPlayerController>().AnimationSystem = controll;
 
             return player;
