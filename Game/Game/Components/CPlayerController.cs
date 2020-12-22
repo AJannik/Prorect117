@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Game.Interfaces;
 using OpenTK.Input;
 
@@ -34,20 +32,22 @@ namespace Game.Components
 
         private bool Running { get; set; } = false;
 
-        private bool Falling { get; set; } = false;
-
         private bool FacingRight { get; set; } = true;
 
         public void SetUpGroundTrigger(CBoxCollider trigger)
         {
             GroundTrigger = trigger;
-            GroundTrigger.TriggerEntered += OnTriggerEntered;
-            GroundTrigger.TriggerExited += OnTriggerExited;
+            GroundTrigger.TriggerEntered += OnGroundTriggerEntered;
+            GroundTrigger.TriggerExited += OnGroundTriggerExited;
         }
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.getActive()) return;
+            if (!MyGameObject.getActive())
+            {
+                return;
+            }
+
             var keyboard = Keyboard.GetState();
 
             float axisLeftRight = keyboard.IsKeyDown(Key.A) ? -1.0f : keyboard.IsKeyDown(Key.D) ? 1.0f : 0.0f;
@@ -127,12 +127,12 @@ namespace Game.Components
             }
         }
 
-        private void OnTriggerExited(object sender, ICollider e)
+        private void OnGroundTriggerExited(object sender, ICollider e)
         {
             OnGround = false;
         }
 
-        private void OnTriggerEntered(object sender, ICollider e)
+        private void OnGroundTriggerEntered(object sender, ICollider e)
         {
             Console.WriteLine("Entered" + sender);
             OnGround = true;

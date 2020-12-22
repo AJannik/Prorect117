@@ -42,7 +42,11 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.getActive()) return;
+            if (!MyGameObject.getActive())
+            {
+                return;
+            }
+
             if (Renderer == null)
             {
                 return;
@@ -130,7 +134,7 @@ namespace Game.Components
         }
 
         /// <summary>
-        /// Goes to Animation with Name.
+        /// Plays the animation with given name if its not already playing and a loop.
         /// </summary>
         /// <param name="name">Name of the Animation.</param>
         public void PlayAnimation(string name)
