@@ -30,7 +30,11 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.getActive()) return;
+            if (!MyGameObject.getActive())
+            {
+                return;
+            }
+
             if (Colliders.Count == 0)
             {
                 SetColliders();
@@ -47,15 +51,16 @@ namespace Game.Components
                 s += PhysicConstants.Gravity * GravityScale * deltaTime;
             }
 
-            if (IsColliding(s))
+            if (IsColliding())
             {
+                // TODO: Calculate PenRes of this frame, not the old frame!
                 s += PenRes;
-                if (s.X < 0.00001f && s.X > -0.00001f)
+                if (s.X < 0.0001f && s.X > -0.0001f)
                 {
                     s.X = 0f;
                 }
 
-                if (s.Y < 0.00001f && s.Y > -0.00001f)
+                if (s.Y < 0.0001f && s.Y > -0.0001f)
                 {
                     s.Y = 0f;
                 }
@@ -83,11 +88,10 @@ namespace Game.Components
             Force = Vector2.Zero;
         }
 
-        private bool IsColliding(Vector2 s)
+        private bool IsColliding()
         {
             foreach (ICollider myCollider in Colliders)
             {
-                myCollider.Geometry.Center += s;
                 if (myCollider.GetType() == typeof(CBoxCollider))
                 {
                     if (CheckBoxColliderCollisions((CBoxCollider)myCollider))

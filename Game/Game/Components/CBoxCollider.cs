@@ -10,9 +10,9 @@ namespace Game.Components
 {
     public class CBoxCollider : IComponent, ICollider
     {
-        public event EventHandler<ICollider> TriggerEntered;
+        public event EventHandler<IComponent> TriggerEntered;
 
-        public event EventHandler<ICollider> TriggerExited;
+        public event EventHandler<IComponent> TriggerExited;
 
         public GameObject MyGameObject { get; set; } = null;
 
@@ -22,11 +22,15 @@ namespace Game.Components
 
         public Vector2 Offset { get; set; } = Vector2.Zero;
 
-        private List<ICollider> TriggerHits { get; set; } = new List<ICollider>();
+        private List<IComponent> TriggerHits { get; set; } = new List<IComponent>();
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.getActive()) return;
+            if (!MyGameObject.getActive())
+            {
+                return;
+            }
+
             Geometry.Center = MyGameObject.Transform.WorldPosition + Offset;
 
             if (IsTrigger)

@@ -6,9 +6,9 @@ namespace Game.Interfaces
 {
     public interface ICollider
     {
-        public event EventHandler<ICollider> TriggerEntered;
+        public event EventHandler<IComponent> TriggerEntered;
 
-        public event EventHandler<ICollider> TriggerExited;
+        public event EventHandler<IComponent> TriggerExited;
 
         public bool IsTrigger { get; set; }
 

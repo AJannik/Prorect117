@@ -10,6 +10,8 @@ namespace Game
         private static void Main()
         {
             var window = new GameWindow(1366, 768);
+            window.TargetRenderFrequency = 100;
+            window.TargetUpdateFrequency = 300;
             SceneManager sceneManager = new SceneManager();
             float counter = 7f;
             int skipedFrames = 0;
@@ -21,7 +23,7 @@ namespace Game
             void Update(float deltaTime)
             {
                 // Skip frame if deltaTime is to big because an untypically big deltaTime can cause physic bugs
-                if (deltaTime > 0.03f)
+                if (deltaTime > 0.05f)
                 {
                     skipedFrames++;
                     return;
