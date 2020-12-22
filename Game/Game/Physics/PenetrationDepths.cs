@@ -22,8 +22,6 @@ namespace Game.Physics
 
                 if (yOverlap > 0f)
                 {
-                    //Console.WriteLine($"{rect2.Center} {rect2.NextCenter}");
-
                     if (xOverlap < yOverlap)
                     {
                         if (n.X < 0f)

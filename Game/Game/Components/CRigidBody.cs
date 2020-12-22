@@ -52,26 +52,17 @@ namespace Game.Components
                 s += PhysicConstants.Gravity * GravityScale * deltaTime;
             }
 
-            IsColliding(s);
-            if (true)
+            CheckCollision(s);
+            s += PenRes;
+
+            if (s.X < 0.0001f && s.X > -0.0001f)
             {
-                // TODO: Calculate PenRes of this frame, not the old frame!
-                //Console.WriteLine($"{s} {PenRes}");
-                s += PenRes;
-                if (s.X < 0.0001f && s.X > -0.0001f)
-                {
-                    s.X = 0f;
-                }
-
-                if (s.Y < 0.0001f && s.Y > -0.0001f)
-                {
-                    s.Y = 0f;
-                }
-
-                //Console.WriteLine(s);
+                s.X = 0f;
             }
-            else
+
+            if (s.Y < 0.0001f && s.Y > -0.0001f)
             {
+                s.Y = 0f;
             }
 
             MyGameObject.Transform.Position += s;
@@ -93,7 +84,7 @@ namespace Game.Components
             Force = Vector2.Zero;
         }
 
-        private void IsColliding(Vector2 s)
+        private void CheckCollision(Vector2 s)
         {
             foreach (ICollider myCollider in Colliders)
             {

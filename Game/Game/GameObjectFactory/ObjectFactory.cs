@@ -32,23 +32,6 @@ namespace Game.GameObjectFactory
             return BuildWall(scene, position, size);
         }
 
-        private static GameObject BuildWall(Scene scene, Vector2 position, Vector2 size)
-        {
-            GameObject wall = new GameObject(scene, "Wall");
-            wall.Transform.Position = position;
-            wall.Transform.Scale = size;
-
-            wall.AddComponent<CRender>();
-            wall.AddComponent<CBoxCollider>();
-            wall.GetComponent<CBoxCollider>().Geometry.Size = size;
-
-            wall.AddComponent<CRigidBody>();
-            CRigidBody rb = wall.GetComponent<CRigidBody>();
-            rb.Static = true;
-
-            return wall;
-        }
-
         public static GameObject BuildPlatform2(Scene scene, Vector2 position)
         {
             Vector2 size = new Vector2(2f, 0.2f);
@@ -71,23 +54,6 @@ namespace Game.GameObjectFactory
         {
             Vector2 size = new Vector2(32f, 0.2f);
             return BuildPlatform(scene, position, size);
-        }
-
-        private static GameObject BuildPlatform(Scene scene, Vector2 position, Vector2 size)
-        {
-            GameObject floor = new GameObject(scene, "Floor");
-            floor.Transform.Position = position;
-            floor.Transform.Scale = size;
-
-            floor.AddComponent<CRender>();
-            floor.AddComponent<CBoxCollider>();
-            floor.GetComponent<CBoxCollider>().Geometry.Size = size;
-
-            floor.AddComponent<CRigidBody>();
-            CRigidBody rb = floor.GetComponent<CRigidBody>();
-            rb.Static = true;
-
-            return floor;
         }
 
         public static GameObject BuildBall(Scene scene, Vector2 position)
@@ -192,6 +158,40 @@ namespace Game.GameObjectFactory
             powerDown.GetComponent<CPowerDownScript>().Trigger = trigger;
 
             return powerDown;
+        }
+
+        private static GameObject BuildPlatform(Scene scene, Vector2 position, Vector2 size)
+        {
+            GameObject floor = new GameObject(scene, "Floor");
+            floor.Transform.Position = position;
+            floor.Transform.Scale = size;
+
+            floor.AddComponent<CRender>();
+            floor.AddComponent<CBoxCollider>();
+            floor.GetComponent<CBoxCollider>().Geometry.Size = size;
+
+            floor.AddComponent<CRigidBody>();
+            CRigidBody rb = floor.GetComponent<CRigidBody>();
+            rb.Static = true;
+
+            return floor;
+        }
+
+        private static GameObject BuildWall(Scene scene, Vector2 position, Vector2 size)
+        {
+            GameObject wall = new GameObject(scene, "Wall");
+            wall.Transform.Position = position;
+            wall.Transform.Scale = size;
+
+            wall.AddComponent<CRender>();
+            wall.AddComponent<CBoxCollider>();
+            wall.GetComponent<CBoxCollider>().Geometry.Size = size;
+
+            wall.AddComponent<CRigidBody>();
+            CRigidBody rb = wall.GetComponent<CRigidBody>();
+            rb.Static = true;
+
+            return wall;
         }
     }
 }
