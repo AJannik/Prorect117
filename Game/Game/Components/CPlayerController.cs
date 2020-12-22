@@ -34,6 +34,8 @@ namespace Game.Components
 
         private bool Running { get; set; } = false;
 
+        private bool Falling { get; set; } = false;
+
         private bool FacingRight { get; set; } = true;
 
         public void SetUpGroundTrigger(CBoxCollider trigger)
@@ -88,6 +90,11 @@ namespace Game.Components
             {
                 Running = false;
                 AnimationSystem.PlayAnimation("Idle");
+            }
+
+            if (RigidBody.Velocity.Y < 0f)
+            {
+                AnimationSystem.PlayAnimation("Fall");
             }
 
             // update Render

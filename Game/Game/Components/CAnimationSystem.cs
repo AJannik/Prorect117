@@ -103,7 +103,7 @@ namespace Game.Components
         /// </summary>
         public void GoToNextAnimation()
         {
-            ActiveAnimation.ActiveFrame = ActiveAnimation.StartFrame;
+            // ActiveAnimation.ActiveFrame = ActiveAnimation.StartFrame;
             if (ActiveAnimation.NextAnimation == null)
             {
                 ActiveAnimation = StartAnimation;
@@ -134,11 +134,16 @@ namespace Game.Components
         /// <param name="name">Name of the Animation.</param>
         public void PlayAnimation(string name)
         {
+            if (ActiveAnimation.Name == name && ActiveAnimation.IsLoop)
+            {
+                return;
+            }
+
             foreach (Animation animation in Animations)
             {
                 if (animation.Name == name)
                 {
-                    ActiveAnimation.ActiveFrame = ActiveAnimation.StartFrame;
+                    // ActiveAnimation.ActiveFrame = ActiveAnimation.StartFrame;
                     ActiveAnimation = animation;
                     if (animation.HasSeperateTexture)
                     {

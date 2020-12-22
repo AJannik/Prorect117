@@ -2,6 +2,7 @@
 using Game.SceneSystem;
 using Game.Tools;
 using OpenTK;
+using OpenTK.Graphics.OpenGL;
 
 namespace Game.GameObjectFactory
 {
@@ -120,15 +121,33 @@ namespace Game.GameObjectFactory
             controll.DefaultTexture = controll.Renderer.Texture;
             controll.SetDefaultColumnsAndRows(14, 13);
             Animation idle = new Animation("Idle", 4, 0, true);
+            idle.TimeBetweenTwoFrames = 1 / 6f;
             controll.AddAnimation(idle);
             controll.SetStartAnimation(idle);
             Animation run = new Animation("Run", 6, 8, true);
             controll.AddAnimation(run);
             Animation jump = new Animation("Jump", 2, 16, false);
             controll.AddAnimation(jump);
+            Animation fall = new Animation("Fall", 2, 23, true);
+            controll.AddAnimation(fall);
             player.GetComponent<CPlayerController>().AnimationSystem = controll;
 
             return player;
+        }
+
+        public static GameObject BuildPowerDown(Scene scene, Vector2 position)
+        {
+            GameObject powerDown = new GameObject(scene, "PowerDown");
+            powerDown.Transform.Position = position;
+
+            powerDown.AddComponent<CRender>();
+            powerDown.GetComponent<CRender>().LoadAndSetTexture("Content.default.png");
+            powerDown.AddComponent<CCircleCollider>();
+            CCircleCollider trigger = powerDown.GetComponent<CCircleCollider>();
+            powerDown.AddComponent<CPowerDownScript>();
+            powerDown.GetComponent<CPowerDownScript>().Trigger = trigger;
+
+            return powerDown;
         }
     }
 }
