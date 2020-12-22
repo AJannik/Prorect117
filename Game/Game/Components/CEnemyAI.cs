@@ -33,11 +33,11 @@ namespace Game.Components
             RightFootTrigger.TriggerExited += RightFootExited;
         }
 
-        private void RightFootExited(object sender, ICollider e)
+        private void RightFootExited(object sender, IComponent e)
         {
         }
 
-        private void LeftFootExited(object sender, ICollider e)
+        private void LeftFootExited(object sender, IComponent e)
         {
         }
     }
