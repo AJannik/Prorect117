@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Content\adventurer.png" />
     <None Remove="Content\default.png" />
     <None Remove="Content\KnightAttack.png" />
     <None Remove="Content\KnightDeath.png" />
@@ -15,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Content\adventurer.png" />
     <EmbeddedResource Include="Content\default.png" />
     <EmbeddedResource Include="Content\KnightAttack.png" />
     <EmbeddedResource Include="Content\KnightDeath.png" />
