@@ -108,7 +108,7 @@ namespace Game
             {
                 if (component.GetType() == typeof(T))
                 {
-                    return (T) component;
+                    return (T)component;
                 }
             }
 
@@ -137,7 +137,7 @@ namespace Game
             {
                 if (component.GetType() == typeof(T))
                 {
-                    list.Add((T) component);
+                    list.Add((T)component);
                 }
             }
 

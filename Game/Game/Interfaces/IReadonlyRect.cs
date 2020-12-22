@@ -15,5 +15,9 @@ namespace Game.Interfaces
         float MinY { get; }
 
         Vector2 Size { get; }
+
+        Vector2 PhysicOffset { get; }
+
+        Vector2 NextCenter { get; }
     }
 }

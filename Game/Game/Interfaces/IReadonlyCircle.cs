@@ -7,5 +7,7 @@ namespace Game.Interfaces
         Vector2 Center { get; }
 
         float Radius { get; }
+
+        Vector2 NextCenter { get; }
     }
 }

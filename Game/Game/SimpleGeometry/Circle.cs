@@ -22,5 +22,9 @@ namespace Game.SimpleGeometry
         public Vector2 Size { get; set; }
 
         public float Radius => Size.X;
+
+        public Vector2 PhysicOffset { get; set; }
+
+        public Vector2 NextCenter => PhysicOffset + Center;
     }
 }

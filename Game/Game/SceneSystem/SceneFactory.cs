@@ -86,7 +86,7 @@ namespace Game.SceneSystem
 
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 12f;
+            camera.GetComponent<CCamera>().Scale = 5f;
 
             ObjectFactory.BuildPlatform2(scene, new Vector2(-11f, 2f));
             ObjectFactory.BuildPlatform2(scene, new Vector2(-14.8f, 5f));

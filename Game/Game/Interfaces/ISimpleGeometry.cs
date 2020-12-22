@@ -7,5 +7,7 @@ namespace Game.Interfaces
         public Vector2 Center { get; set; }
 
         public Vector2 Size { get; set; }
+
+        public Vector2 PhysicOffset { get; set; }
     }
 }

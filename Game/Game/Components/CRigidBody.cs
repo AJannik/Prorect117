@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Interfaces;
 using Game.Physics;
 using Game.SimpleGeometry;
@@ -51,9 +52,11 @@ namespace Game.Components
                 s += PhysicConstants.Gravity * GravityScale * deltaTime;
             }
 
-            if (IsColliding())
+            IsColliding(s);
+            if (true)
             {
                 // TODO: Calculate PenRes of this frame, not the old frame!
+                //Console.WriteLine($"{s} {PenRes}");
                 s += PenRes;
                 if (s.X < 0.0001f && s.X > -0.0001f)
                 {
@@ -64,6 +67,8 @@ namespace Game.Components
                 {
                     s.Y = 0f;
                 }
+
+                //Console.WriteLine(s);
             }
             else
             {
@@ -88,41 +93,32 @@ namespace Game.Components
             Force = Vector2.Zero;
         }
 
-        private bool IsColliding()
+        private void IsColliding(Vector2 s)
         {
             foreach (ICollider myCollider in Colliders)
             {
+                myCollider.Geometry.PhysicOffset = s;
                 if (myCollider.GetType() == typeof(CBoxCollider))
                 {
-                    if (CheckBoxColliderCollisions((CBoxCollider)myCollider))
-                    {
-                        return true;
-                    }
+                    CheckBoxColliderCollisions((CBoxCollider)myCollider);
                 }
                 else if (myCollider.GetType() == typeof(CCircleCollider))
                 {
-                    if (CheckCircleColliderCollisions((CCircleCollider)myCollider))
-                    {
-                        return true;
-                    }
+                    CheckCircleColliderCollisions((CCircleCollider)myCollider);
                 }
-            }
 
-            return false;
+                myCollider.Geometry.PhysicOffset = Vector2.Zero;
+            }
         }
 
-        private bool CheckBoxColliderCollisions(CBoxCollider myCollider)
+        private void CheckBoxColliderCollisions(CBoxCollider myCollider)
         {
             // Going through every non owned and non trigger CBoxCollider in the Scene
-            foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
+            foreach (var item in MyGameObject.Scene.GetCBoxColliders())
             {
-                if (!Colliders.Contains(boxCollider) && !boxCollider.IsTrigger)
+                if (!Colliders.Contains(item) && !item.IsTrigger)
                 {
-                    if (CollisionCheck.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry))
-                    {
-                        PenRes += PenetrationDepths.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry) * -1f;
-                        return true;
-                    }
+                    PenRes += PenetrationDepths.AabbAndAabb((Rect)myCollider.Geometry, (Rect)item.Geometry);
                 }
             }
 
@@ -134,15 +130,12 @@ namespace Game.Components
                     if (CollisionCheck.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry))
                     {
                         PenRes += PenetrationDepths.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry) * -1f;
-                        return true;
                     }
                 }
             }
-
-            return false;
         }
 
-        private bool CheckCircleColliderCollisions(CCircleCollider myCollider)
+        private void CheckCircleColliderCollisions(CCircleCollider myCollider)
         {
             // Going through every non owned and non trigger CBoxCollider in the Scene
             foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
@@ -152,7 +145,6 @@ namespace Game.Components
                     if (CollisionCheck.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)myCollider.Geometry))
                     {
                         PenRes += PenetrationDepths.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)myCollider.Geometry) * 1f;
-                        return true;
                     }
                 }
             }
@@ -165,12 +157,9 @@ namespace Game.Components
                     if (CollisionCheck.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry))
                     {
                         PenRes += PenetrationDepths.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry) * 1f;
-                        return true;
                     }
                 }
             }
-
-            return false;
         }
 
         private void SetColliders()

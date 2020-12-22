@@ -28,5 +28,9 @@ namespace Game.SimpleGeometry
         public float MaxX => Center.X + (Size.X / 2);
 
         public float MaxY => Center.Y + (Size.Y / 2);
+
+        public Vector2 PhysicOffset { get; set; } = Vector2.Zero;
+
+        public Vector2 NextCenter => Center + PhysicOffset;
     }
 }
