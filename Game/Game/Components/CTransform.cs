@@ -135,6 +135,7 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
+            if (!MyGameObject.getActive()) return;
         }
 
         private void UpdateLocalTransform()

@@ -8,6 +8,7 @@ namespace Game
 {
     public class GameObject
     {
+        private bool active;
         private List<IComponent> components = new List<IComponent>();
 
         public GameObject(Scene scene)
@@ -38,6 +39,7 @@ namespace Game
             }
 
             Name = name;
+            setActive(true);
             Transform.MyGameObject = this;
             Scene = scene;
             Scene.AddGameObject(this);
@@ -52,6 +54,20 @@ namespace Game
         public Scene Scene { get; set; }
 
         public string Name { get; set; } = "GameObject";
+
+        public bool getActive()
+        {
+            return active;
+        }
+
+        public void setActive(bool value)
+        {
+            active = value;
+            foreach (GameObject child in Children)
+            {
+                child.setActive(value);
+            }
+        }
 
         public int ChildCount
         {
