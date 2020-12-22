@@ -26,7 +26,13 @@ namespace Game.GameObjectFactory
             return BuildWall(scene, position, size);
         }
 
-        public static GameObject BuildWall(Scene scene, Vector2 position, Vector2 size)
+        public static GameObject BuildLevelWall(Scene scene, Vector2 position)
+        {
+            Vector2 size = new Vector2(0.2f, 32f);
+            return BuildWall(scene, position, size);
+        }
+
+        private static GameObject BuildWall(Scene scene, Vector2 position, Vector2 size)
         {
             GameObject wall = new GameObject(scene, "Wall");
             wall.Transform.Position = position;
@@ -41,12 +47,6 @@ namespace Game.GameObjectFactory
             rb.Static = true;
 
             return wall;
-        }
-
-        public static GameObject BuildLevelWall(Scene scene, Vector2 position)
-        {
-            Vector2 size = new Vector2(0.2f, 32f);
-            return BuildWall(scene, position, size);
         }
 
         public static GameObject BuildPlatform2(Scene scene, Vector2 position)
@@ -67,6 +67,12 @@ namespace Game.GameObjectFactory
             return BuildPlatform(scene, position, size);
         }
 
+        public static GameObject BuildGround(Scene scene, Vector2 position)
+        {
+            Vector2 size = new Vector2(32f, 0.2f);
+            return BuildPlatform(scene, position, size);
+        }
+
         private static GameObject BuildPlatform(Scene scene, Vector2 position, Vector2 size)
         {
             GameObject floor = new GameObject(scene, "Floor");
@@ -82,12 +88,6 @@ namespace Game.GameObjectFactory
             rb.Static = true;
 
             return floor;
-        }
-
-        public static GameObject BuildGround(Scene scene, Vector2 position)
-        {
-            Vector2 size = new Vector2(32f, 0.2f);
-            return BuildPlatform(scene, position, size);
         }
 
         public static GameObject BuildBall(Scene scene, Vector2 position)

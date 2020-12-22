@@ -79,16 +79,22 @@ namespace Game.SceneSystem
         {
             Scene scene = new Scene();
 
-            ObjectFactory.BuildGround(scene, new Vector2(0f, 0f));
+            ObjectFactory.BuildGround(scene, new Vector2(0f, -0.1f));
             ObjectFactory.BuildLevelWall(scene, new Vector2(-15.9f, 0f));
             ObjectFactory.BuildLevelWall(scene, new Vector2(15.9f, 0f));
-            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(-13f, 3.0f));
+            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(0f, 3.0f));
 
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 12f;
 
-            ObjectFactory.BuildPlatform2(scene, new Vector2(-14.8f, 3f));
+            ObjectFactory.BuildPlatform2(scene, new Vector2(-11f, 2f));
+            ObjectFactory.BuildPlatform2(scene, new Vector2(-14.8f, 5f));
+            ObjectFactory.BuildPlatform4(scene, new Vector2(-8f, 5f));
+            ObjectFactory.BuildWall3(scene, new Vector2(-9f, 1.5f));
+            ObjectFactory.BuildWall2(scene, new Vector2(-9f, 4f));
+
+            ObjectFactory.BuildPlatform3(scene, new Vector2(-12f, 8f));
 
             return scene;
         }
