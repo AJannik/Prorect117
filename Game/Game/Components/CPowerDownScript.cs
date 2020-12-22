@@ -17,7 +17,11 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.getActive()) return;
+            if (!MyGameObject.getActive())
+            {
+                return;
+            }
+
             if (Trigger == null)
             {
                 Trigger = MyGameObject.GetComponent<CCircleCollider>();

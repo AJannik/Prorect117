@@ -30,7 +30,11 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.getActive()) return;
+            if (!MyGameObject.getActive())
+            {
+                return;
+            }
+
             if (Colliders.Count == 0)
             {
                 SetColliders();
