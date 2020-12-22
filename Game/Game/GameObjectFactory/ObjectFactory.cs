@@ -8,6 +8,25 @@ namespace Game.GameObjectFactory
 {
     public static class ObjectFactory
     {
+        public static GameObject BuildWall(Scene scene, Vector2 position)
+        {
+            Vector2 size = new Vector2(0.2f, 4f);
+
+            GameObject wall = new GameObject(scene, "Wall");
+            wall.Transform.Position = position;
+            wall.Transform.Scale = size;
+
+            wall.AddComponent<CRender>();
+            wall.AddComponent<CBoxCollider>();
+            wall.GetComponent<CBoxCollider>().Geometry.Size = size;
+
+            wall.AddComponent<CRigidBody>();
+            CRigidBody rb = wall.GetComponent<CRigidBody>();
+            rb.Static = true;
+
+            return wall;
+        }
+        
         public static GameObject BuildFloor(Scene scene, Vector2 position)
         {
             Vector2 size = new Vector2(4f, 0.2f);

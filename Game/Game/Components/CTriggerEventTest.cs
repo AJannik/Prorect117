@@ -12,7 +12,7 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.getActive())
+            if (!MyGameObject.Active)
             {
                 return;
             }

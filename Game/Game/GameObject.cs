@@ -39,7 +39,7 @@ namespace Game
             }
 
             Name = name;
-            setActive(true);
+            Active = true;
             Transform.MyGameObject = this;
             Scene = scene;
             Scene.AddGameObject(this);
@@ -55,17 +55,20 @@ namespace Game
 
         public string Name { get; set; } = "GameObject";
 
-        public bool getActive()
+        public bool Active
         {
-            return active;
-        }
-
-        public void setActive(bool value)
-        {
-            active = value;
-            foreach (GameObject child in Children)
+            get
             {
-                child.setActive(value);
+                return active;
+            }
+
+            set
+            {
+                active = value;
+                foreach (GameObject child in Children)
+                {
+                    child.Active = value;
+                }
             }
         }
 
@@ -105,7 +108,7 @@ namespace Game
             {
                 if (component.GetType() == typeof(T))
                 {
-                    return (T)component;
+                    return (T) component;
                 }
             }
 
@@ -134,7 +137,7 @@ namespace Game
             {
                 if (component.GetType() == typeof(T))
                 {
-                    list.Add((T)component);
+                    list.Add((T) component);
                 }
             }
 
