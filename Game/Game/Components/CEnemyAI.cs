@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using Game.Interfaces;
 
@@ -13,9 +14,13 @@ namespace Game.Components
 
         public GameObject MyGameObject { get; set; } = null;
 
-        public CBoxCollider LeftFootTrigger { get; set; }
+        public CRigidBody RigidBody { get; set; }
 
-        public CBoxCollider RightFootTrigger { get; set; }
+        public CBoxCollider LeftTrigger { get; set; }
+
+        public CBoxCollider RightTrigger { get; set; }
+
+        public float MoveSpeed { get; private set; } = 5f;
 
         public void Update(float deltaTime)
         {
@@ -23,22 +28,48 @@ namespace Game.Components
 
         public void SetupLeftTrigger(CBoxCollider trigger)
         {
-            LeftFootTrigger = trigger;
-            LeftFootTrigger.TriggerExited += LeftFootExited;
+            LeftTrigger = trigger;
+            LeftTrigger.TriggerExited += LeftFootExited;
+            LeftTrigger.TriggerEntered += LeftEntered;
         }
 
         public void SetupRightTrigger(CBoxCollider trigger)
         {
-            RightFootTrigger = trigger;
-            RightFootTrigger.TriggerExited += RightFootExited;
+            RightTrigger = trigger;
+            RightTrigger.TriggerExited += RightFootExited;
+            RightTrigger.TriggerEntered += RightEntered;
         }
 
-        private void RightFootExited(object sender, IComponent e)
+        private void LeftEntered(object sender, IComponent e)
         {
+            if (e.MyGameObject.Name == "Player")
+            {
+                // attack left
+            }
         }
 
         private void LeftFootExited(object sender, IComponent e)
         {
+            if (e.MyGameObject.Name == "Floor" || e.MyGameObject.Name == "Ground")
+            {
+                RigidBody.Velocity = new OpenTK.Vector2(1 * MoveSpeed, RigidBody.Velocity.Y);
+            }
+        }
+
+        private void RightEntered(object sender, IComponent e)
+        {
+            if (e.MyGameObject.Name == "Player")
+            {
+                // attack right
+            }
+        }
+
+        private void RightFootExited(object sender, IComponent e)
+        {
+            if (e.MyGameObject.Name == "Floor" || e.MyGameObject.Name == "Ground")
+            {
+                RigidBody.Velocity = new OpenTK.Vector2(-1 * MoveSpeed, RigidBody.Velocity.Y);
+            }
         }
     }
 }

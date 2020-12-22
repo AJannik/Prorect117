@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Game.Components;
 using Game;
+using UnitTests.DummyClasses;
 
 namespace UnitTests
 {
@@ -15,7 +16,9 @@ namespace UnitTests
         [TestMethod]
         public void TestCalculateTexCoords1x1()
         {
-            CAnimationSystem acontroller = new CAnimationSystem();
+            DummyGameObject dummy = DummyGameObject.BuildDummy();
+            dummy.AddComponent<CAnimationSystem>();
+            CAnimationSystem acontroller = dummy.GetComponent<CAnimationSystem>();
             acontroller.SetColumnsAndRows(1, 1);
             acontroller.SetActiveFrame(0);
             acontroller.Update(1f);
@@ -28,7 +31,9 @@ namespace UnitTests
         [TestMethod]
         public void TestCalculateTexCoords4x1()
         {
-            CAnimationSystem acontroller = new CAnimationSystem();
+            DummyGameObject dummy = DummyGameObject.BuildDummy();
+            dummy.AddComponent<CAnimationSystem>();
+            CAnimationSystem acontroller = dummy.GetComponent<CAnimationSystem>();
             acontroller.SetColumnsAndRows(4, 1);
             acontroller.SetActiveFrame(1);
             acontroller.Update(0f);
@@ -41,7 +46,9 @@ namespace UnitTests
         [TestMethod]
         public void TestCalculateTexCoords1x4()
         {
-            CAnimationSystem acontroller = new CAnimationSystem();
+            DummyGameObject dummy = DummyGameObject.BuildDummy();
+            dummy.AddComponent<CAnimationSystem>();
+            CAnimationSystem acontroller = dummy.GetComponent<CAnimationSystem>();
             acontroller.SetColumnsAndRows(1, 4);
             acontroller.SetActiveFrame(3);
             acontroller.Update(0f);
