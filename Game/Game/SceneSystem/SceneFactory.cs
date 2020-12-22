@@ -82,7 +82,7 @@ namespace Game.SceneSystem
             ObjectFactory.BuildGround(scene, new Vector2(0f, -0.1f));
             ObjectFactory.BuildLevelWall(scene, new Vector2(-15.9f, 0f));
             ObjectFactory.BuildLevelWall(scene, new Vector2(15.9f, 0f));
-            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(0f, 3.0f));
+            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(0f, 1f));
 
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
@@ -95,6 +95,8 @@ namespace Game.SceneSystem
             ObjectFactory.BuildWall2(scene, new Vector2(-9f, 4f));
 
             ObjectFactory.BuildPlatform3(scene, new Vector2(-12f, 8f));
+
+            ObjectFactory.BuildSkeletonEnemy(scene, new Vector2(10f, 1f));
 
             return scene;
         }
