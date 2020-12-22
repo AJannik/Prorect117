@@ -2,6 +2,7 @@
 using Game.SceneSystem;
 using Game.Tools;
 using OpenTK;
+using OpenTK.Graphics.OpenGL;
 
 namespace Game.GameObjectFactory
 {
@@ -92,13 +93,13 @@ namespace Game.GameObjectFactory
             player.Transform.Position = position;
             player.AddComponent<CRender>();
             CRender render = player.GetComponent<CRender>();
-            render.SetSize(3.0f, 3.0f);
-            render.LoadAndSetTexture("Content.KnightIdle.png");
+            render.SetSize(2.7f, 2.0f);
+            render.LoadAndSetTexture("Content.adventurer.png");
             render.SetTexCoords(new SimpleGeometry.Rect(0.0f, 0.0f, 1f / 15f, 1.0f));
-            render.SetOffset(0.0f, -0.1f);
+            render.SetOffset(0.0f, 0.1f);
 
             player.AddComponent<CBoxCollider>();
-            player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(0.75f, 1.5f);
+            player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(0.75f, 1.6f);
             player.AddComponent<CRigidBody>();
             player.GetComponent<CRigidBody>().Mass = 3f;
             player.AddComponent<CPlayerController>();
@@ -109,7 +110,7 @@ namespace Game.GameObjectFactory
             player.AddComponent<CBoxCollider>();
             CBoxCollider trigger = player.GetComponents<CBoxCollider>()[1];
             trigger.IsTrigger = true;
-            trigger.Offset = new Vector2(0f, -0.7f);
+            trigger.Offset = new Vector2(0f, -0.8f);
             trigger.Geometry.Size = new Vector2(0.75f, 0.2f);
             player.GetComponent<CPlayerController>().SetUpGroundTrigger(trigger);
 
@@ -118,16 +119,35 @@ namespace Game.GameObjectFactory
             CAnimationSystem controll = player.GetComponent<CAnimationSystem>();
             controll.Renderer = player.GetComponent<CRender>();
             controll.DefaultTexture = controll.Renderer.Texture;
-            controll.SetDefaultColumnsAndRows(15, 1);
-            Animation idle = new Animation("Idle", 15, 0, true);
+            controll.SetDefaultColumnsAndRows(14, 13);
+            Animation idle = new Animation("Idle", 4, 0, true);
+            idle.TimeBetweenTwoFrames = 1 / 6f;
             controll.AddAnimation(idle);
             controll.SetStartAnimation(idle);
-            Animation run = new Animation("Run", 8, 0, true, true, "Content.KnightRun.png", 8, 1);
+            Animation run = new Animation("Run", 6, 8, true);
             controll.AddAnimation(run);
-            controll.LinkAnimation(run, idle);
+            Animation jump = new Animation("Jump", 2, 16, false);
+            controll.AddAnimation(jump);
+            Animation fall = new Animation("Fall", 2, 23, true);
+            controll.AddAnimation(fall);
             player.GetComponent<CPlayerController>().AnimationSystem = controll;
 
             return player;
+        }
+
+        public static GameObject BuildPowerDown(Scene scene, Vector2 position)
+        {
+            GameObject powerDown = new GameObject(scene, "PowerDown");
+            powerDown.Transform.Position = position;
+
+            powerDown.AddComponent<CRender>();
+            powerDown.GetComponent<CRender>().LoadAndSetTexture("Content.default.png");
+            powerDown.AddComponent<CCircleCollider>();
+            CCircleCollider trigger = powerDown.GetComponent<CCircleCollider>();
+            powerDown.AddComponent<CPowerDownScript>();
+            powerDown.GetComponent<CPowerDownScript>().Trigger = trigger;
+
+            return powerDown;
         }
     }
 }

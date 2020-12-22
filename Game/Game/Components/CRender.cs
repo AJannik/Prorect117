@@ -34,6 +34,7 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
+            if (!MyGameObject.getActive()) return;
         }
 
         public void Draw()

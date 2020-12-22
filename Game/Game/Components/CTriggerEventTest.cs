@@ -12,6 +12,7 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
+            if (!MyGameObject.getActive()) return;
             if (false && Trigger == null)
             {
                 Trigger = MyGameObject.GetComponent<CBoxCollider>();

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Game.Interfaces;
 using OpenTK.Input;
 
@@ -39,12 +37,17 @@ namespace Game.Components
         public void SetUpGroundTrigger(CBoxCollider trigger)
         {
             GroundTrigger = trigger;
-            GroundTrigger.TriggerEntered += OnTriggerEntered;
-            GroundTrigger.TriggerExited += OnTriggerExited;
+            GroundTrigger.TriggerEntered += OnGroundTriggerEntered;
+            GroundTrigger.TriggerExited += OnGroundTriggerExited;
         }
 
         public void Update(float deltaTime)
         {
+            if (!MyGameObject.getActive())
+            {
+                return;
+            }
+
             var keyboard = Keyboard.GetState();
 
             float axisLeftRight = keyboard.IsKeyDown(Key.A) ? -1.0f : keyboard.IsKeyDown(Key.D) ? 1.0f : 0.0f;
@@ -90,6 +93,11 @@ namespace Game.Components
                 AnimationSystem.PlayAnimation("Idle");
             }
 
+            if (RigidBody.Velocity.Y < 0f)
+            {
+                AnimationSystem.PlayAnimation("Fall");
+            }
+
             // update Render
             if (FacingRight)
             {
@@ -110,20 +118,21 @@ namespace Game.Components
         {
             if (!Jumping && OnGround && JumpCooldown <= 0f)
             {
-                Console.WriteLine("Jumping");
                 RigidBody.Velocity = new OpenTK.Vector2(RigidBody.Velocity.Y, 0f);
                 RigidBody.AddForce(new OpenTK.Vector2(0, JumpForce));
                 Jumping = true;
                 JumpCooldown = 0.1f;
+                Console.WriteLine("Jumping");
+                AnimationSystem.PlayAnimation("Jump");
             }
         }
 
-        private void OnTriggerExited(object sender, ICollider e)
+        private void OnGroundTriggerExited(object sender, ICollider e)
         {
             OnGround = false;
         }
 
-        private void OnTriggerEntered(object sender, ICollider e)
+        private void OnGroundTriggerEntered(object sender, ICollider e)
         {
             Console.WriteLine("Entered" + sender);
             OnGround = true;

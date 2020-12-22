@@ -13,7 +13,7 @@ namespace Game.Tools
             Frames = frames;
             StartFrame = startFrame;
             ActiveFrame = StartFrame;
-            Loop = isLoop;
+            IsLoop = isLoop;
         }
 
         public Animation(string name, int frames, int startFrame, bool isLoop, bool hasSeperateTexture, string seperateTexturePath, int columns, int rows)
@@ -22,7 +22,7 @@ namespace Game.Tools
             Frames = frames;
             StartFrame = startFrame;
             ActiveFrame = StartFrame;
-            Loop = isLoop;
+            IsLoop = isLoop;
             HasSeperateTexture = hasSeperateTexture;
             Columns = columns;
             Rows = rows;
@@ -36,7 +36,7 @@ namespace Game.Tools
 
         public int StartFrame { get; private set; }
 
-        public int ActiveFrame { get; private set; }
+        public int ActiveFrame { get; set; }
 
         public string Name { get; private set; }
 
@@ -52,9 +52,9 @@ namespace Game.Tools
 
         public int Texture { get; private set; }
 
-        private float TimeToNextFrame { get; set; } = 0f;
+        public bool IsLoop { get; set; } = false;
 
-        private bool Loop { get; set; } = false;
+        private float TimeToNextFrame { get; set; } = 1 / 12f;
 
         /// <summary>
         /// Updates animation and returns the FrameID or -1 for GoToNext.
@@ -74,7 +74,7 @@ namespace Game.Tools
                 // check if last frame+1 has been reached
                 if (ActiveFrame >= StartFrame + Frames)
                 {
-                    if (Loop)
+                    if (IsLoop)
                     {
                         ActiveFrame = StartFrame;
                     }

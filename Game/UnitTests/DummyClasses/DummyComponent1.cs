@@ -8,7 +8,8 @@ namespace UnitTests.DummyClasses
         public GameObject MyGameObject { get; set; } = null;
 
         public void Update(float deltaTime)
-        {            
+        {
+            if (!MyGameObject.getActive()) return;
         }
     }
 }
