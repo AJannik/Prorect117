@@ -10,6 +10,7 @@ namespace UnitTests.DummyClasses
 
         public void Update(float deltaTime)
         {
+            if (!MyGameObject.getActive()) return;
             throw new NotImplementedException();
         }
     }
