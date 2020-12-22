@@ -26,12 +26,12 @@ namespace Game.SceneSystem
             }
         }
 
-        private Scene BuildScene0()
+        private Scene BuildScene3()
         {
             Scene scene = new Scene();
 
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
-            ObjectFactory.BuildFloor(scene, new Vector2(0f, -4f));
+            ObjectFactory.BuildPlatform4(scene, new Vector2(0f, -4f));
             GameObject ball = ObjectFactory.BuildBall(scene, Vector2.Zero);
 
             camera.SetParent(ball);
@@ -63,8 +63,8 @@ namespace Game.SceneSystem
             Scene scene = new Scene();
 
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
-            ObjectFactory.BuildFloor(scene, new Vector2(0f, -4f));
-            ObjectFactory.BuildFloor(scene, new Vector2(5f, -4f));
+            ObjectFactory.BuildPlatform4(scene, new Vector2(0f, -4f));
+            ObjectFactory.BuildPlatform4(scene, new Vector2(5f, -4f));
             ObjectFactory.BuildGround(scene, new Vector2(0f, -6f));
 
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(0f, 3.0f));
@@ -75,19 +75,26 @@ namespace Game.SceneSystem
             return scene;
         }
 
-        private Scene BuildScene3()
+        private Scene BuildScene0()
         {
             Scene scene = new Scene();
-            
+
+            ObjectFactory.BuildGround(scene, new Vector2(0f, -0.1f));
+            ObjectFactory.BuildLevelWall(scene, new Vector2(-15.9f, 0f));
+            ObjectFactory.BuildLevelWall(scene, new Vector2(15.9f, 0f));
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(0f, 3.0f));
-            
+
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 3f;
+            camera.GetComponent<CCamera>().Scale = 12f;
 
-            ObjectFactory.BuildGround(scene, new Vector2(0f, 0f));
-            ObjectFactory.BuildWall(scene, new Vector2(-3f, 2f));
-            ObjectFactory.BuildWall(scene, new Vector2(3f, 2f));
+            ObjectFactory.BuildPlatform2(scene, new Vector2(-11f, 2f));
+            ObjectFactory.BuildPlatform2(scene, new Vector2(-14.8f, 5f));
+            ObjectFactory.BuildPlatform4(scene, new Vector2(-8f, 5f));
+            ObjectFactory.BuildWall3(scene, new Vector2(-9f, 1.5f));
+            ObjectFactory.BuildWall2(scene, new Vector2(-9f, 4f));
+
+            ObjectFactory.BuildPlatform3(scene, new Vector2(-12f, 8f));
 
             return scene;
         }

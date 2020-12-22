@@ -8,10 +8,32 @@ namespace Game.GameObjectFactory
 {
     public static class ObjectFactory
     {
-        public static GameObject BuildWall(Scene scene, Vector2 position)
+        public static GameObject BuildWall2(Scene scene, Vector2 position)
+        {
+            Vector2 size = new Vector2(0.2f, 2f);
+            return BuildWall(scene, position, size);
+        }
+
+        public static GameObject BuildWall3(Scene scene, Vector2 position)
+        {
+            Vector2 size = new Vector2(0.2f, 3f);
+            return BuildWall(scene, position, size);
+        }
+
+        public static GameObject BuildWall4(Scene scene, Vector2 position)
         {
             Vector2 size = new Vector2(0.2f, 4f);
+            return BuildWall(scene, position, size);
+        }
 
+        public static GameObject BuildLevelWall(Scene scene, Vector2 position)
+        {
+            Vector2 size = new Vector2(0.2f, 32f);
+            return BuildWall(scene, position, size);
+        }
+
+        private static GameObject BuildWall(Scene scene, Vector2 position, Vector2 size)
+        {
             GameObject wall = new GameObject(scene, "Wall");
             wall.Transform.Position = position;
             wall.Transform.Scale = size;
@@ -27,29 +49,32 @@ namespace Game.GameObjectFactory
             return wall;
         }
 
-        public static GameObject BuildFloor(Scene scene, Vector2 position)
+        public static GameObject BuildPlatform2(Scene scene, Vector2 position)
+        {
+            Vector2 size = new Vector2(2f, 0.2f);
+            return BuildPlatform(scene, position, size);
+        }
+
+        public static GameObject BuildPlatform3(Scene scene, Vector2 position)
+        {
+            Vector2 size = new Vector2(3f, 0.2f);
+            return BuildPlatform(scene, position, size);
+        }
+
+        public static GameObject BuildPlatform4(Scene scene, Vector2 position)
         {
             Vector2 size = new Vector2(4f, 0.2f);
-
-            GameObject floor = new GameObject(scene, "Floor");
-            floor.Transform.Position = position;
-            floor.Transform.Scale = size;
-
-            floor.AddComponent<CRender>();
-            floor.AddComponent<CBoxCollider>();
-            floor.GetComponent<CBoxCollider>().Geometry.Size = size;
-
-            floor.AddComponent<CRigidBody>();
-            CRigidBody rb = floor.GetComponent<CRigidBody>();
-            rb.Static = true;
-
-            return floor;
+            return BuildPlatform(scene, position, size);
         }
 
         public static GameObject BuildGround(Scene scene, Vector2 position)
         {
-            Vector2 size = new Vector2(30f, 0.2f);
+            Vector2 size = new Vector2(32f, 0.2f);
+            return BuildPlatform(scene, position, size);
+        }
 
+        private static GameObject BuildPlatform(Scene scene, Vector2 position, Vector2 size)
+        {
             GameObject floor = new GameObject(scene, "Floor");
             floor.Transform.Position = position;
             floor.Transform.Scale = size;

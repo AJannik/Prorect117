@@ -1,12 +1,12 @@
 ﻿using System;
-using Game.SimpleGeometry;
+using Game.Interfaces;
 using OpenTK;
 
 namespace Game.Physics
 {
     internal static class PenetrationDepths
     {
-        public static Vector2 AabbAndAabb(Rect rect1, Rect rect2)
+        public static Vector2 AabbAndAabb(IReadonlyRect rect1, IReadonlyRect rect2)
         {
             Vector2 n = rect2.Center - rect1.Center;
             Vector2 normal;
@@ -41,7 +41,7 @@ namespace Game.Physics
             }
         }
 
-        public static Vector2 CircleAndCircle(Circle circle1, Circle circle2)
+        public static Vector2 CircleAndCircle(IReadonlyCircle circle1, IReadonlyCircle circle2)
         {
             Vector2 distance = circle1.Center - circle2.Center;
             float penDepth = circle1.Radius + circle2.Radius - distance.Length;
@@ -49,7 +49,7 @@ namespace Game.Physics
             return penRes;
         }
 
-        public static Vector2 AabbAndCircle(Rect rect, Circle circle)
+        public static Vector2 AabbAndCircle(IReadonlyRect rect, IReadonlyCircle circle)
         {
             Vector2 n = circle.Center - rect.Center;
             Vector2 closest = n;

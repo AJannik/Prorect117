@@ -10,8 +10,9 @@ namespace Game
         private static void Main()
         {
             var window = new GameWindow(1366, 768);
-            window.TargetRenderFrequency = 100;
             window.TargetUpdateFrequency = 300;
+            window.TargetRenderFrequency = 200;
+            window.VSync = VSyncMode.On;
             SceneManager sceneManager = new SceneManager();
             float counter = 7f;
             int skipedFrames = 0;
@@ -32,7 +33,7 @@ namespace Game
                 sceneManager.Update(deltaTime);
 
                 // TODO: Remove this, it's only for testing
-                if (sceneManager.CurrentScene == 0 || sceneManager.CurrentScene == 1)
+                if (sceneManager.CurrentScene < sceneManager.scenes.Length - 1)
                 {
                     counter -= deltaTime;
                     if (counter <= 0f)
