@@ -3,7 +3,7 @@ using OpenTK;
 
 namespace Game.SimpleGeometry
 {
-    public class Circle : ISimpleGeometry
+    public class Circle : ISimpleGeometry, IReadonlyCircle
     {
         public Circle(Vector2 center, Vector2 radius)
         {

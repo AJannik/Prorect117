@@ -10,8 +10,9 @@ namespace Game
         private static void Main()
         {
             var window = new GameWindow(1366, 768);
-            window.TargetRenderFrequency = 100;
             window.TargetUpdateFrequency = 300;
+            window.TargetRenderFrequency = 200;
+            window.VSync = VSyncMode.On;
             SceneManager sceneManager = new SceneManager();
             float counter = 7f;
             int skipedFrames = 0;
