@@ -54,16 +54,7 @@ namespace Game.Components
 
             CheckCollision(s);
             s += PenRes;
-
-            if (s.X < 0.0001f && s.X > -0.0001f)
-            {
-                s.X = 0f;
-            }
-
-            if (s.Y < 0.0001f && s.Y > -0.0001f)
-            {
-                s.Y = 0f;
-            }
+            s = CorrectRoundingErrors(s);
 
             MyGameObject.Transform.Position += s;
             PenRes = Vector2.Zero;
@@ -82,6 +73,21 @@ namespace Game.Components
         public void ClearForce()
         {
             Force = Vector2.Zero;
+        }
+
+        private Vector2 CorrectRoundingErrors(Vector2 s)
+        {
+            if (s.X < 0.0001f && s.X > -0.0001f)
+            {
+                s.X = 0f;
+            }
+
+            if (s.Y < 0.0001f && s.Y > -0.0001f)
+            {
+                s.Y = 0f;
+            }
+
+            return s;
         }
 
         private void CheckCollision(Vector2 s)
@@ -109,7 +115,11 @@ namespace Game.Components
             {
                 if (!Colliders.Contains(item) && !item.IsTrigger)
                 {
-                    PenRes += PenetrationDepths.AabbAndAabb((Rect)myCollider.Geometry, (Rect)item.Geometry);
+                    Vector2 x = PenetrationDepths.AabbAndAabb((Rect)myCollider.Geometry, (Rect)item.Geometry);
+                    if (CorrectRoundingErrors(PenRes - x) != Vector2.Zero)
+                    {
+                        PenRes += x;
+                    }
                 }
             }
 
@@ -118,9 +128,10 @@ namespace Game.Components
             {
                 if (!Colliders.Contains(circelCollider) && !circelCollider.IsTrigger)
                 {
-                    if (CollisionCheck.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry))
+                    Vector2 x = PenetrationDepths.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry) * -1f;
+                    if (CorrectRoundingErrors(PenRes - x) != Vector2.Zero)
                     {
-                        PenRes += PenetrationDepths.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry) * -1f;
+                        PenRes += x;
                     }
                 }
             }
@@ -133,9 +144,10 @@ namespace Game.Components
             {
                 if (!Colliders.Contains(boxCollider) && !boxCollider.IsTrigger)
                 {
-                    if (CollisionCheck.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)myCollider.Geometry))
+                    Vector2 x = PenetrationDepths.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)myCollider.Geometry);
+                    if (CorrectRoundingErrors(PenRes - x) != Vector2.Zero)
                     {
-                        PenRes += PenetrationDepths.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)myCollider.Geometry) * 1f;
+                        PenRes += x;
                     }
                 }
             }
@@ -145,9 +157,10 @@ namespace Game.Components
             {
                 if (!Colliders.Contains(circelCollider) && !circelCollider.IsTrigger)
                 {
-                    if (CollisionCheck.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry))
+                    Vector2 x = PenetrationDepths.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry);
+                    if (CorrectRoundingErrors(PenRes - x) != Vector2.Zero)
                     {
-                        PenRes += PenetrationDepths.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry) * 1f;
+                        PenRes += x;
                     }
                 }
             }
