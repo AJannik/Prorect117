@@ -29,8 +29,11 @@ namespace Game.Components
 
         private Vector2 PenRes { get; set; } = Vector2.Zero;
 
+        private Vector2 Acceleration { get; set; } = Vector2.Zero;
+
         public void Update(float deltaTime)
         {
+            deltaTime = 1f / 150f;
             if (!MyGameObject.Active)
             {
                 return;
@@ -46,18 +49,46 @@ namespace Game.Components
                 return;
             }
 
-            Vector2 s = (Velocity + (Force / Mass * deltaTime)) * deltaTime;
             if (UseGravity)
             {
-                s += PhysicConstants.Gravity * GravityScale * deltaTime;
+                AddForce(PhysicConstants.Gravity * GravityScale);
             }
+
+            Acceleration = Force / Mass;
+            Vector2 s = deltaTime * (Velocity + (deltaTime * Acceleration / 2f));
+            Velocity += deltaTime * Acceleration;
+
+            //Vector2 newAcceleration = Force / Mass;
+            //Velocity += deltaTime * (newAcceleration - Acceleration) / 2f;
+            //Acceleration = newAcceleration;
 
             CheckCollision(s);
             s += PenRes;
             s = CorrectRoundingErrors(s);
 
+            // TODO: subtract PenRes Velocity, Force and Acceleration
+            //Acceleration += PenRes * 0.5f / (deltaTime * deltaTime);
+
+            // Subtract velocity of PenDepth resolution
+            if ((PenRes.X > 0f && Velocity.X > 0f) || (PenRes.X < 0f && Velocity.X < 0f) || (PenRes.Y > 0f && Velocity.Y > 0f) || (PenRes.Y < 0f && Velocity.Y < 0f))
+            {
+            }
+            else
+            {
+                Velocity += (PenRes / deltaTime) - (deltaTime * Acceleration / 2f);
+            }
+
+            Velocity = CorrectRoundingErrors(Velocity);
+            Acceleration = CorrectRoundingErrors(Acceleration);
+
             MyGameObject.Transform.Position += s;
+            if (MyGameObject.Name == "Player")
+            {
+                Console.WriteLine($"{Velocity} {Acceleration} {PenRes}");
+            }
+
             PenRes = Vector2.Zero;
+            ClearForce();
         }
 
         public void AddForce(Vector2 force)
@@ -75,8 +106,9 @@ namespace Game.Components
             Force = Vector2.Zero;
         }
 
-        private Vector2 CorrectRoundingErrors(Vector2 s)
+        private Vector2 CorrectRoundingErrors(Vector2 vector)
         {
+            Vector2 s = new Vector2(vector.X, vector.Y);
             if (s.X < 0.0001f && s.X > -0.0001f)
             {
                 s.X = 0f;
@@ -111,11 +143,11 @@ namespace Game.Components
         private void CheckBoxColliderCollisions(CBoxCollider myCollider)
         {
             // Going through every non owned and non trigger CBoxCollider in the Scene
-            foreach (var item in MyGameObject.Scene.GetCBoxColliders())
+            foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
             {
-                if (!Colliders.Contains(item) && !item.IsTrigger)
+                if (!Colliders.Contains(boxCollider) && !boxCollider.IsTrigger)
                 {
-                    Vector2 x = PenetrationDepths.AabbAndAabb((Rect)myCollider.Geometry, (Rect)item.Geometry);
+                    Vector2 x = PenetrationDepths.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry);
                     if (CorrectRoundingErrors(PenRes - x) != Vector2.Zero)
                     {
                         PenRes += x;
