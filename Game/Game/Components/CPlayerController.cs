@@ -20,15 +20,15 @@ namespace Game.Components
 
         public CAnimationSystem AnimationSystem { get; set; }
 
-        public float PlayerSpeed { get; private set; } = 10f;
+        public float PlayerSpeed { get; private set; } = 30f;
 
-        public float JumpForce { get; private set; } = 1400f;
+        public float JumpForce { get; private set; } = 8000f;
 
         private float JumpCooldown { get; set; }
 
         private bool Jumping { get; set; } = false;
 
-        private bool OnGround { get; set; } = true;
+        private int OnGround { get; set; } = 0;
 
         private bool Running { get; set; } = false;
 
@@ -62,16 +62,17 @@ namespace Game.Components
             {
                 if (RigidBody.Velocity.Y < 0f)
                 {
-                    RigidBody.GravityScale = 1f;
+                    RigidBody.GravityScale = 8f;
                 }
                 else
                 {
-                    RigidBody.GravityScale = 1f;
+                    Jumping = false;
+                    RigidBody.GravityScale = 20f;
                 }
             }
             else
             {
-                RigidBody.GravityScale = 1f;
+                RigidBody.GravityScale = 20f;
             }
 
             // updating facingRight and animations
@@ -115,7 +116,7 @@ namespace Game.Components
                 Render.Flipped = true;
             }
 
-            if (OnGround && JumpCooldown > 0)
+            if (OnGround >= 1 && JumpCooldown > 0)
             {
                 JumpCooldown -= deltaTime;
             }
@@ -123,9 +124,9 @@ namespace Game.Components
 
         private void Jump()
         {
-            if (!Jumping && OnGround && JumpCooldown <= 0f)
+            if (!Jumping && OnGround >= 1 && JumpCooldown <= 0f)
             {
-                //RigidBody.Velocity = new OpenTK.Vector2(RigidBody.Velocity.X, JumpForce);
+                // RigidBody.Velocity = new OpenTK.Vector2(RigidBody.Velocity.X, JumpForce);
                 RigidBody.AddForce(new OpenTK.Vector2(0f, JumpForce));
                 Jumping = true;
                 JumpCooldown = 0.1f;
@@ -135,13 +136,19 @@ namespace Game.Components
 
         private void OnGroundTriggerExited(object sender, IComponent e)
         {
-            OnGround = false;
+            if (e.MyGameObject.Name == "Floor")
+            {
+                OnGround--;
+            }
         }
 
         private void OnGroundTriggerEntered(object sender, IComponent e)
         {
-            OnGround = true;
-            Jumping = false;
+            if (e.MyGameObject.Name == "Floor")
+            {
+                OnGround++;
+                Jumping = false;
+            }
         }
     }
 }

@@ -137,7 +137,7 @@ namespace Game.GameObjectFactory
             controll.AddAnimation(run);
             Animation jump = new Animation("Jump", 2, 16, false);
             controll.AddAnimation(jump);
-            Animation fall = new Animation("Fall", 2, 23, true);
+            Animation fall = new Animation("Fall", 2, 22, true);
             controll.AddAnimation(fall);
             player.GetComponent<CPlayerController>().AnimationSystem = controll;
 
