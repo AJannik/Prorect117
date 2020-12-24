@@ -22,7 +22,7 @@ namespace Game.Components
 
         public float PlayerSpeed { get; private set; } = 10f;
 
-        public float JumpForce { get; private set; } = 150f;
+        public float JumpForce { get; private set; } = 1400f;
 
         private float JumpCooldown { get; set; }
 
@@ -51,16 +51,23 @@ namespace Game.Components
             var keyboard = Keyboard.GetState();
 
             float axisLeftRight = keyboard.IsKeyDown(Key.A) ? -1.0f : keyboard.IsKeyDown(Key.D) ? 1.0f : 0.0f;
-            RigidBody.Velocity = new OpenTK.Vector2(axisLeftRight * PlayerSpeed, 0f);
+            RigidBody.Velocity = new OpenTK.Vector2(axisLeftRight * PlayerSpeed, RigidBody.Velocity.Y);
 
             if (keyboard.IsKeyDown(Key.Space))
             {
                 Jump();
             }
 
-            if (Jumping && RigidBody.Velocity.Y > 0)
+            if (Jumping)
             {
-                RigidBody.GravityScale = 0.4f;
+                if (RigidBody.Velocity.Y < 0f)
+                {
+                    RigidBody.GravityScale = 1f;
+                }
+                else
+                {
+                    RigidBody.GravityScale = 1f;
+                }
             }
             else
             {
@@ -93,7 +100,7 @@ namespace Game.Components
                 AnimationSystem.PlayAnimation("Idle");
             }
 
-            if (RigidBody.Velocity.Y < 0f)
+            if (RigidBody.Velocity.Y < -0.1f)
             {
                 AnimationSystem.PlayAnimation("Fall");
             }
@@ -118,7 +125,8 @@ namespace Game.Components
         {
             if (!Jumping && OnGround && JumpCooldown <= 0f)
             {
-                RigidBody.AddForce(new OpenTK.Vector2(0, JumpForce));
+                //RigidBody.Velocity = new OpenTK.Vector2(RigidBody.Velocity.X, JumpForce);
+                RigidBody.AddForce(new OpenTK.Vector2(0f, JumpForce));
                 Jumping = true;
                 JumpCooldown = 0.1f;
                 AnimationSystem.PlayAnimation("Jump");
