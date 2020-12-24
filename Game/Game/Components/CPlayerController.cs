@@ -118,10 +118,9 @@ namespace Game.Components
         {
             if (!Jumping && OnGround && JumpCooldown <= 0f)
             {
-                RigidBody.Velocity = new OpenTK.Vector2(RigidBody.Velocity.X, JumpForce);
+                RigidBody.AddForce(new OpenTK.Vector2(0, JumpForce));
                 Jumping = true;
                 JumpCooldown = 0.1f;
-                Console.WriteLine("Jumping");
                 AnimationSystem.PlayAnimation("Jump");
             }
         }
@@ -133,7 +132,6 @@ namespace Game.Components
 
         private void OnGroundTriggerEntered(object sender, IComponent e)
         {
-            Console.WriteLine("Entered" + sender);
             OnGround = true;
             Jumping = false;
         }
