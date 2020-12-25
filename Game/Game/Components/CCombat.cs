@@ -17,7 +17,7 @@ namespace Game.Components
 
         public float CurrentHealth { get; set; } = 100f;
 
-        public float Resistance { get; set; } = 10f;
+        public float Armor { get; set; } = 10f;
 
         public float AttackSpeed { get; set; } = 0.5f;
 
@@ -29,17 +29,36 @@ namespace Game.Components
         {
         }
 
-        public void Attack(CCombat targetCCombat, float dmgMultiplier, CBoxCollider hitbox)
+        public void Attack(CBoxCollider hitbox, float dmgMultiplier, bool ignoreArmor)
         {
             if (NextAttackTime > 0f)
             {
                 return;
             }
+
+            foreach (IComponent hit in hitbox.GetTriggerHits())
+            {
+                if ((hit.MyGameObject.Name == "Player" || hit.MyGameObject.Name == "Enemy") && MyGameObject.Name != hit.MyGameObject.Name)
+                {
+                    hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor);
+                }
+            }
         }
 
-        public void TakeDamage(float amount, bool ignoreResistance)
+        public void TakeDamage(float dmgAmount, bool ignoreArmor)
         {
-
+            if (ignoreArmor)
+            {
+                CurrentHealth -= dmgAmount;
+            }
+            else if (Armor >= 0f)
+            {
+                CurrentHealth -= dmgAmount * (100 / (100 + Armor));
+            }
+            else
+            {
+                CurrentHealth -= dmgAmount * (2 - (100 / (100 - Armor)));
+            }
         }
     }
 }
