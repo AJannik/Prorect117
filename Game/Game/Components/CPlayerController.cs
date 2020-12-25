@@ -95,7 +95,7 @@ namespace Game.Components
                 }
             }
 
-            if (RigidBody.Velocity.X == 0)
+            if (RigidBody.Velocity.X == 0 && !Jumping)
             {
                 Running = false;
                 AnimationSystem.PlayAnimation("Idle");
@@ -148,6 +148,14 @@ namespace Game.Components
             {
                 OnGround++;
                 Jumping = false;
+                if (RigidBody.Velocity.X == 0)
+                {
+                    AnimationSystem.PlayAnimation("Idle");
+                }
+                else
+                {
+                    AnimationSystem.PlayAnimation("Run");
+                }
             }
         }
     }

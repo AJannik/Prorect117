@@ -119,8 +119,8 @@ namespace Game.GameObjectFactory
             player.AddComponent<CBoxCollider>();
             CBoxCollider trigger = player.GetComponents<CBoxCollider>()[1];
             trigger.IsTrigger = true;
-            trigger.Offset = new Vector2(0f, -0.8f);
-            trigger.Geometry.Size = new Vector2(0.75f, 0.2f);
+            trigger.Offset = new Vector2(0f, -0.76f);
+            trigger.Geometry.Size = new Vector2(0.95f, 0.2f);
             player.GetComponent<CPlayerController>().SetUpGroundTrigger(trigger);
 
             // add all animations
@@ -136,6 +136,7 @@ namespace Game.GameObjectFactory
             Animation run = new Animation("Run", 6, 8, true);
             controll.AddAnimation(run);
             Animation jump = new Animation("Jump", 2, 16, false);
+            jump.TimeBetweenTwoFrames = 1 / 3.3f;
             controll.AddAnimation(jump);
             Animation fall = new Animation("Fall", 2, 22, true);
             controll.AddAnimation(fall);
