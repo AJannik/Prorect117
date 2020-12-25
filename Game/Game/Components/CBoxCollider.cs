@@ -61,6 +61,11 @@ namespace Game.Components
             GL.Color4(Color.White);
         }
 
+        public IReadOnlyList<IComponent> GetTriggerHits()
+        {
+            return TriggerHits;
+        }
+
         private bool IsValidCollider(CBoxCollider boxCollider)
         {
             return boxCollider != this && !boxCollider.IsTrigger && boxCollider.MyGameObject != MyGameObject && boxCollider.MyGameObject.GetComponent<CRigidBody>() != null;

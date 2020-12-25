@@ -1,5 +1,5 @@
 ﻿using System;
-using Game.Components;
+using System.Collections.Generic;
 using OpenTK;
 
 namespace Game.Interfaces
@@ -17,5 +17,7 @@ namespace Game.Interfaces
         public ISimpleGeometry Geometry { get; set; }
 
         public void DebugDraw();
+
+        public IReadOnlyList<IComponent> GetTriggerHits();
     }
 }
