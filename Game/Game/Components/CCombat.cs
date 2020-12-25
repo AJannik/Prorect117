@@ -21,10 +21,25 @@ namespace Game.Components
 
         public float AttackSpeed { get; set; } = 0.5f;
 
+        public float NextAttackTime { get; set; } = 0f;
+
         public float AttackDamage { get; set; } = 1f;
 
         public void Update(float deltaTime)
         {
+        }
+
+        public void Attack(CCombat targetCCombat, float dmgMultiplier, CBoxCollider hitbox)
+        {
+            if (NextAttackTime > 0f)
+            {
+                return;
+            }
+        }
+
+        public void TakeDamage(float amount, bool ignoreResistance)
+        {
+
         }
     }
 }
