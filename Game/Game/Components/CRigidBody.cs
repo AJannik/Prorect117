@@ -33,7 +33,7 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            deltaTime = 1f / 150f;
+            deltaTime = PhysicConstants.FixedUpdate;
             if (!MyGameObject.Active)
             {
                 return;
@@ -54,9 +54,10 @@ namespace Game.Components
                 AddForce(PhysicConstants.Gravity * GravityScale);
             }
 
-            Acceleration = Force / Mass;
             Vector2 s = deltaTime * (Velocity + (deltaTime * Acceleration / 2f));
-            Velocity += deltaTime * Acceleration;
+            Vector2 newAcceleration = Force / Mass;
+            Velocity += deltaTime * (Acceleration + newAcceleration) / 2f;
+            Acceleration = newAcceleration;
 
             //Vector2 newAcceleration = Force / Mass;
             //Velocity += deltaTime * (newAcceleration - Acceleration) / 2f;

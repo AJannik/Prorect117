@@ -20,9 +20,9 @@ namespace Game.Components
 
         public CAnimationSystem AnimationSystem { get; set; }
 
-        public float PlayerSpeed { get; private set; } = 30f;
+        public float PlayerSpeed { get; private set; } = 10f;
 
-        public float JumpForce { get; private set; } = 8000f;
+        public float JumpForce { get; private set; } = 2000f;
 
         private float JumpCooldown { get; set; }
 
@@ -62,17 +62,18 @@ namespace Game.Components
             {
                 if (RigidBody.Velocity.Y < 0f)
                 {
-                    RigidBody.GravityScale = 8f;
+                    RigidBody.GravityScale = 1f;
                 }
                 else
                 {
+                    // falling after jump
                     Jumping = false;
-                    RigidBody.GravityScale = 20f;
+                    RigidBody.GravityScale = 8f;
                 }
             }
             else
             {
-                RigidBody.GravityScale = 20f;
+                RigidBody.GravityScale = 4f;
             }
 
             // updating facingRight and animations
