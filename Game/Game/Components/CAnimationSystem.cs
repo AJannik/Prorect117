@@ -10,6 +10,8 @@ namespace Game.Components
 {
     public class CAnimationSystem : IComponent
     {
+        private CRender render;
+
         public CAnimationSystem()
         {
         }
@@ -28,7 +30,19 @@ namespace Game.Components
 
         public Animation StartAnimation { get; private set; }
 
-        public CRender Renderer { get; set; }
+        public CRender Renderer
+        {
+            get
+            {
+                return render;
+            }
+
+            set
+            {
+                render = value;
+                DefaultTexture = render.Texture;
+            }
+        }
 
         public int DefaultTexture { get; set; }
 
@@ -142,6 +156,11 @@ namespace Game.Components
         /// <param name="name">Name of the Animation.</param>
         public void PlayAnimation(string name)
         {
+            if (ActiveAnimation == null)
+            {
+                return;
+            }
+
             if ((ActiveAnimation.Name == name && ActiveAnimation.IsLoop) || ForceEnd)
             {
                 return;
@@ -177,14 +196,43 @@ namespace Game.Components
         /// Plays the animation with given name if its not already playing and a loop.
         /// </summary>
         /// <param name="name">Name of the Animation.</param>
-        /// <param name="forceEnd">Animation will play all the way without any interrupt.</param>
+        /// <param name="forceEnd">Animation will play all the way without any interrupt except when another force is called.</param>
         public void PlayAnimation(string name, bool forceEnd)
         {
+            // remove previous force if forcing
+            if (forceEnd)
+            {
+                ForceEnd = false;
+            }
+
             PlayAnimation(name);
             if (!ActiveAnimation.IsLoop)
             {
                 ForceEnd = forceEnd;
             }
+        }
+
+        /// <summary>
+        /// Plays the animation with given name if its not already playing and a loop.
+        /// </summary>
+        /// <param name="name">Name of the Animation.</param>
+        /// <param name="forceEnd">Animation will play all the way without any interrupt.</param>
+        /// <param name="faceLeft">Will force animation to face a certain direction.</param>
+        public void PlayAnimation(string name, bool forceEnd, bool faceLeft)
+        {
+            // remove previous force if forcing
+            if (forceEnd)
+            {
+                ForceEnd = false;
+            }
+
+            PlayAnimation(name);
+            if (!ActiveAnimation.IsLoop && !ForceEnd)
+            {
+                ForceEnd = forceEnd;
+            }
+
+            Renderer.Flipped = faceLeft;
         }
 
         /// <summary>

@@ -30,8 +30,6 @@ namespace Game.Components
 
         private int OnGround { get; set; } = 0;
 
-        private bool Running { get; set; } = false;
-
         private bool FacingRight { get; set; } = true;
 
         public void SetUpGroundTrigger(CBoxCollider trigger)
@@ -80,41 +78,22 @@ namespace Game.Components
             if (RigidBody.Velocity.X > 0f)
             {
                 FacingRight = true;
-                if (Running == false)
-                {
-                    Running = true;
-                    AnimationSystem.PlayAnimation("Run");
-                }
+                AnimationSystem.PlayAnimation("Run", false, !FacingRight);
             }
             else if (RigidBody.Velocity.X < 0f)
             {
                 FacingRight = false;
-                if (Running == false)
-                {
-                    Running = true;
-                    AnimationSystem.PlayAnimation("Run");
-                }
+                AnimationSystem.PlayAnimation("Run", false, !FacingRight);
             }
 
             if (RigidBody.Velocity.X <= 0.01f && RigidBody.Velocity.X >= -0.01f && !Jumping)
             {
-                Running = false;
-                AnimationSystem.PlayAnimation("Idle");
+                AnimationSystem.PlayAnimation("Idle", false, !FacingRight);
             }
 
             if (RigidBody.Velocity.Y < -0.1f)
             {
-                AnimationSystem.PlayAnimation("Fall");
-            }
-
-            // update Render
-            if (FacingRight)
-            {
-                Render.Flipped = false;
-            }
-            else
-            {
-                Render.Flipped = true;
+                AnimationSystem.PlayAnimation("Fall", false, !FacingRight);
             }
 
             if (OnGround >= 1 && JumpCooldown > 0)
@@ -131,7 +110,7 @@ namespace Game.Components
                 RigidBody.AddForce(new OpenTK.Vector2(0f, JumpForce));
                 Jumping = true;
                 JumpCooldown = 0.1f;
-                AnimationSystem.PlayAnimation("Jump");
+                AnimationSystem.PlayAnimation("Jump", true, !FacingRight);
             }
         }
 

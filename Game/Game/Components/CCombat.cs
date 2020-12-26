@@ -13,20 +13,28 @@ namespace Game.Components
 
         public GameObject MyGameObject { get; set; } = null;
 
+        public CAnimationSystem AnimationSystem { get; set; } = null;
+
         public float MaxHealth { get; set; } = 100f;
 
         public float CurrentHealth { get; set; } = 100f;
 
         public float Armor { get; set; } = 10f;
 
-        public float AttackSpeed { get; set; } = 0.5f;
+        public float AttackSpeed { get; set; } = 1.8f;
 
         public float NextAttackTime { get; set; } = 0f;
 
         public float AttackDamage { get; set; } = 1f;
 
+        public string HurtAnimationName { get; set; } = "Hurt";
+
         public void Update(float deltaTime)
         {
+            if (NextAttackTime > 0f)
+            {
+                NextAttackTime -= deltaTime;
+            }
         }
 
         /// <summary>
@@ -54,16 +62,16 @@ namespace Game.Components
 
             foreach (IComponent hit in hitbox.GetTriggerHits())
             {
-                if ((hit.MyGameObject.Name == "Player" || hit.MyGameObject.Name == "Enemy") && MyGameObject.Name != hit.MyGameObject.Name)
+                if ((hit.MyGameObject.Name == "Player" || hit.MyGameObject.Name == "Enemy") && MyGameObject.Name != hit.MyGameObject.Name && hit.MyGameObject.GetComponent<CCombat>() != null)
                 {
-                    hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor);
+                    hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor, hit.MyGameObject.GetComponent<CCombat>().HurtAnimationName);
                 }
             }
 
             return true;
         }
 
-        public void TakeDamage(float dmgAmount, bool ignoreArmor)
+        public void TakeDamage(float dmgAmount, bool ignoreArmor, string dmgAnimationName)
         {
             if (ignoreArmor)
             {
@@ -76,6 +84,11 @@ namespace Game.Components
             else
             {
                 CurrentHealth -= dmgAmount * (2 - (100 / (100 - Armor)));
+            }
+
+            if (AnimationSystem != null)
+            {
+                AnimationSystem.PlayAnimation(dmgAnimationName, true);
             }
         }
     }
