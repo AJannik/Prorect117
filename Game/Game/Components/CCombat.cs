@@ -29,11 +29,27 @@ namespace Game.Components
         {
         }
 
-        public void Attack(CBoxCollider hitbox, float dmgMultiplier, bool ignoreArmor)
+        /// <summary>
+        /// Attack in given hitbox. Returns false if attack if still on cooldown.
+        /// </summary>
+        /// <param name="hitbox">Attack hitbox.</param>
+        /// <param name="dmgMultiplier">Multiplies the base damage by this value.</param>
+        /// <param name="ignoreArmor">Whether to ignore Armor or not.</param>
+        /// <returns>Returns False if attack still on cooldown.</returns>
+        public bool Attack(ICollider hitbox, float dmgMultiplier, bool ignoreArmor)
         {
             if (NextAttackTime > 0f)
             {
-                return;
+                return false;
+            }
+
+            if (AttackSpeed >= 0)
+            {
+                NextAttackTime = 1f / AttackSpeed;
+            }
+            else
+            {
+                NextAttackTime = 1f;
             }
 
             foreach (IComponent hit in hitbox.GetTriggerHits())
@@ -43,6 +59,8 @@ namespace Game.Components
                     hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor);
                 }
             }
+
+            return true;
         }
 
         public void TakeDamage(float dmgAmount, bool ignoreArmor)
