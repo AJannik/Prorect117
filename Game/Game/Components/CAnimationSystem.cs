@@ -40,6 +40,8 @@ namespace Game.Components
 
         private int Columns { get; set; } = 1;
 
+        private bool ForceEnd { get; set; } = false;
+
         public void Update(float deltaTime)
         {
             if (!MyGameObject.Active)
@@ -108,7 +110,8 @@ namespace Game.Components
         /// </summary>
         public void GoToNextAnimation()
         {
-            // ActiveAnimation.ActiveFrame = ActiveAnimation.StartFrame;
+            ForceEnd = false;
+            ActiveAnimation.ActiveFrame = ActiveAnimation.StartFrame;
             if (ActiveAnimation.NextAnimation == null)
             {
                 ActiveAnimation = StartAnimation;
@@ -139,7 +142,7 @@ namespace Game.Components
         /// <param name="name">Name of the Animation.</param>
         public void PlayAnimation(string name)
         {
-            if (ActiveAnimation.Name == name && ActiveAnimation.IsLoop)
+            if ((ActiveAnimation.Name == name && ActiveAnimation.IsLoop) || ForceEnd)
             {
                 return;
             }
@@ -148,7 +151,7 @@ namespace Game.Components
             {
                 if (animation.Name == name)
                 {
-                    // ActiveAnimation.ActiveFrame = ActiveAnimation.StartFrame;
+                    ActiveAnimation.ActiveFrame = ActiveAnimation.StartFrame;
                     ActiveAnimation = animation;
                     if (animation.HasSeperateTexture)
                     {
@@ -168,6 +171,20 @@ namespace Game.Components
             }
 
             Console.WriteLine("Couldnt find Animation with that Name: " + name);
+        }
+
+        /// <summary>
+        /// Plays the animation with given name if its not already playing and a loop.
+        /// </summary>
+        /// <param name="name">Name of the Animation.</param>
+        /// <param name="forceEnd">Animation will play all the way without any interrupt.</param>
+        public void PlayAnimation(string name, bool forceEnd)
+        {
+            PlayAnimation(name);
+            if (!ActiveAnimation.IsLoop)
+            {
+                ForceEnd = forceEnd;
+            }
         }
 
         /// <summary>

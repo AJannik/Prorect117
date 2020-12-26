@@ -8,7 +8,6 @@ namespace Game.GameObjectFactory
 {
     public static class ObjectFactory
     {
-
         public static GameObject BuildPlatform(Scene scene, Vector2 position, int length)
         {
             GameObject floor = new GameObject(scene, "Floor");
@@ -108,8 +107,8 @@ namespace Game.GameObjectFactory
             player.AddComponent<CBoxCollider>();
             CBoxCollider trigger = player.GetComponents<CBoxCollider>()[1];
             trigger.IsTrigger = true;
-            trigger.Offset = new Vector2(0f, -0.76f);
-            trigger.Geometry.Size = new Vector2(0.95f, 0.2f);
+            trigger.Offset = new Vector2(0f, -0.77f);
+            trigger.Geometry.Size = new Vector2(0.95f, 0.1f);
             player.GetComponent<CPlayerController>().SetUpGroundTrigger(trigger);
 
             // add all animations
@@ -129,6 +128,12 @@ namespace Game.GameObjectFactory
             controll.AddAnimation(jump);
             Animation fall = new Animation("Fall", 2, 22, true);
             controll.AddAnimation(fall);
+            Animation attack1 = new Animation("Attack1", 3, 44, false);
+            controll.AddAnimation(attack1);
+            Animation attack2 = new Animation("Attack2", 3, 50, false);
+            controll.AddAnimation(attack2);
+            Animation attack3 = new Animation("Attack3", 3, 55, false);
+            controll.AddAnimation(attack3);
             player.GetComponent<CPlayerController>().AnimationSystem = controll;
 
             return player;

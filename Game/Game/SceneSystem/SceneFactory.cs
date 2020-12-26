@@ -114,7 +114,6 @@ namespace Game.SceneSystem
             ObjectFactory.BuildWall(scene, new Vector2(6f, 1.5f), 3);
             ObjectFactory.BuildWall(scene, new Vector2(6f, 4f), 2);
 
-
             ObjectFactory.BuildSkeletonEnemy(scene, new Vector2(10f, 1f));
 
             return scene;
