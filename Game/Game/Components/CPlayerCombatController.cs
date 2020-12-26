@@ -1,4 +1,5 @@
 ﻿using Game.Interfaces;
+using OpenTK;
 using OpenTK.Input;
 
 namespace Game.Components
@@ -26,11 +27,11 @@ namespace Game.Components
         public void Update(float deltaTime)
         {
             var mouse = Mouse.GetState();
-            if (mouse.IsButtonDown(MouseButton.Left) && mouse.X < 0.5f)
+            if (mouse.IsButtonDown(MouseButton.Left) && AnimationSystem.Renderer.Flipped)
             {
                 ComboAttack(true);
             }
-            else if (mouse.IsButtonDown(MouseButton.Left) && mouse.X >= 0.5f)
+            else if (mouse.IsButtonDown(MouseButton.Left) && !AnimationSystem.Renderer.Flipped)
             {
                 ComboAttack(false);
             }

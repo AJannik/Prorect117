@@ -224,6 +224,7 @@ namespace Game.Components
             if (forceEnd)
             {
                 ForceEnd = false;
+                Renderer.Flipped = faceLeft;
             }
 
             PlayAnimation(name);
@@ -232,7 +233,10 @@ namespace Game.Components
                 ForceEnd = forceEnd;
             }
 
-            Renderer.Flipped = faceLeft;
+            if (!ForceEnd)
+            {
+                Renderer.Flipped = faceLeft;
+            }
         }
 
         /// <summary>
