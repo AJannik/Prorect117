@@ -92,16 +92,16 @@ namespace Game.SceneSystem
             ObjectFactory.BuildPlatform(scene, new Vector2(-11f, 2f), 2);
             ObjectFactory.BuildPlatform(scene, new Vector2(-14.8f, 5f), 2);
             ObjectFactory.BuildPlatform(scene, new Vector2(-6f, 5.1f), 8);
-            ObjectFactory.BuildPlatform(scene, new Vector2(-12f, 8f), 3);
-            ObjectFactory.BuildPlatform(scene, new Vector2(-6f, 7.1f), 2);
+            ObjectFactory.BuildPlatform(scene, new Vector2(-12f, 10f), 3);
+            ObjectFactory.BuildPlatform(scene, new Vector2(-6.6f, 7.9f), 3);
             ObjectFactory.BuildPlatform(scene, new Vector2(-1.5f, 2.1f), 7);
-            ObjectFactory.BuildPlatform(scene, new Vector2(1.5f, 9f), 7);
+            ObjectFactory.BuildPlatform(scene, new Vector2(1.5f, 9.3f), 7);
             ObjectFactory.BuildPlatform(scene, new Vector2(6.5f, 5.1f), 11);
-            ObjectFactory.BuildPlatform(scene, new Vector2(14f, 9f), 4);
+            ObjectFactory.BuildPlatform(scene, new Vector2(13.8f, 9f), 4);
 
             ObjectFactory.BuildWall(scene, new Vector2(-8f, 2.5f), 5);
-            ObjectFactory.BuildWall(scene, new Vector2(-7f, 10.5f), 7);
-            ObjectFactory.BuildWall(scene, new Vector2(-2, 5.5f), 7);
+            ObjectFactory.BuildWall(scene, new Vector2(-7f, 11f), 6);
+            ObjectFactory.BuildWall(scene, new Vector2(-1.9f, 5.7f), 7);
             ObjectFactory.BuildWall(scene, new Vector2(6f, 2.5f), 5);
 
             ObjectFactory.BuildSkeletonEnemy(scene, new Vector2(10f, 1f));
