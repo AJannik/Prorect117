@@ -91,14 +91,11 @@ namespace Game.SceneSystem
 
             ObjectFactory.BuildPlatform(scene, new Vector2(-11f, 2f), 2);
             ObjectFactory.BuildPlatform(scene, new Vector2(-14.8f, 5f), 2);
-            ObjectFactory.BuildPlatform(scene, new Vector2(-8f, 5.1f), 4);
-            ObjectFactory.BuildPlatform(scene, new Vector2(-4f, 5.1f), 4);
+            ObjectFactory.BuildPlatform(scene, new Vector2(-6f, 5.1f), 8);
             ObjectFactory.BuildPlatform(scene, new Vector2(-12f, 8f), 3);
             ObjectFactory.BuildPlatform(scene, new Vector2(-6f, 7.1f), 2);
-            ObjectFactory.BuildPlatform(scene, new Vector2(-3.5f, 2.1f), 3);
-            ObjectFactory.BuildPlatform(scene, new Vector2(0f, 2.1f), 4);
-            ObjectFactory.BuildPlatform(scene, new Vector2(0f, 9f), 4);
-            ObjectFactory.BuildPlatform(scene, new Vector2(3.5f, 9f), 3);
+            ObjectFactory.BuildPlatform(scene, new Vector2(-1.5f, 2.1f), 7);
+            ObjectFactory.BuildPlatform(scene, new Vector2(1.5f, 9f), 7);
             ObjectFactory.BuildPlatform(scene, new Vector2(6.5f, 5.1f), 11);
             ObjectFactory.BuildPlatform(scene, new Vector2(14f, 9f), 4);
 
