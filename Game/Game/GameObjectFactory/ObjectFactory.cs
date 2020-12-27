@@ -194,8 +194,8 @@ namespace Game.GameObjectFactory
 
             enemy.AddComponent<CEnemyAI>();
             CEnemyAI ai = enemy.GetComponent<CEnemyAI>();
-            ai.LeftTrigger = left;
-            ai.RightTrigger = right;
+            ai.SetupLeftTrigger(left);
+            ai.SetupRightTrigger(right);
             ai.RigidBody = enemy.GetComponent<CRigidBody>();
 
             // animations

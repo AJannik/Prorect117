@@ -33,21 +33,21 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-        }
-
-        public void FixedUpdate(float deltaTime)
-        {
-            if (!MyGameObject.Active)
-            {
-                return;
-            }
-
             if (Colliders.Count == 0)
             {
                 SetColliders();
             }
+        }
 
-            if (!Simulated || Static)
+        public void FixedUpdate(float deltaTime)
+        {
+            if (!Simulated)
+            {
+                Velocity = Vector2.Zero;
+                return;
+            }
+
+            if (!MyGameObject.Active || Static)
             {
                 return;
             }
@@ -63,27 +63,26 @@ namespace Game.Components
             Velocity += deltaTime * (Acceleration + newAcceleration) / 2f;
             Acceleration = newAcceleration;
 
-            CheckCollision(s);
-            s += PenRes;
+            // TODO: Performance-Opitimization
+            // Check y-axis for collision
+            CheckCollision(new Vector2(0f, s.Y));
+            s.Y += PenRes.Y;
             s = CorrectRoundingErrors(s);
 
-            // Subtract velocity of PenDepth resolution
-            // TODO: Only add if opposite direction
-            if (Velocity.X > 0f && PenRes.X < 0f || Velocity.X < 0f && PenRes.X > 0f)
-            {
-                Velocity += new Vector2((PenRes.X / deltaTime) - (deltaTime * Acceleration.X / 2f), 0f);
-            }
-            if (Velocity.Y > 0f && PenRes.Y < 0f || Velocity.Y < 0f && PenRes.Y > 0f)
+            if ((Velocity.Y > 0f && PenRes.Y < 0f) || (Velocity.Y < 0f && PenRes.Y > 0f))
             {
                 Velocity += new Vector2(0f, (PenRes.Y / deltaTime) - (deltaTime * Acceleration.Y / 2f));
             }
 
-            if ((PenRes.X > 0f && Velocity.X > 0f) || (PenRes.X < 0f && Velocity.X < 0f) || (PenRes.Y > 0f && Velocity.Y > 0f) || (PenRes.Y < 0f && Velocity.Y < 0f))
+            // Check x-axis for collision
+            CheckCollision(new Vector2(s.X, 0f));
+            s.X += PenRes.X;
+            s = CorrectRoundingErrors(s);
+
+            // reduce velocity by PenRes amount
+            if ((Velocity.X > 0f && PenRes.X < 0f) || (Velocity.X < 0f && PenRes.X > 0f))
             {
-            }
-            else
-            {
-                //Velocity += (PenRes / deltaTime) - (deltaTime * Acceleration / 2f);
+                Velocity += new Vector2((PenRes.X / deltaTime) - (deltaTime * Acceleration.X / 2f), 0f);
             }
 
             Velocity = CorrectRoundingErrors(Velocity);
