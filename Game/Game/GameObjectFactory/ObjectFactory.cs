@@ -213,7 +213,9 @@ namespace Game.GameObjectFactory
 
             // combat
             enemy.AddComponent<CCombat>();
-            enemy.GetComponent<CCombat>().AnimationSystem = animationSystem;
+            CCombat combat = enemy.GetComponent<CCombat>();
+            combat.AnimationSystem = animationSystem;
+            combat.MaxHealth = 30;
 
             return enemy;
         }
