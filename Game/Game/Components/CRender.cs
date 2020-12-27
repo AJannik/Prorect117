@@ -22,6 +22,8 @@ namespace Game.Components
 
         public bool Flipped { get; set; } = false;
 
+        public bool Visible { get; set; } = true;
+
         public int Texture { get; private set; }
 
         private float SizeX { get; set; } = 1f;
@@ -42,7 +44,7 @@ namespace Game.Components
 
         public void Draw()
         {
-            if (!MyGameObject.Active)
+            if (!MyGameObject.Active || !Visible)
             {
                 return;
             }
