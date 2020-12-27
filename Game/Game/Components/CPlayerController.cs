@@ -20,17 +20,15 @@ namespace Game.Components
 
         public CAnimationSystem AnimationSystem { get; set; }
 
-        public float PlayerSpeed { get; private set; } = 10f;
+        public float PlayerSpeed { get; private set; } = 20f;
 
-        public float JumpForce { get; private set; } = 2000f;
+        public float JumpForce { get; private set; } = 6000f;
 
         private float JumpCooldown { get; set; }
 
         private bool Jumping { get; set; } = false;
 
         private int OnGround { get; set; } = 0;
-
-        private bool Running { get; set; } = false;
 
         private bool FacingRight { get; set; } = true;
 
@@ -73,48 +71,29 @@ namespace Game.Components
             }
             else
             {
-                RigidBody.GravityScale = 4f;
+                RigidBody.GravityScale = 8f;
             }
 
             // updating facingRight and animations
             if (RigidBody.Velocity.X > 0f)
             {
                 FacingRight = true;
-                if (Running == false)
-                {
-                    Running = true;
-                    AnimationSystem.PlayAnimation("Run");
-                }
+                AnimationSystem.PlayAnimation("Run", false, !FacingRight);
             }
             else if (RigidBody.Velocity.X < 0f)
             {
                 FacingRight = false;
-                if (Running == false)
-                {
-                    Running = true;
-                    AnimationSystem.PlayAnimation("Run");
-                }
+                AnimationSystem.PlayAnimation("Run", false, !FacingRight);
             }
 
-            if (RigidBody.Velocity.X == 0 && !Jumping)
+            if (RigidBody.Velocity.X <= 0.01f && RigidBody.Velocity.X >= -0.01f && !Jumping)
             {
-                Running = false;
-                AnimationSystem.PlayAnimation("Idle");
+                AnimationSystem.PlayAnimation("Idle", false, !FacingRight);
             }
 
             if (RigidBody.Velocity.Y < -0.1f)
             {
-                AnimationSystem.PlayAnimation("Fall");
-            }
-
-            // update Render
-            if (FacingRight)
-            {
-                Render.Flipped = false;
-            }
-            else
-            {
-                Render.Flipped = true;
+                AnimationSystem.PlayAnimation("Fall", false, !FacingRight);
             }
 
             if (OnGround >= 1 && JumpCooldown > 0)
@@ -127,11 +106,11 @@ namespace Game.Components
         {
             if (!Jumping && OnGround >= 1 && JumpCooldown <= 0f)
             {
-                // RigidBody.Velocity = new OpenTK.Vector2(RigidBody.Velocity.X, JumpForce);
+                RigidBody.Velocity = new OpenTK.Vector2(RigidBody.Velocity.X, 0f);
                 RigidBody.AddForce(new OpenTK.Vector2(0f, JumpForce));
                 Jumping = true;
                 JumpCooldown = 0.1f;
-                AnimationSystem.PlayAnimation("Jump");
+                AnimationSystem.PlayAnimation("Jump", true, !FacingRight);
             }
         }
 
@@ -149,7 +128,7 @@ namespace Game.Components
             {
                 OnGround++;
                 Jumping = false;
-                if (RigidBody.Velocity.X == 0)
+                if (RigidBody.Velocity.X >= -0.01f && RigidBody.Velocity.X <= 0.01f)
                 {
                     AnimationSystem.PlayAnimation("Idle");
                 }

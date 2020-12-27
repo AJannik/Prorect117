@@ -8,52 +8,40 @@ namespace Game.GameObjectFactory
 {
     public static class ObjectFactory
     {
-        public static GameObject BuildWall2(Scene scene, Vector2 position)
+        public static GameObject BuildPlatform(Scene scene, Vector2 position, int length)
         {
-            Vector2 size = new Vector2(0.2f, 2f);
-            return BuildWall(scene, position, size);
+            GameObject floor = new GameObject(scene, "Floor");
+            Vector2 size = new Vector2(length, 0.2f);
+            floor.Transform.Position = position;
+            floor.Transform.Scale = size;
+
+            floor.AddComponent<CRender>();
+            floor.AddComponent<CBoxCollider>();
+            floor.GetComponent<CBoxCollider>().Geometry.Size = size;
+
+            floor.AddComponent<CRigidBody>();
+            CRigidBody rb = floor.GetComponent<CRigidBody>();
+            rb.Static = true;
+
+            return floor;
         }
 
-        public static GameObject BuildWall3(Scene scene, Vector2 position)
+        public static GameObject BuildWall(Scene scene, Vector2 position, int height)
         {
-            Vector2 size = new Vector2(0.2f, 3f);
-            return BuildWall(scene, position, size);
-        }
+            GameObject wall = new GameObject(scene, "Wall");
+            Vector2 size = new Vector2(0.2f, height);
+            wall.Transform.Position = position;
+            wall.Transform.Scale = size;
 
-        public static GameObject BuildWall4(Scene scene, Vector2 position)
-        {
-            Vector2 size = new Vector2(0.2f, 4f);
-            return BuildWall(scene, position, size);
-        }
+            wall.AddComponent<CRender>();
+            wall.AddComponent<CBoxCollider>();
+            wall.GetComponent<CBoxCollider>().Geometry.Size = size;
 
-        public static GameObject BuildLevelWall(Scene scene, Vector2 position)
-        {
-            Vector2 size = new Vector2(0.2f, 32f);
-            return BuildWall(scene, position, size);
-        }
+            wall.AddComponent<CRigidBody>();
+            CRigidBody rb = wall.GetComponent<CRigidBody>();
+            rb.Static = true;
 
-        public static GameObject BuildPlatform2(Scene scene, Vector2 position)
-        {
-            Vector2 size = new Vector2(2f, 0.2f);
-            return BuildPlatform(scene, position, size);
-        }
-
-        public static GameObject BuildPlatform3(Scene scene, Vector2 position)
-        {
-            Vector2 size = new Vector2(3f, 0.2f);
-            return BuildPlatform(scene, position, size);
-        }
-
-        public static GameObject BuildPlatform4(Scene scene, Vector2 position)
-        {
-            Vector2 size = new Vector2(4f, 0.2f);
-            return BuildPlatform(scene, position, size);
-        }
-
-        public static GameObject BuildGround(Scene scene, Vector2 position)
-        {
-            Vector2 size = new Vector2(32f, 0.2f);
-            return BuildPlatform(scene, position, size);
+            return wall;
         }
 
         public static GameObject BuildBall(Scene scene, Vector2 position)
@@ -119,8 +107,8 @@ namespace Game.GameObjectFactory
             player.AddComponent<CBoxCollider>();
             CBoxCollider trigger = player.GetComponents<CBoxCollider>()[1];
             trigger.IsTrigger = true;
-            trigger.Offset = new Vector2(0f, -0.76f);
-            trigger.Geometry.Size = new Vector2(0.95f, 0.2f);
+            trigger.Offset = new Vector2(0f, -0.77f);
+            trigger.Geometry.Size = new Vector2(0.95f, 0.1f);
             player.GetComponent<CPlayerController>().SetUpGroundTrigger(trigger);
 
             // add all animations
@@ -140,7 +128,36 @@ namespace Game.GameObjectFactory
             controll.AddAnimation(jump);
             Animation fall = new Animation("Fall", 2, 22, true);
             controll.AddAnimation(fall);
+            Animation attack1 = new Animation("Attack1", 3, 50, false);
+            controll.AddAnimation(attack1);
+            Animation attack2 = new Animation("Attack2", 4, 55, false);
+            controll.AddAnimation(attack2);
+            Animation attack3 = new Animation("Attack3", 3, 44, false);
+            controll.AddAnimation(attack3);
             player.GetComponent<CPlayerController>().AnimationSystem = controll;
+
+            // add Combat Components
+            player.AddComponent<CCombat>();
+            player.GetComponent<CCombat>().AnimationSystem = controll;
+            player.AddComponent<CPlayerCombatController>();
+            CPlayerCombatController combatController = player.GetComponent<CPlayerCombatController>();
+            combatController.AnimationSystem = controll;
+            combatController.Combat = player.GetComponent<CCombat>();
+
+            // add hitbox to combatcontroller
+            player.AddComponent<CBoxCollider>();
+            CBoxCollider attackHitboxLeft = player.GetComponents<CBoxCollider>()[2];
+            attackHitboxLeft.IsTrigger = true;
+            attackHitboxLeft.Geometry.Size = new Vector2(1f, 1.5f);
+            attackHitboxLeft.Offset = new Vector2(-0.9f, 0f);
+            combatController.LeftHitbox = attackHitboxLeft;
+
+            player.AddComponent<CBoxCollider>();
+            CBoxCollider attackHitboxRight = player.GetComponents<CBoxCollider>()[3];
+            attackHitboxRight.IsTrigger = true;
+            attackHitboxRight.Geometry.Size = new Vector2(1f, 1.5f);
+            attackHitboxRight.Offset = new Vector2(0.9f, 0f);
+            combatController.RightHitbox = attackHitboxRight;
 
             return player;
         }
@@ -168,10 +185,10 @@ namespace Game.GameObjectFactory
             CBoxCollider right = enemy.GetComponents<CBoxCollider>()[2];
             left.IsTrigger = true;
             right.IsTrigger = true;
-            left.Geometry.Size = new Vector2(0.7f, 1.8f);
-            right.Geometry.Size = new Vector2(0.7f, 1.8f);
-            left.Offset = new Vector2(-0.6f, 0f);
-            right.Offset = new Vector2(0.6f, 0f);
+            left.Geometry.Size = new Vector2(0.8f, 1.8f);
+            right.Geometry.Size = new Vector2(0.8f, 1.8f);
+            left.Offset = new Vector2(-0.7f, 0f);
+            right.Offset = new Vector2(0.7f, 0f);
 
             enemy.AddComponent<CRigidBody>();
 
@@ -180,8 +197,6 @@ namespace Game.GameObjectFactory
             ai.LeftTrigger = left;
             ai.RightTrigger = right;
             ai.RigidBody = enemy.GetComponent<CRigidBody>();
-
-            // ai.RigidBody.Velocity = new Vector2(ai.MoveSpeed, 0f);
 
             // animations
             enemy.AddComponent<CAnimationSystem>();
@@ -193,6 +208,12 @@ namespace Game.GameObjectFactory
             animationSystem.SetStartAnimation(idle);
             Animation walk = new Animation("Walk", 13, 0, true, true, "Content.Skeleton.SkeletonWalk.png", 13, 1);
             animationSystem.AddAnimation(walk);
+            Animation hurt = new Animation("Hurt", 8, 0, false, true, "Content.Skeleton.SkeletonHit.png", 8, 1);
+            animationSystem.AddAnimation(hurt);
+
+            // combat
+            enemy.AddComponent<CCombat>();
+            enemy.GetComponent<CCombat>().AnimationSystem = animationSystem;
 
             return enemy;
         }
@@ -210,40 +231,6 @@ namespace Game.GameObjectFactory
             powerDown.GetComponent<CPowerDownScript>().Trigger = trigger;
 
             return powerDown;
-        }
-
-        private static GameObject BuildPlatform(Scene scene, Vector2 position, Vector2 size)
-        {
-            GameObject floor = new GameObject(scene, "Floor");
-            floor.Transform.Position = position;
-            floor.Transform.Scale = size;
-
-            floor.AddComponent<CRender>();
-            floor.AddComponent<CBoxCollider>();
-            floor.GetComponent<CBoxCollider>().Geometry.Size = size;
-
-            floor.AddComponent<CRigidBody>();
-            CRigidBody rb = floor.GetComponent<CRigidBody>();
-            rb.Static = true;
-
-            return floor;
-        }
-
-        private static GameObject BuildWall(Scene scene, Vector2 position, Vector2 size)
-        {
-            GameObject wall = new GameObject(scene, "Wall");
-            wall.Transform.Position = position;
-            wall.Transform.Scale = size;
-
-            wall.AddComponent<CRender>();
-            wall.AddComponent<CBoxCollider>();
-            wall.GetComponent<CBoxCollider>().Geometry.Size = size;
-
-            wall.AddComponent<CRigidBody>();
-            CRigidBody rb = wall.GetComponent<CRigidBody>();
-            rb.Static = true;
-
-            return wall;
         }
     }
 }

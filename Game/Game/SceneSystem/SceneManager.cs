@@ -6,8 +6,8 @@ namespace Game.SceneSystem
     {
         public Scene[] scenes;
         private SceneFactory sceneFactory;
-        private int screenWidth = 0;
-        private int screenHeight = 0;
+        private int screenWidth = 1366;
+        private int screenHeight = 768;
 
         public SceneManager()
         {
