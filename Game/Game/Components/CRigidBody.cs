@@ -43,8 +43,6 @@ namespace Game.Components
                 return;
             }
 
-            deltaTime = PhysicConstants.FixedUpdate;
-
             if (Colliders.Count == 0)
             {
                 SetColliders();
