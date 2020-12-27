@@ -7,7 +7,7 @@ using OpenTK;
 
 namespace Game.Components
 {
-    public class CRigidBody : IComponent
+    public class CRigidBody : IComponent, IPhysicsComponent
     {
         public GameObject MyGameObject { get; set; } = null;
 
@@ -33,6 +33,11 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
+        }
+
+        public void FixedUpdate()
+        {
+            float deltaTime = PhysicConstants.FixedUpdate;
             if (!MyGameObject.Active)
             {
                 return;
@@ -79,7 +84,7 @@ namespace Game.Components
             MyGameObject.Transform.Position += s;
             if (MyGameObject.Name == "Player")
             {
-                Console.WriteLine($"{Velocity} {Acceleration} {PenRes}");
+                Console.WriteLine($"{Velocity} {(Acceleration + newAcceleration) / 2f} {PenRes}");
             }
 
             PenRes = Vector2.Zero;
