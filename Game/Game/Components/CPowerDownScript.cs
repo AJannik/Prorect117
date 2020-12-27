@@ -32,7 +32,13 @@ namespace Game.Components
 
         private void OnTriggerEntered(object sender, IComponent e)
         {
-            // TODO: implement effect
+            if (e.MyGameObject.Name == "Player")
+            {
+                if (e.MyGameObject.GetComponent<CEffectSystem>() != null)
+                {
+                    e.MyGameObject.GetComponent<CEffectSystem>().AddEffect(EffectType.Slow);
+                }
+            }
         }
     }
 }
