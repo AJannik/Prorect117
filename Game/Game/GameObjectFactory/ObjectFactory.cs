@@ -210,6 +210,7 @@ namespace Game.GameObjectFactory
             animationSystem.AddAnimation(walk);
             Animation hurt = new Animation("Hurt", 8, 0, false, true, "Content.Skeleton.SkeletonHit.png", 8, 1);
             animationSystem.AddAnimation(hurt);
+            ai.AnimationSystem = animationSystem;
 
             // combat
             enemy.AddComponent<CCombat>();
