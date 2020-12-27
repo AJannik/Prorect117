@@ -21,12 +21,13 @@ namespace Game.Components
             {
                 return;
             }
+        }
 
-            if (Trigger == null)
-            {
-                Trigger = MyGameObject.GetComponent<CCircleCollider>();
-                Trigger.TriggerEntered += OnTriggerEntered;
-            }
+        public void SetupTrigger(CCircleCollider trigger)
+        {
+            Trigger = trigger;
+            Trigger.IsTrigger = true;
+            Trigger.TriggerEntered += OnTriggerEntered;
         }
 
         private void OnTriggerEntered(object sender, IComponent e)

@@ -48,6 +48,7 @@ namespace Game.Components
             {
                 return;
             }
+
             switch (State)
             {
                 case EnemyState.Idle:
