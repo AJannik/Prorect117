@@ -13,6 +13,7 @@ namespace Game.SceneSystem
         private List<CBoxCollider> boxColliders = new List<CBoxCollider>();
         private List<CCircleCollider> circleColliders = new List<CCircleCollider>();
         private List<IComponent> genericComponents = new List<IComponent>();
+        private List<IPhysicsComponent> physicsComponents = new List<IPhysicsComponent>();
 
         public Debug Debug { get; } = new Debug();
 
@@ -42,6 +43,14 @@ namespace Game.SceneSystem
             foreach (IComponent component in genericComponents)
             {
                 component.Update(deltaTime);
+            }
+        }
+
+        public void FixedUpdate()
+        {
+            foreach (IPhysicsComponent physicsComponent in physicsComponents)
+            {
+                physicsComponent.FixedUpdate();
             }
         }
 
@@ -98,33 +107,41 @@ namespace Game.SceneSystem
             RemoveComponentsFromLists(gameObject);
         }
 
-        public List<GameObject> GetGameObjects()
+        public IReadOnlyList<GameObject> GetGameObjects()
         {
             return gameObjects;
         }
 
-        public List<CRender> GetCRenders()
+        public IReadOnlyList<CRender> GetCRenders()
         {
             return renderers;
         }
 
-        public List<CBoxCollider> GetCBoxColliders()
+        public IReadOnlyList<CBoxCollider> GetCBoxColliders()
         {
             return boxColliders;
         }
 
-        public List<CCircleCollider> GetCCircleColliders()
+        public IReadOnlyList<CCircleCollider> GetCCircleColliders()
         {
             return circleColliders;
         }
 
-        public List<IComponent> GetGenericComponents()
+        public IReadOnlyList<IComponent> GetGenericComponents()
         {
             return genericComponents;
         }
 
         public void AddComponent(IComponent component)
         {
+            if (component is IPhysicsComponent)
+            {
+                if (!physicsComponents.Contains((IPhysicsComponent)component))
+                {
+                    physicsComponents.Add((IPhysicsComponent)component);
+                }
+            }
+
             if (component.GetType() == typeof(CRender))
             {
                 if (!renderers.Contains((CRender)component))
@@ -165,6 +182,11 @@ namespace Game.SceneSystem
 
         public void RemoveComponent(IComponent component)
         {
+            if (component is IPhysicsComponent)
+            {
+                physicsComponents.Remove((IPhysicsComponent)component);
+            }
+
             if (component.GetType() == typeof(CRender))
             {
                 renderers.Remove((CRender)component);

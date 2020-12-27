@@ -11,7 +11,6 @@ namespace Game
         {
             var window = new GameWindow(1366, 768);
             window.VSync = VSyncMode.On;
-            //window.TargetUpdateFrequency = 100;
             SceneManager sceneManager = new SceneManager();
             float counter = 7f;
             int skipedFrames = 0;
@@ -20,16 +19,20 @@ namespace Game
             GameObject parentQuad = sceneManager.GetScene(1).GetGameObjects()[1];
             GameObject childQuad = sceneManager.GetScene(1).GetGameObjects()[2];
 
-            void Update(float deltaTime)
+            void Update(float frameTime)
             {
-                // Skip frame if deltaTime is to big because an untypically big deltaTime can cause physic bugs
-                if (deltaTime > 0.05f)
-                {
-                    skipedFrames++;
-                    return;
-                }
+                // Normal Update
+                sceneManager.Update(frameTime);
 
-                sceneManager.Update(deltaTime);
+                // Semi-FixedUpdate for Physics
+                int maxSteps = 15;
+                while (frameTime > 0f && maxSteps > 0)
+                {
+                    float deltaTime = MathF.Min(frameTime, Physics.PhysicConstants.FixedDeltaTime);
+                    frameTime -= deltaTime;
+                    sceneManager.FixedUpdate();
+                    maxSteps--;
+                }
 
                 // TODO: Remove this, it's only for testing
                 if (sceneManager.CurrentScene < sceneManager.scenes.Length - 1)
@@ -58,8 +61,8 @@ namespace Game
                 }
                 else if (sceneManager.CurrentScene == 1)
                 {
-                    parentQuad.Transform.Rotation += deltaTime * 0.5f;
-                    childQuad.Transform.Rotation += deltaTime * 1f;
+                    parentQuad.Transform.Rotation += frameTime * 0.5f;
+                    childQuad.Transform.Rotation += frameTime * 1f;
                 }
             }
 

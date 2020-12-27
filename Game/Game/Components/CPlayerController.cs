@@ -20,9 +20,9 @@ namespace Game.Components
 
         public CAnimationSystem AnimationSystem { get; set; }
 
-        public float PlayerSpeed { get; private set; } = 20f;
+        public float PlayerSpeed { get; private set; } = 15f;
 
-        public float JumpForce { get; private set; } = 6000f;
+        public float JumpForce { get; private set; } = 2000f;
 
         private float JumpCooldown { get; set; }
 
@@ -75,7 +75,7 @@ namespace Game.Components
             }
 
             // updating facingRight and animations
-            if (RigidBody.Velocity.X > 0f)
+            if (RigidBody.Velocity.X > 8f)
             {
                 FacingRight = true;
                 AnimationSystem.PlayAnimation("Run", false, !FacingRight);

@@ -33,7 +33,6 @@ namespace UnitTests
             scene.RemoveGameObject(gameObject3);
 
             Assert.AreEqual(2, scene.GetGameObjects().Count);
-            Assert.IsFalse(scene.GetGameObjects().Contains(gameObject3));
         }
 
         [TestMethod]
