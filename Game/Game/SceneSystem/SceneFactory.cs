@@ -83,7 +83,7 @@ namespace Game.SceneSystem
             ObjectFactory.BuildWall(scene, new Vector2(-15.9f, 7f), 14);
             ObjectFactory.BuildWall(scene, new Vector2(15.9f, 7f), 14);
             ObjectFactory.BuildPlatform(scene, new Vector2(0f, 14.1f), 32);
-            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(0f, 10f));
+            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(-13f, 1f));
 
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
@@ -97,7 +97,9 @@ namespace Game.SceneSystem
             ObjectFactory.BuildPlatform(scene, new Vector2(-1.5f, 2.1f), 7);
             ObjectFactory.BuildPlatform(scene, new Vector2(1.5f, 9.3f), 7);
             ObjectFactory.BuildPlatform(scene, new Vector2(6.5f, 5.1f), 11);
-            ObjectFactory.BuildPlatform(scene, new Vector2(13.8f, 9f), 4);
+            ObjectFactory.BuildPlatform(scene, new Vector2(12.8f, 8f), 6);
+            ObjectFactory.BuildPlatform(scene, new Vector2(14.8f, 3f), 2);
+            ObjectFactory.BuildPlatform(scene, new Vector2(14.3f, 11f), 3);
 
             ObjectFactory.BuildWall(scene, new Vector2(-8f, 2.5f), 5);
             ObjectFactory.BuildWall(scene, new Vector2(-7f, 11f), 6);
@@ -105,6 +107,8 @@ namespace Game.SceneSystem
             ObjectFactory.BuildWall(scene, new Vector2(6f, 2.5f), 5);
 
             ObjectFactory.BuildSkeletonEnemy(scene, new Vector2(10f, 1f));
+            ObjectFactory.BuildSkeletonEnemy(scene, new Vector2(0f, 1f));
+            ObjectFactory.BuildSkeletonEnemy(scene, new Vector2(0f, 10.2f));
 
             return scene;
         }

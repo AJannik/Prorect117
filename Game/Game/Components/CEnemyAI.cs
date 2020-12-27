@@ -24,6 +24,10 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
+            if (!MyGameObject.Active)
+            {
+                return;
+            }
         }
 
         public void SetupLeftTrigger(CBoxCollider trigger)

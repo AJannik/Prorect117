@@ -7,15 +7,32 @@ namespace Game.Components
 {
     public class CCombat : IComponent
     {
+        private float maxHP = 100;
+
         public CCombat()
         {
+        }
+
+        public float MaxHealth
+        {
+            get
+            {
+                return maxHP;
+            }
+
+            set
+            {
+                maxHP = value;
+                if (CurrentHealth > maxHP)
+                {
+                    CurrentHealth = maxHP;
+                }
+            }
         }
 
         public GameObject MyGameObject { get; set; } = null;
 
         public CAnimationSystem AnimationSystem { get; set; } = null;
-
-        public float MaxHealth { get; set; } = 100f;
 
         public float CurrentHealth { get; set; } = 100f;
 
@@ -25,15 +42,26 @@ namespace Game.Components
 
         public float NextAttackTime { get; set; } = 0f;
 
-        public float AttackDamage { get; set; } = 1f;
+        public float AttackDamage { get; set; } = 10f;
 
         public string HurtAnimationName { get; set; } = "Hurt";
 
         public void Update(float deltaTime)
         {
+            if (!MyGameObject.Active)
+            {
+                return;
+            }
+
             if (NextAttackTime > 0f)
             {
                 NextAttackTime -= deltaTime;
+            }
+
+            if (CurrentHealth <= 0)
+            {
+                AnimationSystem.PlayAnimation("death");
+                //TODO: Delete Game Object
             }
         }
 
@@ -62,9 +90,11 @@ namespace Game.Components
 
             foreach (IComponent hit in hitbox.GetTriggerHits())
             {
-                if ((hit.MyGameObject.Name == "Player" || hit.MyGameObject.Name == "Enemy") && MyGameObject.Name != hit.MyGameObject.Name && hit.MyGameObject.GetComponent<CCombat>() != null)
+                if ((hit.MyGameObject.Name == "Player" || hit.MyGameObject.Name == "Enemy") &&
+                    MyGameObject.Name != hit.MyGameObject.Name && hit.MyGameObject.GetComponent<CCombat>() != null)
                 {
-                    hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor, hit.MyGameObject.GetComponent<CCombat>().HurtAnimationName);
+                    hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor,
+                        hit.MyGameObject.GetComponent<CCombat>().HurtAnimationName);
                 }
             }
 
