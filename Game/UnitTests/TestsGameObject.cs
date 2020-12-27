@@ -112,6 +112,7 @@ namespace UnitTests
             if (gameObject.GetNumberComponents() > 0)
             {
                 DummyComponent1 dummy = gameObject.GetComponent<DummyComponent1>();
+                if(dummy == null) return;
                 dummy.MyGameObject.Active = false;
                 Assert.IsFalse(dummy.MyGameObject.Active);
                 if (dummy.MyGameObject.ChildCount > 0)
