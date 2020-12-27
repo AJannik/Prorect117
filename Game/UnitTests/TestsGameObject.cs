@@ -31,6 +31,7 @@ namespace UnitTests
             RemoveNotExistingComponent(gameObject);
             TryGettingNotExistingComponent(gameObject);
             RemoveGivenComponent(gameObject);
+            TestActiveProperty(gameObject);
         }
 
         [TestMethod]
@@ -102,6 +103,28 @@ namespace UnitTests
             gameObject.RemoveComponent(dummy);
             Assert.AreEqual(1, gameObject.GetNumberComponents());
             Assert.AreNotEqual(dummy, gameObject.GetComponent<DummyComponent2>());
+        }
+
+        [TestMethod]
+        private void TestActiveProperty(GameObject gameObject)
+        {
+            //Test setting component inactive or active
+            if (gameObject.GetNumberComponents() > 0)
+            {
+                DummyComponent1 dummy = gameObject.GetComponent<DummyComponent1>();
+                if(dummy == null) return;
+                dummy.MyGameObject.Active = false;
+                Assert.IsFalse(dummy.MyGameObject.Active);
+                if (dummy.MyGameObject.ChildCount > 0)
+                {
+                    Assert.IsFalse(dummy.MyGameObject.GetChild(0).Active);
+                }
+
+                if (dummy.MyGameObject.GetParent() != null && dummy.MyGameObject.GetParent() != dummy.MyGameObject)
+                {
+                    Assert.IsTrue(dummy.MyGameObject.GetParent().Active);
+                }
+            }
         }
 
         /*

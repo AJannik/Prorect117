@@ -7,7 +7,7 @@ using OpenTK;
 
 namespace Game.Components
 {
-    public class CRigidBody : IComponent
+    public class CRigidBody : IComponent, IPhysicsComponent
     {
         public GameObject MyGameObject { get; set; } = null;
 
@@ -33,7 +33,11 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            deltaTime = PhysicConstants.FixedUpdate;
+        }
+
+        public void FixedUpdate()
+        {
+            float deltaTime = PhysicConstants.FixedDeltaTime;
             if (!MyGameObject.Active)
             {
                 return;
@@ -51,32 +55,36 @@ namespace Game.Components
 
             if (UseGravity)
             {
-                AddForce(PhysicConstants.Gravity * GravityScale);
+                AddForce(PhysicConstants.Gravity * GravityScale * Mass);
             }
 
+            // Verlet Integral
             Vector2 s = deltaTime * (Velocity + (deltaTime * Acceleration / 2f));
             Vector2 newAcceleration = Force / Mass;
             Velocity += deltaTime * (Acceleration + newAcceleration) / 2f;
             Acceleration = newAcceleration;
 
-            //Vector2 newAcceleration = Force / Mass;
-            //Velocity += deltaTime * (newAcceleration - Acceleration) / 2f;
-            //Acceleration = newAcceleration;
-
             CheckCollision(s);
             s += PenRes;
             s = CorrectRoundingErrors(s);
 
-            // TODO: subtract PenRes Velocity, Force and Acceleration
-            //Acceleration += PenRes * 0.5f / (deltaTime * deltaTime);
-
             // Subtract velocity of PenDepth resolution
+            // TODO: Only add if opposite direction
+            if (Velocity.X > 0f && PenRes.X < 0f || Velocity.X < 0f && PenRes.X > 0f)
+            {
+                Velocity += new Vector2((PenRes.X / deltaTime) - (deltaTime * Acceleration.X / 2f), 0f);
+            }
+            if (Velocity.Y > 0f && PenRes.Y < 0f || Velocity.Y < 0f && PenRes.Y > 0f)
+            {
+                Velocity += new Vector2(0f, (PenRes.Y / deltaTime) - (deltaTime * Acceleration.Y / 2f));
+            }
+
             if ((PenRes.X > 0f && Velocity.X > 0f) || (PenRes.X < 0f && Velocity.X < 0f) || (PenRes.Y > 0f && Velocity.Y > 0f) || (PenRes.Y < 0f && Velocity.Y < 0f))
             {
             }
             else
             {
-                Velocity += (PenRes / deltaTime) - (deltaTime * Acceleration / 2f);
+                //Velocity += (PenRes / deltaTime) - (deltaTime * Acceleration / 2f);
             }
 
             Velocity = CorrectRoundingErrors(Velocity);
@@ -85,7 +93,7 @@ namespace Game.Components
             MyGameObject.Transform.Position += s;
             if (MyGameObject.Name == "Player")
             {
-                Console.WriteLine($"{Velocity} {Acceleration} {PenRes}");
+                Console.WriteLine($"{Velocity} {(Acceleration + newAcceleration) / 2f} {PenRes}");
             }
 
             PenRes = Vector2.Zero;

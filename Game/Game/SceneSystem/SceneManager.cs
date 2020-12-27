@@ -1,4 +1,5 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using System;
+using OpenTK.Graphics.OpenGL;
 
 namespace Game.SceneSystem
 {
@@ -28,6 +29,11 @@ namespace Game.SceneSystem
         public void Update(float deltaTime)
         {
             scenes[CurrentScene].Update(deltaTime);
+        }
+
+        public void FixedUpdate()
+        {
+            scenes[CurrentScene].FixedUpdate();
         }
 
         public void Draw()
