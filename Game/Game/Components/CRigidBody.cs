@@ -33,7 +33,6 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            deltaTime = PhysicConstants.FixedUpdate;
             if (!MyGameObject.Active)
             {
                 return;
@@ -51,26 +50,21 @@ namespace Game.Components
 
             if (UseGravity)
             {
-                AddForce(PhysicConstants.Gravity * GravityScale);
+                AddForce(PhysicConstants.Gravity * GravityScale * Mass);
             }
 
+            // Verlet Integral
             Vector2 s = deltaTime * (Velocity + (deltaTime * Acceleration / 2f));
             Vector2 newAcceleration = Force / Mass;
             Velocity += deltaTime * (Acceleration + newAcceleration) / 2f;
             Acceleration = newAcceleration;
 
-            //Vector2 newAcceleration = Force / Mass;
-            //Velocity += deltaTime * (newAcceleration - Acceleration) / 2f;
-            //Acceleration = newAcceleration;
-
             CheckCollision(s);
             s += PenRes;
             s = CorrectRoundingErrors(s);
 
-            // TODO: subtract PenRes Velocity, Force and Acceleration
-            //Acceleration += PenRes * 0.5f / (deltaTime * deltaTime);
-
             // Subtract velocity of PenDepth resolution
+            // TODO: Only add if opposite direction
             if ((PenRes.X > 0f && Velocity.X > 0f) || (PenRes.X < 0f && Velocity.X < 0f) || (PenRes.Y > 0f && Velocity.Y > 0f) || (PenRes.Y < 0f && Velocity.Y < 0f))
             {
             }
