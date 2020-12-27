@@ -30,7 +30,7 @@ namespace Game.Components
 
         public CBoxCollider RightTrigger { get; set; }
 
-        public float MoveSpeed { get; private set; } = 5f;
+        public float MoveSpeed { get; private set; } = 2f;
 
         public EnemyState State { get; private set; } = EnemyState.Idle;
 
