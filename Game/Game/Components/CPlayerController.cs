@@ -71,7 +71,7 @@ namespace Game.Components
             }
             else
             {
-                RigidBody.GravityScale = 8f;
+                RigidBody.GravityScale = 4f;
             }
 
             // updating facingRight and animations

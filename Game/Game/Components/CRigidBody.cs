@@ -70,12 +70,21 @@ namespace Game.Components
 
             // Subtract velocity of PenDepth resolution
             // TODO: Only add if opposite direction
+            if (Velocity.X > 0f && PenRes.X < 0f || Velocity.X < 0f && PenRes.X > 0f)
+            {
+                Velocity += new Vector2((PenRes.X / deltaTime) - (deltaTime * Acceleration.X / 2f), 0f);
+            }
+            if (Velocity.Y > 0f && PenRes.Y < 0f || Velocity.Y < 0f && PenRes.Y > 0f)
+            {
+                Velocity += new Vector2(0f, (PenRes.Y / deltaTime) - (deltaTime * Acceleration.Y / 2f));
+            }
+
             if ((PenRes.X > 0f && Velocity.X > 0f) || (PenRes.X < 0f && Velocity.X < 0f) || (PenRes.Y > 0f && Velocity.Y > 0f) || (PenRes.Y < 0f && Velocity.Y < 0f))
             {
             }
             else
             {
-                Velocity += (PenRes / deltaTime) - (deltaTime * Acceleration / 2f);
+                //Velocity += (PenRes / deltaTime) - (deltaTime * Acceleration / 2f);
             }
 
             Velocity = CorrectRoundingErrors(Velocity);
