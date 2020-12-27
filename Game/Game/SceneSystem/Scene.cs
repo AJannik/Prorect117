@@ -46,11 +46,11 @@ namespace Game.SceneSystem
             }
         }
 
-        public void FixedUpdate()
+        public void FixedUpdate(float deltaTime)
         {
             foreach (IPhysicsComponent physicsComponent in physicsComponents)
             {
-                physicsComponent.FixedUpdate();
+                physicsComponent.FixedUpdate(deltaTime);
             }
         }
 

@@ -2,6 +2,6 @@
 {
     public interface IPhysicsComponent
     {
-        public void FixedUpdate();
+        public void FixedUpdate(float deltaTime);
     }
 }

@@ -31,9 +31,9 @@ namespace Game.SceneSystem
             scenes[CurrentScene].Update(deltaTime);
         }
 
-        public void FixedUpdate()
+        public void FixedUpdate(float deltaTime)
         {
-            scenes[CurrentScene].FixedUpdate();
+            scenes[CurrentScene].FixedUpdate(deltaTime);
         }
 
         public void Draw()

@@ -12,9 +12,11 @@ namespace Game
             var window = new GameWindow(1366, 768);
             window.VSync = VSyncMode.On;
             SceneManager sceneManager = new SceneManager();
-            window.TargetUpdateFrequency = 150;
+            //window.TargetUpdateFrequency = 300;
             float counter = 7f;
             int skipedFrames = 0;
+            float accumulator = 0f;
+            float alpha = 1f;
 
             GameObject quad = sceneManager.GetScene(0).GetGameObjects()[0];
             GameObject parentQuad = sceneManager.GetScene(1).GetGameObjects()[1];
@@ -25,13 +27,25 @@ namespace Game
                 // Normal Update
                 sceneManager.Update(frameTime);
 
+                /*
+                // FixedUpdate for Physics
+                accumulator += frameTime;
+                while (accumulator >= Physics.PhysicConstants.FixedDeltaTime)
+                {
+                    sceneManager.FixedUpdate(alpha);
+                    accumulator -= Physics.PhysicConstants.FixedDeltaTime;
+                }
+
+                alpha = accumulator / Physics.PhysicConstants.FixedDeltaTime;
+                */
+
                 // Semi-FixedUpdate for Physics
-                int maxSteps = 15;
+                int maxSteps = 10;
                 while (frameTime > 0f && maxSteps > 0)
                 {
                     float deltaTime = MathF.Min(frameTime, Physics.PhysicConstants.FixedDeltaTime);
+                    sceneManager.FixedUpdate(deltaTime);
                     frameTime -= deltaTime;
-                    sceneManager.FixedUpdate();
                     maxSteps--;
                 }
 
