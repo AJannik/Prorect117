@@ -37,7 +37,7 @@ namespace Game.Components
 
         public void FixedUpdate()
         {
-            float deltaTime = PhysicConstants.FixedUpdate;
+            float deltaTime = PhysicConstants.FixedDeltaTime;
             if (!MyGameObject.Active)
             {
                 return;
