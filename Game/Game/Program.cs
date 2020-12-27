@@ -12,33 +12,25 @@ namespace Game
             var window = new GameWindow(1366, 768);
             window.VSync = VSyncMode.On;
             SceneManager sceneManager = new SceneManager();
-            //window.TargetUpdateFrequency = 300;
-            float counter = 7f;
-            int skipedFrames = 0;
+            window.TargetRenderFrequency = 60;
             float accumulator = 0f;
-            float alpha = 1f;
-
-            GameObject quad = sceneManager.GetScene(0).GetGameObjects()[0];
-            GameObject parentQuad = sceneManager.GetScene(1).GetGameObjects()[1];
-            GameObject childQuad = sceneManager.GetScene(1).GetGameObjects()[2];
 
             void Update(float frameTime)
             {
                 // Normal Update
                 sceneManager.Update(frameTime);
 
-                /*
                 // FixedUpdate for Physics
                 accumulator += frameTime;
                 while (accumulator >= Physics.PhysicConstants.FixedDeltaTime)
                 {
-                    sceneManager.FixedUpdate(alpha);
+                    sceneManager.FixedUpdate(Physics.PhysicConstants.FixedDeltaTime);
                     accumulator -= Physics.PhysicConstants.FixedDeltaTime;
                 }
 
-                alpha = accumulator / Physics.PhysicConstants.FixedDeltaTime;
-                */
+                //alpha = accumulator / Physics.PhysicConstants.FixedDeltaTime;
 
+                /*
                 // Semi-FixedUpdate for Physics
                 int maxSteps = 10;
                 while (frameTime > 0f && maxSteps > 0)
@@ -48,37 +40,7 @@ namespace Game
                     frameTime -= deltaTime;
                     maxSteps--;
                 }
-
-                // TODO: Remove this, it's only for testing
-                if (sceneManager.CurrentScene < sceneManager.scenes.Length - 1)
-                {
-                    // counter -= deltaTime;
-                    if (counter <= 0f)
-                    {
-                        sceneManager.LoadNextScene();
-                        counter = 5f;
-                    }
-                }
-                else
-                {
-                    // counter -= deltaTime;
-                    if (counter <= 0f)
-                    {
-                        Console.WriteLine($"A total of {skipedFrames} Update-Frames were skiped.");
-                        window.Exit();
-                        return;
-                    }
-                }
-
-                // TODO: Remove this, it's only for testing
-                if (sceneManager.CurrentScene == 0)
-                {
-                }
-                else if (sceneManager.CurrentScene == 1)
-                {
-                    parentQuad.Transform.Rotation += frameTime * 0.5f;
-                    childQuad.Transform.Rotation += frameTime * 1f;
-                }
+                */
             }
 
             void Draw()
