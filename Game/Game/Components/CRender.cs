@@ -22,6 +22,8 @@ namespace Game.Components
 
         public bool Flipped { get; set; } = false;
 
+        public bool Visible { get; set; } = true;
+
         public int Texture { get; private set; }
 
         private float SizeX { get; set; } = 1f;
@@ -42,6 +44,11 @@ namespace Game.Components
 
         public void Draw()
         {
+            if (!MyGameObject.Active || !Visible)
+            {
+                return;
+            }
+
             GL.BindTexture(TextureTarget.Texture2D, this.Texture);
 
             Vector2 pos1;

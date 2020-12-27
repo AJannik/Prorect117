@@ -75,18 +75,18 @@ namespace Game.Components
             }
 
             // updating facingRight and animations
-            if (RigidBody.Velocity.X > 8f)
+            if (RigidBody.Velocity.X > 0.1f)
             {
                 FacingRight = true;
                 AnimationSystem.PlayAnimation("Run", false, !FacingRight);
             }
-            else if (RigidBody.Velocity.X < 0f)
+            else if (RigidBody.Velocity.X < -0.1f)
             {
                 FacingRight = false;
                 AnimationSystem.PlayAnimation("Run", false, !FacingRight);
             }
 
-            if (RigidBody.Velocity.X <= 0.01f && RigidBody.Velocity.X >= -0.01f && !Jumping)
+            if (RigidBody.Velocity.X <= 0.001f && RigidBody.Velocity.X >= -0.001f && !Jumping)
             {
                 AnimationSystem.PlayAnimation("Idle", false, !FacingRight);
             }

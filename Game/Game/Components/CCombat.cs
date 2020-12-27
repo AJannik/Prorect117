@@ -61,7 +61,7 @@ namespace Game.Components
             if (CurrentHealth <= 0)
             {
                 AnimationSystem.PlayAnimation("death");
-                //TODO: Delete Game Object
+                MyGameObject.Active = false;
             }
         }
 
