@@ -42,6 +42,11 @@ namespace Game.Components
 
         public void Draw()
         {
+            if (!MyGameObject.Active)
+            {
+                return;
+            }
+
             GL.BindTexture(TextureTarget.Texture2D, this.Texture);
 
             Vector2 pos1;
