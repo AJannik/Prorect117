@@ -16,7 +16,7 @@ namespace Game.Physics.RaycastSystem
 
             foreach (CBoxCollider boxCollider in scene.GetCBoxColliders())
             {
-                if (querryTrigger || (!querryTrigger && !boxCollider.IsTrigger))
+                if (boxCollider.MyGameObject.Active && (querryTrigger || (!querryTrigger && !boxCollider.IsTrigger)))
                 {
                     if (RaycastCollisionCheck.AabbAndLine((Rect)boxCollider.Geometry, ray, hit))
                     {
@@ -28,7 +28,7 @@ namespace Game.Physics.RaycastSystem
 
             foreach (CCircleCollider circleCollider in scene.GetCCircleColliders())
             {
-                if (querryTrigger || (!querryTrigger && !circleCollider.IsTrigger))
+                if (circleCollider.MyGameObject.Active && (querryTrigger || (!querryTrigger && !circleCollider.IsTrigger)))
                 {
                     if (RaycastCollisionCheck.CircleAndLine((Circle)circleCollider.Geometry, ray, hit))
                     {

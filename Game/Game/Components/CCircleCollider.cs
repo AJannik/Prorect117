@@ -76,12 +76,12 @@ namespace Game.Components
 
         private bool IsValidCollider(CBoxCollider boxCollider)
         {
-            return !boxCollider.IsTrigger && boxCollider.MyGameObject != MyGameObject && boxCollider.MyGameObject.GetComponent<CRigidBody>() != null;
+            return boxCollider.MyGameObject.Active && !boxCollider.IsTrigger && boxCollider.MyGameObject != MyGameObject && boxCollider.MyGameObject.GetComponent<CRigidBody>() != null;
         }
 
         private bool IsValidCollider(CCircleCollider circleCollider)
         {
-            return circleCollider != this && !circleCollider.IsTrigger && circleCollider.MyGameObject != MyGameObject && circleCollider.MyGameObject.GetComponent<CRigidBody>() != null;
+            return circleCollider != this && circleCollider.MyGameObject.Active && !circleCollider.IsTrigger && circleCollider.MyGameObject != MyGameObject && circleCollider.MyGameObject.GetComponent<CRigidBody>() != null;
         }
 
         private void CheckForBoxCollider()
