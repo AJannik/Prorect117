@@ -70,6 +70,17 @@ namespace Game.SceneSystem
             }
         }
 
+        public void LoadScene(int index)
+        {
+            if (index >= 0 && index < sceneFactory.NumScenes && index != CurrentScene)
+            {
+                UnloadCurrentScene();
+                CurrentScene = index;
+
+                Resize(screenWidth, screenHeight);
+            }
+        }
+
         public void UnloadCurrentScene()
         {
             // TODO: Implement UnloadCurrentScene()

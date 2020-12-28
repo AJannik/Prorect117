@@ -29,7 +29,7 @@ namespace Game
                 }
 
                 // TODO: Add RenderBlending and unlock Render-Framerate
-                //alpha = accumulator / Physics.PhysicConstants.FixedDeltaTime;
+                // alpha = accumulator / Physics.PhysicConstants.FixedDeltaTime;
 
                 /*
                 // Semi-FixedUpdate for Physics

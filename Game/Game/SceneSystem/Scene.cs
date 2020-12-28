@@ -46,7 +46,7 @@ namespace Game.SceneSystem
             SortRenderers();
             foreach (CRender cRender in renderers)
             {
-                if (cRender.MyGameObject.Active) 
+                if (cRender.MyGameObject.Active)
                 {
                     cRender.Update(deltaTime);
                 }

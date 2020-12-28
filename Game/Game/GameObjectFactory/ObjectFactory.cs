@@ -8,63 +8,6 @@ namespace Game.GameObjectFactory
 {
     public static class ObjectFactory
     {
-        public static GameObject BuildPlatform(Scene scene, Vector2 position, int length)
-        {
-            GameObject floor = new GameObject(scene, "Floor");
-            Vector2 size = new Vector2(length, 0.2f);
-            floor.Transform.Position = position;
-            floor.Transform.Scale = size;
-
-            floor.AddComponent<CRender>();
-            floor.AddComponent<CBoxCollider>();
-            floor.GetComponent<CBoxCollider>().Geometry.Size = size;
-
-            floor.AddComponent<CRigidBody>();
-            CRigidBody rb = floor.GetComponent<CRigidBody>();
-            rb.Static = true;
-
-            return floor;
-        }
-
-        public static GameObject BuildWall(Scene scene, Vector2 position, int height)
-        {
-            GameObject wall = new GameObject(scene, "Wall");
-            Vector2 size = new Vector2(0.2f, height);
-            wall.Transform.Position = position;
-            wall.Transform.Scale = size;
-
-            wall.AddComponent<CRender>();
-            wall.AddComponent<CBoxCollider>();
-            wall.GetComponent<CBoxCollider>().Geometry.Size = size;
-
-            wall.AddComponent<CRigidBody>();
-            CRigidBody rb = wall.GetComponent<CRigidBody>();
-            rb.Static = true;
-
-            return wall;
-        }
-
-        public static GameObject BuildBall(Scene scene, Vector2 position)
-        {
-            GameObject ball = new GameObject(scene, "Ball");
-            ball.Transform.Position = position;
-
-            ball.AddComponent<CRender>();
-            ball.GetComponent<CRender>().SetSize(0.2f, 0.2f);
-            ball.AddComponent<CCircleCollider>();
-            ball.GetComponent<CCircleCollider>().Geometry.Size = new Vector2(0.2f, 0f);
-            ball.AddComponent<CTriggerEventTest>();
-            ball.AddComponent<CRigidBody>();
-
-            ball.AddComponent<CBoxCollider>();
-            CBoxCollider trigger = ball.GetComponent<CBoxCollider>();
-            trigger.IsTrigger = true;
-            trigger.Offset = new Vector2(0f, -0.2f);
-            trigger.Geometry.Size = new Vector2(0.2f, 0.1f);
-
-            return ball;
-        }
-
         public static GameObject BuildSprite(Scene scene, Vector2 position)
         {
             GameObject sprite = new GameObject(scene);
@@ -160,65 +103,6 @@ namespace Game.GameObjectFactory
             combatController.RightHitbox = attackHitboxRight;
 
             return player;
-        }
-
-        public static GameObject BuildSkeletonEnemy(Scene scene, Vector2 position)
-        {
-            GameObject enemy = new GameObject(scene, "Enemy");
-            enemy.Transform.Position = position;
-
-            // render
-            enemy.AddComponent<CRender>();
-            CRender render = enemy.GetComponent<CRender>();
-            render.LoadAndSetTexture("Content.Skeleton.SkeletonIdle.png");
-            render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 1f / 11f, 1f));
-            render.SetSize(2f, 2f);
-            render.SetOffset(0.3f, 0f);
-
-            // hitboxes and triggers
-            enemy.AddComponent<CBoxCollider>();
-            CBoxCollider hitbox = enemy.GetComponent<CBoxCollider>();
-            hitbox.Geometry.Size = new Vector2(1f, 1.6f);
-            enemy.AddComponent<CBoxCollider>();
-            CBoxCollider left = enemy.GetComponents<CBoxCollider>()[1];
-            enemy.AddComponent<CBoxCollider>();
-            CBoxCollider right = enemy.GetComponents<CBoxCollider>()[2];
-            left.IsTrigger = true;
-            right.IsTrigger = true;
-            left.Geometry.Size = new Vector2(0.8f, 1.8f);
-            right.Geometry.Size = new Vector2(0.8f, 1.8f);
-            left.Offset = new Vector2(-0.7f, 0f);
-            right.Offset = new Vector2(0.7f, 0f);
-
-            enemy.AddComponent<CRigidBody>();
-
-            enemy.AddComponent<CEnemyAI>();
-            CEnemyAI ai = enemy.GetComponent<CEnemyAI>();
-            ai.SetupLeftTrigger(left);
-            ai.SetupRightTrigger(right);
-            ai.RigidBody = enemy.GetComponent<CRigidBody>();
-
-            // animations
-            enemy.AddComponent<CAnimationSystem>();
-            CAnimationSystem animationSystem = enemy.GetComponent<CAnimationSystem>();
-            Animation idle = new Animation("Idle", 11, 0, true);
-            animationSystem.Renderer = render;
-            animationSystem.AddAnimation(idle);
-            animationSystem.SetDefaultColumnsAndRows(11, 1);
-            animationSystem.SetStartAnimation(idle);
-            Animation walk = new Animation("Walk", 13, 0, true, true, "Content.Skeleton.SkeletonWalk.png", 13, 1);
-            animationSystem.AddAnimation(walk);
-            Animation hurt = new Animation("Hurt", 8, 0, false, true, "Content.Skeleton.SkeletonHit.png", 8, 1);
-            animationSystem.AddAnimation(hurt);
-            ai.AnimationSystem = animationSystem;
-
-            // combat
-            enemy.AddComponent<CCombat>();
-            CCombat combat = enemy.GetComponent<CCombat>();
-            combat.AnimationSystem = animationSystem;
-            combat.MaxHealth = 30;
-
-            return enemy;
         }
 
         public static GameObject BuildPowerDown(Scene scene, Vector2 position)
