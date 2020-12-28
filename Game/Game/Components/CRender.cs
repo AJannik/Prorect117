@@ -26,6 +26,8 @@ namespace Game.Components
 
         public int Texture { get; private set; }
 
+        public Color TintColor { get; set; } = Color.White;
+
         private float SizeX { get; set; } = 1f;
 
         private float SizeY { get; set; } = 1f;
@@ -41,6 +43,7 @@ namespace Game.Components
         public void Draw()
         {
             GL.BindTexture(TextureTarget.Texture2D, this.Texture);
+            GL.Color3(TintColor);
 
             Vector2 pos1;
             Vector2 pos2;
@@ -95,11 +98,20 @@ namespace Game.Components
             }
 
             GL.End();
+            GL.Color3(Color.White);
+            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
         public void LoadAndSetTexture(string name)
         {
             Texture = TextureTools.LoadFromResource(name);
+
+            // set options
+            GL.BindTexture(TextureTarget.Texture2D, Texture);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
+            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
         public void SetTexture(int tex)
