@@ -36,19 +36,10 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.Active)
-            {
-                return;
-            }
         }
 
         public void Draw()
         {
-            if (!MyGameObject.Active || !Visible)
-            {
-                return;
-            }
-
             GL.BindTexture(TextureTarget.Texture2D, this.Texture);
 
             Vector2 pos1;

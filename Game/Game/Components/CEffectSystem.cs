@@ -10,10 +10,6 @@ namespace Game.Components
 {
     public class CEffectSystem : IComponent
     {
-        public CEffectSystem()
-        {
-        }
-
         public GameObject MyGameObject { get; set; } = null;
 
         private List<Effect> Effects { get; set; } = new List<Effect>();

@@ -6,10 +6,6 @@ namespace Game.Components
 {
     public class CPlayerCombatController : IComponent
     {
-        public CPlayerCombatController()
-        {
-        }
-
         public GameObject MyGameObject { get; set; } = null;
 
         public CAnimationSystem AnimationSystem { get; set; }
@@ -26,11 +22,6 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.Active)
-            {
-                return;
-            }
-
             var mouse = Mouse.GetState();
             if (mouse.IsButtonDown(MouseButton.Left) && AnimationSystem.Renderer.Flipped)
             {

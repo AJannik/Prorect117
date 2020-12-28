@@ -26,11 +26,6 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.Active)
-            {
-                return;
-            }
-
             Geometry.Center = MyGameObject.Transform.WorldPosition + Offset;
 
             if (IsTrigger)

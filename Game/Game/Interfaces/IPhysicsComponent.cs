@@ -2,6 +2,8 @@
 {
     public interface IPhysicsComponent
     {
+        public GameObject MyGameObject { get; set; }
+
         public void FixedUpdate(float deltaTime);
     }
 }

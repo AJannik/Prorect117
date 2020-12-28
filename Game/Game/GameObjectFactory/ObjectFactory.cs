@@ -8,63 +8,6 @@ namespace Game.GameObjectFactory
 {
     public static class ObjectFactory
     {
-        public static GameObject BuildPlatform(Scene scene, Vector2 position, int length)
-        {
-            GameObject floor = new GameObject(scene, "Floor");
-            Vector2 size = new Vector2(length, 0.2f);
-            floor.Transform.Position = position;
-            floor.Transform.Scale = size;
-
-            floor.AddComponent<CRender>();
-            floor.AddComponent<CBoxCollider>();
-            floor.GetComponent<CBoxCollider>().Geometry.Size = size;
-
-            floor.AddComponent<CRigidBody>();
-            CRigidBody rb = floor.GetComponent<CRigidBody>();
-            rb.Static = true;
-
-            return floor;
-        }
-
-        public static GameObject BuildWall(Scene scene, Vector2 position, int height)
-        {
-            GameObject wall = new GameObject(scene, "Wall");
-            Vector2 size = new Vector2(0.2f, height);
-            wall.Transform.Position = position;
-            wall.Transform.Scale = size;
-
-            wall.AddComponent<CRender>();
-            wall.AddComponent<CBoxCollider>();
-            wall.GetComponent<CBoxCollider>().Geometry.Size = size;
-
-            wall.AddComponent<CRigidBody>();
-            CRigidBody rb = wall.GetComponent<CRigidBody>();
-            rb.Static = true;
-
-            return wall;
-        }
-
-        public static GameObject BuildBall(Scene scene, Vector2 position)
-        {
-            GameObject ball = new GameObject(scene, "Ball");
-            ball.Transform.Position = position;
-
-            ball.AddComponent<CRender>();
-            ball.GetComponent<CRender>().SetSize(0.2f, 0.2f);
-            ball.AddComponent<CCircleCollider>();
-            ball.GetComponent<CCircleCollider>().Geometry.Size = new Vector2(0.2f, 0f);
-            ball.AddComponent<CTriggerEventTest>();
-            ball.AddComponent<CRigidBody>();
-
-            ball.AddComponent<CBoxCollider>();
-            CBoxCollider trigger = ball.GetComponent<CBoxCollider>();
-            trigger.IsTrigger = true;
-            trigger.Offset = new Vector2(0f, -0.2f);
-            trigger.Geometry.Size = new Vector2(0.2f, 0.1f);
-
-            return ball;
-        }
-
         public static GameObject BuildSprite(Scene scene, Vector2 position)
         {
             GameObject sprite = new GameObject(scene);
