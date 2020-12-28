@@ -12,8 +12,11 @@ namespace Game.Components
         public CRender()
         {
             Texture = TextureTools.LoadFromResource("Content.default.png");
-            TexCoords = new Rect(0f, 0f, 1f, 1f);
-            Offset = new Vector2(0, 0);
+            GL.BindTexture(TextureTarget.Texture2D, Texture);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
+            GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
         public GameObject MyGameObject { get; set; } = null;
@@ -32,9 +35,9 @@ namespace Game.Components
 
         private float SizeY { get; set; } = 1f;
 
-        private Rect TexCoords { get; set; }
+        private Rect TexCoords { get; set; } = new Rect(0f, 0f, 1f, 1f);
 
-        private Vector2 Offset { get; set; }
+        private Vector2 Offset { get; set; } = new Vector2(0, 0);
 
         public void Update(float deltaTime)
         {
