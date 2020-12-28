@@ -18,7 +18,7 @@ namespace Game.Components
 
         public GameObject MyGameObject { get; set; } = null;
 
-        public int Layer { get; set; }
+        public int Layer { get; set; } = 10;
 
         public bool Flipped { get; set; } = false;
 
