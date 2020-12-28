@@ -15,6 +15,8 @@ namespace Game.SceneSystem
         private List<IComponent> genericComponents = new List<IComponent>();
         private List<IPhysicsComponent> physicsComponents = new List<IPhysicsComponent>();
 
+        private List<GameObject> deleteList = new List<GameObject>();
+
         public Debug Debug { get; } = new Debug();
 
         public void Update(float deltaTime)
@@ -59,6 +61,8 @@ namespace Game.SceneSystem
                     component.Update(deltaTime);
                 }
             }
+
+            DeleteGameObjects();
         }
 
         public void FixedUpdate(float deltaTime)
@@ -141,8 +145,7 @@ namespace Game.SceneSystem
 
         public void RemoveGameObject(GameObject gameObject)
         {
-            gameObjects.Remove(gameObject);
-            RemoveComponentsFromLists(gameObject);
+            deleteList.Add(gameObject);
         }
 
         public IReadOnlyList<GameObject> GetGameObjects()
@@ -245,6 +248,17 @@ namespace Game.SceneSystem
             {
                 genericComponents.Remove(component);
             }
+        }
+
+        private void DeleteGameObjects()
+        {
+            foreach (GameObject gameObject in deleteList)
+            {
+                gameObjects.Remove(gameObject);
+                RemoveComponentsFromLists(gameObject);
+            }
+
+            deleteList.Clear();
         }
 
         private void SortRenderers()

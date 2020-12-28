@@ -31,6 +31,7 @@ namespace UnitTests
             GameObject gameObject3 = new GameObject(scene);
 
             scene.RemoveGameObject(gameObject3);
+            scene.Update(0f);
 
             Assert.AreEqual(2, scene.GetGameObjects().Count);
         }
@@ -70,6 +71,7 @@ namespace UnitTests
             gameObject1.AddComponent<DummyComponent1>();
             gameObject2.AddComponent<DummyComponent1>();
             scene.RemoveGameObject(gameObject2);
+            scene.Update(0f);
             
             Assert.AreEqual(1, scene.GetGenericComponents().Count);            
         }
