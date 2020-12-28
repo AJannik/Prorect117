@@ -47,7 +47,7 @@ namespace Game.Components
                 return;
             }
 
-            if (!MyGameObject.Active || Static)
+            if (Static)
             {
                 return;
             }

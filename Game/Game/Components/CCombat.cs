@@ -48,11 +48,6 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.Active)
-            {
-                return;
-            }
-
             if (NextAttackTime > 0f)
             {
                 NextAttackTime -= deltaTime;

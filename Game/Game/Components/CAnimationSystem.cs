@@ -12,10 +12,6 @@ namespace Game.Components
     {
         private CRender render;
 
-        public CAnimationSystem()
-        {
-        }
-
         public GameObject MyGameObject { get; set; } = null;
 
         public Rect TexCoords { get; private set; }
@@ -58,11 +54,6 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.Active)
-            {
-                return;
-            }
-
             if (Renderer == null)
             {
                 return;

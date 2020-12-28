@@ -6,10 +6,6 @@ namespace Game.Components
 {
     public class CPlayerController : IComponent
     {
-        public CPlayerController()
-        {
-        }
-
         public GameObject MyGameObject { get; set; } = null;
 
         public CRigidBody RigidBody { get; set; } = null;
@@ -41,11 +37,6 @@ namespace Game.Components
 
         public void Update(float deltaTime)
         {
-            if (!MyGameObject.Active)
-            {
-                return;
-            }
-
             var keyboard = Keyboard.GetState();
 
             float axisLeftRight = keyboard.IsKeyDown(Key.A) ? -1.0f : keyboard.IsKeyDown(Key.D) ? 1.0f : 0.0f;

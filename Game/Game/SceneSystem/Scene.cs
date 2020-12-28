@@ -21,28 +21,43 @@ namespace Game.SceneSystem
         {
             foreach (CCamera cCamera in cameras)
             {
-                cCamera.Update(deltaTime);
+                if (cCamera.MyGameObject.Active)
+                {
+                    cCamera.Update(deltaTime);
+                }
             }
 
             foreach (CBoxCollider boxCollider in boxColliders)
             {
-                boxCollider.Update(deltaTime);
+                if (boxCollider.MyGameObject.Active)
+                {
+                    boxCollider.Update(deltaTime);
+                }
             }
 
             foreach (CCircleCollider circleCollider in circleColliders)
             {
-                circleCollider.Update(deltaTime);
+                if (circleCollider.MyGameObject.Active)
+                {
+                    circleCollider.Update(deltaTime);
+                }
             }
 
             SortRenderers();
             foreach (CRender cRender in renderers)
             {
-                cRender.Update(deltaTime);
+                if (cRender.MyGameObject.Active) 
+                {
+                    cRender.Update(deltaTime);
+                }
             }
 
             foreach (IComponent component in genericComponents)
             {
-                component.Update(deltaTime);
+                if (component.MyGameObject.Active)
+                {
+                    component.Update(deltaTime);
+                }
             }
         }
 
@@ -50,7 +65,10 @@ namespace Game.SceneSystem
         {
             foreach (IPhysicsComponent physicsComponent in physicsComponents)
             {
-                physicsComponent.FixedUpdate(deltaTime);
+                if (physicsComponent.MyGameObject.Active)
+                {
+                    physicsComponent.FixedUpdate(deltaTime);
+                }
             }
         }
 
@@ -58,7 +76,10 @@ namespace Game.SceneSystem
         {
             foreach (CCamera camera in cameras)
             {
-                camera.Resize(width, height);
+                if (camera.MyGameObject.Active)
+                {
+                    camera.Resize(width, height);
+                }
             }
         }
 
@@ -67,28 +88,45 @@ namespace Game.SceneSystem
             GL.Clear(ClearBufferMask.ColorBufferBit);
             foreach (CCamera camera in cameras)
             {
-                camera.Draw();
+                if (camera.MyGameObject.Active)
+                {
+                    camera.Draw();
+                }
             }
 
             foreach (CRender render in renderers)
             {
-                render.Draw();
+                if (render.MyGameObject.Active)
+                {
+                    render.Draw();
+                }
             }
 
             if (debugMode)
             {
-                foreach (CBoxCollider boxCollider in boxColliders)
+                DebugDraw();
+            }
+        }
+
+        public void DebugDraw()
+        {
+            foreach (CBoxCollider boxCollider in boxColliders)
+            {
+                if (boxCollider.MyGameObject.Active)
                 {
                     boxCollider.DebugDraw();
                 }
+            }
 
-                foreach (CCircleCollider circleCollider in circleColliders)
+            foreach (CCircleCollider circleCollider in circleColliders)
+            {
+                if (circleCollider.MyGameObject.Active)
                 {
                     circleCollider.DebugDraw();
                 }
-
-                Debug.DebugDraw();
             }
+
+            Debug.DebugDraw();
         }
 
         public void AddGameObject(GameObject gameObject)
