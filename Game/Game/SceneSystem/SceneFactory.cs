@@ -51,9 +51,9 @@ namespace Game.SceneSystem
             ObjectFactory.BuildWall(scene, new Vector2(-1.9f, 5.7f), 7);
             ObjectFactory.BuildWall(scene, new Vector2(6f, 2.5f), 5);
 
-            ObjectFactory.BuildSkeletonEnemy(scene, new Vector2(10f, 1f));
-            ObjectFactory.BuildSkeletonEnemy(scene, new Vector2(0f, 1f));
-            ObjectFactory.BuildSkeletonEnemy(scene, new Vector2(0f, 10.2f));
+            ObjectFactory.BuildBanditEnemy(scene, new Vector2(10f, 1f));
+            ObjectFactory.BuildBanditEnemy(scene, new Vector2(0f, 1f));
+            ObjectFactory.BuildBanditEnemy(scene, new Vector2(0f, 10.2f));
 
             return scene;
         }

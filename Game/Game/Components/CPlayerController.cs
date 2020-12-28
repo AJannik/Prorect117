@@ -66,12 +66,12 @@ namespace Game.Components
                 {
                     // falling after jump
                     Jumping = false;
-                    RigidBody.GravityScale = 4f;
+                    RigidBody.GravityScale = 3f;
                 }
             }
             else
             {
-                RigidBody.GravityScale = 2f;
+                RigidBody.GravityScale = 3f;
             }
 
             // updating facingRight and animations

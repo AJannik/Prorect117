@@ -95,6 +95,7 @@ namespace Game.GameObjectFactory
             render.LoadAndSetTexture("Content.adventurer.png");
             render.SetTexCoords(new SimpleGeometry.Rect(0.0f, 0.0f, 1f / 15f, 1.0f));
             render.SetOffset(0.0f, 0.1f);
+            render.Layer = 12;
 
             player.AddComponent<CBoxCollider>();
             player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(0.85f, 1.6f);
@@ -134,6 +135,9 @@ namespace Game.GameObjectFactory
             controll.AddAnimation(attack2);
             Animation attack3 = new Animation("Attack3", 3, 44, false);
             controll.AddAnimation(attack3);
+            Animation hurt = new Animation("Hurt", 1, 136, false);
+            hurt.TimeBetweenTwoFrames = 1 / 3f;
+            controll.AddAnimation(hurt);
             player.GetComponent<CPlayerController>().AnimationSystem = controll;
 
             // add Combat Components
@@ -162,7 +166,7 @@ namespace Game.GameObjectFactory
             return player;
         }
 
-        public static GameObject BuildSkeletonEnemy(Scene scene, Vector2 position)
+        public static GameObject BuildBanditEnemy(Scene scene, Vector2 position)
         {
             GameObject enemy = new GameObject(scene, "Enemy");
             enemy.Transform.Position = position;
@@ -170,10 +174,11 @@ namespace Game.GameObjectFactory
             // render
             enemy.AddComponent<CRender>();
             CRender render = enemy.GetComponent<CRender>();
-            render.LoadAndSetTexture("Content.Skeleton.SkeletonIdle.png");
-            render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 1f / 11f, 1f));
-            render.SetSize(2f, 2f);
-            render.SetOffset(0.3f, 0f);
+            render.LoadAndSetTexture("Content.LightBandit.png");
+            render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 1f / 8f, 1f / 5f));
+            render.SetSize(2.5f, 2.5f);
+            render.SetOffset(0.0f, 0.3f);
+            render.Layer = 11;
 
             // hitboxes and triggers
             enemy.AddComponent<CBoxCollider>();
@@ -201,15 +206,17 @@ namespace Game.GameObjectFactory
             // animations
             enemy.AddComponent<CAnimationSystem>();
             CAnimationSystem animationSystem = enemy.GetComponent<CAnimationSystem>();
-            Animation idle = new Animation("Idle", 11, 0, true);
+            Animation idle = new Animation("Idle", 4, 0, true);
             animationSystem.Renderer = render;
             animationSystem.AddAnimation(idle);
-            animationSystem.SetDefaultColumnsAndRows(11, 1);
+            animationSystem.SetDefaultColumnsAndRows(8, 5);
             animationSystem.SetStartAnimation(idle);
-            Animation walk = new Animation("Walk", 13, 0, true, true, "Content.Skeleton.SkeletonWalk.png", 13, 1);
+            Animation walk = new Animation("Walk", 8, 8, true);
             animationSystem.AddAnimation(walk);
-            Animation hurt = new Animation("Hurt", 8, 0, false, true, "Content.Skeleton.SkeletonHit.png", 8, 1);
+            Animation hurt = new Animation("Hurt", 3, 32, false);
             animationSystem.AddAnimation(hurt);
+            Animation attack = new Animation("Attack", 8, 16, false);
+            animationSystem.AddAnimation(attack);
             ai.AnimationSystem = animationSystem;
 
             // combat
@@ -217,6 +224,7 @@ namespace Game.GameObjectFactory
             CCombat combat = enemy.GetComponent<CCombat>();
             combat.AnimationSystem = animationSystem;
             combat.MaxHealth = 30;
+            ai.Combat = combat;
 
             return enemy;
         }

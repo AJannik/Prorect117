@@ -30,7 +30,9 @@ namespace Game.Components
 
         public CBoxCollider RightTrigger { get; set; }
 
-        public float MoveSpeed { get; private set; } = 2f;
+        public CCombat Combat { get; set; }
+
+        public float MoveSpeed { get; private set; } = 1.5f;
 
         public EnemyState State { get; private set; } = EnemyState.Idle;
 
@@ -42,6 +44,10 @@ namespace Game.Components
 
         private int RightOnGround { get; set; } = 0;
 
+        private bool AttackDisabled { get; set; } = false;
+
+        private Random Randomizer { get; set; } = new Random();
+
         public void Update(float deltaTime)
         {
             if (!MyGameObject.Active)
@@ -52,6 +58,8 @@ namespace Game.Components
             switch (State)
             {
                 case EnemyState.Idle:
+                    AnimationSystem.PlayAnimation("Idle", false, FacingRight);
+                    RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
                     break;
                 case EnemyState.Running:
                     if (RightOnGround < 1)
@@ -65,8 +73,10 @@ namespace Game.Components
                     }
 
                     RigidBody.Velocity = new Vector2((FacingRight ? 1 : -1) * MoveSpeed, RigidBody.Velocity.Y);
+                    AnimationSystem.PlayAnimation("Walk", false, FacingRight);
                     break;
                 case EnemyState.Attacking:
+                    TelegraphAttack();
                     break;
                 default:
                     State = EnemyState.Idle;
@@ -78,13 +88,24 @@ namespace Game.Components
                 if (State == EnemyState.Idle)
                 {
                     State = EnemyState.Running;
-                    TimeInState = 5f;
+                    TimeInState = Randomizer.Next(3, 15) + (float)Randomizer.NextDouble();
+                }
+                else if (State == EnemyState.Attacking)
+                {
+                    AttackDisabled = false;
+                    State = EnemyState.Idle;
+                    TimeInState = TimeInState = Randomizer.Next(1, 5) + (float)Randomizer.NextDouble();
                 }
                 else
                 {
-                    TimeInState = 5f;
+                    TimeInState = Randomizer.Next(1, 7) + (float)Randomizer.NextDouble();
                     State = EnemyState.Idle;
                 }
+            }
+
+            if (TimeInState > 0f)
+            {
+                TimeInState -= deltaTime;
             }
         }
 
@@ -102,17 +123,34 @@ namespace Game.Components
             RightTrigger.TriggerEntered += RightEntered;
         }
 
+        private void Attack()
+        {
+            State = EnemyState.Attacking;
+            TimeInState = 1f;
+            AnimationSystem.PlayAnimation("Attack", true, FacingRight);
+            RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
+        }
+
+        private void TelegraphAttack()
+        {
+            if (TimeInState < 0.67 && !AttackDisabled)
+            {
+                Combat.Attack(FacingRight ? RightTrigger : LeftTrigger, 1, false);
+                AttackDisabled = true;
+            }
+        }
+
         private void LeftEntered(object sender, IComponent e)
         {
-            if (e.MyGameObject.Name == "Player")
+            if (e.MyGameObject.Name == "Player" && State != EnemyState.Attacking)
             {
-                // attack left
+                FacingRight = false;
+                Attack();
             }
 
             if (e.MyGameObject.Name == "Wall")
             {
                 FacingRight = true;
-                Console.WriteLine("Entered Wall");
             }
 
             if (e.MyGameObject.Name == "Floor")
@@ -131,15 +169,15 @@ namespace Game.Components
 
         private void RightEntered(object sender, IComponent e)
         {
-            if (e.MyGameObject.Name == "Player")
+            if (e.MyGameObject.Name == "Player" && State != EnemyState.Attacking)
             {
-                // attack right
+                FacingRight = true;
+                Attack();
             }
 
             if (e.MyGameObject.Name == "Wall")
             {
                 FacingRight = false;
-                Console.WriteLine("Entered Wall");
             }
 
             if (e.MyGameObject.Name == "Floor")
