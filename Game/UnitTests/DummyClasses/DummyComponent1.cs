@@ -3,7 +3,7 @@ using Game.Interfaces;
 
 namespace UnitTests.DummyClasses
 {
-    public class DummyComponent1 : IComponent
+    public class DummyComponent1 : IComponent, IUpdateable
     {
         public GameObject MyGameObject { get; set; } = null;
 

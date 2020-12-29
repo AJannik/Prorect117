@@ -129,7 +129,7 @@ namespace Game.SceneSystem
             return circleColliders;
         }
 
-        public IReadOnlyList<IUpdateable> GetGenericComponents()
+        public IReadOnlyList<IUpdateable> GetUpdateables()
         {
             return updateables;
         }
