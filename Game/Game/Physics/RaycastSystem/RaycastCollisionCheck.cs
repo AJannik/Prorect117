@@ -55,6 +55,7 @@ namespace Game.Physics.RaycastSystem
             }
 
             hit.HitPoint = ray.StartPos + (ray.Direction * t);
+            hit.Distance = t;
             hit.ObjectNormal = hit.HitPoint - circle.Center;
 
             return true;
@@ -91,11 +92,13 @@ namespace Game.Physics.RaycastSystem
             if (tmin < 0f)
             {
                 hit.HitPoint = ray.StartPos + (ray.Direction * tmax);
+                hit.Distance = tmax;
                 hit.ObjectNormal = CalculateNormal(hit.HitPoint, rect);
                 return true; // tmax
             }
 
             hit.HitPoint = ray.StartPos + (ray.Direction * tmin);
+            hit.Distance = tmin;
             hit.ObjectNormal = CalculateNormal(hit.HitPoint, rect);
             return true; // tmin
         }

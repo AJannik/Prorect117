@@ -8,6 +8,8 @@ namespace Game.Physics.RaycastSystem
 
         public GameObject HitObject { get; set; }
 
+        public float Distance { get; set; }
+
         public Vector2 HitPoint { get; set; }
 
         /// <summary>
