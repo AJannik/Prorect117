@@ -13,7 +13,7 @@ namespace Game.Components
     {
         public CTextRender()
         {
-            // LoadAndSetSpriteSheet("Content.Font.png");
+            LoadAndSetSpriteSheet("Content.Font.png");
         }
 
         public GameObject MyGameObject { get; set; } = null;
@@ -28,7 +28,7 @@ namespace Game.Components
 
         public Vector2 Offset { get; set; } = Vector2.Zero;
 
-        public Color TintColor { get; set; } = Color.White;
+        public Color FontColor { get; set; } = Color.White;
 
         public uint FirstCharacter { get; set; } = 32;
 
@@ -67,7 +67,7 @@ namespace Game.Components
         private void DrawSingle(Rect rect, Rect texCoords)
         {
             GL.BindTexture(TextureTarget.Texture2D, SpriteSheet);
-            GL.Color3(TintColor);
+            GL.Color3(FontColor);
 
             // calculate the corners
             Vector2 pos1 = new Vector2(rect.MinX + Offset.X, rect.MinY + Offset.Y);
