@@ -31,7 +31,9 @@ namespace Game.GameObjectFactory
             wall.Transform.Position = position;
             wall.Transform.Scale = size;
 
-            wall.AddComponent<CRender>();
+            wall.AddComponent<CTileRenderer>();
+            wall.GetComponent<CTileRenderer>().Height = height;
+            wall.GetComponent<CTileRenderer>().Width = 1;
             wall.AddComponent<CBoxCollider>();
             wall.GetComponent<CBoxCollider>().Geometry.Size = size;
 

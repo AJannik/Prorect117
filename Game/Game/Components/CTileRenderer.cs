@@ -20,6 +20,8 @@ namespace Game.Components
 
         public int Texture { get; set; }
 
+        public int Layer { get; set; } = 10;
+
         public Color TintColor { get; set; } = Color.White;
 
         public int Width { get; set; } = 3;
