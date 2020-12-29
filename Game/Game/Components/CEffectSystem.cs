@@ -8,7 +8,7 @@ using Game.Tools;
 
 namespace Game.Components
 {
-    public class CEffectSystem : IComponent
+    public class CEffectSystem : IComponent, IUpdateable
     {
         public GameObject MyGameObject { get; set; } = null;
 

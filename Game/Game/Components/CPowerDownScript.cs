@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Game.Interfaces;
+﻿using Game.Interfaces;
 using Game.Tools;
 
 namespace Game.Components
@@ -11,10 +8,6 @@ namespace Game.Components
         public GameObject MyGameObject { get; set; } = null;
 
         public CCircleCollider Trigger { get; set; }
-
-        public void Update(float deltaTime)
-        {
-        }
 
         public void SetupTrigger(CCircleCollider trigger)
         {

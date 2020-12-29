@@ -4,7 +4,7 @@ using System;
 
 namespace UnitTests.DummyClasses
 {
-    public class DummyComponent2 : IComponent
+    public class DummyComponent2 : IComponent, IUpdateable
     {
         public GameObject MyGameObject { get; set; } = null;
 

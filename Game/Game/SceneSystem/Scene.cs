@@ -9,12 +9,13 @@ namespace Game.SceneSystem
     public class Scene
     {
         private List<GameObject> gameObjects = new List<GameObject>();
-        private List<CRender> renderers = new List<CRender>();
-        private List<CCamera> cameras = new List<CCamera>();
+        private List<IDrawable> drawables = new List<IDrawable>();
+        private List<IUpdateable> updateables = new List<IUpdateable>();
+        private List<IPhysicsComponent> physicsComponents = new List<IPhysicsComponent>();
+        private List<IDebugDrawable> debugDrawables = new List<IDebugDrawable>();
+        private List<IResizeable> resizeables = new List<IResizeable>();
         private List<CBoxCollider> boxColliders = new List<CBoxCollider>();
         private List<CCircleCollider> circleColliders = new List<CCircleCollider>();
-        private List<IComponent> genericComponents = new List<IComponent>();
-        private List<IPhysicsComponent> physicsComponents = new List<IPhysicsComponent>();
 
         private List<GameObject> deleteList = new List<GameObject>();
 
@@ -29,44 +30,16 @@ namespace Game.SceneSystem
 
         public void Update(float deltaTime)
         {
-            foreach (CCamera cCamera in cameras)
-            {
-                if (cCamera.MyGameObject.Active)
-                {
-                    cCamera.Update(deltaTime);
-                }
-            }
-
-            foreach (CBoxCollider boxCollider in boxColliders)
-            {
-                if (boxCollider.MyGameObject.Active)
-                {
-                    boxCollider.Update(deltaTime);
-                }
-            }
-
-            foreach (CCircleCollider circleCollider in circleColliders)
-            {
-                if (circleCollider.MyGameObject.Active)
-                {
-                    circleCollider.Update(deltaTime);
-                }
-            }
-
             SortRenderers();
-            foreach (CRender cRender in renderers)
+            foreach (IUpdateable updateAble in updateables)
             {
-                if (cRender.MyGameObject.Active)
+                if ((updateAble as IComponent).MyGameObject.Active)
                 {
-                    cRender.Update(deltaTime);
+                    updateAble.Update(deltaTime);
                 }
-            }
-
-            foreach (IComponent component in genericComponents)
-            {
-                if (component.MyGameObject.Active)
+                else
                 {
-                    component.Update(deltaTime);
+                    updateAble.Update(deltaTime);
                 }
             }
 
@@ -77,7 +50,7 @@ namespace Game.SceneSystem
         {
             foreach (IPhysicsComponent physicsComponent in physicsComponents)
             {
-                if (physicsComponent.MyGameObject.Active)
+                if ((physicsComponent as IComponent).MyGameObject.Active)
                 {
                     physicsComponent.FixedUpdate(deltaTime);
                 }
@@ -86,11 +59,11 @@ namespace Game.SceneSystem
 
         public void Resize(int width, int height)
         {
-            foreach (CCamera camera in cameras)
+            foreach (IResizeable resizeable in resizeables)
             {
-                if (camera.MyGameObject.Active)
+                if ((resizeable as IComponent).MyGameObject.Active)
                 {
-                    camera.Resize(width, height);
+                    resizeable.Resize(width, height);
                 }
             }
         }
@@ -98,19 +71,12 @@ namespace Game.SceneSystem
         public void Draw(bool debugMode)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
-            foreach (CCamera camera in cameras)
-            {
-                if (camera.MyGameObject.Active)
-                {
-                    camera.Draw();
-                }
-            }
 
-            foreach (CRender render in renderers)
+            foreach (IDrawable drawable in drawables)
             {
-                if (render.MyGameObject.Active)
+                if ((drawable as IComponent).MyGameObject.Active)
                 {
-                    render.Draw();
+                    drawable.Draw();
                 }
             }
 
@@ -122,19 +88,11 @@ namespace Game.SceneSystem
 
         public void DebugDraw()
         {
-            foreach (CBoxCollider boxCollider in boxColliders)
+            foreach (IDebugDrawable item in debugDrawables)
             {
-                if (boxCollider.MyGameObject.Active)
+                if ((item as IComponent).MyGameObject.Active)
                 {
-                    boxCollider.DebugDraw();
-                }
-            }
-
-            foreach (CCircleCollider circleCollider in circleColliders)
-            {
-                if (circleCollider.MyGameObject.Active)
-                {
-                    circleCollider.DebugDraw();
+                    item.DebugDraw();
                 }
             }
 
@@ -161,11 +119,6 @@ namespace Game.SceneSystem
             return gameObjects;
         }
 
-        public IReadOnlyList<CRender> GetCRenders()
-        {
-            return renderers;
-        }
-
         public IReadOnlyList<CBoxCollider> GetCBoxColliders()
         {
             return boxColliders;
@@ -176,9 +129,9 @@ namespace Game.SceneSystem
             return circleColliders;
         }
 
-        public IReadOnlyList<IComponent> GetGenericComponents()
+        public IReadOnlyList<IUpdateable> GetUpdateables()
         {
-            return genericComponents;
+            return updateables;
         }
 
         public void AddComponent(IComponent component)
@@ -191,22 +144,40 @@ namespace Game.SceneSystem
                 }
             }
 
-            if (component.GetType() == typeof(CRender))
+            if (component is IDrawable)
             {
-                if (!renderers.Contains((CRender)component))
+                if (!drawables.Contains((IDrawable)component))
                 {
-                    int index = GetIndex((CRender)component);
-                    renderers.Insert(index, (CRender)component);
+                    int index = GetIndex((IDrawable)component);
+                    drawables.Insert(index, (IDrawable)component);
                 }
             }
-            else if (component.GetType() == typeof(CCamera))
+
+            if (component is IUpdateable)
             {
-                if (!cameras.Contains((CCamera)component))
+                if (!updateables.Contains((IUpdateable)component))
                 {
-                    cameras.Add((CCamera)component);
+                    updateables.Add((IUpdateable)component);
                 }
             }
-            else if (component.GetType() == typeof(CBoxCollider))
+
+            if (component is IResizeable)
+            {
+                if (!resizeables.Contains((IResizeable)component))
+                {
+                    resizeables.Add((IResizeable)component);
+                }
+            }
+
+            if (component is IDebugDrawable)
+            {
+                if (!debugDrawables.Contains((IDebugDrawable)component))
+                {
+                    debugDrawables.Add((IDebugDrawable)component);
+                }
+            }
+
+            if (component.GetType() == typeof(CBoxCollider))
             {
                 if (!boxColliders.Contains((CBoxCollider)component))
                 {
@@ -220,13 +191,6 @@ namespace Game.SceneSystem
                     circleColliders.Add((CCircleCollider)component);
                 }
             }
-            else
-            {
-                if (!genericComponents.Contains(component))
-                {
-                    genericComponents.Add(component);
-                }
-            }
         }
 
         public void RemoveComponent(IComponent component)
@@ -236,25 +200,33 @@ namespace Game.SceneSystem
                 physicsComponents.Remove((IPhysicsComponent)component);
             }
 
-            if (component.GetType() == typeof(CRender))
+            if (component is IDrawable)
             {
-                renderers.Remove((CRender)component);
+                drawables.Remove((IDrawable)component);
             }
-            else if (component.GetType() == typeof(CCamera))
+
+            if (component is IUpdateable)
             {
-                cameras.Remove((CCamera)component);
+                updateables.Remove((IUpdateable)component);
             }
-            else if (component.GetType() == typeof(CBoxCollider))
+
+            if (component is IResizeable)
+            {
+                resizeables.Remove((IResizeable)component);
+            }
+
+            if (component is IDebugDrawable)
+            {
+                debugDrawables.Remove((IDebugDrawable)component);
+            }
+
+            if (component.GetType() == typeof(CBoxCollider))
             {
                 boxColliders.Remove((CBoxCollider)component);
             }
             else if (component.GetType() == typeof(CCircleCollider))
             {
                 circleColliders.Remove((CCircleCollider)component);
-            }
-            else
-            {
-                genericComponents.Remove(component);
             }
         }
 
@@ -271,7 +243,7 @@ namespace Game.SceneSystem
 
         private void SortRenderers()
         {
-            renderers.Sort((x, y) => x.Layer.CompareTo(y.Layer));
+            drawables.Sort((x, y) => x.Layer.CompareTo(y.Layer));
         }
 
         private void AddComponentsToLists(GameObject gameObject)
@@ -284,22 +256,22 @@ namespace Game.SceneSystem
             }
         }
 
-        private int GetIndex(CRender cRender)
+        private int GetIndex(IDrawable drawable)
         {
-            if (renderers.Count == 0)
+            if (drawables.Count == 0)
             {
                 return 0;
             }
 
-            for (int i = 1; i < renderers.Count; i++)
+            for (int i = 1; i < drawables.Count; i++)
             {
-                if (renderers[i].Layer >= cRender.Layer)
+                if (drawables[i].Layer >= drawable.Layer)
                 {
                     return i - 1;
                 }
             }
 
-            return renderers.Count;
+            return drawables.Count;
         }
 
         private void RemoveComponentsFromLists(GameObject gameObject)

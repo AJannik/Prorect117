@@ -4,7 +4,7 @@ using OpenTK;
 
 namespace Game.Components
 {
-    public class CTriggerEventTest : IComponent
+    public class CTriggerEventTest : IComponent, IUpdateable
     {
         public GameObject MyGameObject { get; set; } = null;
 

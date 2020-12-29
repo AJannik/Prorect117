@@ -1,6 +1,6 @@
 ﻿namespace Game.Interfaces
 {
-    public interface IUpdateAble
+    public interface IUpdateable
     {
         public void Update(float deltaTime);
     }
