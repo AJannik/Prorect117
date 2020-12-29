@@ -14,7 +14,7 @@ namespace Game.Components
         Attacking,
     }
 
-    public class CEnemyAI : IComponent
+    public class CEnemyAI : IComponent, IUpdateAble
     {
         public CEnemyAI()
         {

@@ -133,10 +133,6 @@ namespace Game.Components
             }
         }
 
-        public void Update(float deltaTime)
-        {
-        }
-
         private void UpdateLocalTransform()
         {
             Matrix4 posTransform = Transformation.Translate(pos);

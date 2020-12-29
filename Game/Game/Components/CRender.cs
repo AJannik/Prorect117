@@ -39,10 +39,6 @@ namespace Game.Components
 
         private Vector2 Offset { get; set; } = new Vector2(0, 0);
 
-        public void Update(float deltaTime)
-        {
-        }
-
         public void Draw()
         {
             GL.BindTexture(TextureTarget.Texture2D, this.Texture);

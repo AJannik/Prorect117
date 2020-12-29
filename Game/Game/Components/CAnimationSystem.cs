@@ -4,11 +4,10 @@ using System.Text;
 using Game.Interfaces;
 using Game.SimpleGeometry;
 using Game.Tools;
-using OpenTK.Graphics.OpenGL;
 
 namespace Game.Components
 {
-    public class CAnimationSystem : IComponent
+    public class CAnimationSystem : IComponent, IUpdateAble
     {
         private CRender render;
 
