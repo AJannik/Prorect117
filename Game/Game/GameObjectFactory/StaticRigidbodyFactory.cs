@@ -9,7 +9,7 @@ namespace Game.GameObjectFactory
         public static GameObject BuildPlatform(Scene scene, Vector2 position, int length)
         {
             GameObject floor = new GameObject(scene, "Floor");
-            Vector2 size = new Vector2(length, 0.2f);
+            Vector2 size = new Vector2(length, 1f);
             floor.Transform.Position = position;
             floor.Transform.Scale = size;
 
@@ -27,7 +27,7 @@ namespace Game.GameObjectFactory
         public static GameObject BuildWall(Scene scene, Vector2 position, int height)
         {
             GameObject wall = new GameObject(scene, "Wall");
-            Vector2 size = new Vector2(0.2f, height);
+            Vector2 size = new Vector2(1f, height);
             wall.Transform.Position = position;
             wall.Transform.Scale = size;
 
