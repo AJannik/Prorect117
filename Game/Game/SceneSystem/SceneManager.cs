@@ -16,6 +16,7 @@ namespace Game.SceneSystem
             sceneFactory = new SceneFactory();
             scenes = new Scene[sceneFactory.NumScenes];
             BuildScenes();
+            GameManager = new GameManager(this);
 
             GL.Enable(EnableCap.Texture2D);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -26,8 +27,11 @@ namespace Game.SceneSystem
 
         public bool DebugMode { get; set; } = true;
 
+        public GameManager GameManager { get; }
+
         public void Update(float deltaTime)
         {
+            GameManager.Update(deltaTime);
             scenes[CurrentScene].Update(deltaTime);
         }
 
