@@ -22,8 +22,6 @@ namespace Game.SceneSystem
 
         public Debug Debug { get; } = new Debug();
 
-        // TODO: Add LoadScene events
-
         public void LoadLevelEvent(int num)
         {
             LoadLevelNumber?.Invoke(this, num);
