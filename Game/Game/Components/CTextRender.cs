@@ -36,10 +36,6 @@ namespace Game.Components
 
         public uint CharactersPerRow { get; set; } = 8;
 
-        public void Update(float deltaTime)
-        {
-        }
-
         public void LoadAndSetSpriteSheet(string name)
         {
             SpriteSheet = TextureTools.LoadFromResource(name);
