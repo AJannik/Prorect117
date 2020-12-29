@@ -52,49 +52,50 @@ namespace Game.Components
             {
                 for (int y = 0; y < Height; y++)
                 {
+                    Vector2 position = new Vector2(x, y);
                     if (x == 0)
                     {
                         if (y == 0)
                         {
-                            DrawSingleTile(new Vector2(x, y), TopLeftTileIndex + (2 * TileSetColumns));
+                            DrawSingleTile(position, TopLeftTileIndex + (2 * TileSetColumns));
                         }
                         else if (y == Height - 1)
                         {
-                            DrawSingleTile(new Vector2(x, y), TopLeftTileIndex + TileSetColumns);
+                            DrawSingleTile(position, TopLeftTileIndex + TileSetColumns);
                         }
                         else
                         {
-                            DrawSingleTile(new Vector2(x, y), TopLeftTileIndex);
+                            DrawSingleTile(position, TopLeftTileIndex);
                         }
                     }
                     else if (x == Height - 1)
                     {
                         if (y == 0)
                         {
-                            DrawSingleTile(new Vector2(x, y), TopLeftTileIndex + (2 * TileSetColumns) + 2);
+                            DrawSingleTile(position, TopLeftTileIndex + (2 * TileSetColumns) + 2);
                         }
                         else if (y == Height - 1)
                         {
-                            DrawSingleTile(new Vector2(x, y), TopLeftTileIndex + TileSetColumns + 2);
+                            DrawSingleTile(position, TopLeftTileIndex + TileSetColumns + 2);
                         }
                         else
                         {
-                            DrawSingleTile(new Vector2(x, y), TopLeftTileIndex + 2);
+                            DrawSingleTile(position, TopLeftTileIndex + 2);
                         }
                     }
                     else
                     {
                         if (y == 0)
                         {
-                            DrawSingleTile(new Vector2(x, y), TopLeftTileIndex + (2 * TileSetColumns) + 1);
+                            DrawSingleTile(position, TopLeftTileIndex + (2 * TileSetColumns) + 1);
                         }
                         else if (y == Height - 1)
                         {
-                            DrawSingleTile(new Vector2(x, y), TopLeftTileIndex + TileSetColumns + 1);
+                            DrawSingleTile(position, TopLeftTileIndex + TileSetColumns + 1);
                         }
                         else
                         {
-                            DrawSingleTile(new Vector2(x, y), TopLeftTileIndex + 1);
+                            DrawSingleTile(position, TopLeftTileIndex + 1);
                         }
                     }
                 }
