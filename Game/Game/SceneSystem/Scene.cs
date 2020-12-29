@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Components;
 using Game.Interfaces;
 using OpenTK.Graphics.OpenGL;
@@ -17,9 +18,16 @@ namespace Game.SceneSystem
 
         private List<GameObject> deleteList = new List<GameObject>();
 
+        public event EventHandler<int> LoadLevelNumber;
+
         public Debug Debug { get; } = new Debug();
 
         // TODO: Add LoadScene events
+
+        public void LoadLevelEvent(int num)
+        {
+            LoadLevelNumber?.Invoke(this, num);
+        }
 
         public void Update(float deltaTime)
         {
