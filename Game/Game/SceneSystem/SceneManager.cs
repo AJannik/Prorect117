@@ -5,7 +5,7 @@ namespace Game.SceneSystem
 {
     public class SceneManager
     {
-        public Scene[] scenes;
+        private Scene[] scenes;
         private SceneFactory sceneFactory;
         private int screenWidth = 1366;
         private int screenHeight = 768;
@@ -17,6 +17,12 @@ namespace Game.SceneSystem
             scenes = new Scene[sceneFactory.NumScenes];
             BuildScenes();
 
+            // Load new Level EventListner
+            for (int i = 0; i < scenes.Length; i++)
+            {
+                scenes[i].LoadLevelNumber += LoadScene;
+            }
+
             GL.Enable(EnableCap.Texture2D);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Blend);
@@ -26,8 +32,11 @@ namespace Game.SceneSystem
 
         public bool DebugMode { get; set; } = true;
 
+        public GameManager GameManager { get; } = new GameManager();
+
         public void Update(float deltaTime)
         {
+            GameManager.Update(deltaTime);
             scenes[CurrentScene].Update(deltaTime);
         }
 
@@ -48,39 +57,6 @@ namespace Game.SceneSystem
             scenes[CurrentScene].Resize(screenWidth, screenHeight);
         }
 
-        public void LoadNextScene()
-        {
-            if (CurrentScene < scenes.Length - 1)
-            {
-                UnloadCurrentScene();
-                CurrentScene++;
-
-                Resize(screenWidth, screenHeight);
-            }
-        }
-
-        public void LoadLastScene()
-        {
-            if (CurrentScene >= 1)
-            {
-                UnloadCurrentScene();
-                CurrentScene--;
-
-                Resize(screenWidth, screenHeight);
-            }
-        }
-
-        public void LoadScene(int index)
-        {
-            if (index >= 0 && index < sceneFactory.NumScenes && index != CurrentScene)
-            {
-                UnloadCurrentScene();
-                CurrentScene = index;
-
-                Resize(screenWidth, screenHeight);
-            }
-        }
-
         public void UnloadCurrentScene()
         {
             // TODO: Implement UnloadCurrentScene()
@@ -89,6 +65,22 @@ namespace Game.SceneSystem
         public Scene GetScene(int index)
         {
             return scenes[index];
+        }
+
+        private void LoadScene(object sender, int index)
+        {
+            if (sender != scenes[CurrentScene])
+            {
+                return;
+            }
+
+            if (index >= 0 && index < sceneFactory.NumScenes && index != CurrentScene)
+            {
+                UnloadCurrentScene();
+                CurrentScene = index;
+
+                Resize(screenWidth, screenHeight);
+            }
         }
 
         private void BuildScenes()
