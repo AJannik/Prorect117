@@ -52,7 +52,7 @@ namespace Game.Components
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
-        public void Draw()
+        public void Draw(float alpha)
         {
             GL.Color3(Color.White);
             var rect = new Rect(MyGameObject.Transform.Position.X, MyGameObject.Transform.Position.Y, Size, Size); // rectangle of the first character
