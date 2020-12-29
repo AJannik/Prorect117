@@ -15,6 +15,7 @@
     <None Remove="Content\Skeleton\SkeletonIdle.png" />
     <None Remove="Content\Skeleton\SkeletonReact.png" />
     <None Remove="Content\Skeleton\SkeletonWalk.png" />
+    <None Remove="Content\WallSpritesheet.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +28,7 @@
     <EmbeddedResource Include="Content\Skeleton\SkeletonIdle.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonReact.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonWalk.png" />
+    <EmbeddedResource Include="Content\WallSpritesheet.png" />
   </ItemGroup>
 
   <ItemGroup>
