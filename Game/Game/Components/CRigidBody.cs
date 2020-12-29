@@ -151,7 +151,7 @@ namespace Game.Components
         {
             foreach (ICollider collider in MyGameObject.Scene.GetColliders())
             {
-                if (collider.MyGameObject.Active && !Colliders.Contains(collider) && !collider.IsTrigger)
+                if (collider.MyGameObject.Active && !Colliders.Contains(collider))
                 {
                     Vector2 x = PenetrationDepths.HandlePenDepth((IReadonlySimpleGeometry)myCollider.Geometry, (IReadonlySimpleGeometry)collider.Geometry);
                     if (CorrectRoundingErrors(PenRes - x) != Vector2.Zero)
@@ -170,7 +170,7 @@ namespace Game.Components
             {
                 foreach (CBoxCollider boxCollider in boxColliders)
                 {
-                    if (!boxCollider.IsTrigger && !Colliders.Contains(boxCollider))
+                    if (!Colliders.Contains(boxCollider))
                     {
                         Colliders.Add(boxCollider);
                     }
@@ -181,7 +181,7 @@ namespace Game.Components
             {
                 foreach (CCircleCollider circleCollider in circleColliders)
                 {
-                    if (!circleCollider.IsTrigger && !Colliders.Contains(circleCollider))
+                    if (!Colliders.Contains(circleCollider))
                     {
                         Colliders.Add(circleCollider);
                     }

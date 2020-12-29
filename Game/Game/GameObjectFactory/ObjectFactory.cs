@@ -48,9 +48,8 @@ namespace Game.GameObjectFactory
             player.GetComponent<CPlayerController>().Render = player.GetComponent<CRender>();
 
             // add ground trigger for playercontroller
-            player.AddComponent<CBoxCollider>();
-            CBoxCollider trigger = player.GetComponents<CBoxCollider>()[1];
-            trigger.IsTrigger = true;
+            player.AddComponent<CBoxTrigger>();
+            CBoxTrigger trigger = player.GetComponent<CBoxTrigger>();
             trigger.Offset = new Vector2(0f, -0.77f);
             trigger.Geometry.Size = new Vector2(0.84f, 0.1f);
             player.GetComponent<CPlayerController>().SetUpGroundTrigger(trigger);
@@ -92,16 +91,14 @@ namespace Game.GameObjectFactory
             combatController.Combat = player.GetComponent<CCombat>();
 
             // add hitbox to combatcontroller
-            player.AddComponent<CBoxCollider>();
-            CBoxCollider attackHitboxLeft = player.GetComponents<CBoxCollider>()[2];
-            attackHitboxLeft.IsTrigger = true;
+            player.AddComponent<CBoxTrigger>();
+            CBoxTrigger attackHitboxLeft = player.GetComponents<CBoxTrigger>()[1];
             attackHitboxLeft.Geometry.Size = new Vector2(1f, 1.5f);
             attackHitboxLeft.Offset = new Vector2(-0.9f, 0f);
             combatController.LeftHitbox = attackHitboxLeft;
 
-            player.AddComponent<CBoxCollider>();
-            CBoxCollider attackHitboxRight = player.GetComponents<CBoxCollider>()[3];
-            attackHitboxRight.IsTrigger = true;
+            player.AddComponent<CBoxTrigger>();
+            CBoxTrigger attackHitboxRight = player.GetComponents<CBoxTrigger>()[2];
             attackHitboxRight.Geometry.Size = new Vector2(1f, 1.5f);
             attackHitboxRight.Offset = new Vector2(0.9f, 0f);
             combatController.RightHitbox = attackHitboxRight;
@@ -116,8 +113,8 @@ namespace Game.GameObjectFactory
 
             powerDown.AddComponent<CRender>();
             powerDown.GetComponent<CRender>().LoadAndSetTexture("Content.default.png");
-            powerDown.AddComponent<CCircleCollider>();
-            CCircleCollider trigger = powerDown.GetComponent<CCircleCollider>();
+            powerDown.AddComponent<CCircleTrigger>();
+            CCircleTrigger trigger = powerDown.GetComponent<CCircleTrigger>();
             powerDown.AddComponent<CPowerDownScript>();
             powerDown.GetComponent<CPowerDownScript>().Trigger = trigger;
 

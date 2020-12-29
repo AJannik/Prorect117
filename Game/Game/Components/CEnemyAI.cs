@@ -26,9 +26,9 @@ namespace Game.Components
 
         public CRigidBody RigidBody { get; set; }
 
-        public CBoxCollider LeftTrigger { get; set; }
+        public CBoxTrigger LeftTrigger { get; set; }
 
-        public CBoxCollider RightTrigger { get; set; }
+        public CBoxTrigger RightTrigger { get; set; }
 
         public CCombat Combat { get; set; }
 
@@ -104,14 +104,14 @@ namespace Game.Components
             }
         }
 
-        public void SetupLeftTrigger(CBoxCollider trigger)
+        public void SetupLeftTrigger(CBoxTrigger trigger)
         {
             LeftTrigger = trigger;
             LeftTrigger.TriggerExited += LeftFootExited;
             LeftTrigger.TriggerEntered += LeftEntered;
         }
 
-        public void SetupRightTrigger(CBoxCollider trigger)
+        public void SetupRightTrigger(CBoxTrigger trigger)
         {
             RightTrigger = trigger;
             RightTrigger.TriggerExited += RightFootExited;

@@ -67,7 +67,7 @@ namespace Game.Components
         /// <param name="dmgMultiplier">Multiplies the base damage by this value.</param>
         /// <param name="ignoreArmor">Whether to ignore Armor or not.</param>
         /// <returns>Returns False if attack still on cooldown.</returns>
-        public bool Attack(ICollider hitbox, float dmgMultiplier, bool ignoreArmor)
+        public bool Attack(ITrigger hitbox, float dmgMultiplier, bool ignoreArmor)
         {
             if (NextAttackTime > 0f)
             {

@@ -8,13 +8,13 @@ namespace Game.Components
     {
         public GameObject MyGameObject { get; set; } = null;
 
-        private CBoxCollider Trigger { get; set; } = null;
+        private CBoxTrigger Trigger { get; set; } = null;
 
         public void Update(float deltaTime)
         {
             if (false && Trigger == null)
             {
-                Trigger = MyGameObject.GetComponent<CBoxCollider>();
+                Trigger = MyGameObject.GetComponent<CBoxTrigger>();
                 Trigger.TriggerEntered += OnTriggerEntered;
                 Trigger.TriggerExited += OnTriggerExited;
             }

@@ -14,6 +14,7 @@ namespace Game.SceneSystem
         private List<IDebugDrawable> debugDrawables = new List<IDebugDrawable>();
         private List<IResizeable> resizeables = new List<IResizeable>();
         private List<ICollider> colliders = new List<ICollider>();
+        private List<ITrigger> triggers = new List<ITrigger>();
 
         private List<GameObject> deleteList = new List<GameObject>();
 
@@ -127,6 +128,11 @@ namespace Game.SceneSystem
             return updateables;
         }
 
+        public IReadOnlyList<ITrigger> GetTriggers()
+        {
+            return triggers;
+        }
+
         public void AddComponent(IComponent component)
         {
             if (component is IPhysicsComponent)
@@ -177,6 +183,14 @@ namespace Game.SceneSystem
                     colliders.Add((ICollider)component);
                 }
             }
+
+            if (component is ITrigger)
+            {
+                if (!triggers.Contains((ITrigger)component))
+                {
+                    triggers.Add((ITrigger)component);
+                }
+            }
         }
 
         public void RemoveComponent(IComponent component)
@@ -209,6 +223,11 @@ namespace Game.SceneSystem
             if (component is ICollider)
             {
                 colliders.Remove((ICollider)component);
+            }
+
+            if (component is ITrigger)
+            {
+                triggers.Remove((ITrigger)component);
             }
         }
 

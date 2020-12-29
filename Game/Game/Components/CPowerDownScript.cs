@@ -7,12 +7,11 @@ namespace Game.Components
     {
         public GameObject MyGameObject { get; set; } = null;
 
-        public CCircleCollider Trigger { get; set; }
+        public CCircleTrigger Trigger { get; set; }
 
-        public void SetupTrigger(CCircleCollider trigger)
+        public void SetupTrigger(CCircleTrigger trigger)
         {
             Trigger = trigger;
-            Trigger.IsTrigger = true;
             Trigger.TriggerEntered += OnTriggerEntered;
         }
 

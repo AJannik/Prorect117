@@ -15,12 +15,27 @@ namespace Game.Physics.RaycastSystem
 
             foreach (ICollider collider in scene.GetColliders())
             {
-                if ((collider as IComponent).MyGameObject.Active && (querryTrigger || (!querryTrigger && !collider.IsTrigger)))
+                if (collider.MyGameObject.Active)
                 {
                     if (RaycastCollisionCheck.HandleRaycastCollision((IReadonlySimpleGeometry)collider.Geometry, ray, hit))
                     {
-                        hit.HitObject = collider;
+                        hit.HitObject = collider.MyGameObject;
                         return true;
+                    }
+                }
+            }
+
+            if (querryTrigger)
+            {
+                foreach (ITrigger trigger in scene.GetTriggers())
+                {
+                    if (trigger.MyGameObject.Active)
+                    {
+                        if (RaycastCollisionCheck.HandleRaycastCollision((IReadonlySimpleGeometry)trigger.Geometry, ray, hit))
+                        {
+                            hit.HitObject = trigger.MyGameObject;
+                            return true;
+                        }
                     }
                 }
             }

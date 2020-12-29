@@ -10,7 +10,7 @@ namespace Game.Components
 
         public CRigidBody RigidBody { get; set; } = null;
 
-        public CBoxCollider GroundTrigger { get; set; }
+        public CBoxTrigger GroundTrigger { get; set; }
 
         public CRender Render { get; set; }
 
@@ -28,7 +28,7 @@ namespace Game.Components
 
         private bool FacingRight { get; set; } = true;
 
-        public void SetUpGroundTrigger(CBoxCollider trigger)
+        public void SetUpGroundTrigger(CBoxTrigger trigger)
         {
             GroundTrigger = trigger;
             GroundTrigger.TriggerEntered += OnGroundTriggerEntered;

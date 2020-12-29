@@ -12,9 +12,9 @@ namespace Game.Components
 
         public CCombat Combat { get; set; }
 
-        public CBoxCollider LeftHitbox { get; set; }
+        public CBoxTrigger LeftHitbox { get; set; }
 
-        public CBoxCollider RightHitbox { get; set; }
+        public CBoxTrigger RightHitbox { get; set; }
 
         private float ComboTime { get; set; } = 0f;
 
@@ -45,26 +45,26 @@ namespace Game.Components
         private void ComboAttack(bool leftSide)
         {
             bool successful;
-            CBoxCollider collider = RightHitbox;
+            CBoxTrigger trigger = RightHitbox;
             if (leftSide)
             {
-                collider = LeftHitbox;
+                trigger = LeftHitbox;
             }
 
             switch (ComboCount)
             {
                 case 0:
-                    successful = Attack1(collider, leftSide);
+                    successful = Attack1(trigger, leftSide);
                     break;
                 case 1:
-                    successful = Attack2(collider, leftSide);
+                    successful = Attack2(trigger, leftSide);
                     break;
                 case 2:
-                    successful = Attack3(collider, leftSide);
+                    successful = Attack3(trigger, leftSide);
                     break;
                 default:
                     ComboCount = 0;
-                    successful = Attack1(collider, leftSide);
+                    successful = Attack1(trigger, leftSide);
                     break;
             }
 
@@ -75,7 +75,7 @@ namespace Game.Components
             }
         }
 
-        private bool Attack1(ICollider hitbox, bool leftSide)
+        private bool Attack1(ITrigger hitbox, bool leftSide)
         {
             if (Combat.Attack(hitbox, 1f, false))
             {
@@ -86,7 +86,7 @@ namespace Game.Components
             return false;
         }
 
-        private bool Attack2(ICollider hitbox, bool leftSide)
+        private bool Attack2(ITrigger hitbox, bool leftSide)
         {
             if (Combat.Attack(hitbox, 1.5f, false))
             {
@@ -97,7 +97,7 @@ namespace Game.Components
             return false;
         }
 
-        private bool Attack3(ICollider hitbox, bool leftSide)
+        private bool Attack3(ITrigger hitbox, bool leftSide)
         {
             if (Combat.Attack(hitbox, 3f, false))
             {

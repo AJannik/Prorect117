@@ -1,5 +1,4 @@
-﻿using Game.Interfaces;
-using OpenTK;
+﻿using OpenTK;
 
 namespace Game.Physics.RaycastSystem
 {
@@ -7,7 +6,7 @@ namespace Game.Physics.RaycastSystem
     {
         private Vector2 normal = Vector2.Zero;
 
-        public ICollider HitObject { get; set; }
+        public GameObject HitObject { get; set; }
 
         public Vector2 HitPoint { get; set; }
 
