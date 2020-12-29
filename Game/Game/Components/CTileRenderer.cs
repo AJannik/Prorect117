@@ -46,7 +46,7 @@ namespace Game.Components
             GL.BindTexture(TextureTarget.Texture2D, 0);
         }
 
-        public void Draw()
+        public void Draw(float alpha)
         {
             for (int x = 0; x < Width; x++)
             {

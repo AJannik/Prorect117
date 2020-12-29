@@ -34,7 +34,7 @@ namespace Game.Components
             UpdateMatrix();
         }
 
-        public void Draw()
+        public void Draw(float alpha)
         {
             GL.LoadMatrix(ref cameraMatrix);
         }

@@ -128,7 +128,7 @@ namespace Game.GameObjectFactory
         {
             GameObject levelEnd = new GameObject(scene, "LevelEnd");
 
-            //TODO: Add door sprite, hitbox, trigger
+            // TODO: Add door sprite, hitbox, trigger
 
             return levelEnd;
         }
@@ -137,7 +137,7 @@ namespace Game.GameObjectFactory
         {
             GameObject coin = new GameObject(scene, "Coin");
 
-            //TODO: Add sprite and hitbox
+            // TODO: Add sprite and hitbox
 
             return coin;
         }
@@ -146,7 +146,7 @@ namespace Game.GameObjectFactory
         {
             GameObject key = new GameObject(scene, "Key");
 
-            //TODO: Add sprite and hitbox
+            // TODO: Add sprite and hitbox
 
             return key;
         }

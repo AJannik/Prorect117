@@ -68,7 +68,7 @@ namespace Game.SceneSystem
             }
         }
 
-        public void Draw(bool debugMode)
+        public void Draw(float alpha, bool debugMode)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
@@ -76,17 +76,17 @@ namespace Game.SceneSystem
             {
                 if ((drawable as IComponent).MyGameObject.Active)
                 {
-                    drawable.Draw();
+                    drawable.Draw(alpha);
                 }
             }
 
             if (debugMode)
             {
-                DebugDraw();
+                DebugDraw(alpha);
             }
         }
 
-        public void DebugDraw()
+        public void DebugDraw(float alpha)
         {
             foreach (IDebugDrawable item in debugDrawables)
             {

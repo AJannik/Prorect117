@@ -9,16 +9,16 @@ namespace Game
         [STAThread]
         private static void Main()
         {
-            var window = new GameWindow(1366, 768);
+            GameWindow window = new GameWindow(1366, 768);
             window.VSync = VSyncMode.On;
             SceneManager sceneManager = new SceneManager();
-            window.TargetRenderFrequency = 60;
-            float accumulator = 0f;
+            double accumulator = 0f;
+            double alpha = 1f;
 
-            void Update(float frameTime)
+            void Update(double frameTime)
             {
                 // Normal Update
-                sceneManager.Update(frameTime);
+                sceneManager.Update((float)frameTime);
 
                 // FixedUpdate for Physics
                 accumulator += frameTime;
@@ -28,30 +28,18 @@ namespace Game
                     accumulator -= Physics.PhysicConstants.FixedDeltaTime;
                 }
 
-                // TODO: Add RenderBlending and unlock Render-Framerate
-                // alpha = accumulator / Physics.PhysicConstants.FixedDeltaTime;
-
-                /*
-                // Semi-FixedUpdate for Physics
-                int maxSteps = 10;
-                while (frameTime > 0f && maxSteps > 0)
-                {
-                    float deltaTime = MathF.Min(frameTime, Physics.PhysicConstants.FixedDeltaTime);
-                    sceneManager.FixedUpdate(deltaTime);
-                    frameTime -= deltaTime;
-                    maxSteps--;
-                }
-                */
+                // RenderBlending so we can use unlocked RenderFrequency
+                alpha = accumulator / Physics.PhysicConstants.FixedDeltaTime;
             }
 
-            void Draw()
+            void Draw(double frameTime)
             {
-                sceneManager.Draw();
+                sceneManager.Draw((float)alpha * (float)frameTime);
                 window.SwapBuffers(); // buffer swap needed for double buffering
             }
 
-            window.UpdateFrame += (_, args) => Update((float)args.Time);
-            window.RenderFrame += (s, a) => Draw();
+            window.UpdateFrame += (_, args) => Update(args.Time);
+            window.RenderFrame += (s, a) => Draw(a.Time);
             window.Resize += (_, args) => sceneManager.Resize(window.Width, window.Height);
             window.Run();
         }

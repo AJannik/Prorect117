@@ -4,6 +4,6 @@
     {
         public int Layer { get; set; }
 
-        public void Draw();
+        public void Draw(float alpha);
     }
 }

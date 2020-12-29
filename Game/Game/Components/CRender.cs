@@ -39,7 +39,16 @@ namespace Game.Components
 
         private Vector2 Offset { get; set; } = new Vector2(0, 0);
 
-        public void Draw()
+        // Used for RenderBlending
+        private Vector2 Oldpos1 { get; set; } = Vector2.Zero;
+
+        private Vector2 Oldpos2 { get; set; } = Vector2.Zero;
+
+        private Vector2 Oldpos3 { get; set; } = Vector2.Zero;
+
+        private Vector2 Oldpos4 { get; set; } = Vector2.Zero;
+
+        public void Draw(float alpha)
         {
             GL.BindTexture(TextureTarget.Texture2D, this.Texture);
             GL.Color3(TintColor);
@@ -71,30 +80,41 @@ namespace Game.Components
             pos3 = Transformation.Transform(pos3, MyGameObject.Transform.WorldTransformMatrix);
             pos4 = Transformation.Transform(pos4, MyGameObject.Transform.WorldTransformMatrix);
 
+            Vector2 newpos1 = (pos1 * alpha) + (Oldpos1 * (1f - alpha));
+            Vector2 newpos2 = (pos2 * alpha) + (Oldpos2 * (1f - alpha));
+            Vector2 newpos3 = (pos3 * alpha) + (Oldpos3 * (1f - alpha));
+            Vector2 newpos4 = (pos4 * alpha) + (Oldpos4 * (1f - alpha));
+
             // Draw (flipped)
             GL.Begin(PrimitiveType.Quads);
             if (Flipped)
             {
                 GL.TexCoord2(TexCoords.MaxX, TexCoords.MinY);
-                GL.Vertex2(pos1);
+                GL.Vertex2(newpos1);
                 GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
-                GL.Vertex2(pos2);
+                GL.Vertex2(newpos2);
                 GL.TexCoord2(TexCoords.MinX, TexCoords.MaxY);
-                GL.Vertex2(pos3);
+                GL.Vertex2(newpos3);
                 GL.TexCoord2(TexCoords.MaxX, TexCoords.MaxY);
-                GL.Vertex2(pos4);
+                GL.Vertex2(newpos4);
             }
             else
             {
                 GL.TexCoord2(TexCoords.MinX, TexCoords.MinY);
-                GL.Vertex2(pos1);
+                GL.Vertex2(newpos1);
                 GL.TexCoord2(TexCoords.MaxX, TexCoords.MinY);
-                GL.Vertex2(pos2);
+                GL.Vertex2(newpos2);
                 GL.TexCoord2(TexCoords.MaxX, TexCoords.MaxY);
-                GL.Vertex2(pos3);
+                GL.Vertex2(newpos3);
                 GL.TexCoord2(TexCoords.MinX, TexCoords.MaxY);
-                GL.Vertex2(pos4);
+                GL.Vertex2(newpos4);
             }
+
+            // Update old positions for RenderBlending
+            Oldpos1 = pos1;
+            Oldpos2 = pos2;
+            Oldpos3 = pos3;
+            Oldpos4 = pos4;
 
             GL.End();
             GL.Color3(Color.White);

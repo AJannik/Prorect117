@@ -16,12 +16,7 @@ namespace Game.SceneSystem
             sceneFactory = new SceneFactory();
             scenes = new Scene[sceneFactory.NumScenes];
             BuildScenes();
-
-            // Load new Level EventListner
-            for (int i = 0; i < scenes.Length; i++)
-            {
-                scenes[i].LoadLevelNumber += LoadScene;
-            }
+            RegisterSceneEventListners();
 
             GL.Enable(EnableCap.Texture2D);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -45,9 +40,9 @@ namespace Game.SceneSystem
             scenes[CurrentScene].FixedUpdate(deltaTime);
         }
 
-        public void Draw()
+        public void Draw(float alpha)
         {
-            scenes[CurrentScene].Draw(DebugMode);
+            scenes[CurrentScene].Draw(alpha, DebugMode);
         }
 
         public void Resize(int width, int height)
@@ -67,8 +62,18 @@ namespace Game.SceneSystem
             return scenes[index];
         }
 
+        private void RegisterSceneEventListners()
+        {
+            // Load new Level EventListner
+            for (int i = 0; i < scenes.Length; i++)
+            {
+                scenes[i].LoadLevelNumber += LoadScene;
+            }
+        }
+
         private void LoadScene(object sender, int index)
         {
+            // inactive Scene has invoked the event
             if (sender != scenes[CurrentScene])
             {
                 return;
