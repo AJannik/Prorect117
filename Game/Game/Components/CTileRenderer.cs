@@ -34,8 +34,6 @@ namespace Game.Components
 
         private int TileSetRows { get; set; } = 3;
 
-        public int Layer { get; set; } = 8;
-
         public void LoadAndSetTexture(string name)
         {
             Texture = TextureTools.LoadFromResource(name);
