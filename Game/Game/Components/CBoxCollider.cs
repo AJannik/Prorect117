@@ -8,7 +8,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Game.Components
 {
-    public class CBoxCollider : IComponent, ICollider, IUpdateable, IDebugDrawable
+    public class CBoxCollider : ICollider, IUpdateable, IDebugDrawable
     {
         public event EventHandler<IComponent> TriggerEntered;
 
@@ -30,8 +30,7 @@ namespace Game.Components
 
             if (IsTrigger)
             {
-                CheckForBoxCollider();
-                CheckForCircleCollider();
+                CheckForColliders();
             }
         }
 
@@ -61,61 +60,32 @@ namespace Game.Components
             return TriggerHits;
         }
 
-        private bool IsValidCollider(CBoxCollider boxCollider)
+        private bool IsValidCollider(ICollider collider)
         {
-            return boxCollider != this && boxCollider.MyGameObject.Active && !boxCollider.IsTrigger && boxCollider.MyGameObject != MyGameObject && boxCollider.MyGameObject.GetComponent<CRigidBody>() != null;
+            return collider != this && collider.MyGameObject.Active && !collider.IsTrigger && collider.MyGameObject != MyGameObject && collider.MyGameObject.GetComponent<CRigidBody>() != null;
         }
 
-        private bool IsValidCollider(CCircleCollider circleCollider)
+        private void CheckForColliders()
         {
-            return circleCollider.MyGameObject.Active && !circleCollider.IsTrigger && circleCollider.MyGameObject != MyGameObject && circleCollider.MyGameObject.GetComponent<CRigidBody>() != null;
-        }
-
-        private void CheckForBoxCollider()
-        {
-            foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
+            foreach (ICollider collider in MyGameObject.Scene.GetColliders())
             {
-                if (IsValidCollider(boxCollider))
+                if (IsValidCollider(collider))
                 {
-                    if (CollisionCheck.AabbAndAabb((Rect)Geometry, (Rect)boxCollider.Geometry))
+                    IComponent component = collider as IComponent;
+                    if (CollisionCheck.HandelCollision((IReadonlySimpleGeometry)collider.Geometry, (IReadonlySimpleGeometry)Geometry))
                     {
-                        if (!TriggerHits.Contains(boxCollider))
+                        if (!TriggerHits.Contains(component))
                         {
                             // OnTriggerEnter event
-                            TriggerEntered?.Invoke(this, boxCollider);
-                            TriggerHits.Add(boxCollider);
+                            TriggerEntered?.Invoke(this, component);
+                            TriggerHits.Add(component);
                         }
                     }
-                    else if (TriggerHits.Contains(boxCollider))
+                    else if (TriggerHits.Contains(component))
                     {
                         // OnTriggerExit event
-                        TriggerExited?.Invoke(this, boxCollider);
-                        TriggerHits.Remove(boxCollider);
-                    }
-                }
-            }
-        }
-
-        private void CheckForCircleCollider()
-        {
-            foreach (CCircleCollider circleCollider in MyGameObject.Scene.GetCCircleColliders())
-            {
-                if (IsValidCollider(circleCollider))
-                {
-                    if (CollisionCheck.AabbAndCircle((Rect)Geometry, (Circle)circleCollider.Geometry))
-                    {
-                        if (!TriggerHits.Contains(circleCollider))
-                        {
-                            // OnTriggerEnter event
-                            TriggerEntered?.Invoke(this, circleCollider);
-                            TriggerHits.Add(circleCollider);
-                        }
-                    }
-                    else if (TriggerHits.Contains(circleCollider))
-                    {
-                        // OnTriggerExit event
-                        TriggerExited?.Invoke(this, circleCollider);
-                        TriggerHits.Remove(circleCollider);
+                        TriggerExited?.Invoke(this, component);
+                        TriggerHits.Remove(component);
                     }
                 }
             }

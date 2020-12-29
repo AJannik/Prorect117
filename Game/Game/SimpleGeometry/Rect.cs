@@ -3,7 +3,7 @@ using OpenTK;
 
 namespace Game.SimpleGeometry
 {
-    public class Rect : ISimpleGeometry, IReadonlyRect
+    public class Rect : ISimpleGeometry, IReadonlySimpleGeometry, IReadonlyRect
     {
         public Rect(float minX, float minY, float sizeX, float sizeY)
         {

@@ -6,7 +6,35 @@ namespace Game.Physics
 {
     internal static class PenetrationDepths
     {
-        public static Vector2 AabbAndAabb(IReadonlyRect rect1, IReadonlyRect rect2)
+        internal static Vector2 HandlePenDepth(IReadonlySimpleGeometry geometry1, IReadonlySimpleGeometry geometry2)
+        {
+            if (geometry1 is IReadonlyRect)
+            {
+                if (geometry2 is IReadonlyRect)
+                {
+                    return AabbAndAabb((IReadonlyRect)geometry1, (IReadonlyRect)geometry2);
+                }
+                else if (geometry2 is IReadonlyCircle)
+                {
+                    return AabbAndCircle((IReadonlyRect)geometry1, (IReadonlyCircle)geometry2);
+                }
+            }
+            else if (geometry1 is IReadonlyCircle)
+            {
+                if (geometry2 is IReadonlyCircle)
+                {
+                    return CircleAndCircle((IReadonlyCircle)geometry1, (IReadonlyCircle)geometry2);
+                }
+                else if (geometry2 is IReadonlyRect)
+                {
+                    return AabbAndCircle((IReadonlyRect)geometry2, (IReadonlyCircle)geometry1);
+                }
+            }
+
+            throw new ArgumentException("PenDepth got geometry of unknown type!");
+        }
+
+        private static Vector2 AabbAndAabb(IReadonlyRect rect1, IReadonlyRect rect2)
         {
             Vector2 n = rect2.NextCenter - rect1.NextCenter;
             Vector2 normal;
@@ -54,7 +82,7 @@ namespace Game.Physics
             return Vector2.Zero;
         }
 
-        public static Vector2 CircleAndCircle(IReadonlyCircle circle1, IReadonlyCircle circle2)
+        private static Vector2 CircleAndCircle(IReadonlyCircle circle1, IReadonlyCircle circle2)
         {
             Vector2 distance = circle1.NextCenter - circle2.NextCenter;
             float penDepth = circle1.Radius + circle2.Radius - distance.Length;
@@ -62,7 +90,7 @@ namespace Game.Physics
             return penRes;
         }
 
-        public static Vector2 AabbAndCircle(IReadonlyRect rect, IReadonlyCircle circle)
+        private static Vector2 AabbAndCircle(IReadonlyRect rect, IReadonlyCircle circle)
         {
             Vector2 n = circle.NextCenter - rect.NextCenter;
             Vector2 closest = n;

@@ -9,7 +9,21 @@ namespace Game.Physics.RaycastSystem
 {
     internal static class RaycastCollisionCheck
     {
-        internal static bool CircleAndLine(IReadonlyCircle circle, Ray ray, RaycastHit hit)
+        public static bool HandleRaycastCollision(IReadonlySimpleGeometry geometry, Ray ray, RaycastHit hit)
+        {
+            if (geometry is IReadonlyCircle)
+            {
+                return CircleAndLine((IReadonlyCircle)geometry, ray, hit);
+            }
+            else if (geometry is IReadonlyRect)
+            {
+                return AabbAndLine((IReadonlyRect)geometry, ray, hit);
+            }
+
+            throw new ArgumentException("Raycast got geometry of unknown type!");
+        }
+
+        private static bool CircleAndLine(IReadonlyCircle circle, Ray ray, RaycastHit hit)
         {
             Vector2 circleToRayStart = circle.Center - ray.StartPos;
             float radiusSquared = circle.Radius * circle.Radius;
@@ -46,7 +60,7 @@ namespace Game.Physics.RaycastSystem
             return true;
         }
 
-        internal static bool AabbAndLine(IReadonlyRect rect, Ray ray, RaycastHit hit)
+        private static bool AabbAndLine(IReadonlyRect rect, Ray ray, RaycastHit hit)
         {
             float t1 = (rect.MinX - ray.StartPos.X) / ray.Direction.X;
             float t2 = (rect.MaxX - ray.StartPos.X) / ray.Direction.X;

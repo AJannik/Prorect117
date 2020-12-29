@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Game.Interfaces;
 using Game.Physics;
-using Game.SimpleGeometry;
 using OpenTK;
 
 namespace Game.Components
@@ -44,6 +43,8 @@ namespace Game.Components
             if (!Simulated)
             {
                 Velocity = Vector2.Zero;
+                Force = Vector2.Zero;
+                PenRes = Vector2.Zero;
                 return;
             }
 
@@ -58,10 +59,8 @@ namespace Game.Components
             }
 
             // Verlet Integral
-            Vector2 s = deltaTime * (Velocity + (deltaTime * Acceleration / 2f));
-            Vector2 newAcceleration = Force / Mass;
-            Velocity += deltaTime * (Acceleration + newAcceleration) / 2f;
-            Acceleration = newAcceleration;
+            Vector2 s, newAcceleration;
+            Integrate(deltaTime, out s, out newAcceleration);
 
             // TODO: Performance-Opitimization
             // Check y-axis for collision
@@ -113,6 +112,14 @@ namespace Game.Components
             Force = Vector2.Zero;
         }
 
+        private void Integrate(float deltaTime, out Vector2 s, out Vector2 newAcceleration)
+        {
+            s = deltaTime * (Velocity + (deltaTime * Acceleration / 2f));
+            newAcceleration = Force / Mass;
+            Velocity += deltaTime * (Acceleration + newAcceleration) / 2f;
+            Acceleration = newAcceleration;
+        }
+
         private Vector2 CorrectRoundingErrors(Vector2 vector)
         {
             Vector2 s = new Vector2(vector.X, vector.Y);
@@ -134,69 +141,19 @@ namespace Game.Components
             foreach (ICollider myCollider in Colliders)
             {
                 myCollider.Geometry.PhysicOffset = s;
-                if (myCollider.GetType() == typeof(CBoxCollider))
-                {
-                    CheckBoxColliderCollisions((CBoxCollider)myCollider);
-                }
-                else if (myCollider.GetType() == typeof(CCircleCollider))
-                {
-                    CheckCircleColliderCollisions((CCircleCollider)myCollider);
-                }
+                CheckColliderCollisions(myCollider);
 
                 myCollider.Geometry.PhysicOffset = Vector2.Zero;
             }
         }
 
-        private void CheckBoxColliderCollisions(CBoxCollider myCollider)
+        private void CheckColliderCollisions(ICollider myCollider)
         {
-            // Going through every non owned and non trigger CBoxCollider in the Scene
-            foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
+            foreach (ICollider collider in MyGameObject.Scene.GetColliders())
             {
-                if (boxCollider.MyGameObject.Active && !Colliders.Contains(boxCollider) && !boxCollider.IsTrigger)
+                if (collider.MyGameObject.Active && !Colliders.Contains(collider) && !collider.IsTrigger)
                 {
-                    Vector2 x = PenetrationDepths.AabbAndAabb((Rect)myCollider.Geometry, (Rect)boxCollider.Geometry);
-                    if (CorrectRoundingErrors(PenRes - x) != Vector2.Zero)
-                    {
-                        PenRes += x;
-                    }
-                }
-            }
-
-            // Going through every non owned and non trigger CCircleCollider in the Scene
-            foreach (CCircleCollider circelCollider in MyGameObject.Scene.GetCCircleColliders())
-            {
-                if (circelCollider.MyGameObject.Active && !Colliders.Contains(circelCollider) && !circelCollider.IsTrigger)
-                {
-                    Vector2 x = PenetrationDepths.AabbAndCircle((Rect)myCollider.Geometry, (Circle)circelCollider.Geometry) * -1f;
-                    if (CorrectRoundingErrors(PenRes - x) != Vector2.Zero)
-                    {
-                        PenRes += x;
-                    }
-                }
-            }
-        }
-
-        private void CheckCircleColliderCollisions(CCircleCollider myCollider)
-        {
-            // Going through every non owned and non trigger CBoxCollider in the Scene
-            foreach (CBoxCollider boxCollider in MyGameObject.Scene.GetCBoxColliders())
-            {
-                if (boxCollider.MyGameObject.Active && !Colliders.Contains(boxCollider) && !boxCollider.IsTrigger)
-                {
-                    Vector2 x = PenetrationDepths.AabbAndCircle((Rect)boxCollider.Geometry, (Circle)myCollider.Geometry);
-                    if (CorrectRoundingErrors(PenRes - x) != Vector2.Zero)
-                    {
-                        PenRes += x;
-                    }
-                }
-            }
-
-            // Going through every non owned and non trigger CCircleCollider in the Scene
-            foreach (CCircleCollider circelCollider in MyGameObject.Scene.GetCCircleColliders())
-            {
-                if (circelCollider.MyGameObject.Active && !Colliders.Contains(circelCollider) && !circelCollider.IsTrigger)
-                {
-                    Vector2 x = PenetrationDepths.CircleAndCircle((Circle)myCollider.Geometry, (Circle)circelCollider.Geometry);
+                    Vector2 x = PenetrationDepths.HandlePenDepth((IReadonlySimpleGeometry)myCollider.Geometry, (IReadonlySimpleGeometry)collider.Geometry);
                     if (CorrectRoundingErrors(PenRes - x) != Vector2.Zero)
                     {
                         PenRes += x;

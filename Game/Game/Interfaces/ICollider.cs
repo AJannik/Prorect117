@@ -4,7 +4,7 @@ using OpenTK;
 
 namespace Game.Interfaces
 {
-    public interface ICollider
+    public interface ICollider : IComponent
     {
         public event EventHandler<IComponent> TriggerEntered;
 

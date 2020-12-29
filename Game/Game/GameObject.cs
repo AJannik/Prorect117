@@ -106,7 +106,7 @@ namespace Game
         {
             foreach (IComponent component in components)
             {
-                if (component.GetType() == typeof(T))
+                if (component is T)
                 {
                     return (T)component;
                 }

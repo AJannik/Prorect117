@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Components;
 using Game.Interfaces;
 using OpenTK.Graphics.OpenGL;
 
@@ -14,8 +13,7 @@ namespace Game.SceneSystem
         private List<IPhysicsComponent> physicsComponents = new List<IPhysicsComponent>();
         private List<IDebugDrawable> debugDrawables = new List<IDebugDrawable>();
         private List<IResizeable> resizeables = new List<IResizeable>();
-        private List<CBoxCollider> boxColliders = new List<CBoxCollider>();
-        private List<CCircleCollider> circleColliders = new List<CCircleCollider>();
+        private List<ICollider> colliders = new List<ICollider>();
 
         private List<GameObject> deleteList = new List<GameObject>();
 
@@ -119,14 +117,9 @@ namespace Game.SceneSystem
             return gameObjects;
         }
 
-        public IReadOnlyList<CBoxCollider> GetCBoxColliders()
+        public IReadOnlyList<ICollider> GetColliders()
         {
-            return boxColliders;
-        }
-
-        public IReadOnlyList<CCircleCollider> GetCCircleColliders()
-        {
-            return circleColliders;
+            return colliders;
         }
 
         public IReadOnlyList<IUpdateable> GetUpdateables()
@@ -177,18 +170,11 @@ namespace Game.SceneSystem
                 }
             }
 
-            if (component.GetType() == typeof(CBoxCollider))
+            if (component is ICollider)
             {
-                if (!boxColliders.Contains((CBoxCollider)component))
+                if (!colliders.Contains((ICollider)component))
                 {
-                    boxColliders.Add((CBoxCollider)component);
-                }
-            }
-            else if (component.GetType() == typeof(CCircleCollider))
-            {
-                if (!circleColliders.Contains((CCircleCollider)component))
-                {
-                    circleColliders.Add((CCircleCollider)component);
+                    colliders.Add((ICollider)component);
                 }
             }
         }
@@ -220,13 +206,9 @@ namespace Game.SceneSystem
                 debugDrawables.Remove((IDebugDrawable)component);
             }
 
-            if (component.GetType() == typeof(CBoxCollider))
+            if (component is ICollider)
             {
-                boxColliders.Remove((CBoxCollider)component);
-            }
-            else if (component.GetType() == typeof(CCircleCollider))
-            {
-                circleColliders.Remove((CCircleCollider)component);
+                colliders.Remove((ICollider)component);
             }
         }
 

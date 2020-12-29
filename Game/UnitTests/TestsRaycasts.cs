@@ -18,7 +18,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Circle circle = new Circle(new Vector2(0f, 0f), 0.2f);
 
-            Assert.IsTrue(RaycastCollisionCheck.CircleAndLine(circle, ray, hit));
+            Assert.IsTrue(RaycastCollisionCheck.HandleRaycastCollision(circle, ray, hit));
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Circle circle = new Circle(new Vector2(0f, 0f), 0.2f);
 
-            Assert.IsTrue(RaycastCollisionCheck.CircleAndLine(circle, ray, hit));
+            Assert.IsTrue(RaycastCollisionCheck.HandleRaycastCollision(circle, ray, hit));
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Circle circle = new Circle(new Vector2(0f, 0f), 0.2f);
 
-            Assert.IsTrue(RaycastCollisionCheck.CircleAndLine(circle, ray, hit));
+            Assert.IsTrue(RaycastCollisionCheck.HandleRaycastCollision(circle, ray, hit));
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Circle circle = new Circle(new Vector2(0f, 0f), 0.2f);
 
-            Assert.IsFalse(RaycastCollisionCheck.CircleAndLine(circle, ray, hit));
+            Assert.IsFalse(RaycastCollisionCheck.HandleRaycastCollision(circle, ray, hit));
         }
 
         [TestMethod]
@@ -61,7 +61,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Circle circle = new Circle(new Vector2(0f, 0f), 0.2f);
 
-            Assert.IsFalse(RaycastCollisionCheck.CircleAndLine(circle, ray, hit));
+            Assert.IsFalse(RaycastCollisionCheck.HandleRaycastCollision(circle, ray, hit));
         }
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Circle circle = new Circle(new Vector2(0f, 0f), 0.2f);
 
-            Assert.IsFalse(RaycastCollisionCheck.CircleAndLine(circle, ray, hit));
+            Assert.IsFalse(RaycastCollisionCheck.HandleRaycastCollision(circle, ray, hit));
         }
 
         [TestMethod]
@@ -83,7 +83,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Circle circle = new Circle(new Vector2(0f, 0f), 0.2f);
 
-            Assert.IsFalse(RaycastCollisionCheck.CircleAndLine(circle, ray, hit));
+            Assert.IsFalse(RaycastCollisionCheck.HandleRaycastCollision(circle, ray, hit));
         }
 
         [TestMethod]
@@ -93,7 +93,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Rect rect = new Rect(-0.1f, -0.1f, 0.2f, 0.2f);
 
-            Assert.IsTrue(RaycastCollisionCheck.AabbAndLine(rect, ray, hit));
+            Assert.IsTrue(RaycastCollisionCheck.HandleRaycastCollision(rect, ray, hit));
         }
 
         [TestMethod]
@@ -103,7 +103,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Rect rect = new Rect(-0.1f, -0.1f, 0.2f, 0.2f);
 
-            Assert.IsTrue(RaycastCollisionCheck.AabbAndLine(rect, ray, hit));
+            Assert.IsTrue(RaycastCollisionCheck.HandleRaycastCollision(rect, ray, hit));
         }
 
         [TestMethod]
@@ -113,7 +113,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Rect rect = new Rect(-0.1f, -0.1f, 0.2f, 0.2f);
 
-            Assert.IsTrue(RaycastCollisionCheck.AabbAndLine(rect, ray, hit));
+            Assert.IsTrue(RaycastCollisionCheck.HandleRaycastCollision(rect, ray, hit));
         }
 
         [TestMethod]
@@ -123,7 +123,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Rect rect = new Rect(-0.1f, -0.1f, 0.2f, 0.2f);
 
-            Assert.IsFalse(RaycastCollisionCheck.AabbAndLine(rect, ray, hit));
+            Assert.IsFalse(RaycastCollisionCheck.HandleRaycastCollision(rect, ray, hit));
         }
 
         [TestMethod]
@@ -133,7 +133,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Rect rect = new Rect(-0.1f, -0.1f, 0.2f, 0.2f);
 
-            Assert.IsFalse(RaycastCollisionCheck.AabbAndLine(rect, ray, hit));
+            Assert.IsFalse(RaycastCollisionCheck.HandleRaycastCollision(rect, ray, hit));
         }
 
         [TestMethod]
@@ -143,7 +143,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Rect rect = new Rect(-0.1f, -0.1f, 0.2f, 0.2f);
 
-            Assert.IsFalse(RaycastCollisionCheck.AabbAndLine(rect, ray, hit));
+            Assert.IsFalse(RaycastCollisionCheck.HandleRaycastCollision(rect, ray, hit));
         }
 
         [TestMethod]
@@ -153,7 +153,7 @@ namespace UnitTests
             RaycastHit hit = new RaycastHit();
             Rect rect = new Rect(-0.2f, -0.2f, 0.4f, 0.4f);
 
-            Assert.IsFalse(RaycastCollisionCheck.AabbAndLine(rect, ray, hit));
+            Assert.IsFalse(RaycastCollisionCheck.HandleRaycastCollision(rect, ray, hit));
         }
     }
 }

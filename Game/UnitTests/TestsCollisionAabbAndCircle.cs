@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 using Game.SimpleGeometry;
+using Game.Interfaces;
 using OpenTK;
 using Game.Physics;
 
@@ -16,7 +17,7 @@ namespace UnitTests
             Rect rect1 = new Rect(-1f, -1f, 0.1f, 0.1f);
             Rect rect2 = new Rect(1f, 1f, 0.1f, 0.1f);
 
-            Assert.IsFalse(CollisionCheck.AabbAndAabb(rect1, rect2));
+            Assert.IsFalse(CollisionCheck.HandelCollision((IReadonlySimpleGeometry)rect1, (IReadonlySimpleGeometry)rect2));
         }
 
         [TestMethod]
@@ -25,7 +26,7 @@ namespace UnitTests
             Rect rect1 = new Rect(-1f, -1f, 0.1f, 0.1f);
             Rect rect2 = new Rect(-1f, -0.9f, 0.1f, 0.1f);
 
-            Assert.IsTrue(CollisionCheck.AabbAndAabb(rect1, rect2));
+            Assert.IsTrue(CollisionCheck.HandelCollision((IReadonlySimpleGeometry)rect1, (IReadonlySimpleGeometry)rect2));
         }
 
         [TestMethod]
@@ -34,7 +35,7 @@ namespace UnitTests
             Rect rect1 = new Rect(0f, 0f, 0.4f, 0.4f);
             Rect rect2 = new Rect(0.2f, 0.2f, 0.2f, 0.4f);
 
-            Assert.IsTrue(CollisionCheck.AabbAndAabb(rect1, rect2));
+            Assert.IsTrue(CollisionCheck.HandelCollision((IReadonlySimpleGeometry)rect1, (IReadonlySimpleGeometry)rect2));
         }
 
         [TestMethod]
@@ -43,7 +44,7 @@ namespace UnitTests
             Circle circle1 = new Circle(new Vector2(-1f, -1f), 0.1f);
             Circle circle2 = new Circle(new Vector2(1f, 1f), 0.1f);
 
-            Assert.IsFalse(CollisionCheck.CircleAndCircle(circle1, circle2));
+            Assert.IsFalse(CollisionCheck.HandelCollision((IReadonlySimpleGeometry)circle1, (IReadonlySimpleGeometry)circle2));
         }
 
         [TestMethod]
@@ -52,7 +53,7 @@ namespace UnitTests
             Circle circle1 = new Circle(new Vector2(0f, 0f), 0.1f);
             Circle circle2 = new Circle(new Vector2(0.2f, 0f), 0.1f);
 
-            Assert.IsTrue(CollisionCheck.CircleAndCircle(circle1, circle2));
+            Assert.IsTrue(CollisionCheck.HandelCollision((IReadonlySimpleGeometry)circle1, (IReadonlySimpleGeometry)circle2));
         }
 
         [TestMethod]
@@ -61,7 +62,7 @@ namespace UnitTests
             Circle circle1 = new Circle(new Vector2(0f, 0f), 0.4f);
             Circle circle2 = new Circle(new Vector2(0.2f, 0f), 0.1f);
 
-            Assert.IsTrue(CollisionCheck.CircleAndCircle(circle1, circle2));
+            Assert.IsTrue(CollisionCheck.HandelCollision((IReadonlySimpleGeometry)circle1, (IReadonlySimpleGeometry)circle2));
         }
 
         [TestMethod]
@@ -70,7 +71,7 @@ namespace UnitTests
             Circle circle = new Circle(new Vector2(0f, 0f), 0.4f);
             Rect rect = new Rect(-1f, -1f, 0.1f, 0.1f);
 
-            Assert.IsFalse(CollisionCheck.AabbAndCircle(rect, circle));
+            Assert.IsFalse(CollisionCheck.HandelCollision((IReadonlySimpleGeometry)rect, (IReadonlySimpleGeometry)circle));
         }
 
         [TestMethod]
@@ -79,7 +80,7 @@ namespace UnitTests
             Circle circle = new Circle(new Vector2(0f, 0f), 0.3f);
             Rect rect = new Rect(-0.5f, 0f, 0.2f, 0.2f);
 
-            Assert.IsTrue(CollisionCheck.AabbAndCircle(rect, circle));
+            Assert.IsTrue(CollisionCheck.HandelCollision((IReadonlySimpleGeometry)rect, (IReadonlySimpleGeometry)circle));
         }
 
         [TestMethod]
@@ -88,7 +89,7 @@ namespace UnitTests
             Circle circle = new Circle(new Vector2(0f, 0f), 0.4f);
             Rect rect = new Rect(-0.5f, 0f, 0.4f, 0.4f);
 
-            Assert.IsTrue(CollisionCheck.AabbAndCircle(rect, circle));
+            Assert.IsTrue(CollisionCheck.HandelCollision((IReadonlySimpleGeometry)rect, (IReadonlySimpleGeometry)circle));
         }
 
         [TestMethod]

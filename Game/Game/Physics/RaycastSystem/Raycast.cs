@@ -1,6 +1,5 @@
-﻿using Game.Components;
+﻿using Game.Interfaces;
 using Game.SceneSystem;
-using Game.SimpleGeometry;
 
 namespace Game.Physics.RaycastSystem
 {
@@ -14,25 +13,13 @@ namespace Game.Physics.RaycastSystem
         {
             hit = new RaycastHit();
 
-            foreach (CBoxCollider boxCollider in scene.GetCBoxColliders())
+            foreach (ICollider collider in scene.GetColliders())
             {
-                if (boxCollider.MyGameObject.Active && (querryTrigger || (!querryTrigger && !boxCollider.IsTrigger)))
+                if ((collider as IComponent).MyGameObject.Active && (querryTrigger || (!querryTrigger && !collider.IsTrigger)))
                 {
-                    if (RaycastCollisionCheck.AabbAndLine((Rect)boxCollider.Geometry, ray, hit))
+                    if (RaycastCollisionCheck.HandleRaycastCollision((IReadonlySimpleGeometry)collider.Geometry, ray, hit))
                     {
-                        hit.HitObject = boxCollider;
-                        return true;
-                    }
-                }
-            }
-
-            foreach (CCircleCollider circleCollider in scene.GetCCircleColliders())
-            {
-                if (circleCollider.MyGameObject.Active && (querryTrigger || (!querryTrigger && !circleCollider.IsTrigger)))
-                {
-                    if (RaycastCollisionCheck.CircleAndLine((Circle)circleCollider.Geometry, ray, hit))
-                    {
-                        hit.HitObject = circleCollider;
+                        hit.HitObject = collider;
                         return true;
                     }
                 }
