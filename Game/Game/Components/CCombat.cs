@@ -5,7 +5,7 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    public class CCombat : IComponent, IUpdateAble
+    public class CCombat : IComponent, IUpdateable
     {
         private float maxHP = 100;
 

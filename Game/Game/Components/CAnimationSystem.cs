@@ -7,7 +7,7 @@ using Game.Tools;
 
 namespace Game.Components
 {
-    public class CAnimationSystem : IComponent, IUpdateAble
+    public class CAnimationSystem : IComponent, IUpdateable
     {
         private CRender render;
 

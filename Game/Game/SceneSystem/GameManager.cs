@@ -2,7 +2,7 @@
 
 namespace Game.SceneSystem
 {
-    public class GameManager : IUpdateAble
+    public class GameManager : IUpdateable
     {
         public int Coins { get; set; } = 0;
 

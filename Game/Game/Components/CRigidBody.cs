@@ -7,7 +7,7 @@ using OpenTK;
 
 namespace Game.Components
 {
-    public class CRigidBody : IComponent, IPhysicsComponent, IUpdateAble
+    public class CRigidBody : IComponent, IPhysicsComponent, IUpdateable
     {
         public GameObject MyGameObject { get; set; } = null;
 

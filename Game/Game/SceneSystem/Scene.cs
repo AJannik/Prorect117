@@ -10,7 +10,7 @@ namespace Game.SceneSystem
     {
         private List<GameObject> gameObjects = new List<GameObject>();
         private List<IDrawable> drawables = new List<IDrawable>();
-        private List<IUpdateAble> updateables = new List<IUpdateAble>();
+        private List<IUpdateable> updateables = new List<IUpdateable>();
         private List<IPhysicsComponent> physicsComponents = new List<IPhysicsComponent>();
         private List<IDebugDrawable> debugDrawables = new List<IDebugDrawable>();
         private List<IResizeable> resizeables = new List<IResizeable>();
@@ -31,7 +31,7 @@ namespace Game.SceneSystem
         public void Update(float deltaTime)
         {
             SortRenderers();
-            foreach (IUpdateAble updateAble in updateables)
+            foreach (IUpdateable updateAble in updateables)
             {
                 if ((updateAble as IComponent).MyGameObject.Active)
                 {
@@ -129,7 +129,7 @@ namespace Game.SceneSystem
             return circleColliders;
         }
 
-        public IReadOnlyList<IUpdateAble> GetGenericComponents()
+        public IReadOnlyList<IUpdateable> GetGenericComponents()
         {
             return updateables;
         }
@@ -153,11 +153,11 @@ namespace Game.SceneSystem
                 }
             }
 
-            if (component is IUpdateAble)
+            if (component is IUpdateable)
             {
-                if (!updateables.Contains((IUpdateAble)component))
+                if (!updateables.Contains((IUpdateable)component))
                 {
-                    updateables.Add((IUpdateAble)component);
+                    updateables.Add((IUpdateable)component);
                 }
             }
 
@@ -205,9 +205,9 @@ namespace Game.SceneSystem
                 drawables.Remove((IDrawable)component);
             }
 
-            if (component is IUpdateAble)
+            if (component is IUpdateable)
             {
-                updateables.Remove((IUpdateAble)component);
+                updateables.Remove((IUpdateable)component);
             }
 
             if (component is IResizeable)

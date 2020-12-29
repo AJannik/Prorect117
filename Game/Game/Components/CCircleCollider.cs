@@ -8,7 +8,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Game.Components
 {
-    public class CCircleCollider : IComponent, ICollider, IUpdateAble, IDebugDrawable
+    public class CCircleCollider : IComponent, ICollider, IUpdateable, IDebugDrawable
     {
         public event EventHandler<IComponent> TriggerEntered;
 

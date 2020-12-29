@@ -4,7 +4,7 @@ using OpenTK.Input;
 
 namespace Game.Components
 {
-    public class CPlayerController : IComponent, IUpdateAble
+    public class CPlayerController : IComponent, IUpdateable
     {
         public GameObject MyGameObject { get; set; } = null;
 

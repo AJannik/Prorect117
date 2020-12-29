@@ -6,7 +6,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Game.Components
 {
-    public class CCamera : IComponent, IDrawable, IUpdateAble, IResizeable
+    public class CCamera : IComponent, IDrawable, IUpdateable, IResizeable
     {
         private float scale = 1f;
         private Matrix4 cameraMatrix = Matrix4.Identity;
