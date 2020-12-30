@@ -1,4 +1,6 @@
 ﻿using Game.Components;
+using Game.Components.Colision;
+using Game.Components.Renderer;
 using Game.SceneSystem;
 using OpenTK;
 

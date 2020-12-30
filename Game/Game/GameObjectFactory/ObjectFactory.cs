@@ -1,4 +1,6 @@
 ﻿using Game.Components;
+using Game.Components.Colision;
+using Game.Components.Renderer;
 using Game.SceneSystem;
 using Game.Tools;
 using OpenTK;
@@ -106,7 +108,7 @@ namespace Game.GameObjectFactory
             // add text
             player.AddComponent<CTextRender>();
             player.GetComponent<CTextRender>().Text = "Player";
-            player.GetComponent<CTextRender>().Offset = new Vector2(0, 2.0f);
+            player.GetComponent<CTextRender>().Offset = new Vector2(-1f, 2f);
 
             return player;
         }

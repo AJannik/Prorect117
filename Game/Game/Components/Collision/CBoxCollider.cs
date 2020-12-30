@@ -3,7 +3,7 @@ using Game.SimpleGeometry;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game.Components
+namespace Game.Components.Colision
 {
     public class CBoxCollider : ICollider, IUpdateable, IDebugDrawable
     {

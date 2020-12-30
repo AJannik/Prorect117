@@ -1,5 +1,5 @@
-﻿using Game.Interfaces;
-using OpenTK;
+﻿using Game.Components.Renderer;
+using Game.Interfaces;
 using OpenTK.Input;
 
 namespace Game.Components

@@ -1,11 +1,10 @@
-﻿using System;
-using Game.Interfaces;
+﻿using Game.Interfaces;
 using Game.SimpleGeometry;
 using Game.Tools;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game.Components
+namespace Game.Components.Renderer
 {
     public class CRender : IComponent, IDrawable
     {
@@ -80,6 +79,7 @@ namespace Game.Components
             pos3 = Transformation.Transform(pos3, MyGameObject.Transform.WorldTransformMatrix);
             pos4 = Transformation.Transform(pos4, MyGameObject.Transform.WorldTransformMatrix);
 
+            // Blend between old frame and alpha towards current frame
             Vector2 newpos1 = (pos1 * alpha) + (Oldpos1 * (1f - alpha));
             Vector2 newpos2 = (pos2 * alpha) + (Oldpos2 * (1f - alpha));
             Vector2 newpos3 = (pos3 * alpha) + (Oldpos3 * (1f - alpha));

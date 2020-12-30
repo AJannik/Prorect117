@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Game.Interfaces;
+﻿using Game.Interfaces;
 using Game.SimpleGeometry;
 using Game.Tools;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game.Components
+namespace Game.Components.Renderer
 {
     public class CTileRenderer : IComponent, IDrawable
     {

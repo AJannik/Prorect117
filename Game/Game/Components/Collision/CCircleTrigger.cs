@@ -6,9 +6,9 @@ using Game.SimpleGeometry;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game.Components
+namespace Game.Components.Colision
 {
-    public class CBoxTrigger : ITrigger, IUpdateable, IDebugDrawable
+    public class CCircleTrigger : ITrigger, IUpdateable, IDebugDrawable
     {
         public event EventHandler<IComponent> TriggerEntered;
 
@@ -16,11 +16,13 @@ namespace Game.Components
 
         public Vector2 Offset { get; set; } = Vector2.Zero;
 
-        public ISimpleGeometry Geometry { get; set; } = new Rect(Vector2.Zero, new Vector2(1f, 1f));
+        public ISimpleGeometry Geometry { get; set; } = new Circle(Vector2.Zero, 1f);
 
         public GameObject MyGameObject { get; set; } = null;
 
         private List<IComponent> TriggerHits { get; set; } = new List<IComponent>();
+
+        private int NumVerticies { get; set; } = 18;
 
         public void Update(float deltaTime)
         {
@@ -30,13 +32,20 @@ namespace Game.Components
 
         public void DebugDraw()
         {
-            Rect x = (Rect)Geometry;
+            Circle circle = (Circle)Geometry;
+            float delta = 2f * MathF.PI / NumVerticies;
+
             GL.Color4(Color.Yellow);
             GL.Begin(PrimitiveType.LineLoop);
-            GL.Vertex2(x.MinX, x.MinY);
-            GL.Vertex2(x.MaxX, x.MinY);
-            GL.Vertex2(x.MaxX, x.MaxY);
-            GL.Vertex2(x.MinX, x.MaxY);
+            for (int i = 0; i < NumVerticies; i++)
+            {
+                float alpha = i * delta;
+                float x = MathF.Cos(alpha);
+                float y = MathF.Sin(alpha);
+                Vector2 point = new Vector2(x, y);
+                GL.Vertex2(circle.Center + (circle.Radius * point));
+            }
+
             GL.End();
             GL.Color4(Color.White);
         }

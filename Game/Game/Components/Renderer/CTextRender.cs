@@ -7,7 +7,7 @@ using Game.Tools;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game.Components
+namespace Game.Components.Renderer
 {
     public class CTextRender : IComponent, IDrawable
     {
@@ -36,6 +36,15 @@ namespace Game.Components
 
         public uint CharactersPerRow { get; set; } = 8;
 
+        // Used for RenderBlending
+        private Vector2 Oldpos1 { get; set; } = Vector2.Zero;
+
+        private Vector2 Oldpos2 { get; set; } = Vector2.Zero;
+
+        private Vector2 Oldpos3 { get; set; } = Vector2.Zero;
+
+        private Vector2 Oldpos4 { get; set; } = Vector2.Zero;
+
         public void LoadAndSetSpriteSheet(string name)
         {
             SpriteSheet = TextureTools.LoadFromResource(name);
@@ -52,15 +61,17 @@ namespace Game.Components
         {
             GL.Color3(Color.White);
             var rect = new Rect(0, 0, Size, Size); // rectangle of the first character
+            int i = 0;
             foreach (var spriteId in StringToSpriteIds(Text, FirstCharacter))
             {
                 var texCoords = CalcTexCoords(spriteId, CharactersPerRow, CharactersPerColumn);
-                DrawSingle(rect, texCoords);
+                DrawSingle(rect, texCoords, alpha, i);
                 rect.Center = new Vector2(rect.Center.X + rect.Size.X, rect.Center.Y);
+                i++;
             }
         }
 
-        private void DrawSingle(Rect rect, Rect texCoords)
+        private void DrawSingle(Rect rect, Rect texCoords, float alpha, int i)
         {
             GL.BindTexture(TextureTarget.Texture2D, SpriteSheet);
             GL.Color3(FontColor);
@@ -77,16 +88,31 @@ namespace Game.Components
             pos3 = Transformation.Transform(pos3, MyGameObject.Transform.WorldTransformMatrix);
             pos4 = Transformation.Transform(pos4, MyGameObject.Transform.WorldTransformMatrix);
 
+            // Blend between old frame and alpha towards current frame
+            Vector2 newpos1 = (pos1 * alpha) + ((Oldpos1 + rect.Size * i) * (1f - alpha));
+            Vector2 newpos2 = (pos2 * alpha) + ((Oldpos2 + rect.Size * i) * (1f - alpha));
+            Vector2 newpos3 = (pos3 * alpha) + ((Oldpos3 + rect.Size * i) * (1f - alpha));
+            Vector2 newpos4 = (pos4 * alpha) + ((Oldpos4 + rect.Size * i) * (1f - alpha));
+
             // Draw (flipped)
             GL.Begin(PrimitiveType.Quads);
             GL.TexCoord2(texCoords.MinX, texCoords.MinY);
-            GL.Vertex2(pos1);
+            GL.Vertex2(newpos1);
             GL.TexCoord2(texCoords.MaxX, texCoords.MinY);
-            GL.Vertex2(pos2);
+            GL.Vertex2(newpos2);
             GL.TexCoord2(texCoords.MaxX, texCoords.MaxY);
-            GL.Vertex2(pos3);
+            GL.Vertex2(newpos3);
             GL.TexCoord2(texCoords.MinX, texCoords.MaxY);
-            GL.Vertex2(pos4);
+            GL.Vertex2(newpos4);
+
+            if (i == 0)
+            {
+                // Update old positions for RenderBlending
+                Oldpos1 = pos1;
+                Oldpos2 = pos2;
+                Oldpos3 = pos3;
+                Oldpos4 = pos4;
+            }
 
             GL.End();
             GL.Color3(Color.White);

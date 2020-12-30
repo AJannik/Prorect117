@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Game.Interfaces;
 using Game.SimpleGeometry;
 using Game.Tools;
 
-namespace Game.Components
+namespace Game.Components.Renderer
 {
     public class CAnimationSystem : IComponent, IUpdateable
     {

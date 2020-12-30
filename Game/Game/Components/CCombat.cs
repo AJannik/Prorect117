@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game.Components.Renderer;
 using Game.Interfaces;
 
 namespace Game.Components
