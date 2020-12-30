@@ -34,7 +34,7 @@ namespace Game.Components
 
         private int TileSetRows { get; set; } = 3;
 
-        private float TileSize { get; set; } = 1f;
+        private float TileSize { get; set; } = 0.5f;
 
         public void LoadAndSetTexture(string name)
         {
@@ -50,9 +50,9 @@ namespace Game.Components
 
         public void Draw(float alpha)
         {
-            for (int x = 0; x < Width; x++)
+            for (float x = 0; x < Width; x += TileSize)
             {
-                for (int y = 0; y < Height; y++)
+                for (float y = 0; y < Height; y += TileSize)
                 {
                     Vector2 position = new Vector2(x - (Width / 2f), y - (Height / 2f));
                     if (x == 0)
@@ -61,7 +61,7 @@ namespace Game.Components
                         {
                             DrawSingleTile(position, TopLeftTileIndex + (2 * TileSetColumns));
                         }
-                        else if (y == Height - 1)
+                        else if (y == Height - TileSize)
                         {
                             DrawSingleTile(position, TopLeftTileIndex);
                         }
@@ -70,13 +70,13 @@ namespace Game.Components
                             DrawSingleTile(position, TopLeftTileIndex + TileSetColumns);
                         }
                     }
-                    else if (x == Width - 1)
+                    else if (x == Width - TileSize)
                     {
                         if (y == 0)
                         {
                             DrawSingleTile(position, TopLeftTileIndex + (2 * TileSetColumns) + 2);
                         }
-                        else if (y == Height - 1)
+                        else if (y == Height - TileSize)
                         {
                             DrawSingleTile(position, TopLeftTileIndex + 2);
                         }
@@ -91,7 +91,7 @@ namespace Game.Components
                         {
                             DrawSingleTile(position, TopLeftTileIndex + (2 * TileSetColumns) + 1);
                         }
-                        else if (y == Height - 1)
+                        else if (y == Height - TileSize)
                         {
                             DrawSingleTile(position, TopLeftTileIndex + 1);
                         }
