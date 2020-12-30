@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Security.Cryptography;
 using Game.Components;
-using Game.Components.UI;
+using Game.Components.Renderer;
 using Game.GameObjectFactory;
 using OpenTK;
 
@@ -58,11 +57,15 @@ namespace Game.SceneSystem
             ObjectFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.AddComponent<CCanvas>();
             camera.GetComponent<CCamera>().Scale = 12f;
 
-            GameObject coinUI = ObjectFactory.BuildCoin(scene, new Vector2(16f, 10f));
-            coinUI.SetParent(camera);
+            // Coin UI
+            GameObject coin = ObjectFactory.BuildSprite(scene, new Vector2(18f, 10f), "goldcoin1.png");
+            coin.GetComponent<CRender>().Layer = 20;
+            coin.SetParent(camera);
+            GameObject coinText = ObjectFactory.BuildTextField(scene, new Vector2(17f, 9.8f), "0");
+            coinText.GetComponent<CTextRender>().Layer = 20;
+            coinText.SetParent(camera);
 
             // Enemies
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));

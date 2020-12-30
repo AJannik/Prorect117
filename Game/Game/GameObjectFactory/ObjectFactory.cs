@@ -10,12 +10,13 @@ namespace Game.GameObjectFactory
 {
     public static class ObjectFactory
     {
-        public static GameObject BuildSprite(Scene scene, Vector2 position)
+        public static GameObject BuildSprite(Scene scene, Vector2 position, string texture)
         {
             GameObject sprite = new GameObject(scene);
             sprite.Transform.Position = position;
 
             sprite.AddComponent<CRender>();
+            sprite.GetComponent<CRender>().LoadAndSetTexture($"Content.{texture}");
 
             return sprite;
         }
@@ -28,6 +29,17 @@ namespace Game.GameObjectFactory
             camera.AddComponent<CCamera>();
 
             return camera;
+        }
+
+        public static GameObject BuildTextField(Scene scene, Vector2 position, string text)
+        {
+            GameObject textField = new GameObject(scene, "TextField");
+            textField.Transform.Position = position;
+
+            textField.AddComponent<CTextRender>();
+            textField.GetComponent<CTextRender>().Text = text;
+
+            return textField;
         }
 
         public static GameObject BuildPlayer(Scene scene, Vector2 position)

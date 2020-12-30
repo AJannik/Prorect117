@@ -17,6 +17,11 @@ namespace Game
 
             void Update(double frameTime)
             {
+                if (frameTime > 0.1f)
+                {
+                    frameTime = 0.1f;
+                }
+
                 // Normal Update
                 sceneManager.Update((float)frameTime);
 

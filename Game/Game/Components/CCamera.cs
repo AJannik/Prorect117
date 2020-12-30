@@ -25,8 +25,6 @@ namespace Game.Components
 
         public Matrix4 CameraMatrix => cameraMatrix;
 
-        public Matrix4 InvViewportMatrix { get; private set; }
-
         public int Layer { get; set; } = 0;
 
         public void Update(float deltaTime)

@@ -97,13 +97,13 @@ namespace Game.Components.Renderer
             // Draw (flipped)
             GL.Begin(PrimitiveType.Quads);
             GL.TexCoord2(texCoords.MinX, texCoords.MinY);
-            GL.Vertex2(newpos1);
+            GL.Vertex2(pos1);
             GL.TexCoord2(texCoords.MaxX, texCoords.MinY);
-            GL.Vertex2(newpos2);
+            GL.Vertex2(pos2);
             GL.TexCoord2(texCoords.MaxX, texCoords.MaxY);
-            GL.Vertex2(newpos3);
+            GL.Vertex2(pos3);
             GL.TexCoord2(texCoords.MinX, texCoords.MaxY);
-            GL.Vertex2(newpos4);
+            GL.Vertex2(pos4);
 
             if (i == 0)
             {
