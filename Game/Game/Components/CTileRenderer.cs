@@ -70,7 +70,7 @@ namespace Game.Components
                             DrawSingleTile(position, TopLeftTileIndex + TileSetColumns);
                         }
                     }
-                    else if (x == Height - 1)
+                    else if (x == Width - 1)
                     {
                         if (y == 0)
                         {

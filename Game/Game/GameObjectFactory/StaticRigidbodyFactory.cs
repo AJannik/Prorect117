@@ -11,9 +11,10 @@ namespace Game.GameObjectFactory
             GameObject floor = new GameObject(scene, "Floor");
             Vector2 size = new Vector2(length, 1f);
             floor.Transform.Position = position;
-            floor.Transform.Scale = size;
 
-            floor.AddComponent<CRender>();
+            floor.AddComponent<CTileRenderer>();
+            floor.GetComponent<CTileRenderer>().Height = 1;
+            floor.GetComponent<CTileRenderer>().Width = length;
             floor.AddComponent<CBoxCollider>();
             floor.GetComponent<CBoxCollider>().Geometry.Size = size;
 
