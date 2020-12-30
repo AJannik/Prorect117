@@ -24,7 +24,7 @@ namespace Game.Components
 
         public string Text { get; set; } = string.Empty;
 
-        public float Size { get; set; } = 0.8f;
+        public float Size { get; set; } = 0.4f;
 
         public Vector2 Offset { get; set; } = Vector2.Zero;
 
@@ -51,7 +51,7 @@ namespace Game.Components
         public void Draw(float alpha)
         {
             GL.Color3(Color.White);
-            var rect = new Rect(MyGameObject.Transform.Position.X, MyGameObject.Transform.Position.Y, Size, Size); // rectangle of the first character
+            var rect = new Rect(0, 0, Size, Size); // rectangle of the first character
             foreach (var spriteId in StringToSpriteIds(Text, FirstCharacter))
             {
                 var texCoords = CalcTexCoords(spriteId, CharactersPerRow, CharactersPerColumn);

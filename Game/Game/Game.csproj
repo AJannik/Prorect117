@@ -8,6 +8,7 @@
   <ItemGroup>
     <None Remove="Content\adventurer.png" />
     <None Remove="Content\default.png" />
+    <None Remove="Content\Font.png" />
     <None Remove="Content\LightBandit.png" />
     <None Remove="Content\Skeleton\SkeletonAttack.png" />
     <None Remove="Content\Skeleton\SkeletonDead.png" />
@@ -21,6 +22,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Content\adventurer.png" />
     <EmbeddedResource Include="Content\default.png" />
+    <EmbeddedResource Include="Content\Font.png" />
     <EmbeddedResource Include="Content\LightBandit.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonAttack.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonDead.png" />

@@ -34,6 +34,8 @@ namespace Game.Components
 
         private int TileSetRows { get; set; } = 3;
 
+        private float TileSize { get; set; } = 1f;
+
         public void LoadAndSetTexture(string name)
         {
             Texture = TextureTools.LoadFromResource(name);
@@ -52,7 +54,7 @@ namespace Game.Components
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    Vector2 position = new Vector2(x, y);
+                    Vector2 position = new Vector2(x - (Width / 2f), y - (Height / 2f));
                     if (x == 0)
                     {
                         if (y == 0)
@@ -61,11 +63,11 @@ namespace Game.Components
                         }
                         else if (y == Height - 1)
                         {
-                            DrawSingleTile(position, TopLeftTileIndex + TileSetColumns);
+                            DrawSingleTile(position, TopLeftTileIndex);
                         }
                         else
                         {
-                            DrawSingleTile(position, TopLeftTileIndex);
+                            DrawSingleTile(position, TopLeftTileIndex + TileSetColumns);
                         }
                     }
                     else if (x == Height - 1)
@@ -76,11 +78,11 @@ namespace Game.Components
                         }
                         else if (y == Height - 1)
                         {
-                            DrawSingleTile(position, TopLeftTileIndex + TileSetColumns + 2);
+                            DrawSingleTile(position, TopLeftTileIndex + 2);
                         }
                         else
                         {
-                            DrawSingleTile(position, TopLeftTileIndex + 2);
+                            DrawSingleTile(position, TopLeftTileIndex + TileSetColumns + 2);
                         }
                     }
                     else
@@ -91,11 +93,11 @@ namespace Game.Components
                         }
                         else if (y == Height - 1)
                         {
-                            DrawSingleTile(position, TopLeftTileIndex + TileSetColumns + 1);
+                            DrawSingleTile(position, TopLeftTileIndex + 1);
                         }
                         else
                         {
-                            DrawSingleTile(position, TopLeftTileIndex + 1);
+                            DrawSingleTile(position, TopLeftTileIndex + TileSetColumns + 1);
                         }
                     }
                 }
@@ -104,7 +106,7 @@ namespace Game.Components
 
         private void DrawSingleTile(Vector2 offset, int tileID)
         {
-            GL.BindTexture(TextureTarget.Texture2D, this.Texture);
+            GL.BindTexture(TextureTarget.Texture2D, Texture);
             GL.Color3(TintColor);
 
             Vector2 pos1;
@@ -114,9 +116,9 @@ namespace Game.Components
 
             // calculate the corners and TexCoords
             pos1 = new Vector2(offset.X, offset.Y);
-            pos2 = new Vector2(offset.X, offset.Y);
-            pos3 = new Vector2(offset.X, offset.Y);
-            pos4 = new Vector2(offset.X, offset.Y);
+            pos2 = new Vector2(offset.X + TileSize, offset.Y);
+            pos3 = new Vector2(offset.X + TileSize, offset.Y + TileSize);
+            pos4 = new Vector2(offset.X, offset.Y + TileSize);
             Rect texCoords = CalculateTexCoords(tileID);
 
             // transform the corners

@@ -29,7 +29,6 @@ namespace Game.GameObjectFactory
             GameObject wall = new GameObject(scene, "Wall");
             Vector2 size = new Vector2(1f, height);
             wall.Transform.Position = position;
-            wall.Transform.Scale = size;
 
             wall.AddComponent<CTileRenderer>();
             wall.GetComponent<CTileRenderer>().Height = height;

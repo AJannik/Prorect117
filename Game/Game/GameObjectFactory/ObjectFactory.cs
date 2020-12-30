@@ -103,6 +103,11 @@ namespace Game.GameObjectFactory
             attackHitboxRight.Offset = new Vector2(0.9f, 0f);
             combatController.RightHitbox = attackHitboxRight;
 
+            // add text
+            player.AddComponent<CTextRender>();
+            player.GetComponent<CTextRender>().Text = "Player";
+            player.GetComponent<CTextRender>().Offset = new Vector2(0, 2.0f);
+
             return player;
         }
 
