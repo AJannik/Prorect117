@@ -6,7 +6,7 @@ using Game.SimpleGeometry;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game.Components.Colision
+namespace Game.Components.Collision
 {
     public class CBoxTrigger : ITrigger, IUpdateable, IDebugDrawable
     {

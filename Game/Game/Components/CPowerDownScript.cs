@@ -1,4 +1,5 @@
-﻿using Game.Interfaces;
+﻿using Game.Components.Collision;
+using Game.Interfaces;
 using Game.Tools;
 
 namespace Game.Components

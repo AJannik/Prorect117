@@ -1,5 +1,5 @@
 ﻿using Game.Components;
-using Game.Components.Colision;
+using Game.Components.Collision;
 using Game.Components.Renderer;
 using Game.SceneSystem;
 using Game.Tools;

@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Components.Collision;
 using Game.Components.Renderer;
 using Game.Interfaces;
 using OpenTK.Input;

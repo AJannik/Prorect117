@@ -1,5 +1,5 @@
 ﻿using Game.Components;
-using Game.Components.Colision;
+using Game.Components.Collision;
 using Game.Components.Renderer;
 using Game.SceneSystem;
 using Game.Tools;
@@ -140,7 +140,11 @@ namespace Game.GameObjectFactory
         public static GameObject BuildCoin(Scene scene, Vector2 position)
         {
             GameObject coin = new GameObject(scene, "Coin");
+            coin.Transform.Position = position;
 
+            coin.AddComponent<CRender>();
+            coin.GetComponent<CRender>().LoadAndSetTexture("Content.goldcoin1.png");
+            coin.GetComponent<CRender>().Layer = 11;
             // TODO: Add sprite and hitbox
 
             return coin;
