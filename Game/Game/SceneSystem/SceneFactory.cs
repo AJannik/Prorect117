@@ -62,6 +62,7 @@ namespace Game.SceneSystem
             // Coin UI
             GameObject coin = ObjectFactory.BuildSprite(scene, new Vector2(18f, 10f), "goldcoin1.png");
             coin.GetComponent<CRender>().Layer = 20;
+            coin.GetComponent<CRender>().SetSize(1.5f, 1.5f);
             coin.SetParent(camera);
             GameObject coinText = ObjectFactory.BuildTextField(scene, new Vector2(17f, 9.8f), "0");
             coinText.GetComponent<CTextRender>().Layer = 20;

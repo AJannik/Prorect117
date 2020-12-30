@@ -2,10 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
-using Game.Components;
-using Game;
 using UnitTests.DummyClasses;
+using Game.Components.Renderer;
 
 namespace UnitTests
 {
