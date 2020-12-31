@@ -39,13 +39,13 @@ namespace Game.Components.Renderer
         public uint CharactersPerRow { get; set; } = 8;
 
         // Used for RenderBlending
-        private Vector2 Oldpos1 { get; set; } = Vector2.Zero;
+        private List<Vector2> OldPos1 { get; set; } = new List<Vector2>();
 
-        private Vector2 Oldpos2 { get; set; } = Vector2.Zero;
+        private List<Vector2> OldPos2 { get; set; } = new List<Vector2>();
 
-        private Vector2 Oldpos3 { get; set; } = Vector2.Zero;
+        private List<Vector2> OldPos3 { get; set; } = new List<Vector2>();
 
-        private Vector2 Oldpos4 { get; set; } = Vector2.Zero;
+        private List<Vector2> OldPos4 { get; set; } = new List<Vector2>();
 
         public void LoadAndSetSpriteSheet(string name)
         {
@@ -76,6 +76,15 @@ namespace Game.Components.Renderer
                 rect.Center = new Vector2(rect.Center.X + rect.Size.X, rect.Center.Y);
                 i++;
             }
+
+            // remove unused list places
+            for (int k = i; k < OldPos1.Count; k++)
+            {
+                OldPos1.RemoveAt(k);
+                OldPos2.RemoveAt(k);
+                OldPos3.RemoveAt(k);
+                OldPos4.RemoveAt(k);
+            }
         }
 
         private void DrawSingle(Rect rect, Rect texCoords, float alpha, int i)
@@ -95,30 +104,45 @@ namespace Game.Components.Renderer
             pos3 = Transformation.Transform(pos3, MyGameObject.Transform.WorldTransformMatrix);
             pos4 = Transformation.Transform(pos4, MyGameObject.Transform.WorldTransformMatrix);
 
-            // Blend between old frame and alpha towards current frame
-            Vector2 newpos1 = (pos1 * alpha) + ((Oldpos1 + (rect.Size * i)) * (1f - alpha));
-            Vector2 newpos2 = (pos2 * alpha) + ((Oldpos2 + (rect.Size * i)) * (1f - alpha));
-            Vector2 newpos3 = (pos3 * alpha) + ((Oldpos3 + (rect.Size * i)) * (1f - alpha));
-            Vector2 newpos4 = (pos4 * alpha) + ((Oldpos4 + (rect.Size * i)) * (1f - alpha));
+            // blend
+            Vector2 newpos1 = pos1;
+            Vector2 newpos2 = pos2;
+            Vector2 newpos3 = pos3;
+            Vector2 newpos4 = pos4;
+            // skip blend if text longer than old list
+            if (OldPos1.Count >= Text.Length)
+            {
+                newpos1 = (pos1 * alpha) + (OldPos1[i] * (1f - alpha));
+                newpos2 = (pos2 * alpha) + (OldPos2[i] * (1f - alpha));
+                newpos3 = (pos3 * alpha) + (OldPos3[i] * (1f - alpha));
+                newpos4 = (pos4 * alpha) + (OldPos4[i] * (1f - alpha));
+            }
 
             // Draw (flipped)
             GL.Begin(PrimitiveType.Quads);
             GL.TexCoord2(texCoords.MinX, texCoords.MinY);
-            GL.Vertex2(pos1);
+            GL.Vertex2(newpos1);
             GL.TexCoord2(texCoords.MaxX, texCoords.MinY);
-            GL.Vertex2(pos2);
+            GL.Vertex2(newpos2);
             GL.TexCoord2(texCoords.MaxX, texCoords.MaxY);
-            GL.Vertex2(pos3);
+            GL.Vertex2(newpos3);
             GL.TexCoord2(texCoords.MinX, texCoords.MaxY);
-            GL.Vertex2(pos4);
+            GL.Vertex2(newpos4);
 
-            if (i == 0)
+            // update oldpos
+            if (OldPos1.Count < i + 1)
             {
-                // Update old positions for RenderBlending
-                Oldpos1 = pos1;
-                Oldpos2 = pos2;
-                Oldpos3 = pos3;
-                Oldpos4 = pos4;
+                OldPos1.Add(pos1);
+                OldPos2.Add(pos2);
+                OldPos3.Add(pos3);
+                OldPos4.Add(pos4);
+            }
+            else
+            {
+                OldPos1[i] = pos1;
+                OldPos2[i] = pos2;
+                OldPos3[i] = pos3;
+                OldPos4[i] = pos4;
             }
 
             GL.End();
