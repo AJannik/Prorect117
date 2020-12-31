@@ -31,6 +31,14 @@ namespace Game.Components
 
         public int Layer { get; set; } = 0;
 
+        public int ViewportWidth { get; private set; }
+
+        public int ViewportHeight { get; private set; }
+
+        public int ViewportX { get; private set; }
+
+        public int ViewportY { get; private set; }
+
         public void Update(float deltaTime)
         {
             UpdateMatrix();
@@ -44,23 +52,22 @@ namespace Game.Components
         public void Resize(int width, int height)
         {
             // Fixed aspect ratio of 16:9
-            int viewportX = 0;
-            int viewportY = 0;
-            int viewportWidth = width;
-            int viewportHeight = height;
+            ViewportX = 0;
+            ViewportY = 0;
+            ViewportWidth = width;
+            ViewportHeight = height;
             if (width * YAspect > height * XAspect)
             {
-                viewportWidth = height * XAspect / YAspect;
-                viewportX = (width - viewportWidth) / 2;
+                ViewportWidth = height * XAspect / YAspect;
+                ViewportX = (width - ViewportWidth) / 2;
             }
             else if (width * YAspect < height * XAspect)
             {
-                viewportHeight = width * YAspect / XAspect;
-                viewportY = (height - viewportHeight) / 2;
+                ViewportHeight = width * YAspect / XAspect;
+                ViewportY = (height - ViewportHeight) / 2;
             }
 
-            GL.Viewport(viewportX, viewportY, viewportWidth, viewportHeight);
-
+            GL.Viewport(ViewportX, ViewportY, ViewportWidth, ViewportHeight);
             UpdateMatrix();
         }
 

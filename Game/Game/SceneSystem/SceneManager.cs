@@ -1,5 +1,6 @@
 ﻿using System;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
 
 namespace Game.SceneSystem
 {
@@ -53,6 +54,11 @@ namespace Game.SceneSystem
             screenWidth = width;
             screenHeight = height;
             scenes[CurrentScene].Resize(screenWidth, screenHeight);
+        }
+
+        public void MouseEvent(MouseButtonEventArgs args)
+        {
+            scenes[CurrentScene].MouseEvent(args);
         }
 
         public void UnloadCurrentScene()
