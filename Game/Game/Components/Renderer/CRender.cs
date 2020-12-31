@@ -49,7 +49,7 @@ namespace Game.Components.Renderer
 
         public void Draw(float alpha)
         {
-            GL.BindTexture(TextureTarget.Texture2D, this.Texture);
+            GL.BindTexture(TextureTarget.Texture2D, Texture);
             GL.Color3(TintColor);
 
             Vector2 pos1;
