@@ -58,7 +58,7 @@ namespace Game.SceneSystem
             ObjectFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.0f), new Vector2(1, 2));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 12f;
+            camera.GetComponent<CCamera>().Scale = 6f;
 
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);

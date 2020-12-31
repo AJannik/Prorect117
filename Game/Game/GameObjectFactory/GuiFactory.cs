@@ -37,7 +37,7 @@ namespace Game.GameObjectFactory
 
             textField.AddComponent<CGuiTextRender>();
             textField.GetComponent<CGuiTextRender>().Text = text;
-            textField.GetComponent<CImageRender>().Canvas = canvas.GetComponent<CCanvas>();
+            textField.GetComponent<CGuiTextRender>().Canvas = canvas.GetComponent<CCanvas>();
 
             return textField;
         }

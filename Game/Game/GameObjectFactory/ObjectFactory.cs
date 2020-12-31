@@ -52,7 +52,7 @@ namespace Game.GameObjectFactory
             render.SetSize(2.7f, 2.0f);
             render.LoadAndSetTexture("Content.adventurer.png");
             render.SetTexCoords(new SimpleGeometry.Rect(0.0f, 0.0f, 1f / 15f, 1.0f));
-            render.SetOffset(0.0f, 0.1f);
+            render.SetOffset(0.0f, 0.2f);
             render.Layer = 12;
 
             player.AddComponent<CBoxCollider>();
@@ -117,6 +117,11 @@ namespace Game.GameObjectFactory
             attackHitboxRight.Geometry.Size = new Vector2(1f, 1.5f);
             attackHitboxRight.Offset = new Vector2(0.9f, 0f);
             combatController.RightHitbox = attackHitboxRight;
+
+            // add EffectSystem
+            player.AddComponent<CEffectSystem>();
+            player.GetComponent<CEffectSystem>().PlayerController = player.GetComponent<CPlayerController>();
+            player.GetComponent<CEffectSystem>().Combat = player.GetComponent<CCombat>();
 
             // add text
             player.AddComponent<CTextRender>();
