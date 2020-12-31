@@ -25,6 +25,10 @@ namespace Game.Components
 
         public Matrix4 CameraMatrix => cameraMatrix;
 
+        public int XAspect { get; set; } = 16;
+
+        public int YAspect { get; set; } = 9;
+
         public int Layer { get; set; } = 0;
 
         public void Update(float deltaTime)
@@ -44,14 +48,14 @@ namespace Game.Components
             int viewportY = 0;
             int viewportWidth = width;
             int viewportHeight = height;
-            if (width * 9 > height * 16)
+            if (width * YAspect > height * XAspect)
             {
-                viewportWidth = height * 16 / 9;
+                viewportWidth = height * XAspect / YAspect;
                 viewportX = (width - viewportWidth) / 2;
             }
-            else if (width * 9 < height * 16)
+            else if (width * YAspect < height * XAspect)
             {
-                viewportHeight = width * 9 / 16;
+                viewportHeight = width * YAspect / XAspect;
                 viewportY = (height - viewportHeight) / 2;
             }
 
@@ -62,7 +66,7 @@ namespace Game.Components
 
         public void UpdateMatrix()
         {
-            Matrix4 aspect = Transformation.Scale(9f / 16f, 1f);
+            Matrix4 aspect = Transformation.Scale(YAspect / (float)XAspect, 1f);
 
             // Implement camera scaling
             Matrix4 cameraScale = Transformation.Scale(1f / Scale);
