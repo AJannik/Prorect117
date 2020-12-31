@@ -54,7 +54,7 @@ namespace Game.SceneSystem
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2f));
-            ObjectFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.5f), new Vector2(3, 3));
+            ObjectFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.0f), new Vector2(1, 2));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 12f;

@@ -17,6 +17,11 @@ namespace Game.GameObjectFactory
             floor.AddComponent<CTileRenderer>();
             floor.GetComponent<CTileRenderer>().Height = 1;
             floor.GetComponent<CTileRenderer>().Width = length;
+            floor.AddComponent<CTileRenderer>();
+            floor.GetComponents<CTileRenderer>()[1].Height = 2;
+            floor.GetComponents<CTileRenderer>()[1].Width = length + 1;
+            floor.GetComponents<CTileRenderer>()[1].LoadAndSetTexture("Content.GrassSpritesheet.png");
+            floor.GetComponents<CTileRenderer>()[1].Layer = 11;
             floor.AddComponent<CBoxCollider>();
             floor.GetComponent<CBoxCollider>().Geometry.Size = size;
 
