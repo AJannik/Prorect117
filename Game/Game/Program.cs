@@ -1,6 +1,8 @@
 ﻿using System;
 using Game.SceneSystem;
+using Game.Tools;
 using OpenTK;
+using OpenTK.Input;
 
 namespace Game
 {
@@ -45,9 +47,15 @@ namespace Game
                 window.SwapBuffers(); // buffer swap needed for double buffering
             }
 
+            void MouseEvent(MouseButtonEventArgs args)
+            {
+                sceneManager.MouseEvent(args);
+            }
+
             window.UpdateFrame += (_, args) => Update(args.Time);
             window.RenderFrame += (s, a) => Draw(a.Time);
             window.Resize += (_, args) => sceneManager.Resize(window.Width, window.Height);
+            window.MouseDown += (_, args) => MouseEvent(args);
             window.Run();
         }
     }

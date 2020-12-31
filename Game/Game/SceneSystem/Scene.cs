@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Game.Interfaces;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
 
 namespace Game.SceneSystem
 {
@@ -15,6 +16,7 @@ namespace Game.SceneSystem
         private List<IResizeable> resizeables = new List<IResizeable>();
         private List<ICollider> colliders = new List<ICollider>();
         private List<ITrigger> triggers = new List<ITrigger>();
+        private List<IMouseListener> mouseListeners = new List<IMouseListener>();
 
         private List<GameObject> deleteList = new List<GameObject>();
 
@@ -96,6 +98,17 @@ namespace Game.SceneSystem
             }
 
             Debug.DebugDraw();
+        }
+
+        public void MouseEvent(MouseButtonEventArgs args)
+        {
+            foreach (IMouseListener mouseListener in mouseListeners)
+            {
+                if ((mouseListener as IComponent).MyGameObject.Active)
+                {
+                    mouseListener.MouseEvent(args);
+                }
+            }
         }
 
         public void AddGameObject(GameObject gameObject)
@@ -191,6 +204,14 @@ namespace Game.SceneSystem
                     triggers.Add((ITrigger)component);
                 }
             }
+
+            if (component is IMouseListener)
+            {
+                if (!mouseListeners.Contains((IMouseListener)component))
+                {
+                    mouseListeners.Add((IMouseListener)component);
+                }
+            }
         }
 
         public void RemoveComponent(IComponent component)
@@ -228,6 +249,11 @@ namespace Game.SceneSystem
             if (component is ITrigger)
             {
                 triggers.Remove((ITrigger)component);
+            }
+
+            if (component is IMouseListener)
+            {
+                mouseListeners.Remove((IMouseListener)component);
             }
         }
 
