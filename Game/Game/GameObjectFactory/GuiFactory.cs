@@ -18,24 +18,26 @@ namespace Game.GameObjectFactory
             return canvas;
         }
 
-        public static GameObject BuildGuiImage(Scene scene, Vector2 position, string texture)
+        public static GameObject BuildGuiImage(Scene scene, GameObject canvas, Vector2 position, string texture)
         {
-            GameObject sprite = new GameObject(scene);
-            sprite.Transform.Position = position;
+            GameObject image = new GameObject(scene, "Image", canvas);
+            image.Transform.Position = position;
 
-            sprite.AddComponent<CImageRender>();
-            sprite.GetComponent<CImageRender>().LoadAndSetTexture($"Content.{texture}");
+            image.AddComponent<CImageRender>();
+            image.GetComponent<CImageRender>().LoadAndSetTexture($"Content.{texture}");
+            image.GetComponent<CImageRender>().Canvas = canvas.GetComponent<CCanvas>();
 
-            return sprite;
+            return image;
         }
 
-        public static GameObject BuildTextField(Scene scene, Vector2 position, string text)
+        public static GameObject BuildTextField(Scene scene, GameObject canvas, Vector2 position, string text)
         {
-            GameObject textField = new GameObject(scene, "TextField");
+            GameObject textField = new GameObject(scene, "TextField", canvas);
             textField.Transform.Position = position;
 
             textField.AddComponent<CGuiTextRender>();
             textField.GetComponent<CGuiTextRender>().Text = text;
+            textField.GetComponent<CImageRender>().Canvas = canvas.GetComponent<CCanvas>();
 
             return textField;
         }

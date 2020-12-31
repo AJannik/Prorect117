@@ -65,15 +65,11 @@ namespace Game.SceneSystem
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
             // Coin UI
-            GameObject coin = GuiFactory.BuildGuiImage(scene, new Vector2(0.9f, 0.9f), "goldcoin1.png");
+            GameObject coin = GuiFactory.BuildGuiImage(scene, canvas, new Vector2(0.9f, 0.9f), "goldcoin1.png");
             coin.GetComponent<CImageRender>().SetSize(0.1f, 0.1f);
-            coin.SetParent(canvas);
-            coin.GetComponent<CImageRender>().Canvas = canvas.GetComponent<CCanvas>();
-            GameObject coinText = GuiFactory.BuildTextField(scene, new Vector2(0.85f, 0.87f), "0");
+            GameObject coinText = GuiFactory.BuildTextField(scene, canvas, new Vector2(0.85f, 0.87f), "0");
             coinText.GetComponent<CGuiTextRender>().Centered = true;
             coinText.GetComponent<CGuiTextRender>().Size = 0.05f;
-            coinText.GetComponent<CGuiTextRender>().Canvas = canvas.GetComponent<CCanvas>();
-            coinText.SetParent(canvas);
 
             // Enemies
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));

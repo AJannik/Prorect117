@@ -109,6 +109,7 @@ namespace Game.Components.Renderer
             Vector2 newpos2 = pos2;
             Vector2 newpos3 = pos3;
             Vector2 newpos4 = pos4;
+
             // skip blend if text longer than old list
             if (OldPos1.Count >= Text.Length)
             {
