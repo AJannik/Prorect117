@@ -87,10 +87,10 @@ namespace Game.Components.UI
             Vector2 pos4 = new Vector2(rect.MinX + Offset.X, rect.MaxY + Offset.Y);
 
             // transform the corners
-            pos1 = Transformation.Transform(pos1, Transformation.Combine(Canvas.CanvasMatrix, MyGameObject.Transform.WorldTransformMatrix));
-            pos2 = Transformation.Transform(pos2, Transformation.Combine(Canvas.CanvasMatrix, MyGameObject.Transform.WorldTransformMatrix));
-            pos3 = Transformation.Transform(pos3, Transformation.Combine(Canvas.CanvasMatrix, MyGameObject.Transform.WorldTransformMatrix));
-            pos4 = Transformation.Transform(pos4, Transformation.Combine(Canvas.CanvasMatrix, MyGameObject.Transform.WorldTransformMatrix));
+            pos1 = Transformation.Transform(pos1, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
+            pos2 = Transformation.Transform(pos2, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
+            pos3 = Transformation.Transform(pos3, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
+            pos4 = Transformation.Transform(pos4, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
 
             // Draw
             GL.Begin(PrimitiveType.Quads);

@@ -10,18 +10,32 @@ namespace Game.Components.UI
 
         public CCamera Camera { get; set; } = null;
 
-        public Matrix4 CanvasMatrix { get; set; } = Matrix4.Identity;
+        public Matrix4 CanvasDrawMatrix { get; set; } = Matrix4.Identity;
+
+        public Matrix4 CanvasMouseMatrix { get; set; } = Matrix4.Identity;
 
         public void Resize(int width, int height)
         {
-            UpdateMatrix();
+            UpdateDrawMatrix();
+            UpdateMouseMatrix();
         }
 
-        private void UpdateMatrix()
+        private void UpdateDrawMatrix()
         {
-            Matrix4 aspect = Transformation.Scale(9f / 16f, 1f);
+            Matrix4 aspect = Transformation.Scale((float)Camera.YAspect / (float)Camera.XAspect, 1f);
 
-            CanvasMatrix = Transformation.Combine(aspect);
+            CanvasDrawMatrix = Transformation.Combine(aspect);
+        }
+
+        private void UpdateMouseMatrix()
+        {
+            float width = Camera.ViewportWidth;
+            float height = Camera.ViewportHeight;
+            Matrix4 aspect = Transformation.Translate(-Camera.ViewportX, -Camera.ViewportY / 2f);
+            Matrix4 translate = Transformation.Translate(-width / 2f, -height / 2f);
+            Matrix4 scale = Transformation.Scale(2f / width, -2f / height);
+
+            CanvasMouseMatrix = Transformation.Combine(translate, aspect, scale);
         }
     }
 }
