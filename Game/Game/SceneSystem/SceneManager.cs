@@ -10,8 +10,11 @@ namespace Game.SceneSystem
         private int screenWidth = 1366;
         private int screenHeight = 768;
 
-        public SceneManager()
+        public SceneManager(int width, int height)
         {
+            screenWidth = width;
+            screenHeight = height;
+
             // Building all scenes
             sceneFactory = new SceneFactory();
             scenes = new Scene[sceneFactory.NumScenes];
@@ -25,7 +28,7 @@ namespace Game.SceneSystem
 
         public int CurrentScene { get; private set; } = 0;
 
-        public bool DebugMode { get; set; } = false;
+        public bool DebugMode { get; set; } = true;
 
         public GameManager GameManager { get; } = new GameManager();
 

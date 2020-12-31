@@ -1,6 +1,7 @@
 ﻿using Game.Components;
 using Game.Components.Collision;
 using Game.Components.Renderer;
+using Game.Components.UI;
 using Game.SceneSystem;
 using Game.Tools;
 using OpenTK;
@@ -31,7 +32,7 @@ namespace Game.GameObjectFactory
             return camera;
         }
 
-        public static GameObject BuildTextField(Scene scene, Vector2 position, string text)
+        public static GameObject BuildWorldText(Scene scene, Vector2 position, string text)
         {
             GameObject textField = new GameObject(scene, "TextField");
             textField.Transform.Position = position;

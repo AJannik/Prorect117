@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Components;
 using Game.Components.Renderer;
+using Game.Components.UI;
 using Game.GameObjectFactory;
 using OpenTK;
 
@@ -59,14 +60,20 @@ namespace Game.SceneSystem
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 12f;
 
+            // Canvas
+            GameObject canvas = GuiFactory.BuildCanvas(scene);
+            canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
+
             // Coin UI
-            GameObject coin = ObjectFactory.BuildSprite(scene, new Vector2(18f, 10f), "goldcoin1.png");
-            coin.GetComponent<CRender>().Layer = 20;
-            coin.GetComponent<CRender>().SetSize(1.5f, 1.5f);
-            coin.SetParent(camera);
-            GameObject coinText = ObjectFactory.BuildTextField(scene, new Vector2(17f, 9.8f), "0");
-            coinText.GetComponent<CTextRender>().Layer = 20;
-            coinText.SetParent(camera);
+            GameObject coin = GuiFactory.BuildGuiImage(scene, new Vector2(0.9f, 0.9f), "goldcoin1.png");
+            coin.GetComponent<CImageRender>().SetSize(0.1f, 0.1f);
+            coin.SetParent(canvas);
+            coin.GetComponent<CImageRender>().Canvas = canvas.GetComponent<CCanvas>();
+            GameObject coinText = GuiFactory.BuildTextField(scene, new Vector2(0.85f, 0.87f), "0");
+            coinText.GetComponent<CGuiTextRender>().Centered = true;
+            coinText.GetComponent<CGuiTextRender>().Size = 0.05f;
+            coinText.GetComponent<CGuiTextRender>().Canvas = canvas.GetComponent<CCanvas>();
+            coinText.SetParent(canvas);
 
             // Enemies
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));

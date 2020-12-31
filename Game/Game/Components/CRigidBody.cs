@@ -89,10 +89,6 @@ namespace Game.Components
             Acceleration = CorrectRoundingErrors(Acceleration);
 
             MyGameObject.Transform.Position += s;
-            if (MyGameObject.Name == "Player")
-            {
-                Console.WriteLine($"{Velocity} {(Acceleration + newAcceleration) / 2f} {PenRes}");
-            }
 
             PenRes = Vector2.Zero;
             ClearForce();
