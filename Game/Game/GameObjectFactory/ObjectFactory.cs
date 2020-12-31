@@ -53,7 +53,7 @@ namespace Game.GameObjectFactory
             render.LoadAndSetTexture("Content.adventurer.png");
             render.SetTexCoords(new SimpleGeometry.Rect(0.0f, 0.0f, 1f / 15f, 1.0f));
             render.SetOffset(0.0f, 0.2f);
-            render.Layer = 12;
+            render.Layer = 21;
 
             player.AddComponent<CBoxCollider>();
             player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(0.85f, 1.6f);
@@ -125,9 +125,10 @@ namespace Game.GameObjectFactory
 
             // add text
             player.AddComponent<CTextRender>();
-            player.GetComponent<CTextRender>().Text = "Player";
-            player.GetComponent<CTextRender>().Offset = new Vector2(0f, 2f);
+            player.GetComponent<CTextRender>().Offset = new Vector2(0f, 1f);
+            player.GetComponent<CTextRender>().Size = 0.3f;
             player.GetComponent<CTextRender>().Centered = true;
+            combatController.TextRender = player.GetComponent<CTextRender>();
 
             return player;
         }
@@ -139,6 +140,7 @@ namespace Game.GameObjectFactory
 
             powerDown.AddComponent<CRender>();
             powerDown.GetComponent<CRender>().LoadAndSetTexture("Content.default.png");
+            powerDown.GetComponent<CRender>().Layer = 19;
             powerDown.AddComponent<CCircleTrigger>();
             CCircleTrigger trigger = powerDown.GetComponent<CCircleTrigger>();
             powerDown.AddComponent<CPowerDownScript>();
