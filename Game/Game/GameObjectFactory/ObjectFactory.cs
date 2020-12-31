@@ -120,7 +120,8 @@ namespace Game.GameObjectFactory
             // add text
             player.AddComponent<CTextRender>();
             player.GetComponent<CTextRender>().Text = "Player";
-            player.GetComponent<CTextRender>().Offset = new Vector2(-1f, 2f);
+            player.GetComponent<CTextRender>().Offset = new Vector2(0f, 2f);
+            player.GetComponent<CTextRender>().Centered = true;
 
             return player;
         }

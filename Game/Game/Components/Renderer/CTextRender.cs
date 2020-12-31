@@ -30,6 +30,8 @@ namespace Game.Components.Renderer
 
         public Color FontColor { get; set; } = Color.White;
 
+        public bool Centered { get; set; } = false;
+
         public uint FirstCharacter { get; set; } = 32;
 
         public uint CharactersPerColumn { get; set; } = 12;
@@ -61,6 +63,11 @@ namespace Game.Components.Renderer
         {
             GL.Color3(Color.White);
             var rect = new Rect(0, 0, Size, Size); // rectangle of the first character
+            if (Centered)
+            {
+                rect = new Rect(-(Text.Length * Size) / 2f, 0, Size, Size);
+            }
+
             int i = 0;
             foreach (var spriteId in StringToSpriteIds(Text, FirstCharacter))
             {
@@ -89,10 +96,10 @@ namespace Game.Components.Renderer
             pos4 = Transformation.Transform(pos4, MyGameObject.Transform.WorldTransformMatrix);
 
             // Blend between old frame and alpha towards current frame
-            Vector2 newpos1 = (pos1 * alpha) + ((Oldpos1 + rect.Size * i) * (1f - alpha));
-            Vector2 newpos2 = (pos2 * alpha) + ((Oldpos2 + rect.Size * i) * (1f - alpha));
-            Vector2 newpos3 = (pos3 * alpha) + ((Oldpos3 + rect.Size * i) * (1f - alpha));
-            Vector2 newpos4 = (pos4 * alpha) + ((Oldpos4 + rect.Size * i) * (1f - alpha));
+            Vector2 newpos1 = (pos1 * alpha) + ((Oldpos1 + (rect.Size * i)) * (1f - alpha));
+            Vector2 newpos2 = (pos2 * alpha) + ((Oldpos2 + (rect.Size * i)) * (1f - alpha));
+            Vector2 newpos3 = (pos3 * alpha) + ((Oldpos3 + (rect.Size * i)) * (1f - alpha));
+            Vector2 newpos4 = (pos4 * alpha) + ((Oldpos4 + (rect.Size * i)) * (1f - alpha));
 
             // Draw (flipped)
             GL.Begin(PrimitiveType.Quads);
