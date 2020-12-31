@@ -9,9 +9,11 @@ namespace Game
         [STAThread]
         private static void Main()
         {
-            GameWindow window = new GameWindow(1366, 768);
+            int width = 1366;
+            int height = 768;
+            GameWindow window = new GameWindow(width, height);
             window.VSync = VSyncMode.On;
-            SceneManager sceneManager = new SceneManager();
+            SceneManager sceneManager = new SceneManager(width, height);
             double accumulator = 0f;
             double alpha = 1f;
 
