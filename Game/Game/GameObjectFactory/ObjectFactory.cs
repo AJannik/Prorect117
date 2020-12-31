@@ -158,17 +158,22 @@ namespace Game.GameObjectFactory
             coin.AddComponent<CRender>();
             coin.GetComponent<CRender>().LoadAndSetTexture("Content.goldcoin1.png");
             coin.GetComponent<CRender>().Layer = 11;
-            // TODO: Add sprite and hitbox
 
+            // TODO: Add hitbox and script
             return coin;
         }
 
         public static GameObject BuildKey(Scene scene, Vector2 position)
         {
             GameObject key = new GameObject(scene, "Key");
+            key.Transform.Position = position;
 
-            // TODO: Add sprite and hitbox
+            key.AddComponent<CRender>();
+            CRender render = key.GetComponent<CRender>();
+            render.LoadAndSetTexture("Content.Key.png");
+            render.Layer = 11;
 
+            // TODO: Add hitbox and script
             return key;
         }
     }
