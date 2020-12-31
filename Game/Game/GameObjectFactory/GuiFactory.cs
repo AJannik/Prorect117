@@ -28,5 +28,16 @@ namespace Game.GameObjectFactory
 
             return sprite;
         }
+
+        public static GameObject BuildTextField(Scene scene, Vector2 position, string text)
+        {
+            GameObject textField = new GameObject(scene, "TextField");
+            textField.Transform.Position = position;
+
+            textField.AddComponent<CGuiTextRender>();
+            textField.GetComponent<CGuiTextRender>().Text = text;
+
+            return textField;
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace Game.Components.UI
 
         public GameObject MyGameObject { get; set; } = null;
 
-        public int Layer { get; set; } = 20;
+        public int Layer { get; set; } = 30;
 
         public CCanvas Canvas { get; set; } = null;
 
