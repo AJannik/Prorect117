@@ -61,11 +61,11 @@ namespace Game.SceneSystem
             camera.GetComponent<CCamera>().Scale = 12f;
 
             // Canvas
-            GameObject canvas = ObjectFactory.BuildCanvas(scene);
+            GameObject canvas = GuiFactory.BuildCanvas(scene);
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
             // Coin UI
-            GameObject coin = ObjectFactory.BuildSprite(scene, new Vector2(0.9f, 0.9f), "goldcoin1.png");
+            GameObject coin = GuiFactory.BuildGuiImage(scene, new Vector2(0.9f, 0.9f), "goldcoin1.png");
             coin.GetComponent<CImageRender>().Layer = 30;
             coin.GetComponent<CImageRender>().SetSize(0.1f, 0.1f);
             coin.SetParent(canvas);

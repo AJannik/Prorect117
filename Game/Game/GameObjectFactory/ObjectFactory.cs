@@ -16,8 +16,8 @@ namespace Game.GameObjectFactory
             GameObject sprite = new GameObject(scene);
             sprite.Transform.Position = position;
 
-            sprite.AddComponent<CImageRender>();
-            sprite.GetComponent<CImageRender>().LoadAndSetTexture($"Content.{texture}");
+            sprite.AddComponent<CRender>();
+            sprite.GetComponent<CRender>().LoadAndSetTexture($"Content.{texture}");
 
             return sprite;
         }
@@ -41,15 +41,6 @@ namespace Game.GameObjectFactory
             textField.GetComponent<CTextRender>().Text = text;
 
             return textField;
-        }
-
-        public static GameObject BuildCanvas(Scene scene)
-        {
-            GameObject canvas = new GameObject(scene, "Canvas");
-            canvas.Transform.Position = new Vector2(0f, 0f);
-
-            canvas.AddComponent<CCanvas>();
-            return canvas;
         }
 
         public static GameObject BuildPlayer(Scene scene, Vector2 position)
