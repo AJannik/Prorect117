@@ -41,5 +41,29 @@ namespace Game.GameObjectFactory
 
             return textField;
         }
+
+        public static GameObject BuildButton(Scene scene, GameObject canvas, Vector2 position, string text)
+        {
+            GameObject button = new GameObject(scene, "Button", canvas);
+            button.Transform.Position = position;
+            Vector2 size = new Vector2(0.4f, 0.1f);
+
+            button.AddComponent<CImageRender>();
+            button.AddComponent<CButton>();
+            button.GetComponent<CButton>().Canvas = canvas.GetComponent<CCanvas>();
+            button.GetComponent<CButton>().SetSize(size);
+
+            CImageRender imageRender = button.GetComponent<CImageRender>();
+            imageRender.Canvas = canvas.GetComponent<CCanvas>();
+            imageRender.SetSize(size.X, size.Y);
+
+            GameObject textField = BuildTextField(scene, canvas, new Vector2(0f, -size.Y / 5f), text);
+            textField.SetParent(button);
+            textField.GetComponent<CGuiTextRender>().Centered = true;
+            textField.GetComponent<CGuiTextRender>().Layer = 31;
+            textField.GetComponent<CGuiTextRender>().SetSize(0.03f);
+
+            return button;
+        }
     }
 }
