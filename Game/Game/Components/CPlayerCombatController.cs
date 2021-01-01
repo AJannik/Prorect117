@@ -17,6 +17,8 @@ namespace Game.Components
 
         public CBoxTrigger RightHitbox { get; set; }
 
+        public CTextRender TextRender { get; set; }
+
         private float ComboTime { get; set; } = 0f;
 
         private int ComboCount { get; set; } = 0;
@@ -41,6 +43,8 @@ namespace Game.Components
             {
                 ComboCount = 0;
             }
+
+            TextRender.Text = ((int)Combat.CurrentHealth).ToString() + "/" + ((int)Combat.MaxHealth).ToString();
         }
 
         private void ComboAttack(bool leftSide)

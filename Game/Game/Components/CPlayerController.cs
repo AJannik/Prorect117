@@ -18,9 +18,9 @@ namespace Game.Components
 
         public CAnimationSystem AnimationSystem { get; set; }
 
-        public float PlayerSpeed { get; private set; } = 10f;
+        public float PlayerSpeed { get; set; } = 10f;
 
-        public float JumpForce { get; private set; } = 1000f;
+        public float JumpForce { get; set; } = 1000f;
 
         private float JumpCooldown { get; set; }
 

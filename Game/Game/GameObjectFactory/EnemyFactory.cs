@@ -21,6 +21,7 @@ namespace Game.GameObjectFactory
             render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 1f / 11f, 1f));
             render.SetSize(2f, 2f);
             render.SetOffset(0.3f, 0f);
+            render.Layer = 20;
 
             // hitboxes and triggers
             enemy.AddComponent<CBoxCollider>();
@@ -76,9 +77,9 @@ namespace Game.GameObjectFactory
             CRender render = enemy.GetComponent<CRender>();
             render.LoadAndSetTexture("Content.LightBandit.png");
             render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 1f / 8f, 1f / 5f));
-            render.SetSize(2.5f, 2.5f);
-            render.SetOffset(0.0f, 0.3f);
-            render.Layer = 11;
+            render.SetSize(2.3f, 2.3f);
+            render.SetOffset(0.0f, 0.25f);
+            render.Layer = 20;
 
             // hitboxes and triggers
             enemy.AddComponent<CBoxCollider>();
@@ -105,11 +106,13 @@ namespace Game.GameObjectFactory
             enemy.AddComponent<CAnimationSystem>();
             CAnimationSystem animationSystem = enemy.GetComponent<CAnimationSystem>();
             Animation idle = new Animation("Idle", 4, 0, true);
+            idle.TimeBetweenTwoFrames = 1 / 9f;
             animationSystem.Renderer = render;
             animationSystem.AddAnimation(idle);
             animationSystem.SetDefaultColumnsAndRows(8, 5);
             animationSystem.SetStartAnimation(idle);
             Animation walk = new Animation("Walk", 8, 8, true);
+            walk.TimeBetweenTwoFrames = 1 / 10f;
             animationSystem.AddAnimation(walk);
             Animation hurt = new Animation("Hurt", 3, 32, false);
             animationSystem.AddAnimation(hurt);

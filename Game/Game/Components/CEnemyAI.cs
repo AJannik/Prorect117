@@ -91,7 +91,7 @@ namespace Game.Components
                 {
                     AttackDisabled = false;
                     State = EnemyState.Idle;
-                    TimeInState = TimeInState = Randomizer.Next(1, 5) + (float)Randomizer.NextDouble();
+                    TimeInState = TimeInState = Randomizer.Next(1, 3) + (float)Randomizer.NextDouble();
                 }
                 else
                 {
