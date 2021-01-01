@@ -37,17 +37,6 @@ namespace Game.Physics
             throw new ArgumentException("PenDepth got geometry of unknown type!");
         }
 
-        internal static bool IsPointInAabb(IReadonlyRect rect, Vector2 point)
-        {
-            if (point.X > rect.MinX && point.X < rect.MaxX &&
-                point.Y > rect.MinY && point.Y < rect.MaxY)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         private static bool CircleAndCircle(IReadonlyCircle circle1, IReadonlyCircle circle2)
         {
             float squaredDistanceCircles = Vector2.DistanceSquared(circle1.NextCenter, circle2.NextCenter);

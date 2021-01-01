@@ -10,6 +10,8 @@ namespace Game.Components.UI
     {
         private Matrix4 matrix = Matrix4.Identity;
 
+        private bool transformSize = true;
+
         public CImageRender()
         {
             Texture = TextureTools.LoadFromResource("Content.default.png");
@@ -38,8 +40,6 @@ namespace Game.Components.UI
 
         private Rect TexCoords { get; set; } = new Rect(0f, 0f, 1f, 1f);
 
-        private Vector2 Offset { get; set; } = new Vector2(0, 0);
-
         public void Draw(float alpha)
         {
             matrix = Matrix4.Identity;
@@ -47,16 +47,21 @@ namespace Game.Components.UI
             GL.BindTexture(TextureTarget.Texture2D, Texture);
             GL.Color3(TintColor);
 
-            Vector2 pos1 = new Vector2((-SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
-            Vector2 pos2 = new Vector2((SizeX / 2) + Offset.X, (-SizeY / 2) + Offset.Y);
-            Vector2 pos3 = new Vector2((SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
-            Vector2 pos4 = new Vector2((-SizeX / 2) + Offset.X, (SizeY / 2) + Offset.Y);
+            if (transformSize)
+            {
+                TransformSize();
+            }
+
+            Vector2 pos1 = new Vector2(-SizeX / 2f, -SizeY / 2f);
+            Vector2 pos2 = new Vector2(SizeX / 2f, -SizeY / 2f);
+            Vector2 pos3 = new Vector2(SizeX / 2f, SizeY / 2f);
+            Vector2 pos4 = new Vector2(-SizeX / 2f, SizeY / 2f);
 
             // transform the corners
-            pos1 = Transformation.Transform(pos1, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
-            pos2 = Transformation.Transform(pos2, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
-            pos3 = Transformation.Transform(pos3, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
-            pos4 = Transformation.Transform(pos4, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
+            pos1 = Transformation.Transform(pos1, MyGameObject.Transform.WorldTransformMatrix);
+            pos2 = Transformation.Transform(pos2, MyGameObject.Transform.WorldTransformMatrix);
+            pos3 = Transformation.Transform(pos3, MyGameObject.Transform.WorldTransformMatrix);
+            pos4 = Transformation.Transform(pos4, MyGameObject.Transform.WorldTransformMatrix);
 
             // Draw
             GL.Begin(PrimitiveType.Quads);
@@ -98,15 +103,20 @@ namespace Game.Components.UI
             TexCoords = newTexCoords;
         }
 
-        public void SetOffset(float x, float y)
-        {
-            Offset = new Vector2(x, y);
-        }
-
         public void SetSize(float sizeX, float sizeY)
         {
             SizeX = sizeX;
             SizeY = sizeY;
+            transformSize = true;
+        }
+
+        private void TransformSize()
+        {
+            Vector2 size = new Vector2(SizeX, SizeY);
+            size = Transformation.Transform(size, Canvas.CanvasDrawMatrix);
+            SizeX = size.X;
+            SizeY = size.Y;
+            transformSize = false;
         }
     }
 }

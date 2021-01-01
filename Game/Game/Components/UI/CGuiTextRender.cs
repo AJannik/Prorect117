@@ -13,6 +13,8 @@ namespace Game.Components.UI
     {
         private Matrix4 matrix = Matrix4.Identity;
 
+        private bool transformSize = true;
+
         public CGuiTextRender()
         {
             LoadAndSetSpriteSheet("Content.Font.png");
@@ -28,8 +30,6 @@ namespace Game.Components.UI
 
         public string Text { get; set; } = string.Empty;
 
-        public float Size { get; set; } = 0.4f;
-
         public Vector2 Offset { get; set; } = Vector2.Zero;
 
         public Color FontColor { get; set; } = Color.White;
@@ -41,6 +41,8 @@ namespace Game.Components.UI
         public uint CharactersPerColumn { get; set; } = 12;
 
         public uint CharactersPerRow { get; set; } = 8;
+
+        private Vector2 Size { get; set; } = new Vector2(0.4f, 0.4f);
 
         public void LoadAndSetSpriteSheet(string name)
         {
@@ -57,23 +59,33 @@ namespace Game.Components.UI
         public void Draw(float alpha)
         {
             GL.Color3(Color.White);
-            var rect = new Rect(0, 0, Size, Size); // rectangle of the first character
-            if (Centered)
+
+            if (transformSize)
             {
-                rect = new Rect(-(Text.Length * Size) / 2f, 0, Size, Size);
+                TransformSize();
             }
 
-            int i = 0;
+            var rect = new Rect(Vector2.Zero, Size); // rectangle of the first character
+            if (Centered)
+            {
+                rect = new Rect(-(Text.Length * Size.X) / 2f, 0f, Size.X, Size.Y);
+            }
+
             foreach (var spriteId in StringToSpriteIds(Text, FirstCharacter))
             {
                 var texCoords = CalcTexCoords(spriteId, CharactersPerRow, CharactersPerColumn);
-                DrawSingle(rect, texCoords, alpha, i);
+                DrawSingle(rect, texCoords);
                 rect.Center = new Vector2(rect.Center.X + rect.Size.X, rect.Center.Y);
-                i++;
             }
         }
 
-        private void DrawSingle(Rect rect, Rect texCoords, float alpha, int i)
+        public void SetSize(float size)
+        {
+            Size = new Vector2(size, size);
+            transformSize = true;
+        }
+
+        private void DrawSingle(Rect rect, Rect texCoords)
         {
             matrix = Matrix4.Identity;
             GL.LoadMatrix(ref matrix);
@@ -87,10 +99,10 @@ namespace Game.Components.UI
             Vector2 pos4 = new Vector2(rect.MinX + Offset.X, rect.MaxY + Offset.Y);
 
             // transform the corners
-            pos1 = Transformation.Transform(pos1, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
-            pos2 = Transformation.Transform(pos2, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
-            pos3 = Transformation.Transform(pos3, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
-            pos4 = Transformation.Transform(pos4, Transformation.Combine(Canvas.CanvasDrawMatrix, MyGameObject.Transform.WorldTransformMatrix));
+            pos1 = Transformation.Transform(pos1, MyGameObject.Transform.WorldTransformMatrix);
+            pos2 = Transformation.Transform(pos2, MyGameObject.Transform.WorldTransformMatrix);
+            pos3 = Transformation.Transform(pos3, MyGameObject.Transform.WorldTransformMatrix);
+            pos4 = Transformation.Transform(pos4, MyGameObject.Transform.WorldTransformMatrix);
 
             // Draw
             GL.Begin(PrimitiveType.Quads);
@@ -108,6 +120,12 @@ namespace Game.Components.UI
             GL.LoadMatrix(ref matrix);
             GL.Color3(Color.White);
             GL.BindTexture(TextureTarget.Texture2D, 0);
+        }
+
+        private void TransformSize()
+        {
+            Size = Transformation.Transform(Size, Canvas.CanvasDrawMatrix);
+            transformSize = false;
         }
 
         private Rect CalcTexCoords(uint spriteId, uint columns, uint rows)
