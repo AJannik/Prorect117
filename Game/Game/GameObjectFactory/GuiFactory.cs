@@ -49,13 +49,23 @@ namespace Game.GameObjectFactory
             Vector2 size = new Vector2(0.4f, 0.1f);
 
             button.AddComponent<CImageRender>();
+            button.AddComponent<CImageRender>();
             button.AddComponent<CButton>();
             button.GetComponent<CButton>().Canvas = canvas.GetComponent<CCanvas>();
             button.GetComponent<CButton>().SetSize(size);
 
-            CImageRender imageRender = button.GetComponent<CImageRender>();
-            imageRender.Canvas = canvas.GetComponent<CCanvas>();
-            imageRender.SetSize(size.X, size.Y);
+            CImageRender inactiveImage = button.GetComponents<CImageRender>()[0];
+            inactiveImage.Canvas = canvas.GetComponent<CCanvas>();
+            inactiveImage.LoadAndSetTexture("Content.UI.ui_grey_inactive.png");
+            inactiveImage.SetSize(size.X, size.Y);
+            button.GetComponent<CButton>().InactiveImage = inactiveImage;
+
+            CImageRender activeImage = button.GetComponents<CImageRender>()[1];
+            activeImage.Canvas = canvas.GetComponent<CCanvas>();
+            activeImage.LoadAndSetTexture("Content.UI.ui_grey_active.png");
+            activeImage.SetSize(size.X, size.Y);
+            activeImage.Visible = false;
+            button.GetComponent<CButton>().ActiveImage = activeImage;
 
             GameObject textField = BuildTextField(scene, canvas, new Vector2(0f, -size.Y / 5f), text);
             textField.SetParent(button);

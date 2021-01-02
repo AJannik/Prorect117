@@ -20,6 +20,8 @@
     <None Remove="Content\Skeleton\SkeletonIdle.png" />
     <None Remove="Content\Skeleton\SkeletonReact.png" />
     <None Remove="Content\Skeleton\SkeletonWalk.png" />
+    <None Remove="Content\UI\ui_grey_active.png" />
+    <None Remove="Content\UI\ui_grey_inactive.png" />
     <None Remove="Content\WallSpritesheet.png" />
   </ItemGroup>
 
@@ -38,6 +40,8 @@
     <EmbeddedResource Include="Content\Skeleton\SkeletonIdle.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonReact.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonWalk.png" />
+    <EmbeddedResource Include="Content\UI\ui_grey_active.png" />
+    <EmbeddedResource Include="Content\UI\ui_grey_inactive.png" />
     <EmbeddedResource Include="Content\WallSpritesheet.png" />
   </ItemGroup>
 

@@ -22,13 +22,29 @@ namespace Game.Components.UI
 
         public Vector2 Offset { get; set; } = Vector2.Zero;
 
+        public CImageRender ActiveImage { get; set; }
+
+        public CImageRender InactiveImage { get; set; }
+
         private ISimpleGeometry Geometry { get; set; } = new Rect(Vector2.Zero, new Vector2(1f, 1f));
+
+        private float ClickedTimer { get; set; } = 0f;
 
         public void Update(float deltaTime)
         {
             if (transformSize)
             {
                 TransformSize();
+            }
+
+            if (ClickedTimer > 0f)
+            {
+                ClickedTimer -= deltaTime;
+            }
+            else
+            {
+                ActiveImage.Visible = false;
+                InactiveImage.Visible = true;
             }
         }
 
@@ -42,6 +58,9 @@ namespace Game.Components.UI
             if (IsPointInAabb((IReadonlyRect)Geometry, mouseCoords))
             {
                 ButtonClicked?.Invoke(this, 0);
+                ActiveImage.Visible = true;
+                InactiveImage.Visible = false;
+                ClickedTimer = 0.7f;
 
                 // TODO: Remove
                 MyGameObject.Scene.GameManager.Coins++;

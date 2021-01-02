@@ -42,6 +42,11 @@ namespace Game.Components.UI
 
         public void Draw(float alpha)
         {
+            if (!Visible)
+            {
+                return;
+            }
+
             matrix = Matrix4.Identity;
             GL.LoadMatrix(ref matrix);
             GL.BindTexture(TextureTarget.Texture2D, Texture);
