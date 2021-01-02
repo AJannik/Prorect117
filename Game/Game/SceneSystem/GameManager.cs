@@ -1,4 +1,5 @@
-﻿using Game.Interfaces;
+﻿using System;
+using Game.Interfaces;
 
 namespace Game.SceneSystem
 {
@@ -6,9 +7,13 @@ namespace Game.SceneSystem
     {
         public int Coins { get; set; } = 0;
 
-        // TODO: add shop scene
         public void Update(float deltaTime)
         {
+        }
+
+        public void GameOver()
+        {
+            Console.WriteLine("Game Over!");
         }
     }
 }

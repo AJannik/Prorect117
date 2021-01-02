@@ -54,8 +54,13 @@ namespace Game.Components
                 NextAttackTime -= deltaTime;
             }
 
-            if (CurrentHealth <= 0)
+            if (CurrentHealth <= 0f)
             {
+                if (MyGameObject.Name == "Player")
+                {
+                    MyGameObject.Scene.GameManager.GameOver();
+                }
+
                 AnimationSystem.PlayAnimation("death");
                 MyGameObject.Scene.RemoveGameObject(MyGameObject);
             }

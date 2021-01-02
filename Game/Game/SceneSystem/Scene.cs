@@ -20,9 +20,16 @@ namespace Game.SceneSystem
 
         private List<GameObject> deleteList = new List<GameObject>();
 
+        public Scene(GameManager gameManager)
+        {
+            GameManager = gameManager;
+        }
+
         public event EventHandler<int> LoadLevelNumber;
 
         public Debug Debug { get; } = new Debug();
+
+        public GameManager GameManager { get; }
 
         public void LoadLevelEvent(int num)
         {
