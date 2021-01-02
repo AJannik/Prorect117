@@ -73,5 +73,24 @@ namespace Game.GameObjectFactory
 
             return mainMenuManager;
         }
+
+        public static GameObject BuildCoinHUD(Scene scene, GameObject canvas, Vector2 position)
+        {
+            GameObject coinHUD = new GameObject(scene, "CoinHUD");
+            GameObject textField = BuildTextField(scene, canvas, Vector2.Zero, "0");
+            GameObject coinImage = BuildGuiImage(scene, canvas, new Vector2(-0.05f, -0f), "goldcoin1.png");
+
+            textField.GetComponent<CGuiTextRender>().SetSize(0.05f);
+            textField.SetParent(coinHUD);
+
+            coinImage.GetComponent<CImageRender>().SetSize(0.1f, 0.1f);
+            coinImage.SetParent(coinHUD);
+
+            coinHUD.AddComponent<CCoinUIUpdater>();
+            coinHUD.GetComponent<CCoinUIUpdater>().TextRender = textField.GetComponent<CGuiTextRender>();
+            coinHUD.Transform.Position = position;
+
+            return coinHUD;
+        }
     }
 }

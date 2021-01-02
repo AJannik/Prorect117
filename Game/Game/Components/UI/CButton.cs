@@ -42,6 +42,9 @@ namespace Game.Components.UI
             if (IsPointInAabb((IReadonlyRect)Geometry, mouseCoords))
             {
                 ButtonClicked?.Invoke(this, 0);
+
+                // TODO: Remove
+                MyGameObject.Scene.GameManager.Coins++;
             }
         }
 

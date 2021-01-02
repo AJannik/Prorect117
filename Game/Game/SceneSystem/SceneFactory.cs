@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Components;
-using Game.Components.Renderer;
 using Game.Components.UI;
 using Game.GameObjectFactory;
 using OpenTK;
@@ -9,7 +8,14 @@ namespace Game.SceneSystem
 {
     internal class SceneFactory
     {
+        public SceneFactory(GameManager gameManager)
+        {
+            GameManager = gameManager;
+        }
+
         internal int NumScenes { get; } = 2;
+
+        private GameManager GameManager { get; }
 
         public Scene BuildScene(int num)
         {
@@ -26,7 +32,7 @@ namespace Game.SceneSystem
 
         private Scene BuildLevel0()
         {
-            Scene scene = new Scene();
+            Scene scene = new Scene(GameManager);
 
             // Level border
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(16f, 0.5f), 32);
@@ -70,11 +76,7 @@ namespace Game.SceneSystem
             button.GetComponent<CButton>().ButtonClicked += mainMenuManager.GetComponent<CMainMenuManager>().OnButtonClick;
 
             // Coin UI
-            GameObject coin = GuiFactory.BuildGuiImage(scene, canvas, new Vector2(0.9f, 0.9f), "goldcoin1.png");
-            coin.GetComponent<CImageRender>().SetSize(0.1f, 0.1f);
-            GameObject coinText = GuiFactory.BuildTextField(scene, canvas, new Vector2(0.85f, 0.87f), "0");
-            coinText.GetComponent<CGuiTextRender>().Centered = true;
-            coinText.GetComponent<CGuiTextRender>().SetSize(0.05f);
+            GameObject coinHUD = GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.9f, 0.9f));
 
             // Enemies
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));
@@ -92,7 +94,7 @@ namespace Game.SceneSystem
 
         private Scene BuildLevel1()
         {
-            Scene scene = new Scene();
+            Scene scene = new Scene(GameManager);
 
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(-13f, 1f));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);

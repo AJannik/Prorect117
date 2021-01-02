@@ -17,7 +17,7 @@ namespace Game.SceneSystem
             screenHeight = height;
 
             // Building all scenes
-            sceneFactory = new SceneFactory();
+            sceneFactory = new SceneFactory(GameManager);
             scenes = new Scene[sceneFactory.NumScenes];
             BuildScenes();
             RegisterSceneEventListeners();
