@@ -14,7 +14,8 @@ namespace UnitTests
         [TestMethod]
         public void TestAddGameObjects()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject gameObject1 = new GameObject(scene);
             GameObject gameObject2 = new GameObject(scene);
             GameObject gameObject3 = new GameObject(scene);
@@ -25,7 +26,8 @@ namespace UnitTests
         [TestMethod]
         public void TestRemoveGameObjects()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject gameObject1 = new GameObject(scene);
             GameObject gameObject2 = new GameObject(scene);
             GameObject gameObject3 = new GameObject(scene);
@@ -39,7 +41,8 @@ namespace UnitTests
         [TestMethod]
         public void TestAddComponents()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject gameObject1 = new GameObject(scene);
 
             gameObject1.AddComponent<DummyComponent1>();
@@ -51,7 +54,8 @@ namespace UnitTests
         [TestMethod]
         public void TestRemoveComponent()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject gameObject1 = new GameObject(scene);
 
             gameObject1.AddComponent<DummyComponent1>();
@@ -64,7 +68,8 @@ namespace UnitTests
         [TestMethod]
         public void TestRemoveGameObjectWithComponents()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject gameObject1 = new GameObject(scene);
             GameObject gameObject2 = new GameObject(scene);
 

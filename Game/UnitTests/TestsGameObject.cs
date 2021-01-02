@@ -18,7 +18,8 @@ namespace UnitTests
         [TestMethod]
         public void TestComponentStoring()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject gameObject = new GameObject(scene);
 
             AddComponentToEmptyList(gameObject);
@@ -135,7 +136,8 @@ namespace UnitTests
         [TestMethod]
         public void TestParentHierarchy()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject parent = new GameObject(scene);
             GameObject child1 = new GameObject(scene, parent);
             GameObject child2 = new GameObject(scene);

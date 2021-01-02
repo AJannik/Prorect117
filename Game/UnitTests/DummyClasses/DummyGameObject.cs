@@ -14,7 +14,8 @@ namespace UnitTests.DummyClasses
 
         public static DummyGameObject BuildDummy()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             DummyGameObject dummy = new DummyGameObject(scene);
 
             return dummy;

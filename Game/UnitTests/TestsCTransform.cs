@@ -14,7 +14,8 @@ namespace UnitTests
         [TestMethod]
         public void TestSetAndGetSimplePosition()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject gameObject = new GameObject(scene);
             Vector2 pos = new Vector2(2.5f, 3f);
 
@@ -25,7 +26,8 @@ namespace UnitTests
         [TestMethod]
         public void TestSetAndGetSimpleRotation()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject gameObject = new GameObject(scene);
             float rad = 1.3f;
 
@@ -36,7 +38,8 @@ namespace UnitTests
         [TestMethod]
         public void TestSetAndGetSimpleScale()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject gameObject = new GameObject(scene);
             Vector2 scale = new Vector2(2f, 1.5f);
 
@@ -47,7 +50,8 @@ namespace UnitTests
         [TestMethod]
         public void TestGetPositionOfChild()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject parent = new GameObject(scene);
             GameObject child = new GameObject(scene, parent);
             Vector2 posParent = new Vector2(2f, 1f);
@@ -64,7 +68,8 @@ namespace UnitTests
         [TestMethod]
         public void TestGetScaleOfChild()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject parent = new GameObject(scene);
             GameObject child = new GameObject(scene, parent);
             Vector2 scaleParent = new Vector2(2f, 1f);
@@ -81,7 +86,8 @@ namespace UnitTests
         [TestMethod]
         public void TestGetRotationOfChild()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject parent = new GameObject(scene);
             GameObject child = new GameObject(scene, parent);
             float rotParent = 1f;
@@ -102,7 +108,8 @@ namespace UnitTests
         [TestMethod]
         public void TestGetPositionOfChildFromRotatedParent()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject parent = new GameObject(scene);
             GameObject child = new GameObject(scene, parent);
             float rotParent = 1f;
@@ -118,7 +125,8 @@ namespace UnitTests
         [TestMethod]
         public void TestGetPositionOfChildFromScaledParent()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject parent = new GameObject(scene);
             GameObject child = new GameObject(scene, parent);
             Vector2 scaleParent = new Vector2(0.5f, 2f);
@@ -134,7 +142,8 @@ namespace UnitTests
         [TestMethod]
         public void TestGetPositionOfChildFromMovedRotatedScaledParent()
         {
-            Scene scene = new Scene();
+            GameManager gameManager = new GameManager();
+            Scene scene = new Scene(gameManager);
             GameObject parent = new GameObject(scene);
             GameObject child = new GameObject(scene, parent);
             Vector2 posParent = new Vector2(1.5f, -2f);
