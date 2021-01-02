@@ -65,5 +65,13 @@ namespace Game.GameObjectFactory
 
             return button;
         }
+
+        public static GameObject BuildMainMenuManager(Scene scene)
+        {
+            GameObject mainMenuManager = new GameObject(scene, "MainMenuManager");
+            mainMenuManager.AddComponent<CMainMenuManager>();
+
+            return mainMenuManager;
+        }
     }
 }

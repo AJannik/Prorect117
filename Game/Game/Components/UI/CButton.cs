@@ -14,6 +14,8 @@ namespace Game.Components.UI
 
         private bool transformSize = true;
 
+        public event EventHandler<int> ButtonClicked;
+
         public GameObject MyGameObject { get; set; } = null;
 
         public CCanvas Canvas { get; set; }
@@ -36,25 +38,11 @@ namespace Game.Components.UI
 
             Vector2 mouseCoords = new Vector2(args.X, args.Y);
             mouseCoords = Transformation.Transform(mouseCoords, Canvas.CanvasMouseMatrix);
-            Console.WriteLine(mouseCoords);
 
-            bool hit = false;
-            if (Geometry is Rect)
+            if (IsPointInAabb((IReadonlyRect)Geometry, mouseCoords))
             {
-                hit = IsPointInAabb((IReadonlyRect)Geometry, mouseCoords);
+                ButtonClicked?.Invoke(this, 0);
             }
-            else
-            {
-                hit = IsPointInCircle((IReadonlyCircle)Geometry, mouseCoords);
-            }
-
-            if (hit)
-            {
-                Console.WriteLine("Button click");
-            }
-
-            // TODO: Check IsPointInCollider() for coords
-            // TODO: if true then throw ButtonClicked event
         }
 
         public void DebugDraw()
@@ -87,17 +75,6 @@ namespace Game.Components.UI
         {
             Geometry.Size = Transformation.Transform(Geometry.Size, Canvas.CanvasDrawMatrix);
             transformSize = false;
-        }
-
-        private bool IsPointInCircle(IReadonlyCircle circle, Vector2 point)
-        {
-            Vector2 dist = circle.Center - point;
-            if (dist.LengthSquared < circle.Radius * circle.Radius)
-            {
-                return true;
-            }
-
-            return false;
         }
 
         private bool IsPointInAabb(IReadonlyRect rect, Vector2 point)

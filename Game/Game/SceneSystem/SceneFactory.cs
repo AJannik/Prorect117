@@ -65,7 +65,9 @@ namespace Game.SceneSystem
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
             // Test Button
-            GuiFactory.BuildButton(scene, canvas, new Vector2(-0.7f, 0.5f), "Click Button");
+            GameObject button = GuiFactory.BuildButton(scene, canvas, new Vector2(-0.7f, 0.5f), "Click Button");
+            GameObject mainMenuManager = GuiFactory.BuildMainMenuManager(scene);
+            button.GetComponent<CButton>().ButtonClicked += mainMenuManager.GetComponent<CMainMenuManager>().OnButtonClick;
 
             // Coin UI
             GameObject coin = GuiFactory.BuildGuiImage(scene, canvas, new Vector2(0.9f, 0.9f), "goldcoin1.png");

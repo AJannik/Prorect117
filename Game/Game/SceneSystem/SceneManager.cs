@@ -20,7 +20,7 @@ namespace Game.SceneSystem
             sceneFactory = new SceneFactory();
             scenes = new Scene[sceneFactory.NumScenes];
             BuildScenes();
-            RegisterSceneEventListners();
+            RegisterSceneEventListeners();
 
             GL.Enable(EnableCap.Texture2D);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
@@ -71,7 +71,7 @@ namespace Game.SceneSystem
             return scenes[index];
         }
 
-        private void RegisterSceneEventListners()
+        private void RegisterSceneEventListeners()
         {
             // Load new Level EventListner
             for (int i = 0; i < scenes.Length; i++)
