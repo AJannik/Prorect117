@@ -153,6 +153,27 @@ namespace Game.SceneSystem
 
             // Level walls
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(6.5f, 5f), 2);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(9.5f, 11f), 2);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(9.5f, 2.5f), 3);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(11.5f, 7f), 4);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(16.5f, 9.5f), 11);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(21.5f, 2.5f), 3);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(24.5f, 8.5f), 7);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(29.5f, 5.5f), 9);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(35.5f, 5f), 2);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(38.5f, 9f), 12);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(41.5f, 6f), 10);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(54.5f, 13f), 4);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(63.5f, 11f), 2);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(63.5f, 3.5f), 5);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(66.5f, 6.5f), 5);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(78.5f, 7.5f), 1);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(80.5f, 12f), 6);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(90.5f, 5.5f), 3);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(92.5f, 10f), 4);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(114.5f, 7f), 12);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(117.5f, 8.5f), 7);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(124.5f, 4.5f), 7);
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
