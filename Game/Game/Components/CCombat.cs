@@ -6,7 +6,7 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    public class CCombat : IComponent, IUpdateable
+    public class CCombat : IComponent, IUpdateable, IOnStart
     {
         private float maxHP = 100;
 
@@ -46,6 +46,14 @@ namespace Game.Components
         public float AttackDamage { get; set; } = 10f;
 
         public string HurtAnimationName { get; set; } = "Hurt";
+
+        public void Start()
+        {
+            if (MyGameObject.Name == "Player")
+            {
+                CurrentHealth = MyGameObject.Scene.GameManager.PlayerHealth;
+            }
+        }
 
         public void Update(float deltaTime)
         {

@@ -93,7 +93,7 @@ namespace Game.GameObjectFactory
             textField.GetComponent<CGuiTextRender>().SetSize(0.05f);
             textField.SetParent(coinHUD);
 
-            coinImage.GetComponent<CImageRender>().SetSize(0.1f, 0.1f);
+            coinImage.GetComponent<CImageRender>().SetSize(0.09f, 0.09f);
             coinImage.SetParent(coinHUD);
 
             coinHUD.AddComponent<CCoinUIUpdater>();

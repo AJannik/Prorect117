@@ -25,6 +25,8 @@ namespace Game.SceneSystem
             GL.Enable(EnableCap.Texture2D);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Blend);
+
+            Start();
         }
 
         public int CurrentScene { get; private set; } = 0;
@@ -32,6 +34,11 @@ namespace Game.SceneSystem
         public bool DebugMode { get; set; } = true;
 
         public GameManager GameManager { get; } = new GameManager();
+
+        public void Start()
+        {
+            scenes[CurrentScene].Start();
+        }
 
         public void Update(float deltaTime)
         {
@@ -94,6 +101,7 @@ namespace Game.SceneSystem
                 CurrentScene = index;
 
                 Resize(screenWidth, screenHeight);
+                Start();
             }
         }
 

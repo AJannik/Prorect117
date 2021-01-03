@@ -17,6 +17,7 @@ namespace Game.SceneSystem
         private List<ICollider> colliders = new List<ICollider>();
         private List<ITrigger> triggers = new List<ITrigger>();
         private List<IMouseListener> mouseListeners = new List<IMouseListener>();
+        private List<IOnStart> onStarts = new List<IOnStart>();
 
         private List<GameObject> deleteList = new List<GameObject>();
 
@@ -35,6 +36,14 @@ namespace Game.SceneSystem
         {
             LoadLevelNumber?.Invoke(this, num);
             GameManager.Key = false;
+        }
+
+        public void Start()
+        {
+            foreach (IOnStart start in onStarts)
+            {
+                start.Start();
+            }
         }
 
         public void Update(float deltaTime)
@@ -220,6 +229,14 @@ namespace Game.SceneSystem
                     mouseListeners.Add((IMouseListener)component);
                 }
             }
+
+            if (component is IOnStart)
+            {
+                if (!onStarts.Contains((IOnStart)component))
+                {
+                    onStarts.Add((IOnStart)component);
+                }
+            }
         }
 
         public void RemoveComponent(IComponent component)
@@ -262,6 +279,11 @@ namespace Game.SceneSystem
             if (component is IMouseListener)
             {
                 mouseListeners.Remove((IMouseListener)component);
+            }
+
+            if (component is IOnStart)
+            {
+                onStarts.Remove((IOnStart)component);
             }
         }
 
