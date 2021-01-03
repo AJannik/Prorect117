@@ -60,7 +60,7 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(24.5f, 3f), 4);
 
             // Player, exit and camera
-            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2f));
+            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
             ObjectFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.0f), new Vector2(1, 2));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
@@ -96,10 +96,32 @@ namespace Game.SceneSystem
         {
             Scene scene = new Scene(GameManager);
 
-            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(-13f, 1f));
+            // Level border
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(64f, 15.5f), 128);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(19.5f, 0.5f), 39);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(42.5f, 0.5f), 3);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(48f, 0.5f), 2);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(78.5f, 0.5f), 31);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(115.5f, 0.5f), 3);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(0.5f, 8f), 14);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(127.5f, 9.5f), 11);
+
+            // Level platforms
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(4f, 6.5f), 6);
+
+            // Level walls
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(6.5f, 5f), 2);
+
+            // Player, exit and camera
+            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5f));
+            ObjectFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 12f;
+
+            // Enemies
+
+            // Collectables
 
             return scene;
         }
