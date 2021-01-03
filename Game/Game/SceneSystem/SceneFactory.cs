@@ -74,7 +74,7 @@ namespace Game.SceneSystem
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
             // Test Button
-            GameObject button = GuiFactory.BuildButton(scene, canvas, new Vector2(-0.7f, 0.5f), "Click Button");
+            GameObject button = GuiFactory.BuildButton(scene, canvas, new Vector2(-0.7f, 0.5f), new Vector2(0.4f, 0.1f), "Click Button");
             GameObject mainMenuManager = GuiFactory.BuildMainMenuManager(scene);
             button.GetComponent<CButton>().ButtonClicked += mainMenuManager.GetComponent<CMainMenuManager>().OnButtonClick;
 
@@ -188,7 +188,6 @@ namespace Game.SceneSystem
             // Enemies
 
             // Collectables
-
             return scene;
         }
 
@@ -204,11 +203,15 @@ namespace Game.SceneSystem
             GameObject canvas = GuiFactory.BuildCanvas(scene);
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
+            // Text
             GameObject textField = GuiFactory.BuildTextField(scene, canvas, new Vector2(0f, 0.5f), "YOU DIED!");
             textField.GetComponent<CGuiTextRender>().Centered = true;
             textField.GetComponent<CGuiTextRender>().SetSize(0.3f);
 
-            GuiFactory.BuildGameOverCoinUI(scene, canvas, Vector2.Zero);
+            GameObject coinUI = GuiFactory.BuildGameOverCoinUI(scene, canvas, Vector2.Zero);
+
+            GameObject exitButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0f, -0.3f), new Vector2(0.6f, 0.2f), "Exit");
+            exitButton.GetComponent<CButton>().ButtonClicked += coinUI.GetComponent<CGameOverUI>().OnBtnExit;
 
             return scene;
         }

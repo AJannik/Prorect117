@@ -4,17 +4,19 @@ using OpenTK.Input;
 
 namespace Game.SceneSystem
 {
-    public class SceneManager
+    internal class SceneManager
     {
         private Scene[] scenes;
         private SceneFactory sceneFactory;
         private int screenWidth = 1366;
         private int screenHeight = 768;
+        private Program program;
 
-        public SceneManager(int width, int height)
+        public SceneManager(int width, int height, Program program)
         {
             screenWidth = width;
             screenHeight = height;
+            this.program = program;
 
             // Building all scenes
             sceneFactory = new SceneFactory(GameManager);
@@ -79,12 +81,18 @@ namespace Game.SceneSystem
             return scenes[index];
         }
 
+        public void ExitEvent(object sender, int i)
+        {
+            program.Exit();
+        }
+
         private void RegisterSceneEventListeners()
         {
             // Load new Level EventListner
             for (int i = 0; i < scenes.Length; i++)
             {
                 scenes[i].LoadLevelNumber += LoadScene;
+                scenes[i].ExitEvent += ExitEvent;
             }
         }
 

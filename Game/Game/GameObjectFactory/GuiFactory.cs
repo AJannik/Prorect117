@@ -42,11 +42,10 @@ namespace Game.GameObjectFactory
             return textField;
         }
 
-        public static GameObject BuildButton(Scene scene, GameObject canvas, Vector2 position, string text)
+        public static GameObject BuildButton(Scene scene, GameObject canvas, Vector2 position, Vector2 size, string text)
         {
             GameObject button = new GameObject(scene, "Button", canvas);
             button.Transform.Position = position;
-            Vector2 size = new Vector2(0.4f, 0.1f);
 
             button.AddComponent<CImageRender>();
             button.AddComponent<CImageRender>();
@@ -71,7 +70,7 @@ namespace Game.GameObjectFactory
             textField.SetParent(button);
             textField.GetComponent<CGuiTextRender>().Centered = true;
             textField.GetComponent<CGuiTextRender>().Layer = 31;
-            textField.GetComponent<CGuiTextRender>().SetSize(0.03f);
+            textField.GetComponent<CGuiTextRender>().SetSize(size.Y * 0.3f);
 
             return button;
         }

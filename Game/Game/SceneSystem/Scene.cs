@@ -28,6 +28,8 @@ namespace Game.SceneSystem
 
         public event EventHandler<int> LoadLevelNumber;
 
+        public event EventHandler<int> ExitEvent;
+
         public Debug Debug { get; } = new Debug();
 
         public GameManager GameManager { get; }
@@ -126,6 +128,11 @@ namespace Game.SceneSystem
                     mouseListener.MouseEvent(args);
                 }
             }
+        }
+
+        public void ExitGame()
+        {
+            ExitEvent?.Invoke(this, 0);
         }
 
         public void AddGameObject(GameObject gameObject)
