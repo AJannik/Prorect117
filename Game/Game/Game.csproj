@@ -7,10 +7,12 @@
 
   <ItemGroup>
     <None Remove="Content\adventurer.png" />
+    <None Remove="Content\AnimatedCoin.png" />
     <None Remove="Content\default.png" />
     <None Remove="Content\DoorSprite.png" />
     <None Remove="Content\Font.png" />
     <None Remove="Content\goldcoin1.png" />
+    <None Remove="Content\goldcoin2.png" />
     <None Remove="Content\GrassSpritesheet.png" />
     <None Remove="Content\Key.png" />
     <None Remove="Content\LightBandit.png" />
@@ -27,10 +29,12 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Content\adventurer.png" />
+    <EmbeddedResource Include="Content\AnimatedCoin.png" />
     <EmbeddedResource Include="Content\default.png" />
     <EmbeddedResource Include="Content\DoorSprite.png" />
     <EmbeddedResource Include="Content\Font.png" />
     <EmbeddedResource Include="Content\goldcoin1.png" />
+    <EmbeddedResource Include="Content\goldcoin2.png" />
     <EmbeddedResource Include="Content\GrassSpritesheet.png" />
     <EmbeddedResource Include="Content\Key.png" />
     <EmbeddedResource Include="Content\LightBandit.png" />
