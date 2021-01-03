@@ -100,6 +100,7 @@ namespace Game.GameObjectFactory
             // add Combat Components
             player.AddComponent<CCombat>();
             player.GetComponent<CCombat>().AnimationSystem = controll;
+            player.GetComponent<CCombat>().CurrentHealth = player.Scene.GameManager.PlayerHealth;
             player.AddComponent<CPlayerCombatController>();
             CPlayerCombatController combatController = player.GetComponent<CPlayerCombatController>();
             combatController.AnimationSystem = controll;

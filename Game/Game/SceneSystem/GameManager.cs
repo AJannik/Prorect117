@@ -9,13 +9,19 @@ namespace Game.SceneSystem
         // Stay at level-change
         public int Coins { get; set; }
 
-        // If the player has collected a key in this level; Needs to be reset at level-change
+        public float PlayerHealth { get; set; } = 100f;
+
+        // If the player has collected a key in this level
         public bool Key { get; set; } = false;
 
         // TODO: Add list of power-downs that the player has collected
 
         public void Update(float deltaTime)
         {
+            if (PlayerHealth <= 0f)
+            {
+                GameOver();
+            }
         }
 
         public void GameOver()

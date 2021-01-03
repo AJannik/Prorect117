@@ -34,6 +34,7 @@ namespace Game.SceneSystem
         public void LoadLevelEvent(int num)
         {
             LoadLevelNumber?.Invoke(this, num);
+            GameManager.Key = false;
         }
 
         public void Update(float deltaTime)

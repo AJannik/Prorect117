@@ -56,13 +56,13 @@ namespace Game.Components
 
             if (CurrentHealth <= 0f)
             {
-                if (MyGameObject.Name == "Player")
-                {
-                    MyGameObject.Scene.GameManager.GameOver();
-                }
-
                 AnimationSystem.PlayAnimation("death");
                 MyGameObject.Scene.RemoveGameObject(MyGameObject);
+            }
+
+            if (MyGameObject.Name == "Player")
+            {
+                MyGameObject.Scene.GameManager.PlayerHealth = CurrentHealth;
             }
         }
 
