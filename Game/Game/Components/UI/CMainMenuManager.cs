@@ -11,7 +11,6 @@ namespace Game.Components.UI
 
         public void OnButtonClick(object sender, int num)
         {
-            (sender as CButton).MyGameObject.Transform.Position = new OpenTK.Vector2(0.5f, -0.5f);
         }
     }
 }

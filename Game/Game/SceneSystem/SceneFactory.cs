@@ -13,7 +13,7 @@ namespace Game.SceneSystem
             GameManager = gameManager;
         }
 
-        internal int NumScenes { get; } = 2;
+        internal int NumScenes { get; } = 3;
 
         private GameManager GameManager { get; }
 
@@ -25,6 +25,9 @@ namespace Game.SceneSystem
                     return BuildLevel0();
                 case 1:
                     return BuildLevel1();
+                case 2:
+                    // Last scene
+                    return BuildGameOverScene();
                 default:
                     throw new ArgumentOutOfRangeException($"There is no Scene numbered {num}!");
             }
@@ -185,6 +188,27 @@ namespace Game.SceneSystem
             // Enemies
 
             // Collectables
+
+            return scene;
+        }
+
+        private Scene BuildGameOverScene()
+        {
+            Scene scene = new Scene(GameManager);
+
+            // Camera
+            GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
+            camera.GetComponent<CCamera>().Scale = 6f;
+
+            // Canvas
+            GameObject canvas = GuiFactory.BuildCanvas(scene);
+            canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
+
+            GameObject textField = GuiFactory.BuildTextField(scene, canvas, new Vector2(0f, 0.5f), "YOU DIED!");
+            textField.GetComponent<CGuiTextRender>().Centered = true;
+            textField.GetComponent<CGuiTextRender>().SetSize(0.3f);
+
+            GuiFactory.BuildGameOverCoinUI(scene, canvas, Vector2.Zero);
 
             return scene;
         }

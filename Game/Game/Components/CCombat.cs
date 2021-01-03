@@ -66,6 +66,10 @@ namespace Game.Components
             {
                 AnimationSystem.PlayAnimation("death");
                 MyGameObject.Scene.RemoveGameObject(MyGameObject);
+                if (MyGameObject.Name == "Player")
+                {
+                    MyGameObject.Scene.GameManager.GameOver();
+                }
             }
 
             if (MyGameObject.Name == "Player")

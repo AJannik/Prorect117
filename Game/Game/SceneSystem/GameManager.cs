@@ -6,6 +6,8 @@ namespace Game.SceneSystem
 {
     public class GameManager : IUpdateable
     {
+        public event EventHandler<int> GameOverEvent;
+
         // Stay at level-change
         public int Coins { get; set; }
 
@@ -18,15 +20,11 @@ namespace Game.SceneSystem
 
         public void Update(float deltaTime)
         {
-            if (PlayerHealth <= 0f)
-            {
-                GameOver();
-            }
         }
 
         public void GameOver()
         {
-            Console.WriteLine("Game Over!");
+            GameOverEvent?.Invoke(this, 0);
         }
     }
 }

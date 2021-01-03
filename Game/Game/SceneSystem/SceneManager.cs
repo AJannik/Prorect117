@@ -27,6 +27,7 @@ namespace Game.SceneSystem
             GL.Enable(EnableCap.Blend);
 
             Start();
+            GameManager.GameOverEvent += LoadScene;
         }
 
         public int CurrentScene { get; private set; } = 0;
@@ -89,6 +90,15 @@ namespace Game.SceneSystem
 
         private void LoadScene(object sender, int index)
         {
+            if (sender == GameManager)
+            {
+                UnloadCurrentScene();
+                CurrentScene = sceneFactory.NumScenes - 1;
+
+                Resize(screenWidth, screenHeight);
+                Start();
+            }
+
             // inactive Scene has invoked the event
             if (sender != scenes[CurrentScene])
             {

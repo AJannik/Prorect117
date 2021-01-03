@@ -102,5 +102,27 @@ namespace Game.GameObjectFactory
 
             return coinHUD;
         }
+
+        public static GameObject BuildGameOverCoinUI(Scene scene, GameObject canvas, Vector2 position)
+        {
+            GameObject gameOverCoinUI = new GameObject(scene, "CoinUI");
+            gameOverCoinUI.Transform.Position = position;
+            gameOverCoinUI.AddComponent<CGameOverUI>();
+
+            GameObject scoreText = BuildTextField(scene, canvas, new Vector2(0f, 0f), "You managed to collect     coins");
+            scoreText.SetParent(gameOverCoinUI);
+            scoreText.GetComponent<CGuiTextRender>().Centered = true;
+            scoreText.GetComponent<CGuiTextRender>().SetSize(0.06f);
+
+            GameObject coinText = BuildTextField(scene, canvas, new Vector2(0.25f, 0f), "0");
+            coinText.SetParent(gameOverCoinUI);
+            coinText.GetComponent<CGuiTextRender>().Centered = true;
+            coinText.GetComponent<CGuiTextRender>().FontColor = Color.DarkOrange;
+            coinText.GetComponent<CGuiTextRender>().SetSize(0.06f);
+
+            gameOverCoinUI.GetComponent<CGameOverUI>().CoinsText = coinText.GetComponent<CGuiTextRender>();
+
+            return gameOverCoinUI;
+        }
     }
 }
