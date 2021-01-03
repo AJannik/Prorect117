@@ -161,7 +161,6 @@ namespace Game.GameObjectFactory
             render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 0.5f, 1.0f));
 
             // TODO: Add door hitbox, trigger
-
             return levelEnd;
         }
 
@@ -171,8 +170,17 @@ namespace Game.GameObjectFactory
             coin.Transform.Position = position;
 
             coin.AddComponent<CRender>();
-            coin.GetComponent<CRender>().LoadAndSetTexture("Content.goldcoin1.png");
+            coin.GetComponent<CRender>().LoadAndSetTexture("Content.AnimatedCoin.png");
+            coin.GetComponent<CRender>().SetTexCoords(new SimpleGeometry.Rect(0, 0, 1 / 8f, 1f));
             coin.GetComponent<CRender>().Layer = 11;
+            coin.GetComponent<CRender>().SetSize(0.5f, 0.5f);
+            coin.AddComponent<CAnimationSystem>();
+            CAnimationSystem animationSystem = coin.GetComponent<CAnimationSystem>();
+            animationSystem.Renderer = coin.GetComponent<CRender>();
+            animationSystem.SetDefaultColumnsAndRows(8, 1);
+            Animation spin = new Animation("Spin", 8, 0, true);
+            animationSystem.AddAnimation(spin);
+            animationSystem.SetStartAnimation(spin);
 
             // TODO: Add hitbox and script
             return coin;
