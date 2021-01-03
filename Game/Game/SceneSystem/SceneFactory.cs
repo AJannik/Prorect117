@@ -108,12 +108,54 @@ namespace Game.SceneSystem
 
             // Level platforms
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(4f, 6.5f), 6);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(8.5f, 12.5f), 11);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(5f, 3.5f), 4);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(10.5f, 9.5f), 3);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(10.5f, 4.5f), 3);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(15f, 4.5f), 2);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(17.5f, 3.5f), 3);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(17.5f, 8.5f), 1);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(22.5f, 11.5f), 3);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(23f, 4.5f), 4);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(30f, 12.5f), 12);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(28f, 7.5f), 2);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(33f, 6.5f), 6);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(35f, 9.5f), 6);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(34f, 3.5f), 4);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(46.5f, 11.5f), 11);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(51f, 8.5f), 14);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(51.5f, 2.5f), 1);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(54.5f, 3.5f), 1);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(58f, 12.5f), 6);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(66.5f, 9.5f), 19);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(59f, 1.5f), 2);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(64f, 12.5f), 2);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(78.5f, 3.5f), 25);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(74f, 6.5f), 10);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(74.5f, 12.5f), 7);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(82f, 8.5f), 8);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(88f, 12.5f), 10);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(91.5f, 7.5f), 3);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(96.5f, 10.5f), 7);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(94.5f, 2.5f), 1);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(97.5f, 2.5f), 1);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(100.5f, 2.5f), 1);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(103.5f, 2.5f), 1);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(107f, 3.5f), 2);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(110f, 5.5f), 2);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(113f, 8.5f), 2);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(112.5f, 1.5f), 1);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(119f, 4.5f), 6);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(120f, 12.5f), 6);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(122.5f, 8.5f), 5);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(124.5f, 11.5f), 5);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(126f, 4.5f), 2);
 
             // Level walls
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(6.5f, 5f), 2);
 
             // Player, exit and camera
-            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5f));
+            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
             ObjectFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
