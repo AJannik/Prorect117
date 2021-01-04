@@ -110,12 +110,12 @@ namespace Game.GameObjectFactory
             gameOverCoinUI.Transform.Position = position;
             gameOverCoinUI.AddComponent<CGameOverUI>();
 
-            GameObject scoreText = BuildTextField(scene, canvas, new Vector2(0f, 0f), "You managed to collect     coins");
+            GameObject scoreText = BuildTextField(scene, canvas, new Vector2(0f, 0f), "YOU MANAGED TO COLLECT     COINS");
             scoreText.SetParent(gameOverCoinUI);
             scoreText.GetComponent<CGuiTextRender>().Centered = true;
             scoreText.GetComponent<CGuiTextRender>().SetSize(0.06f);
 
-            GameObject coinText = BuildTextField(scene, canvas, new Vector2(0.25f, 0f), "0");
+            GameObject coinText = BuildTextField(scene, canvas, new Vector2(0.25f, 0f), " 0");
             coinText.SetParent(gameOverCoinUI);
             coinText.GetComponent<CGuiTextRender>().Centered = true;
             coinText.GetComponent<CGuiTextRender>().FontColor = Color.DarkOrange;
@@ -137,6 +137,7 @@ namespace Game.GameObjectFactory
             backgroundImage.SetParent(shopScreen);
 
             GameObject titel = BuildTextField(scene, canvas, new Vector2(0f, 0.55f), "SHOP");
+            titel.Transform.Rotation = 0.3f;
             titel.GetComponent<CGuiTextRender>().SetSize(0.1f);
             titel.GetComponent<CGuiTextRender>().Centered = true;
             titel.GetComponent<CGuiTextRender>().Layer = 33;

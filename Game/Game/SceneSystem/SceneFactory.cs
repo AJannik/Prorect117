@@ -74,7 +74,7 @@ namespace Game.SceneSystem
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
             // Test Button
-            GameObject button = GuiFactory.BuildButton(scene, canvas, new Vector2(-0.7f, 0.5f), new Vector2(0.4f, 0.1f), "Click Button");
+            GameObject button = GuiFactory.BuildButton(scene, canvas, new Vector2(-0.7f, 0.5f), new Vector2(0.4f, 0.1f), "NEXT SCENE");
             GameObject shopScreen = GuiFactory.BuildShopScreen(scene, canvas, Vector2.Zero);
             button.GetComponent<CButton>().ButtonClicked += shopScreen.GetComponent<CShopScreen>().Show;
             shopScreen.Active = false;
@@ -187,6 +187,13 @@ namespace Game.SceneSystem
             camera.GetComponent<CCamera>().Scale = 12f;
 
             // Enemies
+
+            // Canvas
+            GameObject canvas = GuiFactory.BuildCanvas(scene);
+            canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
+
+            // Coin UI
+            GameObject coinHUD = GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
 
             // Collectables
             return scene;

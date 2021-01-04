@@ -34,7 +34,7 @@ namespace Game.SceneSystem
 
         public int CurrentScene { get; private set; } = 0;
 
-        public bool DebugMode { get; set; } = true;
+        public bool DebugMode { get; set; } = false;
 
         public GameManager GameManager { get; } = new GameManager();
 
