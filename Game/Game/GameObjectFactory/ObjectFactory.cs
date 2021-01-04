@@ -1,4 +1,5 @@
-﻿using Game.Components;
+﻿using System;
+using Game.Components;
 using Game.Components.Collision;
 using Game.Components.Renderer;
 using Game.Components.UI;
@@ -175,6 +176,7 @@ namespace Game.GameObjectFactory
             coin.GetComponent<CRender>().SetTexCoords(new SimpleGeometry.Rect(0, 0, 1 / 8f, 1f));
             coin.GetComponent<CRender>().Layer = 11;
             coin.GetComponent<CRender>().SetSize(0.5f, 0.5f);
+
             coin.AddComponent<CAnimationSystem>();
             CAnimationSystem animationSystem = coin.GetComponent<CAnimationSystem>();
             animationSystem.Renderer = coin.GetComponent<CRender>();
@@ -183,7 +185,13 @@ namespace Game.GameObjectFactory
             animationSystem.AddAnimation(spin);
             animationSystem.SetStartAnimation(spin);
 
-            // TODO: Add hitbox and script
+            coin.AddComponent<CBoxTrigger>();
+            CBoxTrigger trigger = coin.GetComponent<CBoxTrigger>();
+            trigger.Geometry.Size = new Vector2(1, 1);
+            coin.AddComponent<CCollectible>();
+            CCollectible collectible = coin.GetComponent<CCollectible>();
+            collectible.SetupTrigger(trigger);
+
             return coin;
         }
 
@@ -197,7 +205,13 @@ namespace Game.GameObjectFactory
             render.LoadAndSetTexture("Content.Key.png");
             render.Layer = 11;
 
-            // TODO: Add hitbox and script
+            key.AddComponent<CBoxTrigger>();
+            CBoxTrigger trigger = key.GetComponent<CBoxTrigger>();
+            trigger.Geometry.Size = new Vector2(1, 1);
+            key.AddComponent<CCollectible>();
+            CCollectible collectible = key.GetComponent<CCollectible>();
+            collectible.SetupTrigger(trigger);
+
             return key;
         }
     }
