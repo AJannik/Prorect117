@@ -151,21 +151,6 @@ namespace Game.GameObjectFactory
             return powerDown;
         }
 
-        public static GameObject BuildLevelEnd(Scene scene, Vector2 position, Vector2 size)
-        {
-            GameObject levelEnd = new GameObject(scene, "LevelEnd");
-            levelEnd.Transform.Position = position;
-
-            levelEnd.AddComponent<CRender>();
-            CRender render = levelEnd.GetComponent<CRender>();
-            render.LoadAndSetTexture("Content.DoorSprite.png");
-            render.SetSize(1f, 2f);
-            render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 0.5f, 1.0f));
-
-            // TODO: Add door hitbox, trigger
-            return levelEnd;
-        }
-
         public static GameObject BuildCoin(Scene scene, Vector2 position)
         {
             GameObject coin = new GameObject(scene, "Coin");
@@ -213,6 +198,15 @@ namespace Game.GameObjectFactory
             collectible.SetupTrigger(trigger);
 
             return key;
+        }
+
+        public static GameObject BuildMovingPlatform(Scene scene, Vector2 position1, Vector2 position2, int length)
+        {
+            GameObject floor = new GameObject(scene, "Floor");
+            Vector2 size = new Vector2(length, 1f);
+            // TODO: Add content as soon as component is implemented
+
+            return floor;
         }
     }
 }

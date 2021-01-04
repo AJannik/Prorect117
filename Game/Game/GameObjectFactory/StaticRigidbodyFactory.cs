@@ -50,5 +50,20 @@ namespace Game.GameObjectFactory
 
             return wall;
         }
+
+        public static GameObject BuildLevelEnd(Scene scene, Vector2 position, Vector2 size)
+        {
+            GameObject levelEnd = new GameObject(scene, "LevelEnd");
+            levelEnd.Transform.Position = position;
+
+            levelEnd.AddComponent<CRender>();
+            CRender render = levelEnd.GetComponent<CRender>();
+            render.LoadAndSetTexture("Content.DoorSprite.png");
+            render.SetSize(1f, 2f);
+            render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 0.5f, 1.0f));
+
+            // TODO: Add door hitbox, trigger
+            return levelEnd;
+        }
     }
 }

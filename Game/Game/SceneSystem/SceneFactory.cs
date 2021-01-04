@@ -64,7 +64,7 @@ namespace Game.SceneSystem
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
-            ObjectFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.0f), new Vector2(1, 2));
+            StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.0f), new Vector2(1, 2));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
@@ -155,6 +155,14 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(124.5f, 11.5f), 5);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(126f, 4.5f), 2);
 
+            // Moving platforms
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, 8.5f), new Vector2(2f, 12.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(15f, 7.5f), new Vector2(15f, 10.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(26f, 3.5f), new Vector2(26f, 7.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(40f, 0.5f), new Vector2(40f, 11.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(115.5f, 7.5f), new Vector2(115.5f, 12.5f), 1);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(118f, 0.5f), new Vector2(126f, 0.5f), 2);
+
             // Level walls
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(6.5f, 5f), 2);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(9.5f, 11f), 2);
@@ -181,7 +189,7 @@ namespace Game.SceneSystem
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
-            ObjectFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
+            StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 12f;
