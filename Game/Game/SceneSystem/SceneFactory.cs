@@ -187,6 +187,22 @@ namespace Game.SceneSystem
             camera.GetComponent<CCamera>().Scale = 12f;
 
             // Enemies
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(7.5f, 14f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(16.5f, 2f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(23.5f, 2f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(27.5f, 2f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(29.5f, 14f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(59.5f, 14f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(66.5f, 11f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(71.5f, 5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(72.5f, 11f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(72.5f, 8f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(74.5f, 14f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(78.5f, 10f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(82.5f, 5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(83.5f, 10f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(87.5f, 14f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(122.5f, 10f));
 
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);

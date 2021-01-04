@@ -9,6 +9,7 @@ namespace Game.GameObjectFactory
 {
     public static class EnemyFactory
     {
+        // A bit stronger than the bandit
         public static GameObject BuildSkeletonEnemy(Scene scene, Vector2 position)
         {
             GameObject enemy = new GameObject(scene, "Enemy");
@@ -67,6 +68,7 @@ namespace Game.GameObjectFactory
             return enemy;
         }
 
+        // Weak enemy for tutorial purpose
         public static GameObject BuildBanditEnemy(Scene scene, Vector2 position)
         {
             GameObject enemy = new GameObject(scene, "Enemy");
