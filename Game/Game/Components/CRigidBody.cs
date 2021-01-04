@@ -71,7 +71,13 @@ namespace Game.Components
 
             if ((Velocity.Y > 0f && PenRes.Y < 0f) || (Velocity.Y < 0f && PenRes.Y > 0f))
             {
-                Velocity += new Vector2(0f, (PenRes.Y / deltaTime) - (deltaTime * Acceleration.Y / 2f));
+                float yRes = (PenRes.Y / deltaTime) - (deltaTime * Acceleration.Y / 2f);
+                if (MathF.Abs(Velocity.Y) < MathF.Abs(yRes))
+                {
+                    yRes = -Velocity.Y;
+                }
+
+                Velocity += new Vector2(0f, yRes);
             }
 
             // Check x-axis for collision
@@ -82,7 +88,13 @@ namespace Game.Components
             // reduce velocity by PenRes amount
             if ((Velocity.X > 0f && PenRes.X < 0f) || (Velocity.X < 0f && PenRes.X > 0f))
             {
-                Velocity += new Vector2((PenRes.X / deltaTime) - (deltaTime * Acceleration.X / 2f), 0f);
+                float xRes = (PenRes.X / deltaTime) - (deltaTime * Acceleration.X / 2f);
+                if (MathF.Abs(Velocity.X) < MathF.Abs(xRes))
+                {
+                    xRes = -Velocity.X;
+                }
+
+                Velocity += new Vector2(xRes, 0f);
             }
 
             Velocity = CorrectRoundingErrors(Velocity);
