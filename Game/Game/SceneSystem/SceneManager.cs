@@ -116,7 +116,7 @@ namespace Game.SceneSystem
             if (index >= 0 && index < sceneFactory.NumScenes && index != CurrentScene)
             {
                 UnloadCurrentScene();
-                CurrentScene = index;
+                CurrentScene += index;
 
                 Resize(screenWidth, screenHeight);
                 Start();

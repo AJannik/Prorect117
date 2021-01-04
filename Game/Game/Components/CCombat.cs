@@ -71,11 +71,6 @@ namespace Game.Components
                     MyGameObject.Scene.GameManager.GameOver();
                 }
             }
-
-            if (MyGameObject.Name == "Player")
-            {
-                MyGameObject.Scene.GameManager.PlayerHealth = CurrentHealth;
-            }
         }
 
         /// <summary>
@@ -132,6 +127,11 @@ namespace Game.Components
             if (AnimationSystem != null)
             {
                 AnimationSystem.PlayAnimation(dmgAnimationName, true);
+            }
+
+            if (MyGameObject.Name == "Player")
+            {
+                MyGameObject.Scene.GameManager.PlayerHealth = CurrentHealth;
             }
         }
     }

@@ -61,9 +61,6 @@ namespace Game.Components.UI
                 ActiveImage.Visible = true;
                 InactiveImage.Visible = false;
                 ClickedTimer = 0.7f;
-
-                // TODO: Remove
-                MyGameObject.Scene.GameManager.Coins++;
             }
         }
 

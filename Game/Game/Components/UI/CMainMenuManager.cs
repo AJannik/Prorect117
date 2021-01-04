@@ -11,6 +11,8 @@ namespace Game.Components.UI
 
         public void OnButtonClick(object sender, int num)
         {
+            // TODO: Remove
+            MyGameObject.Scene.GameManager.Coins++;
         }
     }
 }
