@@ -212,6 +212,29 @@ namespace Game.SceneSystem
             GameObject coinHUD = GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
 
             // Collectables
+            ObjectFactory.BuildCoin(scene, new Vector2(10.5f, 3.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(22.5f, 9.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(25.5f, 2.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(33.5f, 4.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(46.5f, 9.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(48.5f, 2.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(51.5f, 4.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(54.5f, 5.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(56.5f, 13.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(59.5f, 3.5f));
+            ObjectFactory.BuildKey(scene, new Vector2(63.5f, 7.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(64.5f, 10.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(74.5f, 7.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(75.5f, 13.5f));
+            ObjectFactory.BuildKey(scene, new Vector2(75.5f, 4.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(84.5f, 13.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(89.5f, 4.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(100.5f, 4.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(112.5f, 3.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(112.5f, 2.5f));
+            ObjectFactory.BuildKey(scene, new Vector2(125.5f, 6.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(126.5f, 6.5f));
+
             return scene;
         }
 
