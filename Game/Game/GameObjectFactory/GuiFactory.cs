@@ -132,33 +132,40 @@ namespace Game.GameObjectFactory
             shopScreen.Transform.Position = position;
             shopScreen.AddComponent<CShopScreen>();
 
-            GameObject backgroundImage = BuildGuiImage(scene, canvas, position, "default.png");
-            backgroundImage.GetComponent<CImageRender>().SetSize(3f, 1.5f);
+            GameObject backgroundImage = BuildGuiImage(scene, canvas, position, "UI.ui_bg.png");
+            backgroundImage.GetComponent<CImageRender>().SetSize(3f, 1.7f);
             backgroundImage.SetParent(shopScreen);
 
-            GameObject titel = BuildTextField(scene, canvas, new Vector2(0f, 0.55f), "SHOP");
-            titel.Transform.Rotation = 0.3f;
-            titel.GetComponent<CGuiTextRender>().SetSize(0.1f);
+            GameObject titel = BuildTextField(scene, canvas, new Vector2(0f, 0.55f), "BOTZERS' STORE");
+            titel.Transform.Rotation = -0.15f;
+            titel.GetComponent<CGuiTextRender>().SetSize(0.09f);
             titel.GetComponent<CGuiTextRender>().Centered = true;
             titel.GetComponent<CGuiTextRender>().Layer = 33;
+            titel.GetComponent<CGuiTextRender>().FontColor = new Color(209, 204, 199, 1);
             titel.SetParent(shopScreen);
 
-            GameObject closeButton = BuildButton(scene, canvas, new Vector2(0f, -0.6f), new Vector2(0.4f, 0.1f), "CONTINUE");
+            GameObject titelBg = BuildGuiImage(scene, canvas, new Vector2(0f, 0.05f), "UI.ui_wood_sign.png");
+            titelBg.GetComponent<CImageRender>().SetSize(1.6f, 0.3f);
+            titelBg.GetComponent<CImageRender>().Layer = 32;
+            titelBg.SetParent(titel);
+
+            GameObject closeButton = BuildButton(scene, canvas, new Vector2(0f, -0.7f), new Vector2(0.4f, 0.1f), "CONTINUE");
             closeButton.GetComponent<CButton>().ButtonClicked += shopScreen.GetComponent<CShopScreen>().OnContinue;
             closeButton.SetParent(shopScreen);
 
-            GameObject textField = BuildTextField(scene, canvas, new Vector2(0.3f, 0.35f), "CURRENT DEBUFFS:");
+            GameObject textField = BuildTextField(scene, canvas, new Vector2(0.3f, 0.3f), "CURRENT DEBUFFS:");
             textField.GetComponent<CGuiTextRender>().SetSize(0.03f);
             textField.GetComponent<CGuiTextRender>().Layer = 33;
+            textField.GetComponent<CGuiTextRender>().Centered = true;
             textField.SetParent(shopScreen);
 
-            GameObject textField2 = BuildTextField(scene, canvas, new Vector2(-0.3f, 0.35f), "BUY FOR 15 COINS:");
+            GameObject textField2 = BuildTextField(scene, canvas, new Vector2(-0.3f, 0.3f), "BUY FOR 15 COINS:");
             textField2.GetComponent<CGuiTextRender>().SetSize(0.03f);
             textField2.GetComponent<CGuiTextRender>().Layer = 33;
             textField2.GetComponent<CGuiTextRender>().Centered = true;
             textField2.SetParent(shopScreen);
 
-            GameObject buyHealthButton = BuildButton(scene, canvas, new Vector2(-0.3f, 0.25f), new Vector2(0.4f, 0.1f), "BUY 10 HP");
+            GameObject buyHealthButton = BuildButton(scene, canvas, new Vector2(-0.3f, 0.2f), new Vector2(0.4f, 0.1f), "BUY 10 HP");
             buyHealthButton.GetComponent<CButton>().ButtonClicked += shopScreen.GetComponent<CShopScreen>().BuyHealth;
             buyHealthButton.SetParent(shopScreen);
 

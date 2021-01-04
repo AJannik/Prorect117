@@ -73,7 +73,7 @@ namespace Game.SceneSystem
             GameObject canvas = GuiFactory.BuildCanvas(scene);
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
-            // Test Button
+            // Shop
             GameObject button = GuiFactory.BuildButton(scene, canvas, new Vector2(-0.7f, 0.5f), new Vector2(0.4f, 0.1f), "NEXT SCENE");
             GameObject shopScreen = GuiFactory.BuildShopScreen(scene, canvas, Vector2.Zero);
             button.GetComponent<CButton>().ButtonClicked += shopScreen.GetComponent<CShopScreen>().Show;
