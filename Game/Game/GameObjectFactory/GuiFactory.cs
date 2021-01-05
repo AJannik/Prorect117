@@ -126,6 +126,31 @@ namespace Game.GameObjectFactory
             return gameOverCoinUI;
         }
 
+        public static GameObject BuildKeyUI(Scene scene, GameObject canvas, Vector2 position)
+        {
+            GameObject keyUI = new GameObject(scene, "KeyUI");
+            keyUI.Transform.Position = position;
+
+            keyUI.AddComponent<CImageRender>();
+            CImageRender keyInactive = keyUI.GetComponent<CImageRender>();
+            keyInactive.LoadAndSetTexture("Content.KeyInactive.png");
+            keyInactive.SetSize(0.12f, 0.12f);
+            keyInactive.Canvas = canvas.GetComponent<CCanvas>();
+
+            keyUI.AddComponent<CImageRender>();
+            CImageRender keyActive = keyUI.GetComponents<CImageRender>()[1];
+            keyActive.LoadAndSetTexture("Content.Key.png");
+            keyActive.SetSize(0.12f, 0.12f);
+            keyActive.Canvas = canvas.GetComponent<CCanvas>();
+            keyActive.Visible = false;
+
+            keyUI.AddComponent<CKeyUIUpdater>();
+            keyUI.GetComponent<CKeyUIUpdater>().KeyActive = keyActive;
+            keyUI.GetComponent<CKeyUIUpdater>().KeyInactive = keyInactive;
+
+            return keyUI;
+        }
+
         public static GameObject BuildShopScreen(Scene scene, GameObject canvas, Vector2 position)
         {
             GameObject shopScreen = new GameObject(scene, "ShopScreen");

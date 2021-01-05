@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Game.Interfaces;
+﻿using Game.Interfaces;
 
 namespace Game.Components.UI
 {
@@ -9,15 +6,18 @@ namespace Game.Components.UI
     {
         public GameObject MyGameObject { get; set; }
 
+        public GameObject Player { get; set; }
+
         public void OnContinue(object sender, int i)
         {
             MyGameObject.Active = false;
             MyGameObject.Scene.LoadLevelEvent(1);
         }
 
-        public void Show(object sender, int i)
+        public void Show()
         {
             MyGameObject.Active = true;
+            MyGameObject.Scene.RemoveGameObject(Player);
         }
 
         public void BuyHealth(object sender, int i)

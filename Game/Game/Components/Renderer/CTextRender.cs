@@ -20,6 +20,8 @@ namespace Game.Components.Renderer
 
         public int Layer { get; set; } = 20;
 
+        public bool Visible { get; set; } = true;
+
         public int SpriteSheet { get; set; }
 
         public string Text { get; set; } = string.Empty;
@@ -61,6 +63,11 @@ namespace Game.Components.Renderer
 
         public void Draw(float alpha)
         {
+            if (!Visible)
+            {
+                return;
+            }
+
             GL.Color3(Color.White);
             var rect = new Rect(0, 0, Size, Size); // rectangle of the first character
             if (Centered)

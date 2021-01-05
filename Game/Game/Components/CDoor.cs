@@ -1,21 +1,34 @@
-using Game.Components.Collision;
+using Game.Components.Renderer;
+using Game.Components.UI;
 using Game.Interfaces;
+using OpenTK.Input;
 
 namespace Game.Components
 {
-    public class CDoor : IComponent
+    public class CDoor : IComponent, IUpdateable
     {
-        private bool unlocked = false;
-
         public GameObject MyGameObject { get; set; } = null;
 
-        public CBoxTrigger Trigger { get; set; }
+        public CTextRender TextRender { get; set; }
 
-        public void SetupTrigger(CBoxTrigger trigger)
+        public CShopScreen ShopScreen { get; set; }
+
+        private bool Unlockable { get; set; } = false;
+
+        public void SetupTrigger(ITrigger trigger)
         {
-            Trigger = trigger;
-            Trigger.TriggerEntered += Triggered;
-            Trigger.TriggerExited += UnTriggered;
+            trigger.TriggerEntered += Triggered;
+            trigger.TriggerExited += UnTriggered;
+        }
+
+        public void Update(float deltaTime)
+        {
+            KeyboardState keyboard = Keyboard.GetState();
+            if (Unlockable && keyboard.IsKeyDown(Key.E))
+            {
+                MyGameObject.Scene.GameManager.Key = false;
+                ShopScreen.Show();
+            }
         }
 
         private void Triggered(object sender, IComponent e)
@@ -24,13 +37,8 @@ namespace Game.Components
             {
                 if (e.MyGameObject.Scene.GameManager.Key)
                 {
-                    e.MyGameObject.Scene.GameManager.Key = false;
-                    unlocked = true;
-                }
-
-                if (unlocked)
-                {
-                    // TODO: Add button that opens the shop and set visible
+                    TextRender.Visible = true;
+                    Unlockable = true;
                 }
             }
         }
@@ -39,16 +47,8 @@ namespace Game.Components
         {
             if (e.MyGameObject.Name == "Player")
             {
-                if (e.MyGameObject.Scene.GameManager.Key)
-                {
-                    e.MyGameObject.Scene.GameManager.Key = false;
-                    unlocked = true;
-                }
-
-                if (unlocked)
-                {
-                    // TODO: Make shop button invisible
-                }
+                TextRender.Visible = false;
+                Unlockable = false;
             }
         }
     }
