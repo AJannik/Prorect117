@@ -64,6 +64,7 @@ namespace Game.GameObjectFactory
             CCombat combat = enemy.GetComponent<CCombat>();
             combat.AnimationSystem = animationSystem;
             combat.MaxHealth = 30;
+            ai.Combat = combat;
 
             return enemy;
         }
