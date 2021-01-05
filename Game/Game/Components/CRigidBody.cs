@@ -7,7 +7,7 @@ using OpenTK;
 
 namespace Game.Components
 {
-    public class CRigidBody : IComponent, IPhysicsComponent, IUpdateable
+    public class CRigidBody : IComponent, IPhysicsComponent, IOnStart
     {
         public GameObject MyGameObject { get; set; } = null;
 
@@ -23,6 +23,8 @@ namespace Game.Components
 
         public Vector2 Velocity { get; set; } = Vector2.Zero;
 
+        public bool IgnoreCollision { get; set; } = false;
+
         private List<ICollider> Colliders { get; set; } = new List<ICollider>();
 
         private Vector2 Force { get; set; } = Vector2.Zero;
@@ -31,11 +33,12 @@ namespace Game.Components
 
         private Vector2 Acceleration { get; set; } = Vector2.Zero;
 
-        public void Update(float deltaTime)
+        public void Start()
         {
-            if (Colliders.Count == 0)
+            SetColliders();
+            if (MyGameObject.GetComponent<CCombat>() != null)
             {
-                SetColliders();
+                IgnoreCollision = true;
             }
         }
 
@@ -160,7 +163,7 @@ namespace Game.Components
         {
             foreach (ICollider collider in MyGameObject.Scene.GetColliders())
             {
-                if (collider.MyGameObject.Active && !Colliders.Contains(collider))
+                if (collider.MyGameObject.Active && !Colliders.Contains(collider) && collider.MyGameObject.GetComponent<CRigidBody>() != null && !(IgnoreCollision && collider.MyGameObject.GetComponent<CRigidBody>().IgnoreCollision))
                 {
                     Vector2 x = PenetrationDepths.HandlePenDepth((IReadonlySimpleGeometry)myCollider.Geometry, (IReadonlySimpleGeometry)collider.Geometry);
                     if (CorrectRoundingErrors(PenRes - x) != Vector2.Zero)
