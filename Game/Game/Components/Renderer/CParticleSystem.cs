@@ -57,7 +57,7 @@ namespace Game.Components.Renderer
 
         public Color SystemColor { get; set; } = Color.White;
 
-        public Vector2 Direction { get; set; } = new Vector2(0, 1);
+        public Vector2 Direction { get; set; } = new Vector2(0, 1f);
 
         public float ParticleSize { get; set; } = 0.05f;
 

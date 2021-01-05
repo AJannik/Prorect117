@@ -188,7 +188,7 @@ namespace Game.GameObjectFactory
             pSystem.Layer = 19;
             pSystem.DirectionRandomness = 10f;
             pSystem.UseForceField = true;
-            pSystem.MaxParticleLifetime = 1.5f;
+            pSystem.MaxParticleLifetime = 1f;
             pSystem.SystemColor = Color.Wheat;
 
             return coin;
@@ -222,6 +222,8 @@ namespace Game.GameObjectFactory
             pSystem.DirectionRandomness = 10f;
             pSystem.UseForceField = true;
             pSystem.MaxParticleLifetime = 1.5f;
+            pSystem.ParticleSpawnRate = 40f;
+            pSystem.MaxParticles = 50;
             pSystem.SystemColor = Color.Aquamarine;
 
             return key;
