@@ -109,7 +109,7 @@ namespace Game.Components.Renderer
         }
 
         /// <summary>
-        /// Goes to NextAnimation linked. IF there is none goes back to StartAnimation.
+        /// Goes to NextAnimation linked. If there is none goes back to StartAnimation.
         /// </summary>
         public void GoToNextAnimation()
         {
