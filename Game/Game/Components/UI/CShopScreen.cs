@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Game.Interfaces;
+﻿using Game.Interfaces;
 
 namespace Game.Components.UI
 {

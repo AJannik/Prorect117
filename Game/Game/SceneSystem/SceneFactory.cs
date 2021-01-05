@@ -81,6 +81,7 @@ namespace Game.SceneSystem
 
             // Coin UI
             GameObject coinHUD = GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
+            GameObject keyHUD = GuiFactory.BuildKeyUI(scene, canvas, new Vector2(0.7f, 0.9f));
 
             // Enemies
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));

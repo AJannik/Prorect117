@@ -73,6 +73,7 @@ namespace Game.GameObjectFactory
             levelEnd.GetComponent<CTextRender>().Text = "E";
             levelEnd.GetComponent<CTextRender>().Offset = new Vector2(0f, 1.5f);
             levelEnd.GetComponent<CTextRender>().Visible = false;
+            levelEnd.GetComponent<CTextRender>().Centered = true;
             door.TextRender = levelEnd.GetComponent<CTextRender>();
 
             return levelEnd;

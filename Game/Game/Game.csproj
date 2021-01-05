@@ -15,6 +15,7 @@
     <None Remove="Content\goldcoin2.png" />
     <None Remove="Content\GrassSpritesheet.png" />
     <None Remove="Content\Key.png" />
+    <None Remove="Content\KeyInactive.png" />
     <None Remove="Content\LightBandit.png" />
     <None Remove="Content\Skeleton\SkeletonAttack.png" />
     <None Remove="Content\Skeleton\SkeletonDead.png" />
@@ -39,6 +40,7 @@
     <EmbeddedResource Include="Content\goldcoin2.png" />
     <EmbeddedResource Include="Content\GrassSpritesheet.png" />
     <EmbeddedResource Include="Content\Key.png" />
+    <EmbeddedResource Include="Content\KeyInactive.png" />
     <EmbeddedResource Include="Content\LightBandit.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonAttack.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonDead.png" />
