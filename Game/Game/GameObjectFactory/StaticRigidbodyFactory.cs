@@ -66,8 +66,14 @@ namespace Game.GameObjectFactory
             CBoxTrigger trigger = levelEnd.GetComponent<CBoxTrigger>();
             trigger.Geometry.Size = size;
             levelEnd.AddComponent<CDoor>();
-            CDoor collectible = levelEnd.GetComponent<CDoor>();
-            collectible.SetupTrigger(trigger);
+            CDoor door = levelEnd.GetComponent<CDoor>();
+            door.SetupTrigger(trigger);
+
+            levelEnd.AddComponent<CTextRender>();
+            levelEnd.GetComponent<CTextRender>().Text = "E";
+            levelEnd.GetComponent<CTextRender>().Offset = new Vector2(0f, 1.5f);
+            levelEnd.GetComponent<CTextRender>().Visible = false;
+            door.TextRender = levelEnd.GetComponent<CTextRender>();
 
             return levelEnd;
         }

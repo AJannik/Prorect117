@@ -16,6 +16,8 @@ namespace Game.SceneSystem
         // If the player has collected a key in this level
         public bool Key { get; set; } = false;
 
+        public bool PlayerInvulnerable { get; set; } = false;
+
         // TODO: Add list of power-downs that the player has collected
         public void Update(float deltaTime)
         {
