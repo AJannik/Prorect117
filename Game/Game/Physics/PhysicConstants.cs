@@ -6,6 +6,6 @@ namespace Game.Physics
     {
         public static Vector2 Gravity { get; } = new Vector2(0f, -10f);
 
-        public static float FixedDeltaTime { get; } = 1f / 300f;
+        public static float FixedDeltaTime { get; } = 1f / 60f;
     }
 }
