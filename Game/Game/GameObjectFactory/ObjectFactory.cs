@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Game.Components;
 using Game.Components.Collision;
 using Game.Components.Renderer;
@@ -159,7 +160,7 @@ namespace Game.GameObjectFactory
             coin.AddComponent<CRender>();
             coin.GetComponent<CRender>().LoadAndSetTexture("Content.AnimatedCoin.png");
             coin.GetComponent<CRender>().SetTexCoords(new SimpleGeometry.Rect(0, 0, 1 / 8f, 1f));
-            coin.GetComponent<CRender>().Layer = 11;
+            coin.GetComponent<CRender>().Layer = 20;
             coin.GetComponent<CRender>().SetSize(0.5f, 0.5f);
 
             coin.AddComponent<CAnimationSystem>();
@@ -177,6 +178,19 @@ namespace Game.GameObjectFactory
             CCollectible collectible = coin.GetComponent<CCollectible>();
             collectible.SetupTrigger(trigger);
 
+            coin.AddComponent<CParticleSystem>();
+            CParticleSystem pSystem = coin.GetComponent<CParticleSystem>();
+            pSystem.Actice = true;
+            pSystem.FadeOut = true;
+            pSystem.ParticleSize = 0.1f;
+            pSystem.SizeMode = ParticleSizeMode.Shrinking;
+            pSystem.SizeChangeSpeed = 0.005f;
+            pSystem.Layer = 19;
+            pSystem.DirectionRandomness = 10f;
+            pSystem.UseForceField = true;
+            pSystem.MaxParticleLifetime = 1.5f;
+            pSystem.SystemColor = Color.Wheat;
+
             return coin;
         }
 
@@ -188,7 +202,7 @@ namespace Game.GameObjectFactory
             key.AddComponent<CRender>();
             CRender render = key.GetComponent<CRender>();
             render.LoadAndSetTexture("Content.Key.png");
-            render.Layer = 11;
+            render.Layer = 20;
 
             key.AddComponent<CBoxTrigger>();
             CBoxTrigger trigger = key.GetComponent<CBoxTrigger>();
@@ -196,6 +210,19 @@ namespace Game.GameObjectFactory
             key.AddComponent<CCollectible>();
             CCollectible collectible = key.GetComponent<CCollectible>();
             collectible.SetupTrigger(trigger);
+
+            key.AddComponent<CParticleSystem>();
+            CParticleSystem pSystem = key.GetComponent<CParticleSystem>();
+            pSystem.Actice = true;
+            pSystem.FadeOut = true;
+            pSystem.ParticleSize = 0.1f;
+            pSystem.SizeMode = ParticleSizeMode.Shrinking;
+            pSystem.SizeChangeSpeed = 0.005f;
+            pSystem.Layer = 19;
+            pSystem.DirectionRandomness = 10f;
+            pSystem.UseForceField = true;
+            pSystem.MaxParticleLifetime = 1.5f;
+            pSystem.SystemColor = Color.Aquamarine;
 
             return key;
         }
