@@ -204,7 +204,30 @@ namespace Game.GameObjectFactory
         {
             GameObject floor = new GameObject(scene, "Floor");
             Vector2 size = new Vector2(length, 1f);
-            // TODO: Add content as soon as component is implemented
+
+            floor.AddComponent<CPeriodicMovement>();
+            CPeriodicMovement periodicMovement = floor.GetComponent<CPeriodicMovement>();
+            periodicMovement.Start = position1;
+            periodicMovement.End = position2;
+            periodicMovement.MoveSpeed = 3f;
+
+            floor.Transform.Position = position1;
+
+            floor.AddComponent<CTileRenderer>();
+            floor.GetComponent<CTileRenderer>().Height = 1;
+            floor.GetComponent<CTileRenderer>().Width = length;
+            floor.AddComponent<CTileRenderer>();
+            floor.GetComponents<CTileRenderer>()[1].Height = 2;
+            floor.GetComponents<CTileRenderer>()[1].Width = length + 1;
+            floor.GetComponents<CTileRenderer>()[1].LoadAndSetTexture("Content.GrassSpritesheet.png");
+            floor.GetComponents<CTileRenderer>()[1].Layer = 11;
+
+            floor.AddComponent<CBoxCollider>();
+            floor.GetComponent<CBoxCollider>().Geometry.Size = size;
+
+            floor.AddComponent<CRigidBody>();
+            CRigidBody rb = floor.GetComponent<CRigidBody>();
+            rb.Static = true;
 
             return floor;
         }
