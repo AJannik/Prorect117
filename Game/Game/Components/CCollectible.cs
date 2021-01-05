@@ -6,15 +6,11 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Game.Components
 {
-    public class CCollectible : IComponent, IUpdateable
+    public class CCollectible : IComponent
     {
         public GameObject MyGameObject { get; set; } = null;
 
         public CBoxTrigger Trigger { get; set; }
-
-        public void Update(float deltaTime)
-        {
-        }
 
         public void SetupTrigger(CBoxTrigger trigger)
         {

@@ -62,7 +62,13 @@ namespace Game.GameObjectFactory
             render.SetSize(1f, 2f);
             render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 0.5f, 1.0f));
 
-            // TODO: Add door hitbox, trigger
+            levelEnd.AddComponent<CBoxTrigger>();
+            CBoxTrigger trigger = levelEnd.GetComponent<CBoxTrigger>();
+            trigger.Geometry.Size = size;
+            levelEnd.AddComponent<CDoor>();
+            CDoor collectible = levelEnd.GetComponent<CDoor>();
+            collectible.SetupTrigger(trigger);
+
             return levelEnd;
         }
     }
