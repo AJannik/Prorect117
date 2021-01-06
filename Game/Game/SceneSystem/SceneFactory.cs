@@ -79,9 +79,9 @@ namespace Game.SceneSystem
             shopScreen.GetComponent<CShopScreen>().Player = player;
             shopScreen.Active = false;
 
-            // Coin UI
-            GameObject coinHUD = GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
-            GameObject keyHUD = GuiFactory.BuildKeyUI(scene, canvas, new Vector2(0.7f, 0.9f));
+            // Coin and Key UI
+            GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
+            GuiFactory.BuildKeyUI(scene, canvas, new Vector2(0.7f, 0.9f));
 
             // Enemies
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));
@@ -217,8 +217,9 @@ namespace Game.SceneSystem
             GameObject canvas = GuiFactory.BuildCanvas(scene);
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
-            // Coin UI
-            GameObject coinHUD = GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
+            // Coin and Key UI
+            GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
+            GuiFactory.BuildKeyUI(scene, canvas, new Vector2(0.7f, 0.9f));
 
             // Collectables
             ObjectFactory.BuildCoin(scene, new Vector2(10.5f, 3.5f));
