@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Game.Components;
 using Game.Interfaces;
 
 namespace Game.SceneSystem
@@ -18,7 +20,8 @@ namespace Game.SceneSystem
 
         public bool PlayerInvulnerable { get; set; } = false;
 
-        // TODO: Add list of power-downs that the player has collected
+        public List<CPowerDownScript> PowerDowns { get; set; }
+
         public void Update(float deltaTime)
         {
         }

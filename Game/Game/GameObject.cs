@@ -244,7 +244,7 @@ namespace Game
             Parent = null;
         }
 
-        // TODO: Is this usefull? Index is hard to predict without a way to sort children. Mybe get child by name?
+        // TODO: Is this useful? Index is hard to predict without a way to sort children. Maybe get child by name?
         public GameObject GetChild(int index)
         {
             if (index < ChildCount)
