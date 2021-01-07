@@ -97,7 +97,8 @@ namespace Game.GameObjectFactory
             Animation hurt = new Animation("Hurt", 1, 136, false);
             hurt.TimeBetweenTwoFrames = 1 / 3f;
             controll.AddAnimation(hurt);
-            Animation death = new Animation("Death", 1, 1, false);
+            Animation death = new Animation("Death", 6, 136, false);
+            death.TimeBetweenTwoFrames = 1 / 6f;
             controll.AddAnimation(death);
             player.GetComponent<CPlayerController>().AnimationSystem = controll;
 
