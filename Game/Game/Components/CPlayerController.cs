@@ -20,6 +20,8 @@ namespace Game.Components
 
         public CAnimationSystem AnimationSystem { get; set; }
 
+        public PlayerState State { get; set; } = PlayerState.Free;
+
         public float PlayerSpeed { get; set; } = 10f;
 
         public float JumpForce { get; set; } = 1000f;
@@ -44,9 +46,14 @@ namespace Game.Components
             var keyboard = Keyboard.GetState();
 
             float axisLeftRight = keyboard.IsKeyDown(Key.A) ? -1.0f : keyboard.IsKeyDown(Key.D) ? 1.0f : 0.0f;
+            if (State != PlayerState.Free)
+            {
+                axisLeftRight = 0f;
+            }
+
             RigidBody.Velocity = new OpenTK.Vector2(axisLeftRight * PlayerSpeed, RigidBody.Velocity.Y);
 
-            if (keyboard.IsKeyDown(Key.Space))
+            if (keyboard.IsKeyDown(Key.Space) && State == PlayerState.Free)
             {
                 Jump();
             }

@@ -80,6 +80,11 @@ namespace Game.Components
                     break;
             }
 
+            if (AnimationSystem.ActiveAnimation.Name == "Hurt")
+            {
+                State = EnemyState.Idle;
+            }
+
             if (TimeInState <= 0f)
             {
                 if (State == EnemyState.Idle)

@@ -19,9 +19,13 @@ namespace Game.Components
 
         public CTextRender TextRender { get; set; }
 
+        public CPlayerController Controller { get; set; }
+
         private float ComboTime { get; set; } = 0f;
 
         private int ComboCount { get; set; } = 0;
+
+        private float LockTime { get; set; } = 0f;
 
         public void Update(float deltaTime)
         {
@@ -42,6 +46,15 @@ namespace Game.Components
             else
             {
                 ComboCount = 0;
+            }
+
+            if (LockTime > 0f)
+            {
+                LockTime -= deltaTime;
+            }
+            else
+            {
+                Controller.State = PlayerState.Free;
             }
 
             TextRender.Text = ((int)Combat.CurrentHealth).ToString() + "/" + ((int)Combat.MaxHealth).ToString();
@@ -77,6 +90,8 @@ namespace Game.Components
             {
                 ComboCount++;
                 ComboTime = 2f;
+                Controller.State = PlayerState.Blocked;
+                LockTime = 0.5f / Combat.AttackSpeed;
             }
         }
 

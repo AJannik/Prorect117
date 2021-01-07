@@ -110,6 +110,7 @@ namespace Game.GameObjectFactory
             CPlayerCombatController combatController = player.GetComponent<CPlayerCombatController>();
             combatController.AnimationSystem = controll;
             combatController.Combat = player.GetComponent<CCombat>();
+            combatController.Controller = player.GetComponent<CPlayerController>();
 
             // add hitbox to combatcontroller
             player.AddComponent<CBoxTrigger>();
