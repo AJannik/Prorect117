@@ -47,6 +47,10 @@ namespace Game.Components
 
         public string HurtAnimationName { get; set; } = "Hurt";
 
+        private float DeathTime { get; set; } = 0f;
+
+        private bool Dying { get; set; } = false;
+
         public void Start()
         {
             if (MyGameObject.Name == "Player")
@@ -64,12 +68,25 @@ namespace Game.Components
 
             if (CurrentHealth <= 0f)
             {
-                AnimationSystem.PlayAnimation("death");
-                MyGameObject.Scene.RemoveGameObject(MyGameObject);
-                if (MyGameObject.Name == "Player")
+                if (!Dying)
                 {
-                    MyGameObject.Scene.GameManager.GameOver();
+                    AnimationSystem.PlayAnimation("Death", true);
+                    DeathTime = 1f;
+                    Dying = true;
                 }
+                else if (DeathTime < 0f)
+                {
+                    MyGameObject.Scene.RemoveGameObject(MyGameObject);
+                    if (MyGameObject.Name == "Player")
+                    {
+                        MyGameObject.Scene.GameManager.GameOver();
+                    }
+                }
+                else
+                {
+                    DeathTime -= deltaTime;
+                }
+
             }
         }
 

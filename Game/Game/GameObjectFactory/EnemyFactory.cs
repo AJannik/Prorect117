@@ -121,6 +121,9 @@ namespace Game.GameObjectFactory
             animationSystem.AddAnimation(hurt);
             Animation attack = new Animation("Attack", 8, 16, false);
             animationSystem.AddAnimation(attack);
+            Animation death = new Animation("Death", 1, 36, false);
+            death.TimeBetweenTwoFrames = 100f;
+            animationSystem.AddAnimation(death);
             ai.AnimationSystem = animationSystem;
 
             // combat

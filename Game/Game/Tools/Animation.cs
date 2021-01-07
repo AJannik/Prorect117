@@ -7,6 +7,8 @@ namespace Game.Tools
 {
     public class Animation
     {
+        private float animationTime = 1 / 12f;
+
         public Animation(string name, int frames, int startFrame, bool isLoop)
         {
             Name = name;
@@ -42,7 +44,19 @@ namespace Game.Tools
 
         public Animation NextAnimation { get; set; } = null;
 
-        public float TimeBetweenTwoFrames { get; set; } = 1 / 12f;
+        public float TimeBetweenTwoFrames
+        {
+            get
+            {
+                return animationTime;
+            }
+
+            set
+            {
+                animationTime = value;
+                TimeToNextFrame = animationTime;
+            }
+        }
 
         public bool HasSeperateTexture { get; private set; } = false;
 

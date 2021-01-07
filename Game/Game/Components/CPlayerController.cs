@@ -6,6 +6,8 @@ using OpenTK.Input;
 
 namespace Game.Components
 {
+    public enum PlayerState { Free, Blocked }
+
     public class CPlayerController : IComponent, IUpdateable
     {
         public GameObject MyGameObject { get; set; } = null;
