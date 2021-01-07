@@ -46,7 +46,7 @@ namespace Game.Components
             var keyboard = Keyboard.GetState();
 
             float axisLeftRight = keyboard.IsKeyDown(Key.A) ? -1.0f : keyboard.IsKeyDown(Key.D) ? 1.0f : 0.0f;
-            if (State != PlayerState.Free)
+            if (State != PlayerState.Free && OnGround < 1)
             {
                 axisLeftRight = 0f;
             }

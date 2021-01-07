@@ -69,7 +69,11 @@ namespace Game.Components
                         FacingRight = true;
                     }
 
-                    RigidBody.Velocity = new Vector2((FacingRight ? 1 : -1) * MoveSpeed, RigidBody.Velocity.Y);
+                    if (AnimationSystem.ActiveAnimation.Name != "Death")
+                    {
+                        RigidBody.Velocity = new Vector2((FacingRight ? 1 : -1) * MoveSpeed, RigidBody.Velocity.Y);
+                    }
+
                     AnimationSystem.PlayAnimation("Walk", false, FacingRight);
                     break;
                 case EnemyState.Attacking:
@@ -91,12 +95,46 @@ namespace Game.Components
                 {
                     State = EnemyState.Running;
                     TimeInState = Randomizer.Next(3, 15) + (float)Randomizer.NextDouble();
+                    foreach (IComponent component in LeftTrigger.GetTriggerHits())
+                    {
+                        if (component.MyGameObject.Name == "Player" && AnimationSystem.ActiveAnimation.Name != "Death")
+                        {
+                            FacingRight = false;
+                            Attack();
+                        }
+                    }
+
+                    foreach (IComponent component in RightTrigger.GetTriggerHits())
+                    {
+                        if (component.MyGameObject.Name == "Player" && AnimationSystem.ActiveAnimation.Name != "Death")
+                        {
+                            FacingRight = true;
+                            Attack();
+                        }
+                    }
                 }
                 else if (State == EnemyState.Attacking)
                 {
                     AttackDisabled = false;
                     State = EnemyState.Idle;
                     TimeInState = TimeInState = Randomizer.Next(1, 3) + (float)Randomizer.NextDouble();
+                    foreach (IComponent component in LeftTrigger.GetTriggerHits())
+                    {
+                        if (component.MyGameObject.Name == "Player")
+                        {
+                            FacingRight = false;
+                            Attack();
+                        }
+                    }
+
+                    foreach (IComponent component in RightTrigger.GetTriggerHits())
+                    {
+                        if (component.MyGameObject.Name == "Player")
+                        {
+                            FacingRight = true;
+                            Attack();
+                        }
+                    }
                 }
                 else
                 {

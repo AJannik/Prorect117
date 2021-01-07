@@ -74,7 +74,7 @@ namespace Game.Components
                     DeathTime = 1f;
                     Dying = true;
                 }
-                else if (DeathTime < 0f)
+                else if (DeathTime <= 0f)
                 {
                     MyGameObject.Scene.RemoveGameObject(MyGameObject);
                     if (MyGameObject.Name == "Player")
@@ -86,7 +86,6 @@ namespace Game.Components
                 {
                     DeathTime -= deltaTime;
                 }
-
             }
         }
 
@@ -118,8 +117,7 @@ namespace Game.Components
                 if ((hit.MyGameObject.Name == "Player" || hit.MyGameObject.Name == "Enemy") &&
                     MyGameObject.Name != hit.MyGameObject.Name && hit.MyGameObject.GetComponent<CCombat>() != null)
                 {
-                    hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor,
-                        hit.MyGameObject.GetComponent<CCombat>().HurtAnimationName);
+                    hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor, hit.MyGameObject.GetComponent<CCombat>().HurtAnimationName);
                 }
             }
 
