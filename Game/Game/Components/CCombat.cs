@@ -71,7 +71,7 @@ namespace Game.Components
                 if (!Dying)
                 {
                     AnimationSystem.PlayAnimation("Death", true);
-                    DeathTime = 1f;
+                    DeathTime = 0.75f;
                     Dying = true;
                 }
                 else if (DeathTime <= 0f)
