@@ -190,7 +190,7 @@ namespace Game.SceneSystem
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
-            StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
+            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 12f;
@@ -220,6 +220,12 @@ namespace Game.SceneSystem
             // Coin and Key UI
             GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
             GuiFactory.BuildKeyUI(scene, canvas, new Vector2(0.7f, 0.9f));
+
+            // Shopscreen
+            GameObject shopScreen = GuiFactory.BuildShopScreen(scene, canvas, Vector2.Zero);
+            levelEnd.GetComponent<CDoor>().ShopScreen = shopScreen.GetComponent<CShopScreen>();
+            shopScreen.GetComponent<CShopScreen>().Player = player;
+            shopScreen.Active = false;
 
             // Collectables
             ObjectFactory.BuildCoin(scene, new Vector2(10.5f, 3.5f));
