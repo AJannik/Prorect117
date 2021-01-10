@@ -5,7 +5,13 @@ using Game.Components;
 
 namespace Game.Tools
 {
-    public enum EffectType { Slow, Brittle, Silenced, Weakness }
+    public enum EffectType
+    {
+        Slow,
+        Brittle,
+        Silenced,
+        Weakness,
+    }
 
     public class Effect
     {

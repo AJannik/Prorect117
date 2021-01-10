@@ -9,22 +9,18 @@ namespace Game.Components
         private Vector2 end;
         private float moveSpeed;
 
-        private bool Forward { get; set; } = true;
-
-        private Vector2 MoveVector { set; get; }
-
         public GameObject MyGameObject { get; set; }
 
         public Vector2 Start
         {
             get
             {
-                return this.start;
+                return start;
             }
 
             set
             {
-                this.start = value;
+                start = value;
                 UpdateMoveVector();
             }
         }
@@ -56,6 +52,10 @@ namespace Game.Components
                 UpdateMoveVector();
             }
         }
+
+        private bool Forward { get; set; } = true;
+
+        private Vector2 MoveVector { get; set; }
 
         public void Update(float deltaTime)
         {
