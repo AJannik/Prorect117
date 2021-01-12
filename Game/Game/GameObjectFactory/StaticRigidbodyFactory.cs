@@ -70,10 +70,11 @@ namespace Game.GameObjectFactory
             door.SetupTrigger(trigger);
 
             levelEnd.AddComponent<CTextRender>();
-            levelEnd.GetComponent<CTextRender>().Text = "E";
-            levelEnd.GetComponent<CTextRender>().Offset = new Vector2(0f, 1.5f);
-            levelEnd.GetComponent<CTextRender>().Visible = false;
-            levelEnd.GetComponent<CTextRender>().Centered = true;
+            CTextRender textHasKey = levelEnd.GetComponent<CTextRender>();
+            textHasKey.Text = "E";
+            textHasKey.Offset = new Vector2(0f, 1.5f);
+            textHasKey.Visible = false;
+            textHasKey.Centered = true;
             door.TextRender = levelEnd.GetComponent<CTextRender>();
 
             return levelEnd;

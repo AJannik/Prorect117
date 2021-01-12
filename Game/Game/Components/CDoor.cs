@@ -37,9 +37,16 @@ namespace Game.Components
             {
                 if (e.MyGameObject.Scene.GameManager.Key)
                 {
-                    TextRender.Visible = true;
+                    TextRender.Text = "E";
                     Unlockable = true;
                 }
+                else
+                {
+                    TextRender.Text = "YOU NEED A KEY!";
+                    Unlockable = false;
+                }
+
+                TextRender.Visible = true;
             }
         }
 
