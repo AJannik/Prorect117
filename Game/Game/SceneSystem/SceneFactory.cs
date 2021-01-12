@@ -193,7 +193,7 @@ namespace Game.SceneSystem
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 12f;
+            camera.GetComponent<CCamera>().Scale = 6f;
 
             // Enemies
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(7.5f, 14f));
