@@ -88,11 +88,11 @@ namespace Game.SceneSystem
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(27.5f, 2f));
 
             // Collectables
-            ObjectFactory.BuildKey(scene, new Vector2(20.5f, 12.5f));
+            ObjectFactory.BuildKey(scene, new Vector2(30.5f, 1.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(3.5f, 13.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(11.5f, 11.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(20.5f, 12.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(30.5f, 13.5f));
-            ObjectFactory.BuildCoin(scene, new Vector2(30.5f, 1.5f));
 
             return scene;
         }
