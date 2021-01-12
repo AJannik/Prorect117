@@ -120,7 +120,7 @@ namespace Game.Components
                     TimeInState = TimeInState = Randomizer.Next(1, 3) + (float)Randomizer.NextDouble();
                     foreach (IComponent component in LeftTrigger.GetTriggerHits())
                     {
-                        if (component.MyGameObject.Name == "Player")
+                        if (component.MyGameObject.Name == "Player" && AnimationSystem.ActiveAnimation.Name != "Death")
                         {
                             FacingRight = false;
                             Attack();
@@ -129,7 +129,7 @@ namespace Game.Components
 
                     foreach (IComponent component in RightTrigger.GetTriggerHits())
                     {
-                        if (component.MyGameObject.Name == "Player")
+                        if (component.MyGameObject.Name == "Player" && AnimationSystem.ActiveAnimation.Name != "Death")
                         {
                             FacingRight = true;
                             Attack();
@@ -182,13 +182,13 @@ namespace Game.Components
 
         private void LeftEntered(object sender, IComponent e)
         {
-            if (e.MyGameObject.Name == "Player" && State != EnemyState.Attacking)
+            if (e.MyGameObject.Name == "Player" && State != EnemyState.Attacking && AnimationSystem.ActiveAnimation.Name != "Death")
             {
                 FacingRight = false;
                 Attack();
             }
 
-            if (e.MyGameObject.Name == "Wall")
+            if (e.MyGameObject.Name == "Wall" || (e.MyGameObject.Name == "Enemy" && e.MyGameObject != MyGameObject))
             {
                 FacingRight = true;
             }
@@ -209,13 +209,13 @@ namespace Game.Components
 
         private void RightEntered(object sender, IComponent e)
         {
-            if (e.MyGameObject.Name == "Player" && State != EnemyState.Attacking)
+            if (e.MyGameObject.Name == "Player" && State != EnemyState.Attacking && AnimationSystem.ActiveAnimation.Name != "Death")
             {
                 FacingRight = true;
                 Attack();
             }
 
-            if (e.MyGameObject.Name == "Wall")
+            if (e.MyGameObject.Name == "Wall" || (e.MyGameObject.Name == "Enemy" && e.MyGameObject != MyGameObject))
             {
                 FacingRight = false;
             }

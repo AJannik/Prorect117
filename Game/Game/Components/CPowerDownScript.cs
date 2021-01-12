@@ -10,6 +10,14 @@ namespace Game.Components
 
         public CCircleTrigger Trigger { get; set; }
 
+        public COpenDoor OpenDoor { get; set; } = null;
+
+        public EffectType Effect { get; set; } = EffectType.Slow;
+
+        public float EffectDuration { get; set; } = 10f;
+
+        public int EffectStrength { get; set; } = 1;
+
         public void SetupTrigger(CCircleTrigger trigger)
         {
             Trigger = trigger;
@@ -22,7 +30,12 @@ namespace Game.Components
             {
                 if (e.MyGameObject.GetComponent<CEffectSystem>() != null)
                 {
-                    e.MyGameObject.GetComponent<CEffectSystem>().AddEffect(EffectType.Slow);
+                    e.MyGameObject.GetComponent<CEffectSystem>().AddEffect(Effect, EffectDuration, EffectStrength);
+                }
+
+                if (OpenDoor != null)
+                {
+                    OpenDoor.IsOpen = true;
                 }
             }
         }

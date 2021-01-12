@@ -28,7 +28,14 @@ namespace Game.Components.Renderer
 
         public bool Actice { get; set; } = false;
 
-        public bool FadeOut { get; set; } = true;
+        /// <summary>
+        /// Gets or sets a value indicating whether the particle alpha is decreased over lifetime.
+        /// </summary>
+        public bool FadeOut { get; set; } = false;
+
+        public bool FadesIntoColor { get; set; } = false;
+
+        public Color FadeColor { get; set; } = Color.Black;
 
         /// <summary>
         /// Gets or sets a value indicating whether a ForceField is used. It will accelerate particles in ForceFieldDirection.
@@ -45,11 +52,30 @@ namespace Game.Components.Renderer
         /// </summary>
         public float DirectionRandomness { get; set; } = 1f;
 
+        /// <summary>
+        /// Gets or sets the Randomness of the particle size.
+        /// </summary>
         public float SizeRandomness { get; set; } = 1f;
 
+        /// <summary>
+        /// Gets or sets the behaviour of the particle size over time.
+        /// </summary>
         public ParticleSizeMode SizeMode { get; set; } = ParticleSizeMode.Constant;
 
+        /// <summary>
+        /// Gets or sets the speed at which particle size changes in given ParticleSizeMode.
+        /// </summary>
         public float SizeChangeSpeed { get; set; } = 0.1f;
+
+        /// <summary>
+        /// Gets or sets the Randomness of X startposition.
+        /// </summary>
+        public float PositionXRandomness { get; set; } = 0f;
+
+        /// <summary>
+        /// Gets or sets the Randomness of Y startposition.
+        /// </summary>
+        public float PositionYRandomness { get; set; } = 0f;
 
         public Random Randomizer { get; set; } = new Random();
 
@@ -86,6 +112,11 @@ namespace Game.Components.Renderer
 
         public void Update(float deltaTime)
         {
+            if (!Actice)
+            {
+                return;
+            }
+
             foreach (Particle particle in Particles.ToList())
             {
                 particle.Update(deltaTime, UseForceField ? ForceFieldDirection : Vector2.Zero);
@@ -96,6 +127,11 @@ namespace Game.Components.Renderer
                 else if (FadeOut)
                 {
                     particle.Alpha = 1f - (0.8f * (particle.Lifetime / MaxParticleLifetime));
+                }
+
+                if (FadesIntoColor)
+                {
+                    particle.ParticleColor = LerpColor(SystemColor, FadeColor, particle.Lifetime / MaxParticleLifetime);
                 }
 
                 switch (SizeMode)
@@ -122,6 +158,11 @@ namespace Game.Components.Renderer
 
         public void Draw(float alpha)
         {
+            if (!Actice)
+            {
+                return;
+            }
+
             int i = 0;
             foreach (Particle particle in Particles)
             {
@@ -199,12 +240,17 @@ namespace Game.Components.Renderer
                 if (Particles.Count < MaxParticles)
                 {
                     Particles.Add(new Particle(
-                        Vector2.Zero,
+                        new Vector2(((float)Randomizer.NextDouble() - 0.5f) * PositionXRandomness, ((float)Randomizer.NextDouble() - 0.5f) * PositionYRandomness),
                         (((float)Randomizer.NextDouble() * VelocityRandomness) - (VelocityRandomness / 2f) + 1f) * Vector2.Transform(Direction, new Quaternion(new Vector3(0, 0, ((float)Randomizer.NextDouble() * DirectionRandomness) - (DirectionRandomness / 2f)))),
                         SystemColor,
                         (((float)Randomizer.NextDouble() * SizeRandomness) - (SizeRandomness / 2f) + 1f) * ParticleSize));
                 }
             }
+        }
+
+        private Color LerpColor(Color color1, Color color2, float alpha)
+        {
+            return new Color((int)((color1.R * (1f - alpha)) + (color2.R * alpha)), (int)((color1.G * (1f - alpha)) + (color2.G * alpha)), (int)((color1.B * (1f - alpha)) + (color2.B * alpha)), (int)((color1.A * (1f - alpha)) + (color2.A * alpha)));
         }
     }
 }
