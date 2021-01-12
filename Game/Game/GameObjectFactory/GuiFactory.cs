@@ -53,20 +53,28 @@ namespace Game.GameObjectFactory
             button.GetComponent<CButton>().Canvas = canvas.GetComponent<CCanvas>();
             button.GetComponent<CButton>().SetSize(size);
 
-            CImageRender inactiveImage = button.GetComponents<CImageRender>()[0];
+            CImageRender unclickedImage = button.GetComponents<CImageRender>()[0];
+            unclickedImage.Canvas = canvas.GetComponent<CCanvas>();
+            unclickedImage.LoadAndSetTexture("Content.UI.ui_grey_unclicked.png");
+            unclickedImage.SetSize(size.X, size.Y);
+            unclickedImage.Layer = 31;
+            button.GetComponent<CButton>().UnClickedImage = unclickedImage;
+
+            CImageRender clickedImage = button.GetComponents<CImageRender>()[1];
+            clickedImage.Canvas = canvas.GetComponent<CCanvas>();
+            clickedImage.LoadAndSetTexture("Content.UI.ui_grey_clicked.png");
+            clickedImage.SetSize(size.X, size.Y);
+            clickedImage.Visible = false;
+            clickedImage.Layer = 31;
+            button.GetComponent<CButton>().ClickedImage = clickedImage;
+
+            CImageRender inactiveImage = button.GetComponents<CImageRender>()[1];
             inactiveImage.Canvas = canvas.GetComponent<CCanvas>();
             inactiveImage.LoadAndSetTexture("Content.UI.ui_grey_inactive.png");
             inactiveImage.SetSize(size.X, size.Y);
+            inactiveImage.Visible = false;
             inactiveImage.Layer = 31;
             button.GetComponent<CButton>().InactiveImage = inactiveImage;
-
-            CImageRender activeImage = button.GetComponents<CImageRender>()[1];
-            activeImage.Canvas = canvas.GetComponent<CCanvas>();
-            activeImage.LoadAndSetTexture("Content.UI.ui_grey_active.png");
-            activeImage.SetSize(size.X, size.Y);
-            activeImage.Visible = false;
-            activeImage.Layer = 31;
-            button.GetComponent<CButton>().ActiveImage = activeImage;
 
             GameObject textField = BuildTextField(scene, canvas, new Vector2(0f, -size.Y / 5f), text);
             textField.SetParent(button);
@@ -190,9 +198,11 @@ namespace Game.GameObjectFactory
             textField2.GetComponent<CGuiTextRender>().Centered = true;
             textField2.SetParent(shopScreen);
 
-            GameObject buyHealthButton = BuildButton(scene, canvas, new Vector2(-0.3f, 0.2f), new Vector2(0.4f, 0.1f), "BUY 10 HP");
+            GameObject buyHealthButton = BuildButton(scene, canvas, new Vector2(-0.3f, 0.2f), new Vector2(0.4f, 0.1f), "HEAL 10 HP");
             buyHealthButton.GetComponent<CButton>().ButtonClicked += shopScreen.GetComponent<CShopScreen>().BuyHealth;
             buyHealthButton.SetParent(shopScreen);
+
+            shopScreen.GetComponent<CShopScreen>().HealButton = buyHealthButton;
 
             return shopScreen;
         }
