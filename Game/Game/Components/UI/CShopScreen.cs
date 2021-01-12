@@ -8,6 +8,10 @@ namespace Game.Components.UI
 
         public GameObject Player { get; set; }
 
+        public GameObject HealButton { get; set; }
+
+        public int HealPrice { get; } = 15;
+
         public void OnContinue(object sender, int i)
         {
             MyGameObject.Active = false;
@@ -18,11 +22,16 @@ namespace Game.Components.UI
         {
             MyGameObject.Active = true;
             MyGameObject.Scene.RemoveGameObject(Player);
+
+            if (MyGameObject.Scene.GameManager.Coins < HealPrice)
+            {
+                HealButton.GetComponent<CButton>().Active = false;
+            }
         }
 
         public void BuyHealth(object sender, int i)
         {
-            if (MyGameObject.Scene.GameManager.Coins > 14 && MyGameObject.Scene.GameManager.PlayerHealth < 100f)
+            if (MyGameObject.Scene.GameManager.Coins > HealPrice && MyGameObject.Scene.GameManager.PlayerHealth < 100f)
             {
                 MyGameObject.Scene.GameManager.PlayerHealth += 10f;
 
@@ -31,6 +40,11 @@ namespace Game.Components.UI
                 {
                     MyGameObject.Scene.GameManager.PlayerHealth = 100f;
                 }
+            }
+
+            if (MyGameObject.Scene.GameManager.Coins < HealPrice)
+            {
+                HealButton.GetComponent<CButton>().Active = false;
             }
         }
     }
