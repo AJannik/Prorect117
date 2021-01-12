@@ -28,7 +28,14 @@ namespace Game.Components
                 }
                 else if (MyGameObject.Name == "Key")
                 {
-                    e.MyGameObject.Scene.GameManager.Key = true;
+                    if (e.MyGameObject.Scene.GameManager.Key)
+                    {
+                        e.MyGameObject.Scene.GameManager.Coins += 10;
+                    }
+                    else
+                    {
+                        e.MyGameObject.Scene.GameManager.Key = true;
+                    }
                 }
 
                 MyGameObject.Scene.RemoveGameObject(MyGameObject);

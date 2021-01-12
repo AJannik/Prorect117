@@ -10,7 +10,12 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Game.Components.Renderer
 {
-    public enum ParticleSizeMode { Constant, Growing, Shrinking}
+    public enum ParticleSizeMode
+    {
+        Constant,
+        Growing,
+        Shrinking,
+    }
 
     public class CParticleSystem : IComponent, IDrawable, IUpdateable
     {

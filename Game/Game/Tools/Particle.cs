@@ -34,7 +34,11 @@ namespace Game.Tools
 
         public float Size { get; set; } = 0.05f;
 
-        public float Alpha { get { return alpha; } set { alpha = Math.Clamp(value, 0f, 1f); } }
+        public float Alpha
+        {
+            get { return alpha; }
+            set { alpha = Math.Clamp(value, 0f, 1f); }
+        }
 
         public float Lifetime { get; set; } = 0f;
 

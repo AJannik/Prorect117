@@ -88,11 +88,11 @@ namespace Game.SceneSystem
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(27.5f, 2f));
 
             // Collectables
-            ObjectFactory.BuildKey(scene, new Vector2(20.5f, 12.5f));
+            ObjectFactory.BuildKey(scene, new Vector2(30.5f, 1.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(3.5f, 13.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(11.5f, 11.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(20.5f, 12.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(30.5f, 13.5f));
-            ObjectFactory.BuildCoin(scene, new Vector2(30.5f, 1.5f));
 
             return scene;
         }
@@ -113,7 +113,7 @@ namespace Game.SceneSystem
 
             // Level platforms
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(4f, 6.5f), 6);
-            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(8.5f, 12.5f), 11);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(9f, 12.5f), 10);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(5f, 3.5f), 4);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(10.5f, 9.5f), 3);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(10.5f, 4.5f), 3);
@@ -157,7 +157,7 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(126f, 4.5f), 2);
 
             // Moving platforms
-            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, 8.5f), new Vector2(2f, 12.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, 9.5f), new Vector2(2f, 12.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(15f, 7.5f), new Vector2(15f, 10.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(26f, 3.5f), new Vector2(26f, 7.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(40f, 0.5f), new Vector2(40f, 11.5f), 2);
@@ -193,7 +193,7 @@ namespace Game.SceneSystem
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 12f;
+            camera.GetComponent<CCamera>().Scale = 6f;
 
             // Enemies
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(7.5f, 14f));
