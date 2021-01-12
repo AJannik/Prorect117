@@ -113,7 +113,7 @@ namespace Game.SceneSystem
 
             // Level platforms
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(4f, 6.5f), 6);
-            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(8.5f, 12.5f), 11);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(9f, 12.5f), 10);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(5f, 3.5f), 4);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(10.5f, 9.5f), 3);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(10.5f, 4.5f), 3);
@@ -157,7 +157,7 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(126f, 4.5f), 2);
 
             // Moving platforms
-            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, 8.5f), new Vector2(2f, 12.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, 9.5f), new Vector2(2f, 12.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(15f, 7.5f), new Vector2(15f, 10.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(26f, 3.5f), new Vector2(26f, 7.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(40f, 0.5f), new Vector2(40f, 11.5f), 2);
