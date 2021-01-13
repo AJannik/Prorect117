@@ -24,6 +24,44 @@ namespace Game.GameObjectFactory
             return sprite;
         }
 
+        public static GameObject BuildBackground(Scene scene, CTransform target)
+        {
+            GameObject background = new GameObject(scene);
+            background.Transform.Position = Vector2.Zero;
+
+            background.AddComponent<CRender>();
+            background.GetComponent<CRender>().LoadAndSetTexture("Content.Environment.background_0.png");
+            background.GetComponent<CRender>().Layer = 1;
+            background.GetComponent<CRender>().SetSize(16 * 1.5f, 9 * 1.5f);
+
+            background.AddComponent<CParallax>();
+            background.GetComponent<CParallax>().Depth = 3;
+            background.GetComponent<CParallax>().Target = target;
+            background.GetComponent<CParallax>().Render = background.GetComponent<CRender>();
+
+            background.AddComponent<CRender>();
+            background.GetComponents<CRender>()[1].LoadAndSetTexture("Content.Environment.background_1.png");
+            background.GetComponents<CRender>()[1].Layer = 2;
+            background.GetComponents<CRender>()[1].SetSize(16 * 1.5f, 9 * 1.5f);
+
+            background.AddComponent<CParallax>();
+            background.GetComponents<CParallax>()[1].Depth = 2;
+            background.GetComponents<CParallax>()[1].Target = target;
+            background.GetComponents<CParallax>()[1].Render = background.GetComponents<CRender>()[1];
+
+            background.AddComponent<CRender>();
+            background.GetComponents<CRender>()[2].LoadAndSetTexture("Content.Environment.background_2.png");
+            background.GetComponents<CRender>()[2].Layer = 3;
+            background.GetComponents<CRender>()[2].SetSize(16 * 1.5f, 9 * 1.5f);
+
+            background.AddComponent<CParallax>();
+            background.GetComponents<CParallax>()[2].Depth = 1;
+            background.GetComponents<CParallax>()[2].Target = target;
+            background.GetComponents<CParallax>()[2].Render = background.GetComponents<CRender>()[2];
+
+            return background;
+        }
+
         public static GameObject BuildCamera(Scene scene, Vector2 position)
         {
             GameObject camera = new GameObject(scene, "Camera");

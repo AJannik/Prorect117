@@ -57,6 +57,10 @@ namespace Game.SceneSystem
             exitButton.GetComponent<CButton>().ButtonClicked +=
                 menuManager.GetComponent<CMainMenuManager>().OnExitButton;
 
+            // Background
+            GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
+            background.SetParent(camera);
+
             return scene;
         }
 
@@ -121,6 +125,10 @@ namespace Game.SceneSystem
             ObjectFactory.BuildCoin(scene, new Vector2(20.5f, 12.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(30.5f, 13.5f));
             PowerDownFactory.Vulnerability(scene, new Vector2(28.5f, 13.5f));
+
+            // Background
+            GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
+            background.SetParent(camera);
 
             return scene;
         }
@@ -274,6 +282,10 @@ namespace Game.SceneSystem
             ObjectFactory.BuildKey(scene, new Vector2(125.5f, 6.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(126.5f, 6.5f));
 
+            // Background
+            GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
+            background.SetParent(camera);
+
             return scene;
         }
 
@@ -306,6 +318,10 @@ namespace Game.SceneSystem
             exitButton.GetComponent<CButton>().ButtonClicked += gameOverManager.GetComponent<CGameOverUI>().OnBtnExit;
             GameObject restartButton = GuiFactory.BuildButton(scene, canvas, new Vector2(-0.5f, -0.4f), new Vector2(1.2f, 0.15f), "RETURN TO MAIN MENU");
             restartButton.GetComponent<CButton>().ButtonClicked += gameOverManager.GetComponent<CGameOverUI>().OnBtnReturn;
+
+            // Background
+            GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
+            background.SetParent(camera);
 
             return scene;
         }
