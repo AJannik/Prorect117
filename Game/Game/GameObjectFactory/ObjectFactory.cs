@@ -68,7 +68,7 @@ namespace Game.GameObjectFactory
             player.AddComponent<CBoxTrigger>();
             CBoxTrigger trigger = player.GetComponent<CBoxTrigger>();
             trigger.Offset = new Vector2(0f, -0.77f);
-            trigger.Geometry.Size = new Vector2(0.84f, 0.1f);
+            trigger.Geometry.Size = new Vector2(0.84f, 0.3f);
             player.GetComponent<CPlayerController>().SetUpGroundTrigger(trigger);
 
             // add all animations

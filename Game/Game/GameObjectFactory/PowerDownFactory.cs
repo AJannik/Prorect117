@@ -1,4 +1,8 @@
+using Game.Components;
+using Game.Components.Collision;
+using Game.Components.Renderer;
 using Game.SceneSystem;
+using OpenTK;
 
 namespace Game.GameObjectFactory
 {
@@ -11,9 +15,40 @@ namespace Game.GameObjectFactory
             return powerDown;
         }
 
-        public static GameObject Vulnerability(Scene scene)
+        public static GameObject Vulnerability(Scene scene, Vector2 position)
         {
             GameObject powerDown = new GameObject(scene, "Vulnerability");
+            powerDown.Transform.Position = position;
+
+            powerDown.AddComponent<CCircleTrigger>();
+            powerDown.GetComponent<CCircleTrigger>().Geometry.Size = new Vector2(1, 1);
+            powerDown.AddComponent<CPowerDownScript>();
+            CPowerDownScript pdScript = powerDown.GetComponent<CPowerDownScript>();
+            pdScript.Effect = Tools.EffectType.Slow;
+            pdScript.SetupTrigger(powerDown.GetComponent<CCircleTrigger>());
+
+            powerDown.AddComponent<CRender>();
+            CRender render = powerDown.GetComponent<CRender>();
+            render.LoadAndSetTexture("Content.GreenPowerDown.png");
+            render.Layer = 30;
+            render.SetSize(1f, 1f);
+
+            powerDown.AddComponent<CParticleSystem>();
+            CParticleSystem particleSystem = powerDown.GetComponent<CParticleSystem>();
+            particleSystem.SystemColor = Color.White;
+            particleSystem.FadeColor = Color.GreenYellow;
+            particleSystem.FadeOut = true;
+            particleSystem.FadesIntoColor = true;
+            particleSystem.MaxParticles = 40;
+            particleSystem.ParticleSpawnRate = 30;
+            particleSystem.UseForceField = false;
+            particleSystem.Actice = true;
+            particleSystem.DirectionRandomness = 10f;
+            particleSystem.MaxParticleLifetime = 1.5f;
+            particleSystem.SizeRandomness = 0.5f;
+            particleSystem.SizeMode = ParticleSizeMode.Shrinking;
+            particleSystem.SizeChangeSpeed = 0.01f;
+            particleSystem.ParticleSize = 0.4f;
 
             return powerDown;
         }

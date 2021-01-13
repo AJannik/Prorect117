@@ -16,7 +16,7 @@ namespace Game.Components
 
         public float EffectDuration { get; set; } = 10f;
 
-        public int EffectStrength { get; set; } = 1;
+        public int EffectStrength { get; set; } = 5;
 
         public void SetupTrigger(CCircleTrigger trigger)
         {
@@ -26,7 +26,7 @@ namespace Game.Components
 
         private void OnTriggerEntered(object sender, IComponent e)
         {
-            if (e.MyGameObject.Name == "Player")
+            if (e.MyGameObject.Name == "Player" && MyGameObject.Active)
             {
                 if (e.MyGameObject.GetComponent<CEffectSystem>() != null)
                 {
@@ -37,6 +37,8 @@ namespace Game.Components
                 {
                     OpenDoor.IsOpen = true;
                 }
+
+                MyGameObject.Active = false;
             }
         }
     }

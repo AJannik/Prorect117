@@ -120,6 +120,7 @@ namespace Game.SceneSystem
             ObjectFactory.BuildCoin(scene, new Vector2(11.5f, 11.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(20.5f, 12.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(30.5f, 13.5f));
+            PowerDownFactory.Vulnerability(scene, new Vector2(28.5f, 13.5f));
 
             return scene;
         }
