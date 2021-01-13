@@ -29,7 +29,7 @@ namespace Game.SceneSystem
             GL.Enable(EnableCap.Blend);
 
             Start();
-            GameManager.GameOverEvent += LoadScene;
+            GameManager.EndGameEvent += LoadScene;
         }
 
         public int CurrentScene { get; private set; } = 0;
@@ -88,7 +88,7 @@ namespace Game.SceneSystem
 
         private void RegisterSceneEventListeners()
         {
-            // Load new Level EventListner
+            // Load new Level EventListener
             for (int i = 0; i < scenes.Length; i++)
             {
                 scenes[i].LoadLevelNumber += LoadScene;
@@ -98,6 +98,7 @@ namespace Game.SceneSystem
 
         private void LoadScene(object sender, int index)
         {
+            // GameManager detected Game End-condition
             if (sender == GameManager)
             {
                 UnloadCurrentScene();

@@ -118,7 +118,6 @@ namespace Game.GameObjectFactory
         {
             GameObject gameOverCoinUI = new GameObject(scene, "CoinUI");
             gameOverCoinUI.Transform.Position = position;
-            gameOverCoinUI.AddComponent<CGameOverUI>();
 
             GameObject scoreText = BuildTextField(scene, canvas, new Vector2(0f, 0f), "YOU MANAGED TO COLLECT     COINS");
             scoreText.SetParent(gameOverCoinUI);
@@ -130,8 +129,6 @@ namespace Game.GameObjectFactory
             coinText.GetComponent<CGuiTextRender>().Centered = true;
             coinText.GetComponent<CGuiTextRender>().FontColor = Color.DarkOrange;
             coinText.GetComponent<CGuiTextRender>().SetSize(0.06f);
-
-            gameOverCoinUI.GetComponent<CGameOverUI>().CoinsText = coinText.GetComponent<CGuiTextRender>();
 
             return gameOverCoinUI;
         }

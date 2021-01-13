@@ -8,9 +8,19 @@ namespace Game.Components.UI
 
         public CGuiTextRender CoinsText { get; set; }
 
+        public CGuiTextRender Title { get; set; }
+
         public void Start()
         {
             CoinsText.Text = MyGameObject.Scene.GameManager.Coins.ToString();
+            if (MyGameObject.Scene.GameManager.PlayerWon)
+            {
+                Title.Text = "YOU WON!";
+            }
+            else
+            {
+                Title.Text = "YOU DIED!";
+            }
         }
 
         public void OnBtnExit(object sender, int i)

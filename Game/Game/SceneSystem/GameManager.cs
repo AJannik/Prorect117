@@ -8,7 +8,7 @@ namespace Game.SceneSystem
 {
     public class GameManager : IUpdateable
     {
-        public event EventHandler<int> GameOverEvent;
+        public event EventHandler<int> EndGameEvent;
 
         // Stay at level-change
         public int Coins { get; set; }
@@ -18,7 +18,7 @@ namespace Game.SceneSystem
         // If the player has collected a key in this level
         public bool Key { get; set; } = false;
 
-        public bool PlayerInvulnerable { get; set; } = false;
+        public bool PlayerWon { get; set; } = false;
 
         public List<CPowerDownScript> PowerDowns { get; set; }
 
@@ -26,9 +26,9 @@ namespace Game.SceneSystem
         {
         }
 
-        public void GameOver()
+        public void EndGame()
         {
-            GameOverEvent?.Invoke(this, 0);
+            EndGameEvent?.Invoke(this, 0);
         }
     }
 }

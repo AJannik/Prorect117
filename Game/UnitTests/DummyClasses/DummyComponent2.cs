@@ -11,7 +11,6 @@ namespace UnitTests.DummyClasses
         public void Update(float deltaTime)
         {
             if (!MyGameObject.Active) return;
-            throw new NotImplementedException();
         }
     }
 }
