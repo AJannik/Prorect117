@@ -27,5 +27,10 @@ namespace Game.Components.UI
         {
             MyGameObject.Scene.ExitGame();
         }
+
+        public void OnBtnReturn(object sender, int i)
+        {
+            MyGameObject.Scene.GameManager.Restart();
+        }
     }
 }

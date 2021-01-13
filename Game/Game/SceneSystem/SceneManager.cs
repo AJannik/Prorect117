@@ -30,6 +30,7 @@ namespace Game.SceneSystem
 
             Start();
             GameManager.EndGameEvent += LoadScene;
+            GameManager.RestartGameEvent += Restart;
         }
 
         public int CurrentScene { get; private set; } = 0;
@@ -86,6 +87,15 @@ namespace Game.SceneSystem
             program.Exit();
         }
 
+        private void Restart(object sender, int num)
+        {
+            LoadScene(this, -CurrentScene);
+            for (int i = 1; i < sceneFactory.NumScenes; i++)
+            {
+                scenes[i] = sceneFactory.BuildScene(i);
+            }
+        }
+
         private void RegisterSceneEventListeners()
         {
             // Load new Level EventListener
@@ -109,12 +119,12 @@ namespace Game.SceneSystem
             }
 
             // inactive Scene has invoked the event
-            if (sender != scenes[CurrentScene])
+            if (sender != scenes[CurrentScene] && sender != this)
             {
                 return;
             }
 
-            if (index >= 0 && index < sceneFactory.NumScenes && index != CurrentScene)
+            if (CurrentScene + index >= 0 && CurrentScene + index < sceneFactory.NumScenes)
             {
                 UnloadCurrentScene();
                 CurrentScene += index;

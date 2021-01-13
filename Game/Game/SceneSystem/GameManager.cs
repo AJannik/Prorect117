@@ -10,6 +10,8 @@ namespace Game.SceneSystem
     {
         public event EventHandler<int> EndGameEvent;
 
+        public event EventHandler<int> RestartGameEvent;
+
         // Stay at level-change
         public int Coins { get; set; }
 
@@ -29,6 +31,16 @@ namespace Game.SceneSystem
         public void EndGame()
         {
             EndGameEvent?.Invoke(this, 0);
+        }
+
+        public void Restart()
+        {
+            Coins = 0;
+            PlayerHealth = 100f;
+            Key = false;
+            PlayerWon = false;
+            PowerDowns = new List<CPowerDownScript>();
+            RestartGameEvent?.Invoke(this, 0);
         }
     }
 }

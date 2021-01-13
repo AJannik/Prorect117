@@ -301,8 +301,11 @@ namespace Game.SceneSystem
             GameObject coinUI = GuiFactory.BuildGameOverCoinUI(scene, canvas, Vector2.Zero);
             gameOverManager.GetComponent<CGameOverUI>().CoinsText = coinUI.GetChild(1).GetComponent<CGuiTextRender>();
 
-            GameObject exitButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0f, -0.3f), new Vector2(0.6f, 0.2f), "Exit");
+            // Buttons
+            GameObject exitButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0.5f, -0.4f), new Vector2(1.2f, 0.15f), "EXIT");
             exitButton.GetComponent<CButton>().ButtonClicked += gameOverManager.GetComponent<CGameOverUI>().OnBtnExit;
+            GameObject restartButton = GuiFactory.BuildButton(scene, canvas, new Vector2(-0.5f, -0.4f), new Vector2(1.2f, 0.15f), "RETURN TO MAIN MENU");
+            restartButton.GetComponent<CButton>().ButtonClicked += gameOverManager.GetComponent<CGameOverUI>().OnBtnReturn;
 
             return scene;
         }
