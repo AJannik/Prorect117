@@ -97,7 +97,7 @@ namespace Game.Components
                 AnimationSystem.PlayAnimation("Idle", false, !FacingRight);
             }
 
-            if (RigidBody.Velocity.Y < -0.1f)
+            if (RigidBody.Velocity.Y < -2.5f && OnGround < 1)
             {
                 AnimationSystem.PlayAnimation("Fall", false, !FacingRight);
             }

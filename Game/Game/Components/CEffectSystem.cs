@@ -63,22 +63,24 @@ namespace Game.Components
                     PlayerController.PlayerSpeed = DefaultMoveSpeed;
                     Combat.Armor = DefaultArmor;
                 }
-
-                switch (effect.Type)
+                else
                 {
-                    case EffectType.Brittle:
-                        Combat.Armor = 1f / (effect.Strength + 0.5f) * DefaultArmor;
-                        break;
-                    case EffectType.Slow:
-                        PlayerController.PlayerSpeed = 1f / (effect.Strength + 1f) * DefaultMoveSpeed;
-                        break;
-                    case EffectType.Silenced:
-                        break;
-                    case EffectType.Weakness:
-                        Combat.AttackDamage = 1f / ((effect.Strength * 0.5f) + 1f) * DefaultAttackDmg;
-                        break;
-                    default:
-                        break;
+                    switch (effect.Type)
+                    {
+                        case EffectType.Brittle:
+                            Combat.Armor = 1f / (effect.Strength + 0.5f) * DefaultArmor;
+                            break;
+                        case EffectType.Slow:
+                            PlayerController.PlayerSpeed = 1f / (effect.Strength + 1f) * DefaultMoveSpeed;
+                            break;
+                        case EffectType.Silenced:
+                            break;
+                        case EffectType.Weakness:
+                            Combat.AttackDamage = 1f / ((effect.Strength * 0.5f) + 1f) * DefaultAttackDmg;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
