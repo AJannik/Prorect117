@@ -24,7 +24,7 @@ namespace Game.GameObjectFactory
             powerDown.GetComponent<CCircleTrigger>().Geometry.Size = new Vector2(1, 1);
             powerDown.AddComponent<CPowerDownScript>();
             CPowerDownScript pdScript = powerDown.GetComponent<CPowerDownScript>();
-            pdScript.Effect = Tools.EffectType.Slow;
+            pdScript.Effect = Tools.EffectType.Brittle;
             pdScript.SetupTrigger(powerDown.GetComponent<CCircleTrigger>());
 
             powerDown.AddComponent<CRender>();
