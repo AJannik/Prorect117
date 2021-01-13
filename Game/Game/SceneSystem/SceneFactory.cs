@@ -49,7 +49,7 @@ namespace Game.SceneSystem
             skipTutorialButton.GetComponent<CButton>().ButtonClicked +=
                 menuManager.GetComponent<CMainMenuManager>().OnStartButton;
 
-            GameObject tutorialButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0f, 0f), new Vector2(1f, 0.15f), "START WITH TUTORIAL");
+            GameObject tutorialButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0f, 0f), new Vector2(1f, 0.15f), "START TUTORIAL LEVEL");
             tutorialButton.GetComponent<CButton>().ButtonClicked +=
                 menuManager.GetComponent<CMainMenuManager>().OnTutorialButton;
 
