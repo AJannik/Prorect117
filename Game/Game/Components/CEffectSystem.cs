@@ -68,7 +68,7 @@ namespace Game.Components
                     switch (effect.Type)
                     {
                         case EffectType.Brittle:
-                            Combat.Armor = 1f / (effect.Strength + 0.5f) * DefaultArmor;
+                            Combat.Armor = DefaultArmor - ((effect.Strength + 0.75f) * 15);
                             break;
                         case EffectType.Slow:
                             PlayerController.PlayerSpeed = 1f / (effect.Strength + 1f) * DefaultMoveSpeed;

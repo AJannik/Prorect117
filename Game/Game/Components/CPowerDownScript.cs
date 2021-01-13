@@ -16,7 +16,7 @@ namespace Game.Components
 
         public float EffectDuration { get; set; } = 10f;
 
-        public int EffectStrength { get; set; } = 5;
+        public int EffectStrength { get; set; } = 1;
 
         public void SetupTrigger(CCircleTrigger trigger)
         {
