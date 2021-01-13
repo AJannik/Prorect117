@@ -20,8 +20,6 @@ namespace Game.Components.UI
 
         public CCanvas Canvas { get; set; }
 
-        public Vector2 Offset { get; set; } = Vector2.Zero;
-
         public CImageRender ClickedImage { get; set; }
 
         public CImageRender UnClickedImage { get; set; }
@@ -67,15 +65,18 @@ namespace Game.Components.UI
             Geometry.Center = MyGameObject.Transform.Position;
 
             Vector2 mouseCoords = new Vector2(args.X, args.Y);
-            mouseCoords = Transformation.Transform(mouseCoords, Canvas.CanvasMouseMatrix);
+            mouseCoords = mouseCoords.Transform(Canvas.CanvasMouseMatrix);
 
-            if (Active && IsPointInAabb((IReadonlyRect)Geometry, mouseCoords))
+            if (!Active || !IsPointInAabb((IReadonlyRect)Geometry, mouseCoords))
             {
-                ButtonClicked?.Invoke(this, 0);
-                ClickedImage.Visible = true;
-                UnClickedImage.Visible = false;
-                ClickedTimer = 0.7f;
+                return;
             }
+
+            ButtonClicked?.Invoke(this, 0);
+            InactiveImage.Visible = false;
+            ClickedImage.Visible = true;
+            UnClickedImage.Visible = false;
+            ClickedTimer = 0.7f;
         }
 
         public void DebugDraw()

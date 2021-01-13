@@ -49,6 +49,7 @@ namespace Game.GameObjectFactory
 
             button.AddComponent<CImageRender>();
             button.AddComponent<CImageRender>();
+            button.AddComponent<CImageRender>();
             button.AddComponent<CButton>();
             button.GetComponent<CButton>().Canvas = canvas.GetComponent<CCanvas>();
             button.GetComponent<CButton>().SetSize(size);
@@ -57,6 +58,7 @@ namespace Game.GameObjectFactory
             unclickedImage.Canvas = canvas.GetComponent<CCanvas>();
             unclickedImage.LoadAndSetTexture("Content.UI.ui_grey_unclicked.png");
             unclickedImage.SetSize(size.X, size.Y);
+            unclickedImage.Visible = true;
             unclickedImage.Layer = 31;
             button.GetComponent<CButton>().UnClickedImage = unclickedImage;
 
@@ -68,7 +70,7 @@ namespace Game.GameObjectFactory
             clickedImage.Layer = 31;
             button.GetComponent<CButton>().ClickedImage = clickedImage;
 
-            CImageRender inactiveImage = button.GetComponents<CImageRender>()[1];
+            CImageRender inactiveImage = button.GetComponents<CImageRender>()[2];
             inactiveImage.Canvas = canvas.GetComponent<CCanvas>();
             inactiveImage.LoadAndSetTexture("Content.UI.ui_grey_inactive.png");
             inactiveImage.SetSize(size.X, size.Y);
