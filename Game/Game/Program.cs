@@ -7,19 +7,16 @@ namespace Game
 {
     internal class Program
     {
-        private int width;
-        private int height;
-        private GameWindow window;
-        private SceneManager sceneManager;
+        private readonly GameWindow window;
+        private readonly SceneManager sceneManager;
         private double accumulator;
         private double alpha;
 
-        public Program()
+        private Program()
         {
-            width = 1366;
-            height = 768;
-            window = new GameWindow(width, height);
-            window.VSync = VSyncMode.On;
+            const int width = 1366;
+            const int height = 768;
+            window = new GameWindow(width, height) { VSync = VSyncMode.On };
             sceneManager = new SceneManager(width, height, this);
             accumulator = 0f;
             alpha = 1f;
