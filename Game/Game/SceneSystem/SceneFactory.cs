@@ -59,6 +59,11 @@ namespace Game.SceneSystem
 
             // Background
             GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
+            camera.AddComponent<CPeriodicMovement>();
+            CPeriodicMovement periodicMovement = camera.GetComponent<CPeriodicMovement>();
+            periodicMovement.Start = new Vector2(0, 0);
+            periodicMovement.End = new Vector2(100, 0);
+            periodicMovement.MoveSpeed = 2f;
             background.SetParent(camera);
 
             return scene;
@@ -321,6 +326,11 @@ namespace Game.SceneSystem
 
             // Background
             GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
+            camera.AddComponent<CPeriodicMovement>();
+            CPeriodicMovement periodicMovement = camera.GetComponent<CPeriodicMovement>();
+            periodicMovement.Start = new Vector2(0, 0);
+            periodicMovement.End = new Vector2(100, 0);
+            periodicMovement.MoveSpeed = 2f;
             background.SetParent(camera);
 
             return scene;
