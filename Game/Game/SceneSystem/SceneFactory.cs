@@ -13,27 +13,54 @@ namespace Game.SceneSystem
             GameManager = gameManager;
         }
 
-        internal int NumScenes { get; } = 3;
+        internal int NumScenes { get; } = 4;
 
         private GameManager GameManager { get; }
 
         public Scene BuildScene(int num)
         {
-            switch (num)
+            return num switch
             {
-                case 0:
-                    return BuildLevel0();
-                case 1:
-                    return BuildLevel1();
-                case 2:
-                    // Last scene
-                    return BuildGameOverScene();
-                default:
-                    throw new ArgumentOutOfRangeException($"There is no Scene numbered {num}!");
-            }
+                0 => BuildMainMenu(),
+                1 => BuildTutorialLevel(),
+                2 => BuildLevel1(),
+                3 => BuildGameOverScene(), // Last scene
+                _ => throw new ArgumentOutOfRangeException($"There is no Scene numbered {num}!"),
+            };
         }
 
-        private Scene BuildLevel0()
+        private Scene BuildMainMenu()
+        {
+            Scene scene = new Scene(GameManager);
+
+            GameObject menuManager = new GameObject(scene, "MenuManager");
+            menuManager.AddComponent<CMainMenuManager>();
+
+            // Camera
+            GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
+            camera.GetComponent<CCamera>().Scale = 6f;
+
+            // Canvas
+            GameObject canvas = GuiFactory.BuildCanvas(scene);
+            canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
+
+            // Buttons
+            GameObject skipTutorialButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0f, 0.3f), new Vector2(1f, 0.15f), "START");
+            skipTutorialButton.GetComponent<CButton>().ButtonClicked +=
+                menuManager.GetComponent<CMainMenuManager>().OnStartButton;
+
+            GameObject tutorialButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0f, 0f), new Vector2(1f, 0.15f), "START WITH TUTORIAL");
+            tutorialButton.GetComponent<CButton>().ButtonClicked +=
+                menuManager.GetComponent<CMainMenuManager>().OnTutorialButton;
+
+            GameObject exitButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0f, -0.3f), new Vector2(1f, 0.15f), "EXIT");
+            exitButton.GetComponent<CButton>().ButtonClicked +=
+                menuManager.GetComponent<CMainMenuManager>().OnExitButton;
+
+            return scene;
+        }
+
+        private Scene BuildTutorialLevel()
         {
             Scene scene = new Scene(GameManager);
 
@@ -221,7 +248,7 @@ namespace Game.SceneSystem
             GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
             GuiFactory.BuildKeyUI(scene, canvas, new Vector2(0.7f, 0.9f));
 
-            // Shopscreen
+            // Shop screen
             GameObject shopScreen = GuiFactory.BuildShopScreen(scene, canvas, Vector2.Zero);
             levelEnd.GetComponent<CDoor>().ShopScreen = shopScreen.GetComponent<CShopScreen>();
             shopScreen.GetComponent<CShopScreen>().Player = player;

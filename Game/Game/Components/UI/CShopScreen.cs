@@ -15,7 +15,7 @@ namespace Game.Components.UI
         public void OnContinue(object sender, int i)
         {
             MyGameObject.Active = false;
-            MyGameObject.Scene.LoadLevelEvent(1);
+            MyGameObject.Scene.InvokeLoadLevelEvent(1);
         }
 
         public void Show()

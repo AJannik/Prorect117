@@ -9,8 +9,19 @@ namespace Game.Components.UI
     {
         public GameObject MyGameObject { get; set; }
 
-        public void OnButtonClick(object sender, int num)
+        public void OnStartButton(object sender, int num)
         {
+            MyGameObject.Scene.InvokeLoadLevelEvent(2);
+        }
+
+        public void OnTutorialButton(object sender, int num)
+        {
+            MyGameObject.Scene.InvokeLoadLevelEvent(1);
+        }
+
+        public void OnExitButton(object sender, int num)
+        {
+            MyGameObject.Scene.ExitGame();
         }
     }
 }

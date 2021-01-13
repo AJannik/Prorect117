@@ -34,7 +34,7 @@ namespace Game.SceneSystem
 
         public GameManager GameManager { get; }
 
-        public void LoadLevelEvent(int num)
+        public void InvokeLoadLevelEvent(int num)
         {
             LoadLevelNumber?.Invoke(this, num);
             GameManager.Key = false;
