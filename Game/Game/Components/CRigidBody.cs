@@ -66,7 +66,6 @@ namespace Game.Components
             Vector2 s, newAcceleration;
             Integrate(deltaTime, out s, out newAcceleration);
 
-            // TODO: Performance-Opitimization
             // Check y-axis for collision
             CheckCollision(new Vector2(0f, s.Y));
             s.Y += PenRes.Y;
