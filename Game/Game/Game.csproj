@@ -10,6 +10,12 @@
     <None Remove="Content\AnimatedCoin.png" />
     <None Remove="Content\default.png" />
     <None Remove="Content\DoorSprite.png" />
+    <None Remove="Content\Environment\background_0.png" />
+    <None Remove="Content\Environment\background_1.png" />
+    <None Remove="Content\Environment\background_2.png" />
+    <None Remove="Content\Environment\Bush.png" />
+    <None Remove="Content\Environment\Rock.png" />
+    <None Remove="Content\Environment\TreeSmall.png" />
     <None Remove="Content\Font.png" />
     <None Remove="Content\goldcoin1.png" />
     <None Remove="Content\goldcoin2.png" />
@@ -37,6 +43,12 @@
     <EmbeddedResource Include="Content\AnimatedCoin.png" />
     <EmbeddedResource Include="Content\default.png" />
     <EmbeddedResource Include="Content\DoorSprite.png" />
+    <EmbeddedResource Include="Content\Environment\background_0.png" />
+    <EmbeddedResource Include="Content\Environment\background_1.png" />
+    <EmbeddedResource Include="Content\Environment\background_2.png" />
+    <EmbeddedResource Include="Content\Environment\Bush.png" />
+    <EmbeddedResource Include="Content\Environment\Rock.png" />
+    <EmbeddedResource Include="Content\Environment\TreeSmall.png" />
     <EmbeddedResource Include="Content\Font.png" />
     <EmbeddedResource Include="Content\goldcoin1.png" />
     <EmbeddedResource Include="Content\goldcoin2.png" />
