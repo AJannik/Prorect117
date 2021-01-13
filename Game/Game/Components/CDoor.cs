@@ -11,7 +11,9 @@ namespace Game.Components
 
         public CTextRender TextRender { get; set; }
 
-        public CShopScreen ShopScreen { get; set; }
+        public CShopScreen ShopScreen { get; set; } = null;
+
+        public bool LastLevel { get; set; } = false;
 
         private bool Unlockable { get; set; } = false;
 
@@ -27,7 +29,15 @@ namespace Game.Components
             if (Unlockable && keyboard.IsKeyDown(Key.E))
             {
                 MyGameObject.Scene.GameManager.Key = false;
-                ShopScreen.Show();
+                if (!LastLevel)
+                {
+                    ShopScreen.Show();
+                }
+                else
+                {
+                    MyGameObject.Scene.GameManager.PlayerWon = true;
+                    MyGameObject.Scene.GameManager.EndGame();
+                }
             }
         }
 

@@ -218,6 +218,7 @@ namespace Game.SceneSystem
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
+            levelEnd.GetComponent<CDoor>().LastLevel = true;
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
@@ -247,12 +248,6 @@ namespace Game.SceneSystem
             // Coin and Key UI
             GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
             GuiFactory.BuildKeyUI(scene, canvas, new Vector2(0.7f, 0.9f));
-
-            // Shop screen
-            GameObject shopScreen = GuiFactory.BuildShopScreen(scene, canvas, Vector2.Zero);
-            levelEnd.GetComponent<CDoor>().ShopScreen = shopScreen.GetComponent<CShopScreen>();
-            shopScreen.GetComponent<CShopScreen>().Player = player;
-            shopScreen.Active = false;
 
             // Collectables
             ObjectFactory.BuildCoin(scene, new Vector2(10.5f, 3.5f));
@@ -285,6 +280,9 @@ namespace Game.SceneSystem
         {
             Scene scene = new Scene(GameManager);
 
+            GameObject gameOverManager = new GameObject(scene, "GameOverManager");
+            gameOverManager.AddComponent<CGameOverUI>();
+
             // Camera
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.GetComponent<CCamera>().Scale = 6f;
@@ -297,11 +295,13 @@ namespace Game.SceneSystem
             GameObject textField = GuiFactory.BuildTextField(scene, canvas, new Vector2(0f, 0.5f), "YOU DIED!");
             textField.GetComponent<CGuiTextRender>().Centered = true;
             textField.GetComponent<CGuiTextRender>().SetSize(0.3f);
+            gameOverManager.GetComponent<CGameOverUI>().Title = textField.GetComponent<CGuiTextRender>();
 
             GameObject coinUI = GuiFactory.BuildGameOverCoinUI(scene, canvas, Vector2.Zero);
+            gameOverManager.GetComponent<CGameOverUI>().CoinsText = coinUI.GetChild(1).GetComponent<CGuiTextRender>();
 
             GameObject exitButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0f, -0.3f), new Vector2(0.6f, 0.2f), "Exit");
-            exitButton.GetComponent<CButton>().ButtonClicked += coinUI.GetComponent<CGameOverUI>().OnBtnExit;
+            exitButton.GetComponent<CButton>().ButtonClicked += gameOverManager.GetComponent<CGameOverUI>().OnBtnExit;
 
             return scene;
         }

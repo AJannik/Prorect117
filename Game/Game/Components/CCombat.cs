@@ -79,7 +79,8 @@ namespace Game.Components
                     MyGameObject.Scene.RemoveGameObject(MyGameObject);
                     if (MyGameObject.Name == "Player")
                     {
-                        MyGameObject.Scene.GameManager.GameOver();
+                        MyGameObject.Scene.GameManager.EndGame();
+                        MyGameObject.Scene.GameManager.PlayerWon = false;
                     }
                 }
                 else
