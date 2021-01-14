@@ -30,6 +30,7 @@ namespace Game.GameObjectFactory
             GameObject background = new GameObject(scene);
             background.Transform.Position = Vector2.Zero;
 
+            // background layers
             background.AddComponent<CRender>();
             background.GetComponent<CRender>().LoadAndSetTexture("Content.Environment.background_0.png");
             background.GetComponent<CRender>().Layer = 1;
@@ -59,6 +60,21 @@ namespace Game.GameObjectFactory
             background.GetComponents<CParallax>()[2].Depth = 1;
             background.GetComponents<CParallax>()[2].Target = target;
             background.GetComponents<CParallax>()[2].Render = background.GetComponents<CRender>()[2];
+
+            // ambient Particles
+            /*
+            background.AddComponent<CParticleSystem>();
+            CParticleSystem particleSystem = background.GetComponent<CParticleSystem>();
+            particleSystem.Actice = true;
+            particleSystem.PositionYRandomness = 32f;
+            particleSystem.PositionXRandomness = 18f;
+            particleSystem.Offset = new Vector2(0, 9f);
+            particleSystem.FadeOut = true;
+            particleSystem.SystemColor = Color.Gray;
+            particleSystem.MaxParticles = 300;
+            particleSystem.MaxParticleLifetime = 1.5f;
+            particleSystem.ParticleSpawnRate = 200f;
+            */
 
             return background;
         }

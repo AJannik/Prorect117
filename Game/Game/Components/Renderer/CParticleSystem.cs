@@ -176,6 +176,15 @@ namespace Game.Components.Renderer
                 DrawSingleParticle(particle, alpha, i);
                 i++;
             }
+
+            // remove unused list places
+            for (int k = i; k < OldParticlePosition1.Count; k++)
+            {
+                OldParticlePosition1.RemoveAt(k);
+                OldParticlePosition2.RemoveAt(k);
+                OldParticlePosition3.RemoveAt(k);
+                OldParticlePosition4.RemoveAt(k);
+            }
         }
 
         private void DrawSingleParticle(Particle particle, float alpha, int i)
