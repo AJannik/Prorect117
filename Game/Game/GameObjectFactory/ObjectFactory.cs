@@ -139,6 +139,9 @@ namespace Game.GameObjectFactory
             Animation death = new Animation("Death", 6, 136, false);
             death.TimeBetweenTwoFrames = 1 / 6f;
             controll.AddAnimation(death);
+            Animation roll = new Animation("Roll", 4, 18, false);
+            roll.TimeBetweenTwoFrames = 1 / 20f;
+            controll.AddAnimation(roll);
             player.GetComponent<CPlayerController>().AnimationSystem = controll;
 
             // add Combat Components

@@ -28,9 +28,16 @@ namespace Game.Components.Player
 
         private float LockTime { get; set; } = 0f;
 
+        private float RollCooldown { get; set; } = 0f;
+
+        private float RollTelegraph { get; set; }
+
+        private bool CanRoll { get; set; } = true;
+
         public void Update(float deltaTime)
         {
             var mouse = Mouse.GetState();
+            var keyboard = Keyboard.GetState();
             if (mouse.IsButtonDown(MouseButton.Left) && AnimationSystem.Renderer.Flipped)
             {
                 ComboAttack(true);
@@ -38,6 +45,11 @@ namespace Game.Components.Player
             else if (mouse.IsButtonDown(MouseButton.Left) && !AnimationSystem.Renderer.Flipped)
             {
                 ComboAttack(false);
+            }
+
+            if (keyboard.IsKeyDown(Key.ShiftLeft))
+            {
+                Roll();
             }
 
             if (ComboTime >= 0f)
@@ -56,6 +68,23 @@ namespace Game.Components.Player
             else
             {
                 Controller.State = PlayerState.Free;
+            }
+
+            if (RollTelegraph > 0f)
+            {
+                RollTelegraph -= deltaTime;
+                Controller.RigidBody.Velocity = new OpenTK.Vector2(Controller.FacingRight ? 20f : -20f, Controller.RigidBody.Velocity.Y);
+            }
+            else if (!CanRoll)
+            {
+                CanRoll = true;
+                Controller.State = PlayerState.Free;
+                Controller.RigidBody.Velocity = new OpenTK.Vector2(0, Controller.RigidBody.Velocity.Y);
+            }
+
+            if (RollCooldown > 0f)
+            {
+                RollCooldown -= deltaTime;
             }
 
             HpText.Text = $"{(int)Combat.CurrentHealth} / {(int)Combat.MaxHealth}";
@@ -92,6 +121,7 @@ namespace Game.Components.Player
                 ComboCount++;
                 ComboTime = 2f;
                 Controller.State = PlayerState.Blocked;
+                Controller.RigidBody.Velocity = new OpenTK.Vector2(0, Controller.RigidBody.Velocity.Y);
                 LockTime = 0.5f / Combat.AttackSpeed;
             }
         }
@@ -127,6 +157,20 @@ namespace Game.Components.Player
             }
 
             return false;
+        }
+
+        private void Roll()
+        {
+            if (RollCooldown <= 0f)
+            {
+                Controller.State = PlayerState.Blocked;
+                Combat.MakeInvincible(0.2f);
+                Controller.RigidBody.Velocity = new OpenTK.Vector2(Controller.FacingRight ? 20f : -20f, Controller.RigidBody.Velocity.Y);
+                RollCooldown = 1.0f;
+                RollTelegraph = 0.2f;
+                CanRoll = false;
+                AnimationSystem.PlayAnimation("Roll", true);
+            }
         }
     }
 }
