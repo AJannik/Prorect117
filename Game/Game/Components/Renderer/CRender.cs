@@ -47,6 +47,8 @@ namespace Game.Components.Renderer
 
         private Vector2 Oldpos4 { get; set; } = Vector2.Zero;
 
+        private bool OldFlipped { get; set; } = false;
+
         public void Draw(float alpha)
         {
             GL.BindTexture(TextureTarget.Texture2D, Texture);
@@ -80,10 +82,17 @@ namespace Game.Components.Renderer
             pos4 = Transformation.Transform(pos4, MyGameObject.Transform.WorldTransformMatrix);
 
             // Blend between old frame and alpha towards current frame
-            Vector2 newpos1 = (pos1 * alpha) + (Oldpos1 * (1f - alpha));
-            Vector2 newpos2 = (pos2 * alpha) + (Oldpos2 * (1f - alpha));
-            Vector2 newpos3 = (pos3 * alpha) + (Oldpos3 * (1f - alpha));
-            Vector2 newpos4 = (pos4 * alpha) + (Oldpos4 * (1f - alpha));
+            Vector2 newpos1 = pos1;
+            Vector2 newpos2 = pos2;
+            Vector2 newpos3 = pos3;
+            Vector2 newpos4 = pos4;
+            if (OldFlipped == Flipped)
+            {
+                newpos1 = (pos1 * alpha) + (Oldpos1 * (1f - alpha));
+                newpos2 = (pos2 * alpha) + (Oldpos2 * (1f - alpha));
+                newpos3 = (pos3 * alpha) + (Oldpos3 * (1f - alpha));
+                newpos4 = (pos4 * alpha) + (Oldpos4 * (1f - alpha));
+            }
 
             // Draw (flipped)
             GL.Begin(PrimitiveType.Quads);
@@ -115,6 +124,7 @@ namespace Game.Components.Renderer
             Oldpos2 = pos2;
             Oldpos3 = pos3;
             Oldpos4 = pos4;
+            OldFlipped = Flipped;
 
             GL.End();
             GL.Color3(Color.White);

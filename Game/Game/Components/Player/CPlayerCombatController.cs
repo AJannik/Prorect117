@@ -139,7 +139,7 @@ namespace Game.Components.Player
 
         private bool Attack2(ITrigger hitbox, bool leftSide)
         {
-            if (Combat.Attack(hitbox, 1.5f, false))
+            if (Combat.Attack(hitbox, 1.2f, false))
             {
                 AnimationSystem.PlayAnimation("Attack2", true, leftSide);
                 return true;
@@ -150,7 +150,7 @@ namespace Game.Components.Player
 
         private bool Attack3(ITrigger hitbox, bool leftSide)
         {
-            if (Combat.Attack(hitbox, 3f, false))
+            if (Combat.Attack(hitbox, 1.8f, false))
             {
                 AnimationSystem.PlayAnimation("Attack3", true, leftSide);
                 return true;

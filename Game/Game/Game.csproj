@@ -28,7 +28,6 @@
     <None Remove="Content\Skeleton\SkeletonDead.png" />
     <None Remove="Content\Skeleton\SkeletonHit.png" />
     <None Remove="Content\Skeleton\SkeletonIdle.png" />
-    <None Remove="Content\Skeleton\SkeletonReact.png" />
     <None Remove="Content\Skeleton\SkeletonWalk.png" />
     <None Remove="Content\UI\ui_bg.png" />
     <None Remove="Content\UI\ui_grey_clicked.png" />
@@ -61,7 +60,6 @@
     <EmbeddedResource Include="Content\Skeleton\SkeletonDead.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonHit.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonIdle.png" />
-    <EmbeddedResource Include="Content\Skeleton\SkeletonReact.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonWalk.png" />
     <EmbeddedResource Include="Content\UI\ui_bg.png" />
     <EmbeddedResource Include="Content\UI\ui_grey_clicked.png" />

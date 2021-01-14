@@ -40,6 +40,10 @@ namespace Game.Components
 
         public bool FacingRight { get; set; } = false;
 
+        public float InAttackTime { get; set; } = 1f;
+
+        public float HitTime { get; set; } = 0.33f;
+
         private float TimeInState { get; set; } = 0f;
 
         private int LeftOnGround { get; set; } = 0;
@@ -55,7 +59,7 @@ namespace Game.Components
             switch (State)
             {
                 case EnemyState.Idle:
-                    AnimationSystem.PlayAnimation("Idle", false, FacingRight);
+                    AnimationSystem.PlayAnimation("Idle", false, !FacingRight);
                     RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
                     break;
                 case EnemyState.Running:
@@ -74,7 +78,7 @@ namespace Game.Components
                         RigidBody.Velocity = new Vector2((FacingRight ? 1 : -1) * MoveSpeed, RigidBody.Velocity.Y);
                     }
 
-                    AnimationSystem.PlayAnimation("Walk", false, FacingRight);
+                    AnimationSystem.PlayAnimation("Walk", false, !FacingRight);
                     break;
                 case EnemyState.Attacking:
                     TelegraphAttack();
@@ -166,14 +170,14 @@ namespace Game.Components
         private void Attack()
         {
             State = EnemyState.Attacking;
-            TimeInState = 1f;
-            AnimationSystem.PlayAnimation("Attack", true, FacingRight);
+            TimeInState = InAttackTime;
+            AnimationSystem.PlayAnimation("Attack", true, !FacingRight);
             RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
         }
 
         private void TelegraphAttack()
         {
-            if (TimeInState < 0.67 && !AttackDisabled)
+            if (TimeInState < InAttackTime - HitTime && !AttackDisabled)
             {
                 Combat.Attack(FacingRight ? RightTrigger : LeftTrigger, 1, false);
                 AttackDisabled = true;

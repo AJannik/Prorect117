@@ -20,8 +20,8 @@ namespace Game.GameObjectFactory
             CRender render = enemy.GetComponent<CRender>();
             render.LoadAndSetTexture("Content.Skeleton.SkeletonIdle.png");
             render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 1f / 11f, 1f));
-            render.SetSize(2f, 2f);
-            render.SetOffset(0.3f, 0f);
+            render.SetSize(2.4f, 2f);
+            render.SetOffset(0.8f, 0.22f);
             render.Layer = 20;
 
             // hitboxes and triggers
@@ -44,6 +44,8 @@ namespace Game.GameObjectFactory
             ai.SetupLeftTrigger(left);
             ai.SetupRightTrigger(right);
             ai.RigidBody = enemy.GetComponent<CRigidBody>();
+            ai.HitTime = 0.8f;
+            ai.InAttackTime = 1.8f;
 
             // animations
             enemy.AddComponent<CAnimationSystem>();
@@ -58,8 +60,11 @@ namespace Game.GameObjectFactory
             Animation hurt = new Animation("Hurt", 8, 0, false, true, "Content.Skeleton.SkeletonHit.png", 8, 1);
             animationSystem.AddAnimation(hurt);
             Animation attack = new Animation("Attack", 18, 0, false, true, "Content.Skeleton.SkeletonAttack.png", 18, 1);
+            attack.TimeBetweenTwoFrames = 1f / 10f;
             animationSystem.AddAnimation(attack);
-            Animation death = new Animation("Death", 15, 0 false, true, "Content.Skeleton.SkeletonDead", 15, 1);
+            Animation death = new Animation("Death", 15, 0, false, true, "Content.Skeleton.SkeletonDead.png", 15, 1);
+            death.TimeBetweenTwoFrames = 1f / 15f;
+            animationSystem.AddAnimation(death);
             ai.AnimationSystem = animationSystem;
 
             // combat
@@ -115,6 +120,7 @@ namespace Game.GameObjectFactory
             // animations
             enemy.AddComponent<CAnimationSystem>();
             CAnimationSystem animationSystem = enemy.GetComponent<CAnimationSystem>();
+            animationSystem.FlippedAnimations = true;
             Animation idle = new Animation("Idle", 4, 0, true);
             idle.TimeBetweenTwoFrames = 1 / 9f;
             animationSystem.Renderer = render;

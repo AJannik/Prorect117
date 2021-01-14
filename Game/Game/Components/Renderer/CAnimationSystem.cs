@@ -24,6 +24,8 @@ namespace Game.Components.Renderer
 
         public Animation StartAnimation { get; private set; }
 
+        public bool FlippedAnimations { get; set; } = false;
+
         public CRender Renderer
         {
             get
@@ -213,7 +215,7 @@ namespace Game.Components.Renderer
             if (forceEnd)
             {
                 ForceEnd = false;
-                Renderer.Flipped = faceLeft;
+                Renderer.Flipped = FlippedAnimations ? !faceLeft : faceLeft;
             }
 
             PlayAnimation(name);
@@ -224,7 +226,7 @@ namespace Game.Components.Renderer
 
             if (!ForceEnd)
             {
-                Renderer.Flipped = faceLeft;
+                Renderer.Flipped = FlippedAnimations ? !faceLeft : faceLeft;
             }
         }
 
