@@ -67,6 +67,9 @@ namespace Game.GameObjectFactory
             combat.AttackDamage = 25;
             ai.Combat = combat;
 
+            // Hp Text
+            BuildEnemyHpText(scene, enemy, new Vector2(0f, 1.1f));
+
             return enemy;
         }
 
@@ -134,7 +137,23 @@ namespace Game.GameObjectFactory
             combat.MaxHealth = 30;
             ai.Combat = combat;
 
+            // Hp Text
+            BuildEnemyHpText(scene, enemy, new Vector2(0f, 1.1f));
+
             return enemy;
+        }
+
+        public static GameObject BuildEnemyHpText(Scene scene, GameObject parent, Vector2 position)
+        {
+            GameObject enemyHpText = new GameObject(scene, $"{parent.Name}HpText", parent);
+            enemyHpText.Transform.Position = position;
+
+            enemyHpText.AddComponent<CTextRender>();
+            enemyHpText.GetComponent<CTextRender>().Size = 0.2f;
+            enemyHpText.GetComponent<CTextRender>().Centered = true;
+            parent.GetComponent<CCombat>().HpText = enemyHpText.GetComponent<CTextRender>();
+
+            return enemyHpText;
         }
     }
 }

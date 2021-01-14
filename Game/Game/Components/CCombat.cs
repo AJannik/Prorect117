@@ -32,6 +32,8 @@ namespace Game.Components
 
         public CAnimationSystem AnimationSystem { get; set; } = null;
 
+        public CTextRender HpText { get; set; }
+
         public float CurrentHealth { get; set; } = 100f;
 
         public float Armor { get; set; } = 10f;
@@ -61,6 +63,11 @@ namespace Game.Components
             if (NextAttackTime > 0f)
             {
                 NextAttackTime -= deltaTime;
+            }
+
+            if (HpText != null)
+            {
+                HpText.Text = $"{(int)CurrentHealth} HP";
             }
 
             if (CurrentHealth <= 0f)
