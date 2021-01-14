@@ -57,6 +57,9 @@ namespace Game.GameObjectFactory
             animationSystem.AddAnimation(walk);
             Animation hurt = new Animation("Hurt", 8, 0, false, true, "Content.Skeleton.SkeletonHit.png", 8, 1);
             animationSystem.AddAnimation(hurt);
+            Animation attack = new Animation("Attack", 18, 0, false, true, "Content.Skeleton.SkeletonAttack.png", 18, 1);
+            animationSystem.AddAnimation(attack);
+            Animation death = new Animation("Death", 15, 0 false, true, "Content.Skeleton.SkeletonDead", 15, 1);
             ai.AnimationSystem = animationSystem;
 
             // combat
