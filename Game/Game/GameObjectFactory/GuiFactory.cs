@@ -125,7 +125,7 @@ namespace Game.GameObjectFactory
             return gameOverCoinUI;
         }
 
-        public static GameObject BuildKeyUI(Scene scene, GameObject canvas, Vector2 position)
+        public static GameObject BuildKeyHUD(Scene scene, GameObject canvas, Vector2 position)
         {
             GameObject keyUI = new GameObject(scene, "KeyUI");
             keyUI.Transform.Position = position;
@@ -148,6 +148,18 @@ namespace Game.GameObjectFactory
             keyUI.GetComponent<CKeyUIUpdater>().KeyInactive = keyInactive;
 
             return keyUI;
+        }
+
+        public static GameObject BuildPlayerHpHUD(Scene scene, GameObject canvas, Vector2 position)
+        {
+            GameObject playerHP = new GameObject(scene, "PlayerHpHUD");
+            playerHP.Transform.Position = position;
+
+            GameObject textField = BuildTextField(scene, canvas, Vector2.Zero, "PlayerHP");
+            textField.GetComponent<CGuiTextRender>().SetSize(0.08f);
+            textField.SetParent(playerHP);
+
+            return playerHP;
         }
 
         public static GameObject BuildShopScreen(Scene scene, GameObject canvas, Vector2 position)

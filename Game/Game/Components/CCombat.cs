@@ -8,7 +8,7 @@ namespace Game.Components
 {
     public class CCombat : IComponent, IUpdateable, IOnStart
     {
-        private float maxHP = 100;
+        private float maxHp = 100;
 
         public CCombat()
         {
@@ -16,14 +16,14 @@ namespace Game.Components
 
         public float MaxHealth
         {
-            get { return maxHP; }
+            get => maxHp;
 
             set
             {
-                maxHP = value;
-                if (CurrentHealth > maxHP)
+                maxHp = value;
+                if (CurrentHealth > maxHp)
                 {
-                    CurrentHealth = maxHP;
+                    CurrentHealth = maxHp;
                 }
             }
         }
@@ -31,6 +31,8 @@ namespace Game.Components
         public GameObject MyGameObject { get; set; } = null;
 
         public CAnimationSystem AnimationSystem { get; set; } = null;
+
+        public CTextRender HpText { get; set; }
 
         public float CurrentHealth { get; set; } = 100f;
 
@@ -63,6 +65,11 @@ namespace Game.Components
             if (NextAttackTime > 0f)
             {
                 NextAttackTime -= deltaTime;
+            }
+
+            if (HpText != null)
+            {
+                HpText.Text = $"{(int)CurrentHealth} HP";
             }
 
             if (InvincibleTime >= 0f)
@@ -151,10 +158,7 @@ namespace Game.Components
                     CurrentHealth -= dmgAmount * (2 - (100 / (100 - Armor)));
                 }
 
-                if (AnimationSystem != null)
-                {
-                    AnimationSystem.PlayAnimation(dmgAnimationName, true);
-                }
+            AnimationSystem?.PlayAnimation(dmgAnimationName, true);
 
                 if (MyGameObject.Name == "Player")
                 {

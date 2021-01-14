@@ -1,5 +1,6 @@
 ﻿using Game.Components;
 using Game.Components.Collision;
+using Game.Components.Player;
 using Game.Components.Renderer;
 using Game.SceneSystem;
 using OpenTK;
@@ -78,6 +79,23 @@ namespace Game.GameObjectFactory
             door.TextRender = levelEnd.GetComponent<CTextRender>();
 
             return levelEnd;
+        }
+
+        public static GameObject BuildDeadlyArea(Scene scene, Vector2 position, Vector2 size, Vector2 lastPosition, float dmg)
+        {
+            GameObject deadlyArea = new GameObject(scene, "DeadlyArea");
+            deadlyArea.Transform.Position = position;
+
+            deadlyArea.AddComponent<CBoxTrigger>();
+            CBoxTrigger trigger = deadlyArea.GetComponent<CBoxTrigger>();
+            trigger.Geometry.Size = size;
+            deadlyArea.AddComponent<CResetController>();
+            CResetController controller = deadlyArea.GetComponent<CResetController>();
+            controller.PreviousPos = lastPosition;
+            controller.SetupTrigger(trigger);
+            controller.Damage = dmg;
+
+            return deadlyArea;
         }
     }
 }

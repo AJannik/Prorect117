@@ -1,9 +1,10 @@
 ﻿using Game.Components.Collision;
 using Game.Components.Renderer;
+using Game.Components.UI;
 using Game.Interfaces;
 using OpenTK.Input;
 
-namespace Game.Components
+namespace Game.Components.Player
 {
     public class CPlayerCombatController : IComponent, IUpdateable
     {
@@ -17,7 +18,7 @@ namespace Game.Components
 
         public CBoxTrigger RightHitbox { get; set; }
 
-        public CTextRender TextRender { get; set; }
+        public CGuiTextRender HpText { get; set; }
 
         public CPlayerController Controller { get; set; }
 
@@ -87,6 +88,7 @@ namespace Game.Components
             }
 
             TextRender.Text = ((int)Combat.CurrentHealth).ToString() + "/" + ((int)Combat.MaxHealth).ToString();
+            HpText.Text = $"{(int)Combat.CurrentHealth} / {(int)Combat.MaxHealth}";
         }
 
         private void ComboAttack(bool leftSide)

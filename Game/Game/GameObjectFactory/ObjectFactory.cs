@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using Game.Components;
 using Game.Components.Collision;
+using Game.Components.Player;
 using Game.Components.Renderer;
 using Game.Components.UI;
 using Game.SceneSystem;
@@ -170,13 +171,6 @@ namespace Game.GameObjectFactory
             player.AddComponent<CEffectSystem>();
             player.GetComponent<CEffectSystem>().PlayerController = player.GetComponent<CPlayerController>();
             player.GetComponent<CEffectSystem>().Combat = player.GetComponent<CCombat>();
-
-            // add text
-            player.AddComponent<CTextRender>();
-            player.GetComponent<CTextRender>().Offset = new Vector2(0f, 1f);
-            player.GetComponent<CTextRender>().Size = 0.3f;
-            player.GetComponent<CTextRender>().Centered = true;
-            combatController.TextRender = player.GetComponent<CTextRender>();
 
             return player;
         }
