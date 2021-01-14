@@ -176,6 +176,25 @@ namespace Game.GameObjectFactory
             player.GetComponent<CEffectSystem>().PlayerController = player.GetComponent<CPlayerController>();
             player.GetComponent<CEffectSystem>().Combat = player.GetComponent<CCombat>();
 
+            // add Particle System
+            player.AddComponent<CParticleSystem>();
+            CParticleSystem particleSystem = player.GetComponent<CParticleSystem>();
+            particleSystem.DirectionRandomness = 20f;
+            particleSystem.ForceFieldDirection = new Vector2(0f, -10f);
+            particleSystem.UseForceField = true;
+            particleSystem.SystemColor = Color.Red;
+            particleSystem.FadeColor = Color.DarkRed;
+            particleSystem.FadesIntoColor = true;
+            particleSystem.MaxParticleLifetime = 0.3f;
+            particleSystem.Direction = new Vector2(0, 5);
+            particleSystem.ParticleSpawnRate = 200f;
+            particleSystem.MaxParticles = 50;
+            particleSystem.Actice = false;
+            particleSystem.Offset = new Vector2(0, 0.3f);
+            particleSystem.Layer = 30;
+            particleSystem.PositionXRandomness = 0.1f;
+            particleSystem.PositionYRandomness = 1.1f;
+
             return player;
         }
 

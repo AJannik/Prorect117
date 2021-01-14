@@ -90,6 +90,8 @@ namespace Game.Components.Renderer
 
         public Vector2 Direction { get; set; } = new Vector2(0, 1f);
 
+        public Vector2 Offset { get; set; } = Vector2.Zero;
+
         public float ParticleSize { get; set; } = 0.05f;
 
         public float MaxParticleLifetime { get; set; } = 3f;
@@ -245,7 +247,7 @@ namespace Game.Components.Renderer
                 if (Particles.Count < MaxParticles)
                 {
                     Particles.Add(new Particle(
-                        new Vector2(((float)Randomizer.NextDouble() - 0.5f) * PositionXRandomness, ((float)Randomizer.NextDouble() - 0.5f) * PositionYRandomness),
+                        new Vector2((((float)Randomizer.NextDouble() - 0.5f) * PositionXRandomness) + Offset.X, (((float)Randomizer.NextDouble() - 0.5f) * PositionYRandomness) + Offset.Y),
                         (((float)Randomizer.NextDouble() * VelocityRandomness) - (VelocityRandomness / 2f) + 1f) * Vector2.Transform(Direction, new Quaternion(new Vector3(0, 0, ((float)Randomizer.NextDouble() * DirectionRandomness) - (DirectionRandomness / 2f)))),
                         SystemColor,
                         (((float)Randomizer.NextDouble() * SizeRandomness) - (SizeRandomness / 2f) + 1f) * ParticleSize));
