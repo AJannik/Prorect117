@@ -154,6 +154,10 @@ namespace Game.GameObjectFactory
             combatController.Combat = player.GetComponent<CCombat>();
             combatController.Controller = player.GetComponent<CPlayerController>();
 
+            // display player damage
+            GameObject damageUi = BuildDisplayPlayerDamage(scene, player, new Vector2(0f, 1.1f));
+            player.GetComponent<CCombat>().DamageDisplay = damageUi.GetComponent<CDamageDisplay>();
+
             // add hitbox to combatcontroller
             player.AddComponent<CBoxTrigger>();
             CBoxTrigger attackHitboxLeft = player.GetComponents<CBoxTrigger>()[1];
@@ -173,6 +177,20 @@ namespace Game.GameObjectFactory
             player.GetComponent<CEffectSystem>().Combat = player.GetComponent<CCombat>();
 
             return player;
+        }
+
+        public static GameObject BuildDisplayPlayerDamage(Scene scene, GameObject parent, Vector2 position)
+        {
+            GameObject damageDisplay = new GameObject(scene, "DisplayPlayerDamage", parent);
+            damageDisplay.Transform.Position = position;
+
+            damageDisplay.AddComponent<CDamageDisplay>();
+            damageDisplay.AddComponent<CTextRender>();
+            damageDisplay.GetComponent<CTextRender>().Size = 0.2f;
+            damageDisplay.GetComponent<CTextRender>().Centered = true;
+            damageDisplay.GetComponent<CDamageDisplay>().DamageText = damageDisplay.GetComponent<CTextRender>();
+
+            return damageDisplay;
         }
 
         public static GameObject BuildPowerDown(Scene scene, Vector2 position)

@@ -34,6 +34,8 @@ namespace Game.Components
 
         public CTextRender HpText { get; set; }
 
+        public CDamageDisplay DamageDisplay { get; set; }
+
         public float CurrentHealth { get; set; } = 100f;
 
         public float Armor { get; set; } = 10f;
@@ -143,22 +145,27 @@ namespace Game.Components
 
         public void TakeDamage(float dmgAmount, bool ignoreArmor, string dmgAnimationName)
         {
+            float dmg = 0f;
             if (InvincibleTime <= 0f)
             {
                 if (ignoreArmor && Armor > 0f)
                 {
-                    CurrentHealth -= dmgAmount;
+                    dmg = dmgAmount;
+                    CurrentHealth -= dmg;
                 }
                 else if (Armor >= 0f)
                 {
-                    CurrentHealth -= dmgAmount * (100 / (100 + Armor));
+                    dmg = dmgAmount * (100 / (100 + Armor));
+                    CurrentHealth -= dmg;
                 }
                 else
                 {
-                    CurrentHealth -= dmgAmount * (2 - (100 / (100 - Armor)));
+                    dmg = dmgAmount * (2 - (100 / (100 - Armor)));
+                    CurrentHealth -= dmg;
                 }
 
-            AnimationSystem?.PlayAnimation(dmgAnimationName, true);
+                DamageDisplay?.DisplayDamage((int)-dmg);
+                AnimationSystem?.PlayAnimation(dmgAnimationName, true);
 
                 if (MyGameObject.Name == "Player")
                 {

@@ -68,7 +68,8 @@ namespace Game.GameObjectFactory
             ai.Combat = combat;
 
             // Hp Text
-            BuildEnemyHpText(scene, enemy, new Vector2(0f, 1.1f));
+            GameObject damageUi = BuildEnemyHpText(scene, enemy, new Vector2(0f, 1.1f));
+            combat.DamageDisplay = damageUi.GetComponent<CDamageDisplay>();
 
             return enemy;
         }
@@ -138,7 +139,8 @@ namespace Game.GameObjectFactory
             ai.Combat = combat;
 
             // Hp Text
-            BuildEnemyHpText(scene, enemy, new Vector2(0f, 1.1f));
+            GameObject damageUi = BuildEnemyHpText(scene, enemy, new Vector2(0f, 1.1f));
+            combat.DamageDisplay = damageUi.GetComponent<CDamageDisplay>();
 
             return enemy;
         }
@@ -152,6 +154,13 @@ namespace Game.GameObjectFactory
             enemyHpText.GetComponent<CTextRender>().Size = 0.2f;
             enemyHpText.GetComponent<CTextRender>().Centered = true;
             parent.GetComponent<CCombat>().HpText = enemyHpText.GetComponent<CTextRender>();
+
+            enemyHpText.AddComponent<CDamageDisplay>();
+            enemyHpText.AddComponent<CTextRender>();
+            enemyHpText.GetComponents<CTextRender>()[1].Size = 0.2f;
+            enemyHpText.GetComponents<CTextRender>()[1].Centered = true;
+            enemyHpText.GetComponents<CTextRender>()[1].Offset = new Vector2(0f, 0.3f);
+            enemyHpText.GetComponent<CDamageDisplay>().DamageText = enemyHpText.GetComponents<CTextRender>()[1];
 
             return enemyHpText;
         }
