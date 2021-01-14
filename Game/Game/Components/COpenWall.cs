@@ -5,7 +5,7 @@ using Game.Interfaces;
 
 namespace Game.Components
 {
-    public class COpenDoor : IComponent, IUpdateable
+    public class COpenWall : IComponent, IUpdateable
     {
         public GameObject MyGameObject { get; set; }
 
