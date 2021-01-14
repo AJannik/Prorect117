@@ -16,10 +16,7 @@ namespace Game.Components
 
         public float MaxHealth
         {
-            get
-            {
-                return maxHP;
-            }
+            get { return maxHP; }
 
             set
             {
@@ -82,6 +79,10 @@ namespace Game.Components
                         MyGameObject.Scene.GameManager.EndGame();
                         MyGameObject.Scene.GameManager.PlayerWon = false;
                     }
+                    else
+                    {
+                        MyGameObject.Scene.GameManager.Coins += 2;
+                    }
                 }
                 else
                 {
@@ -118,7 +119,8 @@ namespace Game.Components
                 if ((hit.MyGameObject.Name == "Player" || hit.MyGameObject.Name == "Enemy") &&
                     MyGameObject.Name != hit.MyGameObject.Name && hit.MyGameObject.GetComponent<CCombat>() != null)
                 {
-                    hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor, hit.MyGameObject.GetComponent<CCombat>().HurtAnimationName);
+                    hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor,
+                        hit.MyGameObject.GetComponent<CCombat>().HurtAnimationName);
                 }
             }
 
