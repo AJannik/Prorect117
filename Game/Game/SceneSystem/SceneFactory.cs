@@ -287,6 +287,12 @@ namespace Game.SceneSystem
             ObjectFactory.BuildKey(scene, new Vector2(125.5f, 6.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(126.5f, 6.5f));
 
+            // Level dead-zones
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(40f, -1f), new Vector2(4f, 1f), new Vector2(37f, 2.5f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(53.5f, -1f), new Vector2(21f, 1f), new Vector2(43f, 2.5f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(104f, -1f), new Vector2(22f, 1f), new Vector2(92.5f, 2.5f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(120.5f, -1f), new Vector2(9f, 1f), new Vector2(116f, 2.5f), 30);
+
             // Background
             GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
             background.SetParent(camera);
