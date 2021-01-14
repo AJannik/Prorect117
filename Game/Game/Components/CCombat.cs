@@ -44,6 +44,8 @@ namespace Game.Components
 
         public string HurtAnimationName { get; set; } = "Hurt";
 
+        public float InvincibleTime { get; set; } = 0f;
+
         private float DeathTime { get; set; } = 0f;
 
         private bool Dying { get; set; } = false;
@@ -61,6 +63,11 @@ namespace Game.Components
             if (NextAttackTime > 0f)
             {
                 NextAttackTime -= deltaTime;
+            }
+
+            if (InvincibleTime >= 0f)
+            {
+                InvincibleTime -= deltaTime;
             }
 
             if (CurrentHealth <= 0f)
@@ -92,7 +99,7 @@ namespace Game.Components
         }
 
         /// <summary>
-        /// Attack in given hitbox. Returns false if attack if still on cooldown.
+        /// Attack in given hitbox. Returns false if attack is still on cooldown.
         /// </summary>
         /// <param name="hitbox">Attack hitbox.</param>
         /// <param name="dmgMultiplier">Multiplies the base damage by this value.</param>
@@ -129,27 +136,38 @@ namespace Game.Components
 
         public void TakeDamage(float dmgAmount, bool ignoreArmor, string dmgAnimationName)
         {
-            if (ignoreArmor)
+            if (InvincibleTime <= 0f)
             {
-                CurrentHealth -= dmgAmount;
-            }
-            else if (Armor >= 0f)
-            {
-                CurrentHealth -= dmgAmount * (100 / (100 + Armor));
-            }
-            else
-            {
-                CurrentHealth -= dmgAmount * (2 - (100 / (100 - Armor)));
-            }
+                if (ignoreArmor && Armor > 0f)
+                {
+                    CurrentHealth -= dmgAmount;
+                }
+                else if (Armor >= 0f)
+                {
+                    CurrentHealth -= dmgAmount * (100 / (100 + Armor));
+                }
+                else
+                {
+                    CurrentHealth -= dmgAmount * (2 - (100 / (100 - Armor)));
+                }
 
-            if (AnimationSystem != null)
-            {
-                AnimationSystem.PlayAnimation(dmgAnimationName, true);
-            }
+                if (AnimationSystem != null)
+                {
+                    AnimationSystem.PlayAnimation(dmgAnimationName, true);
+                }
 
-            if (MyGameObject.Name == "Player")
+                if (MyGameObject.Name == "Player")
+                {
+                    MyGameObject.Scene.GameManager.PlayerHealth = CurrentHealth;
+                }
+            }
+        }
+
+        public void MakeInvincible(float time)
+        {
+            if (InvincibleTime < time)
             {
-                MyGameObject.Scene.GameManager.PlayerHealth = CurrentHealth;
+                InvincibleTime = time;
             }
         }
     }

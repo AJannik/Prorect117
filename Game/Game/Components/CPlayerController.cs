@@ -30,13 +30,13 @@ namespace Game.Components
 
         public float JumpForce { get; set; } = 1000f;
 
+        public bool FacingRight { get; private set; } = true;
+
         private float JumpCooldown { get; set; }
 
         private bool Jumping { get; set; } = false;
 
         private int OnGround { get; set; } = 0;
-
-        private bool FacingRight { get; set; } = true;
 
         public void SetUpGroundTrigger(CBoxTrigger trigger)
         {
@@ -55,7 +55,10 @@ namespace Game.Components
                 axisLeftRight = 0f;
             }
 
-            RigidBody.Velocity = new OpenTK.Vector2(axisLeftRight * PlayerSpeed, RigidBody.Velocity.Y);
+            if (State == PlayerState.Free)
+            {
+                RigidBody.Velocity = new OpenTK.Vector2(axisLeftRight * PlayerSpeed, RigidBody.Velocity.Y);
+            }
 
             if (keyboard.IsKeyDown(Key.Space) && State == PlayerState.Free)
             {
