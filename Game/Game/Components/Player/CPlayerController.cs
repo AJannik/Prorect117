@@ -1,10 +1,9 @@
-﻿using System;
-using Game.Components.Collision;
+﻿using Game.Components.Collision;
 using Game.Components.Renderer;
 using Game.Interfaces;
 using OpenTK.Input;
 
-namespace Game.Components
+namespace Game.Components.Player
 {
     public enum PlayerState
     {

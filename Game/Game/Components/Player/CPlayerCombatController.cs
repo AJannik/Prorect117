@@ -4,7 +4,7 @@ using Game.Components.UI;
 using Game.Interfaces;
 using OpenTK.Input;
 
-namespace Game.Components
+namespace Game.Components.Player
 {
     public class CPlayerCombatController : IComponent, IUpdateable
     {

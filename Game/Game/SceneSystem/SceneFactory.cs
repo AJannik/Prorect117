@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Components;
+using Game.Components.Player;
 using Game.Components.UI;
 using Game.GameObjectFactory;
 using OpenTK;

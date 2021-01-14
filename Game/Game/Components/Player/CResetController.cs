@@ -2,7 +2,7 @@ using System;
 using Game.Interfaces;
 using OpenTK;
 
-namespace Game.Components
+namespace Game.Components.Player
 {
     public class CResetController : IComponent
     {
