@@ -115,9 +115,11 @@ namespace Game.SceneSystem
             shopScreen.GetComponent<CShopScreen>().Player = player;
             shopScreen.Active = false;
 
-            // Coin and Key UI
+            // Coin, PlayerHP and Key HUD
             GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
-            GuiFactory.BuildKeyUI(scene, canvas, new Vector2(0.7f, 0.9f));
+            GuiFactory.BuildKeyHUD(scene, canvas, new Vector2(0.7f, 0.9f));
+            GameObject playerHpHUD = GuiFactory.BuildPlayerHpHUD(scene, canvas, new Vector2(0.58f, -0.9f));
+            player.GetComponent<CPlayerCombatController>().HpText = playerHpHUD.GetChild(0).GetComponent<CGuiTextRender>();
 
             // Enemies
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));
@@ -259,9 +261,11 @@ namespace Game.SceneSystem
             GameObject canvas = GuiFactory.BuildCanvas(scene);
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
-            // Coin and Key UI
+            // Coin, PlayerHP and Key HUD
             GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
-            GuiFactory.BuildKeyUI(scene, canvas, new Vector2(0.7f, 0.9f));
+            GuiFactory.BuildKeyHUD(scene, canvas, new Vector2(0.7f, 0.9f));
+            GameObject playerHpHUD = GuiFactory.BuildPlayerHpHUD(scene, canvas, new Vector2(0.58f, -0.9f));
+            player.GetComponent<CPlayerCombatController>().HpText = playerHpHUD.GetChild(0).GetComponent<CGuiTextRender>();
 
             // Collectables
             ObjectFactory.BuildCoin(scene, new Vector2(10.5f, 3.5f));
