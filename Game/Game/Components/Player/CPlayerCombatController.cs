@@ -87,7 +87,6 @@ namespace Game.Components.Player
                 RollCooldown -= deltaTime;
             }
 
-            TextRender.Text = ((int)Combat.CurrentHealth).ToString() + "/" + ((int)Combat.MaxHealth).ToString();
             HpText.Text = $"{(int)Combat.CurrentHealth} / {(int)Combat.MaxHealth}";
         }
 
