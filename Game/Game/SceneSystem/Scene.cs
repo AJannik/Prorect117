@@ -299,6 +299,14 @@ namespace Game.SceneSystem
             foreach (GameObject gameObject in deleteList)
             {
                 gameObjects.Remove(gameObject);
+                if (gameObject.GetAllChildren() != null)
+                {
+                    foreach (GameObject child in gameObject.GetAllChildren())
+                    {
+                        RemoveComponentsFromLists(child);
+                    }
+                }
+
                 RemoveComponentsFromLists(gameObject);
             }
 
