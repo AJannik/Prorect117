@@ -52,7 +52,10 @@
     <EmbeddedResource Include="Content\goldcoin1.png" />
     <EmbeddedResource Include="Content\goldcoin2.png" />
     <EmbeddedResource Include="Content\GrassSpritesheet.png" />
-    <EmbeddedResource Include="Content\GreenPowerDown.png" />
+    <EmbeddedResource Include="Content\PowerDownRed.png" />
+    <EmbeddedResource Include="Content\PowerDownGreen.png" />
+    <EmbeddedResource Include="Content\PowerDownBlue.png" />
+    <EmbeddedResource Include="Content\PowerDownYellow.png" />
     <EmbeddedResource Include="Content\Key.png" />
     <EmbeddedResource Include="Content\KeyInactive.png" />
     <EmbeddedResource Include="Content\LightBandit.png" />

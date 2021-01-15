@@ -47,16 +47,13 @@ namespace Game.SceneSystem
 
             // Buttons
             GameObject skipTutorialButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0f, 0.3f), new Vector2(1f, 0.15f), "START");
-            skipTutorialButton.GetComponent<CButton>().ButtonClicked +=
-                menuManager.GetComponent<CMainMenuManager>().OnStartButton;
+            skipTutorialButton.GetComponent<CButton>().ButtonClicked += menuManager.GetComponent<CMainMenuManager>().OnStartButton;
 
             GameObject tutorialButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0f, 0f), new Vector2(1f, 0.15f), "START TUTORIAL LEVEL");
-            tutorialButton.GetComponent<CButton>().ButtonClicked +=
-                menuManager.GetComponent<CMainMenuManager>().OnTutorialButton;
+            tutorialButton.GetComponent<CButton>().ButtonClicked += menuManager.GetComponent<CMainMenuManager>().OnTutorialButton;
 
             GameObject exitButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0f, -0.3f), new Vector2(1f, 0.15f), "EXIT");
-            exitButton.GetComponent<CButton>().ButtonClicked +=
-                menuManager.GetComponent<CMainMenuManager>().OnExitButton;
+            exitButton.GetComponent<CButton>().ButtonClicked += menuManager.GetComponent<CMainMenuManager>().OnExitButton;
 
             // Background
             GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
@@ -101,7 +98,8 @@ namespace Game.SceneSystem
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
-            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.0f), new Vector2(1, 2));
+            GameObject levelEnd =
+                StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.0f), new Vector2(1, 2));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
@@ -132,6 +130,8 @@ namespace Game.SceneSystem
             ObjectFactory.BuildCoin(scene, new Vector2(11.5f, 11.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(20.5f, 12.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(30.5f, 13.5f));
+
+            // Power Downs
             PowerDownFactory.Vulnerability(scene, new Vector2(28.5f, 13.5f));
 
             // Background
@@ -234,7 +234,8 @@ namespace Game.SceneSystem
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
-            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
+            GameObject levelEnd =
+                StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
             levelEnd.GetComponent<CDoor>().LastLevel = true;
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
@@ -266,7 +267,8 @@ namespace Game.SceneSystem
             GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
             GuiFactory.BuildKeyHUD(scene, canvas, new Vector2(0.7f, 0.9f));
             GameObject playerHpHUD = GuiFactory.BuildPlayerHpHUD(scene, canvas, new Vector2(0.58f, -0.9f));
-            player.GetComponent<CPlayerCombatController>().HpText = playerHpHUD.GetChild(0).GetComponent<CGuiTextRender>();
+            player.GetComponent<CPlayerCombatController>().HpText =
+                playerHpHUD.GetChild(0).GetComponent<CGuiTextRender>();
 
             // Collectables
             ObjectFactory.BuildCoin(scene, new Vector2(10.5f, 3.5f));
@@ -291,6 +293,9 @@ namespace Game.SceneSystem
             ObjectFactory.BuildCoin(scene, new Vector2(112.5f, 2.5f));
             ObjectFactory.BuildKey(scene, new Vector2(125.5f, 6.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(126.5f, 6.5f));
+
+            // Power Downs
+            PowerDownFactory.Slowness(scene, new Vector2(57.5f, 11f));
 
             // Level dead-zones
             StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(40f, -1f), new Vector2(4f, 1f), new Vector2(37f, 2.5f), 30);

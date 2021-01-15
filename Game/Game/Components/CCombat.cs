@@ -132,11 +132,9 @@ namespace Game.Components
 
             foreach (IComponent hit in hitbox.GetTriggerHits())
             {
-                if ((hit.MyGameObject.Name == "Player" || hit.MyGameObject.Name == "Enemy") &&
-                    MyGameObject.Name != hit.MyGameObject.Name && hit.MyGameObject.GetComponent<CCombat>() != null)
+                if ((hit.MyGameObject.Name == "Player" || hit.MyGameObject.Name == "Enemy") && MyGameObject.Name != hit.MyGameObject.Name && hit.MyGameObject.GetComponent<CCombat>() != null)
                 {
-                    hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor,
-                        hit.MyGameObject.GetComponent<CCombat>().HurtAnimationName);
+                    hit.MyGameObject.GetComponent<CCombat>().TakeDamage(dmgMultiplier * AttackDamage, ignoreArmor, hit.MyGameObject.GetComponent<CCombat>().HurtAnimationName);
                 }
             }
 
