@@ -87,23 +87,27 @@ namespace Game.GameObjectFactory
             return button;
         }
 
-        public static GameObject BuildCoinHUD(Scene scene, GameObject canvas, Vector2 position)
+        public static GameObject BuildCoinHud(Scene scene, GameObject canvas, Vector2 position)
         {
-            GameObject coinHUD = new GameObject(scene, "CoinHUD");
+            GameObject coinHud = new GameObject(scene, "CoinHUD");
             GameObject textField = BuildTextField(scene, canvas, Vector2.Zero, "0");
             GameObject coinImage = BuildGuiImage(scene, canvas, new Vector2(-0.05f, -0f), "goldcoin1.png");
 
             textField.GetComponent<CGuiTextRender>().SetSize(0.05f);
-            textField.SetParent(coinHUD);
+            textField.SetParent(coinHud);
 
             coinImage.GetComponent<CImageRender>().SetSize(0.09f, 0.09f);
-            coinImage.SetParent(coinHUD);
+            coinImage.SetParent(coinHud);
 
-            coinHUD.AddComponent<CCoinUIUpdater>();
-            coinHUD.GetComponent<CCoinUIUpdater>().TextRender = textField.GetComponent<CGuiTextRender>();
-            coinHUD.Transform.Position = position;
+            coinHud.AddComponent<CCoinUIUpdater>();
+            coinHud.GetComponent<CCoinUIUpdater>().TextRender = textField.GetComponent<CGuiTextRender>();
+            coinHud.Transform.Position = position;
 
-            return coinHUD;
+            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(0.8f, 0.893f), "UI.hud_bg.png");
+            bgImage.GetComponent<CImageRender>().SetSize(0.70f, 0.2f);
+            bgImage.GetComponent<CImageRender>().Layer = 29;
+
+            return coinHud;
         }
 
         public static GameObject BuildGameOverCoinUI(Scene scene, GameObject canvas, Vector2 position)
@@ -125,7 +129,7 @@ namespace Game.GameObjectFactory
             return gameOverCoinUI;
         }
 
-        public static GameObject BuildKeyHUD(Scene scene, GameObject canvas, Vector2 position)
+        public static GameObject BuildKeyHud(Scene scene, GameObject canvas, Vector2 position)
         {
             GameObject keyUI = new GameObject(scene, "KeyUI");
             keyUI.Transform.Position = position;
@@ -150,16 +154,21 @@ namespace Game.GameObjectFactory
             return keyUI;
         }
 
-        public static GameObject BuildPlayerHpHUD(Scene scene, GameObject canvas, Vector2 position)
+        public static GameObject BuildPlayerHpHud(Scene scene, GameObject canvas, Vector2 position)
         {
-            GameObject playerHP = new GameObject(scene, "PlayerHpHUD");
-            playerHP.Transform.Position = position;
+            GameObject playerHp = new GameObject(scene, "PlayerHpHUD");
+            playerHp.Transform.Position = position;
 
             GameObject textField = BuildTextField(scene, canvas, Vector2.Zero, "PlayerHP");
-            textField.GetComponent<CGuiTextRender>().SetSize(0.08f);
-            textField.SetParent(playerHP);
+            textField.GetComponent<CGuiTextRender>().SetSize(0.075f);
+            textField.GetComponent<CGuiTextRender>().Centered = true;
+            textField.SetParent(playerHp);
 
-            return playerHP;
+            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(0.8f, -0.893f), "UI.hud_bg.png");
+            bgImage.GetComponent<CImageRender>().SetSize(0.70f, 0.2f);
+            bgImage.GetComponent<CImageRender>().Layer = 29;
+
+            return playerHp;
         }
 
         public static GameObject BuildShopScreen(Scene scene, GameObject canvas, Vector2 position)

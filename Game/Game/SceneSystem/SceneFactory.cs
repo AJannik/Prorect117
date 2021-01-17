@@ -115,10 +115,10 @@ namespace Game.SceneSystem
             shopScreen.Active = false;
 
             // Coin, PlayerHP and Key HUD
-            GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
-            GuiFactory.BuildKeyHUD(scene, canvas, new Vector2(0.7f, 0.9f));
-            GameObject playerHpHUD = GuiFactory.BuildPlayerHpHUD(scene, canvas, new Vector2(0.58f, -0.9f));
-            player.GetComponent<CPlayerCombatController>().HpText = playerHpHUD.GetChild(0).GetComponent<CGuiTextRender>();
+            GuiFactory.BuildCoinHud(scene, canvas, new Vector2(0.85f, 0.89f));
+            GuiFactory.BuildKeyHud(scene, canvas, new Vector2(0.7f, 0.89f));
+            GameObject playerHpHud = GuiFactory.BuildPlayerHpHud(scene, canvas, new Vector2(0.795f, -0.935f));
+            player.GetComponent<CPlayerCombatController>().HpText = playerHpHud.GetChild(0).GetComponent<CGuiTextRender>();
 
             // Enemies
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));
@@ -264,11 +264,10 @@ namespace Game.SceneSystem
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
             // Coin, PlayerHP and Key HUD
-            GuiFactory.BuildCoinHUD(scene, canvas, new Vector2(0.85f, 0.9f));
-            GuiFactory.BuildKeyHUD(scene, canvas, new Vector2(0.7f, 0.9f));
-            GameObject playerHpHUD = GuiFactory.BuildPlayerHpHUD(scene, canvas, new Vector2(0.58f, -0.9f));
-            player.GetComponent<CPlayerCombatController>().HpText =
-                playerHpHUD.GetChild(0).GetComponent<CGuiTextRender>();
+            GuiFactory.BuildCoinHud(scene, canvas, new Vector2(0.85f, 0.89f));
+            GuiFactory.BuildKeyHud(scene, canvas, new Vector2(0.7f, 0.89f));
+            GameObject playerHpHud = GuiFactory.BuildPlayerHpHud(scene, canvas, new Vector2(0.795f, -0.935f));
+            player.GetComponent<CPlayerCombatController>().HpText = playerHpHud.GetChild(0).GetComponent<CGuiTextRender>();
 
             // Collectables
             ObjectFactory.BuildCoin(scene, new Vector2(10.5f, 3.5f));

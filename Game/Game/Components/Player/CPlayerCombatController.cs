@@ -87,7 +87,7 @@ namespace Game.Components.Player
                 RollCooldown -= deltaTime;
             }
 
-            HpText.Text = $"{(int)Combat.CurrentHealth} / {(int)Combat.MaxHealth}";
+            HpText.Text = $"{(int)Combat.CurrentHealth}/{(int)Combat.MaxHealth}";
         }
 
         private void ComboAttack(bool leftSide)

@@ -50,7 +50,6 @@
     <EmbeddedResource Include="Content\Environment\TreeSmall.png" />
     <EmbeddedResource Include="Content\Font.png" />
     <EmbeddedResource Include="Content\goldcoin1.png" />
-    <EmbeddedResource Include="Content\goldcoin2.png" />
     <EmbeddedResource Include="Content\GrassSpritesheet.png" />
     <EmbeddedResource Include="Content\PowerDownRed.png" />
     <EmbeddedResource Include="Content\PowerDownGreen.png" />
@@ -70,6 +69,8 @@
     <EmbeddedResource Include="Content\UI\ui_grey_unclicked.png" />
     <EmbeddedResource Include="Content\UI\ui_wood_sign.png" />
     <EmbeddedResource Include="Content\WallSpritesheet.png" />
+    <None Remove="Content\UI\hud_bg.png" />
+    <EmbeddedResource Include="Content\UI\hud_bg.png" />
   </ItemGroup>
 
   <ItemGroup>
