@@ -296,6 +296,12 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(104f, -1f), new Vector2(22f, 1f), new Vector2(92.5f, 2.5f), 30);
             StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(120.5f, -1f), new Vector2(9f, 1f), new Vector2(116f, 2.5f), 30);
 
+            // Spike sprites
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(40f, -1.8f), 5);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(53.5f, -1.8f), 22);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(104f, -1.8f), 23);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(120.5f, -1.8f), 10);
+
             // Background
             GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
             background.SetParent(camera);

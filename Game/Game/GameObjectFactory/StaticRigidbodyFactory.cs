@@ -97,5 +97,21 @@ namespace Game.GameObjectFactory
 
             return deadlyArea;
         }
+
+        public static GameObject BuildSpikes(Scene scene, Vector2 position, int length)
+        {
+            GameObject spikes = new GameObject(scene, "Spikes");
+            position.X = position.X - (length / 2f);
+            spikes.Transform.Position = position;
+
+            for (int i = 0; i < length; i++)
+            {
+                spikes.AddComponent<CRender>();
+                spikes.GetComponents<CRender>()[i].LoadAndSetTexture("Content.Environment.spike.png");
+                spikes.GetComponents<CRender>()[i].SetOffset(i * 1f, 0f);
+            }
+
+            return spikes;
+        }
     }
 }
