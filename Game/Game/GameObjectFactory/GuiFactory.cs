@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game.Components.Player;
 using Game.Components.UI;
 using Game.SceneSystem;
 using OpenTK;
@@ -87,29 +88,6 @@ namespace Game.GameObjectFactory
             return button;
         }
 
-        public static GameObject BuildCoinHud(Scene scene, GameObject canvas, Vector2 position)
-        {
-            GameObject coinHud = new GameObject(scene, "CoinHUD");
-            GameObject textField = BuildTextField(scene, canvas, Vector2.Zero, "0");
-            GameObject coinImage = BuildGuiImage(scene, canvas, new Vector2(-0.05f, -0f), "goldcoin1.png");
-
-            textField.GetComponent<CGuiTextRender>().SetSize(0.05f);
-            textField.SetParent(coinHud);
-
-            coinImage.GetComponent<CImageRender>().SetSize(0.09f, 0.09f);
-            coinImage.SetParent(coinHud);
-
-            coinHud.AddComponent<CCoinUIUpdater>();
-            coinHud.GetComponent<CCoinUIUpdater>().TextRender = textField.GetComponent<CGuiTextRender>();
-            coinHud.Transform.Position = position;
-
-            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(0.8f, 0.893f), "UI.hud_bg.png");
-            bgImage.GetComponent<CImageRender>().SetSize(0.70f, 0.2f);
-            bgImage.GetComponent<CImageRender>().Layer = 29;
-
-            return coinHud;
-        }
-
         public static GameObject BuildGameOverCoinUI(Scene scene, GameObject canvas, Vector2 position)
         {
             GameObject gameOverCoinUI = new GameObject(scene, "CoinUI");
@@ -127,48 +105,6 @@ namespace Game.GameObjectFactory
             coinText.GetComponent<CGuiTextRender>().SetSize(0.06f);
 
             return gameOverCoinUI;
-        }
-
-        public static GameObject BuildKeyHud(Scene scene, GameObject canvas, Vector2 position)
-        {
-            GameObject keyUI = new GameObject(scene, "KeyUI");
-            keyUI.Transform.Position = position;
-
-            keyUI.AddComponent<CImageRender>();
-            CImageRender keyInactive = keyUI.GetComponent<CImageRender>();
-            keyInactive.LoadAndSetTexture("Content.KeyInactive.png");
-            keyInactive.SetSize(0.12f, 0.12f);
-            keyInactive.Canvas = canvas.GetComponent<CCanvas>();
-
-            keyUI.AddComponent<CImageRender>();
-            CImageRender keyActive = keyUI.GetComponents<CImageRender>()[1];
-            keyActive.LoadAndSetTexture("Content.Key.png");
-            keyActive.SetSize(0.12f, 0.12f);
-            keyActive.Canvas = canvas.GetComponent<CCanvas>();
-            keyActive.Visible = false;
-
-            keyUI.AddComponent<CKeyUIUpdater>();
-            keyUI.GetComponent<CKeyUIUpdater>().KeyActive = keyActive;
-            keyUI.GetComponent<CKeyUIUpdater>().KeyInactive = keyInactive;
-
-            return keyUI;
-        }
-
-        public static GameObject BuildPlayerHpHud(Scene scene, GameObject canvas, Vector2 position)
-        {
-            GameObject playerHp = new GameObject(scene, "PlayerHpHUD");
-            playerHp.Transform.Position = position;
-
-            GameObject textField = BuildTextField(scene, canvas, Vector2.Zero, "PlayerHP");
-            textField.GetComponent<CGuiTextRender>().SetSize(0.075f);
-            textField.GetComponent<CGuiTextRender>().Centered = true;
-            textField.SetParent(playerHp);
-
-            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(0.8f, -0.893f), "UI.hud_bg.png");
-            bgImage.GetComponent<CImageRender>().SetSize(0.70f, 0.2f);
-            bgImage.GetComponent<CImageRender>().Layer = 29;
-
-            return playerHp;
         }
 
         public static GameObject BuildShopScreen(Scene scene, GameObject canvas, Vector2 position)
@@ -217,6 +153,84 @@ namespace Game.GameObjectFactory
             shopScreen.GetComponent<CShopScreen>().HealButton = buyHealthButton;
 
             return shopScreen;
+        }
+
+        public static GameObject BuildHudElements(Scene scene, GameObject canvas, CPlayerCombatController playerCombatController)
+        {
+            GameObject hud = new GameObject(scene, "Hud");
+
+            BuildPlayerHpHud(scene, canvas, new Vector2(0.795f, -0.935f)).SetParent(hud);
+            BuildCoinHud(scene, canvas, new Vector2(0.85f, 0.89f)).SetParent(hud);
+            BuildKeyHud(scene, canvas, new Vector2(0.7f, 0.89f)).SetParent(hud);
+
+            playerCombatController.HpText = hud.GetChild(0).GetChild(0).GetComponent<CGuiTextRender>();
+
+            return hud;
+        }
+
+        private static GameObject BuildPlayerHpHud(Scene scene, GameObject canvas, Vector2 position)
+        {
+            GameObject playerHp = new GameObject(scene, "PlayerHpHUD");
+            playerHp.Transform.Position = position;
+
+            GameObject textField = BuildTextField(scene, canvas, Vector2.Zero, "PlayerHP");
+            textField.GetComponent<CGuiTextRender>().SetSize(0.075f);
+            textField.GetComponent<CGuiTextRender>().Centered = true;
+            textField.SetParent(playerHp);
+
+            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(0.8f, -0.893f), "UI.hud_bg.png");
+            bgImage.GetComponent<CImageRender>().SetSize(0.70f, 0.2f);
+            bgImage.GetComponent<CImageRender>().Layer = 29;
+
+            return playerHp;
+        }
+
+        private static GameObject BuildKeyHud(Scene scene, GameObject canvas, Vector2 position)
+        {
+            GameObject keyUI = new GameObject(scene, "KeyUI");
+            keyUI.Transform.Position = position;
+
+            keyUI.AddComponent<CImageRender>();
+            CImageRender keyInactive = keyUI.GetComponent<CImageRender>();
+            keyInactive.LoadAndSetTexture("Content.KeyInactive.png");
+            keyInactive.SetSize(0.12f, 0.12f);
+            keyInactive.Canvas = canvas.GetComponent<CCanvas>();
+
+            keyUI.AddComponent<CImageRender>();
+            CImageRender keyActive = keyUI.GetComponents<CImageRender>()[1];
+            keyActive.LoadAndSetTexture("Content.Key.png");
+            keyActive.SetSize(0.12f, 0.12f);
+            keyActive.Canvas = canvas.GetComponent<CCanvas>();
+            keyActive.Visible = false;
+
+            keyUI.AddComponent<CKeyUIUpdater>();
+            keyUI.GetComponent<CKeyUIUpdater>().KeyActive = keyActive;
+            keyUI.GetComponent<CKeyUIUpdater>().KeyInactive = keyInactive;
+
+            return keyUI;
+        }
+
+        private static GameObject BuildCoinHud(Scene scene, GameObject canvas, Vector2 position)
+        {
+            GameObject coinHud = new GameObject(scene, "CoinHUD");
+            GameObject textField = BuildTextField(scene, canvas, Vector2.Zero, "0");
+            GameObject coinImage = BuildGuiImage(scene, canvas, new Vector2(-0.05f, -0f), "goldcoin1.png");
+
+            textField.GetComponent<CGuiTextRender>().SetSize(0.05f);
+            textField.SetParent(coinHud);
+
+            coinImage.GetComponent<CImageRender>().SetSize(0.09f, 0.09f);
+            coinImage.SetParent(coinHud);
+
+            coinHud.AddComponent<CCoinUIUpdater>();
+            coinHud.GetComponent<CCoinUIUpdater>().TextRender = textField.GetComponent<CGuiTextRender>();
+            coinHud.Transform.Position = position;
+
+            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(0.8f, 0.893f), "UI.hud_bg.png");
+            bgImage.GetComponent<CImageRender>().SetSize(0.70f, 0.2f);
+            bgImage.GetComponent<CImageRender>().Layer = 29;
+
+            return coinHud;
         }
     }
 }
