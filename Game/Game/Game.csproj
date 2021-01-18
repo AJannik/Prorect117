@@ -73,6 +73,8 @@
     <EmbeddedResource Include="Content\UI\hud_bg.png" />
     <None Remove="Content\Environment\spike.png" />
     <EmbeddedResource Include="Content\Environment\spike.png" />
+    <None Remove="Content\UI\ui_controls_bg.png" />
+    <EmbeddedResource Include="Content\UI\ui_controls_bg.png" />
   </ItemGroup>
 
   <ItemGroup>

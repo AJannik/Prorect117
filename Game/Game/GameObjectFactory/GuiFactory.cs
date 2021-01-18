@@ -232,5 +232,43 @@ namespace Game.GameObjectFactory
 
             return coinHud;
         }
+
+        public static GameObject BuildControls(Scene scene, GameObject canvas)
+        {
+            GameObject controls = new GameObject(scene, "Controls");
+            controls.AddComponent<CControlsWindow>();
+
+            GameObject bgImage = BuildGuiImage(scene, canvas, Vector2.Zero, "UI.ui_controls_bg.png");
+            bgImage.GetComponent<CImageRender>().SetSize(1.5f, 1f);
+            bgImage.GetComponent<CImageRender>().Layer = 29;
+            bgImage.SetParent(controls);
+
+            GameObject titel = BuildTextField(scene, canvas, new Vector2(0f, 0.35f), "CONTROLS");
+            titel.GetComponent<CGuiTextRender>().SetSize(0.08f);
+            titel.GetComponent<CGuiTextRender>().Centered = true;
+            titel.SetParent(controls);
+
+            GameObject movement = BuildTextField(scene, canvas, new Vector2(-0.3f, 0.23f), "A / D  - WALK LEFT-RIGHT");
+            movement.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            movement.SetParent(controls);
+
+            GameObject jump = BuildTextField(scene, canvas, new Vector2(-0.3f, 0.11f), "SPACE  - JUMP");
+            jump.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            jump.SetParent(controls);
+
+            GameObject roll = BuildTextField(scene, canvas, new Vector2(-0.3f, -0.01f), "LSHIFT - ROLL");
+            roll.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            roll.SetParent(controls);
+
+            GameObject attack = BuildTextField(scene, canvas, new Vector2(-0.3f, -0.13f), "LMOUSE - ATTACK");
+            attack.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            attack.SetParent(controls);
+
+            GameObject btnClose = BuildButton(scene, canvas, new Vector2(0f, -0.33f), new Vector2(0.5f, 0.1f), "GOT IT!");
+            btnClose.GetComponent<CButton>().ButtonClicked += controls.GetComponent<CControlsWindow>().OnBtnClick;
+            btnClose.SetParent(controls);
+
+            return controls;
+        }
     }
 }

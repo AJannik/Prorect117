@@ -117,6 +117,9 @@ namespace Game.SceneSystem
             // Coin, PlayerHP and Key HUD
             GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
 
+            // Controls
+            GuiFactory.BuildControls(scene, canvas);
+
             // Enemies
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(27.5f, 2f));
