@@ -26,18 +26,10 @@ namespace Game.Components
             }
         }
 
-        public void DisplayDamage(int damage)
+        public void DisplayDamage(string damage, Color color)
         {
-            if (damage < 0)
-            {
-                DamageText.FontColor = Color.Red;
-                DamageText.Text = $"{damage}";
-            }
-            else
-            {
-                DamageText.FontColor = Color.Green;
-                DamageText.Text = $"+{damage}";
-            }
+            DamageText.FontColor = color;
+            DamageText.Text = damage;
 
             DamageText.Visible = true;
             CurrentTime = DisplayTime;

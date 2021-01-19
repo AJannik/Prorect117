@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Game.Components.Renderer;
 using Game.Interfaces;
+using OpenTK;
 
 namespace Game.Components
 {
@@ -176,13 +177,17 @@ namespace Game.Components
                     CurrentHealth -= dmg;
                 }
 
-                DamageDisplay?.DisplayDamage((int)-dmg);
                 AnimationSystem?.PlayAnimation(dmgAnimationName, true);
                 BleedTime = 0.1f;
 
                 if (MyGameObject.Name == "Player")
                 {
                     MyGameObject.Scene.GameManager.PlayerHealth = CurrentHealth;
+                    DamageDisplay?.DisplayDamage($"{(int)CurrentHealth}/{MaxHealth}", Color.White);
+                }
+                else
+                {
+                    DamageDisplay?.DisplayDamage($"-{(int)dmg}", Color.DarkRed);
                 }
             }
         }
