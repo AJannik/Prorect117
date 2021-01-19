@@ -16,9 +16,9 @@ namespace Game
         {
             const int width = 1366;
             const int height = 768;
-            window = new GameWindow(width, height) { VSync = VSyncMode.On };
-            window.TargetRenderFrequency = 60;
-            window.TargetUpdateFrequency = 60;
+            window = new GameWindow(width, height) { VSync = VSyncMode.Adaptive };
+            //window.TargetRenderFrequency = 60;
+            //window.TargetUpdateFrequency = 60;
             sceneManager = new SceneManager(width, height, this);
             accumulator = 0f;
             alpha = 1f;
