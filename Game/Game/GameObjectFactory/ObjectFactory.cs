@@ -14,12 +14,14 @@ namespace Game.GameObjectFactory
 {
     public static class ObjectFactory
     {
-        public static GameObject BuildSprite(Scene scene, Vector2 position, string texture)
+        public static GameObject BuildSprite(Scene scene, Vector2 position, Vector2 size, string texture)
         {
             GameObject sprite = new GameObject(scene);
             sprite.Transform.Position = position;
 
             sprite.AddComponent<CRender>();
+            sprite.GetComponent<CRender>().Layer = 9;
+            sprite.GetComponent<CRender>().SetSize(size.X, size.Y);
             sprite.GetComponent<CRender>().LoadAndSetTexture($"Content.{texture}");
 
             return sprite;
