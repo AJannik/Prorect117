@@ -96,6 +96,12 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(17.5f, 7.5f), 7);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(24.5f, 3f), 4);
 
+            // Decorations
+            ObjectFactory.BuildSprite(scene, new Vector2(3f, 3f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(24f, 8f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(12f, 12f), new Vector2(3, 2), "Environment.Bush.png");
+
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
             GameObject levelEnd =
