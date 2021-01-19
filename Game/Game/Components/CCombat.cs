@@ -36,6 +36,8 @@ namespace Game.Components
 
         public CDamageDisplay DamageDisplay { get; set; }
 
+        public CParticleSystem BloodParticles { get; set; }
+
         public float CurrentHealth { get; set; } = 100f;
 
         public float Armor { get; set; } = 10f;
@@ -53,6 +55,8 @@ namespace Game.Components
         private float DeathTime { get; set; } = 0f;
 
         private bool Dying { get; set; } = false;
+
+        private float BleedTime { get; set; } = 0f;
 
         public void Start()
         {
@@ -77,6 +81,16 @@ namespace Game.Components
             if (InvincibleTime >= 0f)
             {
                 InvincibleTime -= deltaTime;
+            }
+
+            if (BleedTime > 0f && BloodParticles != null)
+            {
+                BleedTime -= deltaTime;
+                BloodParticles.Actice = true;
+            }
+            else if (BloodParticles != null)
+            {
+                BloodParticles.Actice = false;
             }
 
             if (CurrentHealth <= 0f)
@@ -164,6 +178,7 @@ namespace Game.Components
 
                 DamageDisplay?.DisplayDamage((int)-dmg);
                 AnimationSystem?.PlayAnimation(dmgAnimationName, true);
+                BleedTime = 0.1f;
 
                 if (MyGameObject.Name == "Player")
                 {

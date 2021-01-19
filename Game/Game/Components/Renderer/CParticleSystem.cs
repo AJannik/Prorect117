@@ -119,11 +119,6 @@ namespace Game.Components.Renderer
 
         public void Update(float deltaTime)
         {
-            if (!Actice)
-            {
-                return;
-            }
-
             foreach (Particle particle in Particles.ToList())
             {
                 particle.Update(deltaTime, UseForceField ? ForceFieldDirection : Vector2.Zero);
@@ -165,11 +160,6 @@ namespace Game.Components.Renderer
 
         public void Draw(float alpha)
         {
-            if (!Actice)
-            {
-                return;
-            }
-
             int i = 0;
             foreach (Particle particle in Particles)
             {
@@ -249,6 +239,11 @@ namespace Game.Components.Renderer
 
         private void AddParticles(float deltaTime)
         {
+            if (!Actice)
+            {
+                return;
+            }
+
             ParticleTime += deltaTime;
             while (ParticleTime > particleFrequency)
             {

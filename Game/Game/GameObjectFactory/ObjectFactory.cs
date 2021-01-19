@@ -211,6 +211,8 @@ namespace Game.GameObjectFactory
             particleSystem.PositionXRandomness = 0.1f;
             particleSystem.PositionYRandomness = 1.1f;
 
+            player.GetComponent<CCombat>().BloodParticles = particleSystem;
+
             return player;
         }
 

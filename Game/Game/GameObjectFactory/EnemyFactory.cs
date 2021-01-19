@@ -98,6 +98,8 @@ namespace Game.GameObjectFactory
             particleSystem.PositionXRandomness = 0.1f;
             particleSystem.PositionYRandomness = 1.1f;
 
+            enemy.GetComponent<CCombat>().BloodParticles = particleSystem;
+
             return enemy;
         }
 
@@ -188,6 +190,8 @@ namespace Game.GameObjectFactory
             particleSystem.Layer = 30;
             particleSystem.PositionXRandomness = 0.1f;
             particleSystem.PositionYRandomness = 1.1f;
+
+            enemy.GetComponent<CCombat>().BloodParticles = particleSystem;
 
             return enemy;
         }
