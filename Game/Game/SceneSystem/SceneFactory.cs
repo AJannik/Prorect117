@@ -333,8 +333,8 @@ namespace Game.SceneSystem
             textField.GetComponent<CGuiTextRender>().SetSize(0.3f);
             gameOverManager.GetComponent<CGameOverUI>().Title = textField.GetComponent<CGuiTextRender>();
 
-            GameObject coinUI = GuiFactory.BuildGameOverCoinUI(scene, canvas, Vector2.Zero);
-            gameOverManager.GetComponent<CGameOverUI>().CoinsText = coinUI.GetChild(1).GetComponent<CGuiTextRender>();
+            GameObject coinUi = GuiFactory.BuildGameOverCoinUi(scene, canvas, Vector2.Zero);
+            gameOverManager.GetComponent<CGameOverUI>().CoinsText = coinUi.GetChild(1).GetComponent<CGuiTextRender>();
 
             // Buttons
             GameObject exitButton = GuiFactory.BuildButton(scene, canvas, new Vector2(0.5f, -0.4f), new Vector2(1.2f, 0.15f), "EXIT");
