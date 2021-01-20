@@ -502,11 +502,19 @@ namespace Game.SceneSystem
             // Power Downs TODO
             PowerDownFactory.Slowness(scene, new Vector2(57.5f, 11f));
 
-            // Level dead-zones TODO
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(40f, -1f), new Vector2(4f, 1f), new Vector2(37f, 2.5f), 30);
+            // Level dead-zones
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(2.5f, -46.5f), new Vector2(3f, 1f), new Vector2(4.5f, -43.5f), 25);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(2.5f, -94.5f), new Vector2(3f, 1f), new Vector2(4.5f, -91.5f), 25);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(4f, -86.5f), new Vector2(2f, 1f), new Vector2(5.5f, -81.5f), 25);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(29.5f, -83.5f), new Vector2(3f, 1f), new Vector2(27.5f, -80.5f), 25);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(30f, -13.5f), new Vector2(2f, 1f), new Vector2(28.5f, -8.5f), 25);
 
-            // Spike sprites TODO
-            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(40f, -1.8f), 5);
+            // Spike sprites
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(3f, -46.5f), 3);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(3f, -94.5f), 3);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(4.5f, -86.5f), 2);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(30f, -83.5f), 3);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(30.5f, -13.5f), 2);
 
             // Background
             GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
