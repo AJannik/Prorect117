@@ -369,6 +369,28 @@ namespace Game.GameObjectFactory
             return spikes;
         }
 
+        public static GameObject BuildMovingDeadlyArea(Scene scene, Vector2 position, Vector2 goal, Vector2 size, Vector2 lastPosition, float dmg)
+        {
+            GameObject deadlyArea = new GameObject(scene, "DeadlyArea");
+            deadlyArea.Transform.Position = position;
+            deadlyArea.AddComponent<CPeriodicMovement>();
+            CPeriodicMovement periodicMovement = deadlyArea.GetComponent<CPeriodicMovement>();
+            periodicMovement.Start = position;
+            periodicMovement.End = goal;
+            periodicMovement.MoveSpeed = 2f;
+
+            deadlyArea.AddComponent<CBoxTrigger>();
+            CBoxTrigger trigger = deadlyArea.GetComponent<CBoxTrigger>();
+            trigger.Geometry.Size = size;
+            deadlyArea.AddComponent<CResetController>();
+            CResetController controller = deadlyArea.GetComponent<CResetController>();
+            controller.PreviousPos = lastPosition;
+            controller.SetupTrigger(trigger);
+            controller.Damage = dmg;
+
+            return deadlyArea;
+        }
+
         private static GameObject BuildDisplayPlayerDamage(Scene scene, GameObject parent, Vector2 position)
         {
             GameObject damageDisplay = new GameObject(scene, "DisplayPlayerDamage", parent);
