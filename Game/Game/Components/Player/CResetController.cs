@@ -19,7 +19,6 @@ namespace Game.Components.Player
 
         private void Triggered(object sender, IComponent e)
         {
-            Console.WriteLine("Triggered by " + e.MyGameObject.Name);
             if (e.MyGameObject.Name == "Player")
             {
                 e.MyGameObject.Transform.Position = PreviousPos;
