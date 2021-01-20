@@ -339,7 +339,7 @@ namespace Game.GameObjectFactory
             floor.GetComponents<CTileRenderer>()[1].Layer = 11;
 
             floor.AddComponent<CBoxCollider>();
-            floor.GetComponent<CBoxCollider>().Geometry.Size = size;
+            floor.GetComponent<CBoxCollider>().Geometry.Size = 0.9f * size;
 
             floor.AddComponent<CRigidBody>();
             CRigidBody rb = floor.GetComponent<CRigidBody>();
