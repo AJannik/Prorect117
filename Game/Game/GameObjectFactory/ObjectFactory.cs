@@ -346,6 +346,51 @@ namespace Game.GameObjectFactory
             return floor;
         }
 
+        public static GameObject BuildMovingSpikes(Scene scene, Vector2 position, Vector2 goal, int length)
+        {
+            GameObject spikes = new GameObject(scene, "Spikes");
+            position.X = position.X - (length / 2f);
+            goal.X = goal.X - (length / 2f);
+            spikes.Transform.Position = position;
+
+            spikes.AddComponent<CPeriodicMovement>();
+            CPeriodicMovement periodicMovement = spikes.GetComponent<CPeriodicMovement>();
+            periodicMovement.Start = position;
+            periodicMovement.End = goal;
+            periodicMovement.MoveSpeed = 2f;
+
+            for (int i = 0; i < length; i++)
+            {
+                spikes.AddComponent<CRender>();
+                spikes.GetComponents<CRender>()[i].LoadAndSetTexture("Content.Environment.spike.png");
+                spikes.GetComponents<CRender>()[i].SetOffset(i * 1f, 0f);
+            }
+
+            return spikes;
+        }
+
+        public static GameObject BuildMovingDeadlyArea(Scene scene, Vector2 position, Vector2 goal, Vector2 size, Vector2 lastPosition, float dmg)
+        {
+            GameObject deadlyArea = new GameObject(scene, "DeadlyArea");
+            deadlyArea.Transform.Position = position;
+            deadlyArea.AddComponent<CPeriodicMovement>();
+            CPeriodicMovement periodicMovement = deadlyArea.GetComponent<CPeriodicMovement>();
+            periodicMovement.Start = position;
+            periodicMovement.End = goal;
+            periodicMovement.MoveSpeed = 2f;
+
+            deadlyArea.AddComponent<CBoxTrigger>();
+            CBoxTrigger trigger = deadlyArea.GetComponent<CBoxTrigger>();
+            trigger.Geometry.Size = size;
+            deadlyArea.AddComponent<CResetController>();
+            CResetController controller = deadlyArea.GetComponent<CResetController>();
+            controller.PreviousPos = lastPosition;
+            controller.SetupTrigger(trigger);
+            controller.Damage = dmg;
+
+            return deadlyArea;
+        }
+
         private static GameObject BuildDisplayPlayerDamage(Scene scene, GameObject parent, Vector2 position)
         {
             GameObject damageDisplay = new GameObject(scene, "DisplayPlayerDamage", parent);
