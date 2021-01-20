@@ -14,7 +14,7 @@ namespace Game.SceneSystem
             GameManager = gameManager;
         }
 
-        internal int NumScenes { get; } = 4;
+        internal int NumScenes { get; } = 5;
 
         private GameManager GameManager { get; }
 
@@ -25,7 +25,8 @@ namespace Game.SceneSystem
                 0 => BuildMainMenu(),
                 1 => BuildTutorialLevel(),
                 2 => BuildLevel1(),
-                3 => BuildGameOverScene(), // Last scene
+                3 => BuildLevel2(),
+                4 => BuildGameOverScene(), // Last scene
                 _ => throw new ArgumentOutOfRangeException($"There is no Scene numbered {num}!"),
             };
         }
@@ -104,11 +105,14 @@ namespace Game.SceneSystem
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
-            GameObject levelEnd =
-                StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.0f), new Vector2(1, 2));
+            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.0f), new Vector2(1, 2));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
+
+            // Enemies
+            EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));
+            EnemyFactory.BuildBanditEnemy(scene, new Vector2(27.5f, 2f));
 
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);
@@ -125,10 +129,6 @@ namespace Game.SceneSystem
 
             // Controls
             GuiFactory.BuildControls(scene, canvas);
-
-            // Enemies
-            EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));
-            EnemyFactory.BuildBanditEnemy(scene, new Vector2(27.5f, 2f));
 
             // Collectables
             ObjectFactory.BuildKey(scene, new Vector2(30.5f, 1.5f));
@@ -240,9 +240,7 @@ namespace Game.SceneSystem
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
-            GameObject levelEnd =
-                StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
-            levelEnd.GetComponent<CDoor>().LastLevel = true;
+            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
@@ -268,6 +266,12 @@ namespace Game.SceneSystem
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
+
+            // Shop
+            GameObject shopScreen = GuiFactory.BuildShopScreen(scene, canvas, Vector2.Zero);
+            levelEnd.GetComponent<CDoor>().ShopScreen = shopScreen.GetComponent<CShopScreen>();
+            shopScreen.GetComponent<CShopScreen>().Player = player;
+            shopScreen.Active = false;
 
             // Coin, PlayerHP and Key HUD
             GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
