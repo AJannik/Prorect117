@@ -56,8 +56,8 @@ namespace Game.Components
                         PickupDisplay.AddKey();
                     }
 
-                    e.MyGameObject.Scene.GameManager.Coins += 5;
-                    PickupDisplay.AddCoins(5);
+                    e.MyGameObject.Scene.GameManager.Coins += 9;
+                    PickupDisplay.AddCoins(9);
                 }
 
                 MyGameObject.Scene.RemoveGameObject(MyGameObject);
