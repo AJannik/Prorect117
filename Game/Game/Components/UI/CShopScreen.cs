@@ -43,7 +43,7 @@ namespace Game.Components.UI
                 }
             }
 
-            if (MyGameObject.Scene.GameManager.Coins < HealPrice)
+            if (MyGameObject.Scene.GameManager.Coins < HealPrice || MyGameObject.Scene.GameManager.PlayerHealth > 95f)
             {
                 HealButton.GetComponent<CButton>().Active = false;
             }
