@@ -474,7 +474,7 @@ namespace Game.SceneSystem
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(30f, -57.5f), new Vector2(30f, -69.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(30f, -93.5f), new Vector2(30f, -105.5f), 2);
 
-            // Level walls TODO
+            // Level walls
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(9.5f, -2.5f), 3);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(22.5f, -5.5f), 9);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(27.5f, -5f), 2);
@@ -572,8 +572,35 @@ namespace Game.SceneSystem
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
 
-            // Enemies TODO
-            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(7.5f, 14f));
+            // Enemies
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(5.5f, -6f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(18.5f, -11f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(10.5f, -12f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(4.5f, -15f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(15.5f, -17f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(6.5f, -19f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(10.5f, -22f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(6.5f, -25f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(22.5f, -28f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(18.5f, -39f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(11.5f, -42f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(10.5f, -49f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(25.5f, -49f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(11.5f, -56f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(13.5f, -59f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(24.5f, -59f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(17.5f, -70f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(26.5f, -71f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(4.5f, -77f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(12.5f, -77f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(22.5f, -81f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(8.5f, -82f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(19.5f, -97f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(2.5f, -110f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(15.5f, -111f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(7.5f, -122f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(16.5f, -126f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(24.5f, -126f));
 
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);
