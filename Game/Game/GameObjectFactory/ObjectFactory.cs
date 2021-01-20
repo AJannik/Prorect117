@@ -173,8 +173,11 @@ namespace Game.GameObjectFactory
             combatController.Controller = player.GetComponent<CPlayerController>();
 
             // display player damage
-            GameObject damageUi = BuildDisplayPlayerDamage(scene, player, new Vector2(0f, 1.1f));
+            GameObject damageUi = BuildDisplayPlayerDamage(scene, player, new Vector2(0f, 1.4f));
             player.GetComponent<CCombat>().DamageDisplay = damageUi.GetComponent<CDamageDisplay>();
+
+            // displays pickups like coins and keys
+            GameObject pickupDisplay = BuildPickupDisplay(scene, player, new Vector2(0f, 2f));
 
             // add hitbox to combatcontroller
             player.AddComponent<CBoxTrigger>();
@@ -216,20 +219,6 @@ namespace Game.GameObjectFactory
             player.GetComponent<CCombat>().BloodParticles = particleSystem;
 
             return player;
-        }
-
-        public static GameObject BuildDisplayPlayerDamage(Scene scene, GameObject parent, Vector2 position)
-        {
-            GameObject damageDisplay = new GameObject(scene, "DisplayPlayerDamage", parent);
-            damageDisplay.Transform.Position = position;
-
-            damageDisplay.AddComponent<CDamageDisplay>();
-            damageDisplay.AddComponent<CTextRender>();
-            damageDisplay.GetComponent<CTextRender>().Size = 0.2f;
-            damageDisplay.GetComponent<CTextRender>().Centered = true;
-            damageDisplay.GetComponent<CDamageDisplay>().DamageText = damageDisplay.GetComponent<CTextRender>();
-
-            return damageDisplay;
         }
 
         public static GameObject BuildPowerDown(Scene scene, Vector2 position)
@@ -355,6 +344,53 @@ namespace Game.GameObjectFactory
             rb.Static = true;
 
             return floor;
+        }
+
+        private static GameObject BuildDisplayPlayerDamage(Scene scene, GameObject parent, Vector2 position)
+        {
+            GameObject damageDisplay = new GameObject(scene, "DisplayPlayerDamage", parent);
+            damageDisplay.Transform.Position = position;
+
+            damageDisplay.AddComponent<CDamageDisplay>();
+            damageDisplay.AddComponent<CTextRender>();
+            damageDisplay.GetComponent<CTextRender>().Size = 0.27f;
+            damageDisplay.GetComponent<CTextRender>().Centered = true;
+            damageDisplay.GetComponent<CDamageDisplay>().DamageText = damageDisplay.GetComponent<CTextRender>();
+
+            return damageDisplay;
+        }
+
+        private static GameObject BuildPickupDisplay(Scene scene, GameObject parent, Vector2 position)
+        {
+            GameObject pickupDisplay = new GameObject(scene, "PickupDisplay", parent);
+            pickupDisplay.Transform.Position = position;
+            pickupDisplay.AddComponent<CPickupDisplay>();
+
+            GameObject coins = new GameObject(scene, "PickupCoins", pickupDisplay);
+            coins.Transform.Position = Vector2.Zero;
+            coins.AddComponent<CTextRender>();
+            coins.AddComponent<CRender>();
+            coins.GetComponent<CTextRender>().Size = 0.23f;
+            coins.GetComponent<CTextRender>().Offset = new Vector2(-0.6f, 0f);
+            coins.GetComponent<CRender>().SetSize(0.35f, 0.35f);
+            coins.GetComponent<CRender>().SetOffset(0.2f, 0.12f);
+            coins.GetComponent<CRender>().Layer = 21;
+
+            GameObject keysAndEffects = new GameObject(scene, "PickupKeysAndEffects", pickupDisplay);
+            keysAndEffects.Transform.Position = new Vector2(0f, 0.4f);
+            keysAndEffects.AddComponent<CTextRender>();
+            keysAndEffects.AddComponent<CRender>();
+            keysAndEffects.GetComponent<CTextRender>().Size = 0.25f;
+            keysAndEffects.GetComponent<CTextRender>().Offset = new Vector2(-0.7f, 0f);
+            keysAndEffects.GetComponent<CRender>().SetSize(0.5f, 0.5f);
+            keysAndEffects.GetComponent<CRender>().SetOffset(0.2f, 0.12f);
+            keysAndEffects.GetComponent<CRender>().Layer = 21;
+
+            pickupDisplay.GetComponent<CPickupDisplay>().TextRenderCoin = coins.GetComponent<CTextRender>();
+            pickupDisplay.GetComponent<CPickupDisplay>().RenderCoin = coins.GetComponent<CRender>();
+            pickupDisplay.GetComponent<CPickupDisplay>().TextRenderKey = keysAndEffects.GetComponent<CTextRender>();
+            pickupDisplay.GetComponent<CPickupDisplay>().RenderKey = keysAndEffects.GetComponent<CRender>();
+            return pickupDisplay;
         }
     }
 }

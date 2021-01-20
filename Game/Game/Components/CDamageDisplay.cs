@@ -10,7 +10,7 @@ namespace Game.Components
 
         public CTextRender DamageText { get; set; }
 
-        public float DisplayTime { get; set; } = 0.7f;
+        private float DisplayTime { get; set; } = 0.7f;
 
         private float CurrentTime { get; set; } = 0f;
 

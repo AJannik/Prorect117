@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game.Components.Player;
 using Game.Components.Renderer;
 using Game.Interfaces;
 using OpenTK;
@@ -53,6 +54,8 @@ namespace Game.Components
 
         public float InvincibleTime { get; set; } = 0f;
 
+        private CPickupDisplay PickupDisplay { get; set; }
+
         private float DeathTime { get; set; } = 0f;
 
         private bool Dying { get; set; } = false;
@@ -64,6 +67,23 @@ namespace Game.Components
             if (MyGameObject.Name == "Player")
             {
                 CurrentHealth = MyGameObject.Scene.GameManager.PlayerHealth;
+            }
+            else
+            {
+                foreach (GameObject gameObject in MyGameObject.Scene.GetGameObjects())
+                {
+                    if (gameObject.Name == "Player")
+                    {
+                        foreach (GameObject child in gameObject.GetAllChildren())
+                        {
+                            if (child.GetComponent<CPickupDisplay>() != null)
+                            {
+                                PickupDisplay = child.GetComponent<CPickupDisplay>();
+                                return;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -101,6 +121,11 @@ namespace Game.Components
                     AnimationSystem.PlayAnimation("Death", true);
                     DeathTime = 0.75f;
                     Dying = true;
+                    if (MyGameObject.Name != "Player")
+                    {
+                        MyGameObject.Scene.GameManager.Coins += 2;
+                        PickupDisplay.AddCoins(2);
+                    }
                 }
                 else if (DeathTime <= 0f)
                 {
@@ -109,10 +134,6 @@ namespace Game.Components
                     {
                         MyGameObject.Scene.GameManager.EndGame();
                         MyGameObject.Scene.GameManager.PlayerWon = false;
-                    }
-                    else
-                    {
-                        MyGameObject.Scene.GameManager.Coins += 2;
                     }
                 }
                 else

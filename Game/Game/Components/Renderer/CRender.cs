@@ -51,6 +51,11 @@ namespace Game.Components.Renderer
 
         public void Draw(float alpha)
         {
+            if (!Visible)
+            {
+                return;
+            }
+
             GL.BindTexture(TextureTarget.Texture2D, Texture);
             GL.Color3(TintColor);
 
