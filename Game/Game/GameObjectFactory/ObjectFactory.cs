@@ -319,7 +319,7 @@ namespace Game.GameObjectFactory
         public static GameObject BuildMovingPlatform(Scene scene, Vector2 position1, Vector2 position2, int length)
         {
             GameObject floor = new GameObject(scene, "Floor");
-            Vector2 size = new Vector2(length - 0.1f, 1f);
+            Vector2 size = new Vector2(length, 1f);
 
             floor.AddComponent<CPeriodicMovement>();
             CPeriodicMovement periodicMovement = floor.GetComponent<CPeriodicMovement>();
