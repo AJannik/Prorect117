@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Game.Components;
 using Game.Components.Collision;
 using Game.Components.Renderer;
@@ -6,6 +7,7 @@ using OpenTK;
 
 namespace Game.GameObjectFactory
 {
+    [ExcludeFromCodeCoverage]
     public class PowerDownFactory
     {
         public static GameObject Slowness(Scene scene, Vector2 position)

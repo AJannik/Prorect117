@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Game.Components;
 using Game.Components.Collision;
@@ -12,6 +13,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Game.GameObjectFactory
 {
+    [ExcludeFromCodeCoverage]
     public static class ObjectFactory
     {
         public static GameObject BuildSprite(Scene scene, Vector2 position, Vector2 size, string texture)

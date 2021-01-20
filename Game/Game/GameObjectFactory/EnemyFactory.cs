@@ -1,4 +1,5 @@
-﻿using Game.Components;
+﻿using System.Diagnostics.CodeAnalysis;
+using Game.Components;
 using Game.Components.Collision;
 using Game.Components.Renderer;
 using Game.SceneSystem;
@@ -7,6 +8,7 @@ using OpenTK;
 
 namespace Game.GameObjectFactory
 {
+    [ExcludeFromCodeCoverage]
     public static class EnemyFactory
     {
         // A bit stronger than the bandit

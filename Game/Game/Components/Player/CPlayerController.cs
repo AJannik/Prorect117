@@ -124,7 +124,7 @@ namespace Game.Components.Player
 
         private void OnGroundTriggerExited(object sender, IComponent e)
         {
-            if (e.MyGameObject.Name == "Floor")
+            if (e.MyGameObject.Name == "Floor" || e.MyGameObject.Name == "Wall")
             {
                 OnGround--;
             }
@@ -132,7 +132,7 @@ namespace Game.Components.Player
 
         private void OnGroundTriggerEntered(object sender, IComponent e)
         {
-            if (e.MyGameObject.Name == "Floor")
+            if (e.MyGameObject.Name == "Floor" || e.MyGameObject.Name == "Wall")
             {
                 OnGround++;
                 Jumping = false;

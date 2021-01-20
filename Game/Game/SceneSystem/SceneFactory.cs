@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Game.Components;
 using Game.Components.Player;
 using Game.Components.UI;
@@ -7,6 +8,7 @@ using OpenTK;
 
 namespace Game.SceneSystem
 {
+    [ExcludeFromCodeCoverage]
     internal class SceneFactory
     {
         public SceneFactory(GameManager gameManager)
