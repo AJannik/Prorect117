@@ -463,15 +463,23 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(30.5f, -112.5f), 1);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(30.5f, -120.5f), 1);
 
-            // Moving platforms TODO
-            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, 9.5f), new Vector2(2f, 12.5f), 2);
+            // Moving platforms
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, -22.5f), new Vector2(2f, -29.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, -38.5f), new Vector2(2f, -45.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, -53.5f), new Vector2(2f, -57.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(1.5f, -68.5f), new Vector2(1.5f, -75.5f), 1);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(1.5f, -82.5f), new Vector2(1.5f, -93.5f), 1);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, -116.5f), new Vector2(2f, -123.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(30f, -42.5f), new Vector2(30f, -47.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(30f, -57.5f), new Vector2(30f, -69.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(30f, -93.5f), new Vector2(30f, -105.5f), 2);
 
             // Level walls TODO
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(6.5f, 5f), 2);
 
-            // Player, exit and camera TODO
-            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
-            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
+            // Player, exit and camera
+            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(10.5f, -125.9f));
+            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(7.5f, 2.5f), new Vector2(3, 3));
             levelEnd.GetComponent<CDoor>().LastLevel = true;
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
