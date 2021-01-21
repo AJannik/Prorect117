@@ -1,4 +1,5 @@
-﻿using Game.Components;
+﻿using System.Diagnostics.CodeAnalysis;
+using Game.Components;
 using Game.Components.Collision;
 using Game.Components.Player;
 using Game.Components.Renderer;
@@ -7,6 +8,7 @@ using OpenTK;
 
 namespace Game.GameObjectFactory
 {
+    [ExcludeFromCodeCoverage]
     public static class StaticRigidbodyFactory
     {
         public static GameObject BuildPlatform(Scene scene, Vector2 position, int length)

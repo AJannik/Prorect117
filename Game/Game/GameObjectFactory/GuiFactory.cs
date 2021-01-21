@@ -1,10 +1,12 @@
-﻿using Game.Components.Player;
+﻿using System.Diagnostics.CodeAnalysis;
+using Game.Components.Player;
 using Game.Components.UI;
 using Game.SceneSystem;
 using OpenTK;
 
 namespace Game.GameObjectFactory
 {
+    [ExcludeFromCodeCoverage]
     public static class GuiFactory
     {
         public static GameObject BuildCanvas(Scene scene)
