@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using Game.Components.Collision;
+using Game.Components.Combat;
 using Game.Components.Renderer;
 using Game.Interfaces;
 using OpenTK;

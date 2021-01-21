@@ -100,10 +100,8 @@ namespace UnitTests
         private void RemoveGivenComponent(GameObject gameObject)
         {
             // Test removing component T of given type
-            DummyComponent2 dummy = gameObject.GetComponents<DummyComponent2>()[1];
-            gameObject.RemoveComponent(dummy);
+            gameObject.RemoveComponent<DummyComponent2>();
             Assert.AreEqual(1, gameObject.GetNumberComponents());
-            Assert.AreNotEqual(dummy, gameObject.GetComponent<DummyComponent2>());
         }
 
         [TestMethod]

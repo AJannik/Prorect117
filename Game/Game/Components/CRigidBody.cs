@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Components.Collision;
+using Game.Components.Combat;
 using Game.Interfaces;
 using Game.Physics;
 using OpenTK;

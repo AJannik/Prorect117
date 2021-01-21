@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using Game.Components.Combat;
 using Game.Components.Player;
 using Game.Interfaces;
 using Game.Tools;
