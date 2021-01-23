@@ -2,7 +2,7 @@ using Game.Components.Renderer;
 using Game.Interfaces;
 using OpenTK;
 
-namespace Game.Components
+namespace Game.Components.Combat
 {
     public class CDamageDisplay : IComponent, IUpdateable
     {

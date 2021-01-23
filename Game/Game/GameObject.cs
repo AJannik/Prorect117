@@ -169,25 +169,6 @@ namespace Game
         }
 
         /// <summary>
-        /// Removes <c>component</c> of type T from GameObject.
-        /// </summary>
-        /// <typeparam name="T">Class that implements IComponent.</typeparam>
-        /// <param name="component">Component to be removed.</param>
-        public void RemoveComponent<T>(T component)
-            where T : class, IComponent
-        {
-            foreach (IComponent comp in components)
-            {
-                if (comp.GetType() == typeof(T) && comp == component)
-                {
-                    components.Remove(comp);
-                    Scene.RemoveComponent(component);
-                    return;
-                }
-            }
-        }
-
-        /// <summary>
         /// Returns the number of components this GameObject owns.
         /// </summary>
         /// <returns>Number of components.</returns>
@@ -266,16 +247,6 @@ namespace Game
             }
 
             return null;
-        }
-
-        /// <summary>
-        /// Check if <c>gameObject</c> is a child this GameObject.
-        /// </summary>
-        /// <param name="gameObject">The Object you want to check if it is a child of this GameObject.</param>
-        /// <returns>true or false.</returns>
-        public bool IsChildOfThis(GameObject gameObject)
-        {
-            return Children.Contains(gameObject);
         }
 
         private void AddChild(GameObject child)
