@@ -1,4 +1,7 @@
-﻿using Game.Interfaces;
+﻿using Game.GameObjectFactory;
+using Game.Interfaces;
+using Game.Tools;
+using OpenTK;
 
 namespace Game.Components.UI
 {
@@ -27,6 +30,8 @@ namespace Game.Components.UI
             {
                 HealButton.GetComponent<CButton>().Active = false;
             }
+
+            DisplayPowerDowns();
         }
 
         public void BuyHealth(object sender, int i)
@@ -46,6 +51,41 @@ namespace Game.Components.UI
             if (MyGameObject.Scene.GameManager.Coins < HealPrice || MyGameObject.Scene.GameManager.PlayerHealth > 95f)
             {
                 HealButton.GetComponent<CButton>().Active = false;
+            }
+        }
+
+        private void DisplayPowerDowns()
+        {
+            int i = 0;
+            if (MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Fragile) > 0)
+            {
+                string text = $"{MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Fragile)}x {EffectType.Fragile}";
+                Vector2 position = new Vector2(0.2f, 0.2f - (0.1f * i));
+                GuiFactory.BuildShopPowerDown(MyGameObject.Scene, HealButton.GetComponent<CButton>().Canvas, MyGameObject, position, text);
+                i++;
+            }
+
+            if (MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Silenced) > 0)
+            {
+                string text = $"{MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Silenced)}x {EffectType.Silenced}";
+                Vector2 position = new Vector2(0.2f, 0.2f - (0.1f * i));
+                GuiFactory.BuildShopPowerDown(MyGameObject.Scene, HealButton.GetComponent<CButton>().Canvas, MyGameObject, position, text);
+                i++;
+            }
+
+            if (MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Slow) > 0)
+            {
+                string text = $"{MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Slow)}x {EffectType.Slow}";
+                Vector2 position = new Vector2(0.2f, 0.2f - (0.1f * i));
+                GuiFactory.BuildShopPowerDown(MyGameObject.Scene, HealButton.GetComponent<CButton>().Canvas, MyGameObject, position, text);
+                i++;
+            }
+
+            if (MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Weakness) > 0)
+            {
+                string text = $"{MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Weakness)}x {EffectType.Weakness}";
+                Vector2 position = new Vector2(0.2f, 0.2f - (0.1f * i));
+                GuiFactory.BuildShopPowerDown(MyGameObject.Scene, HealButton.GetComponent<CButton>().Canvas, MyGameObject, position, text);
             }
         }
     }

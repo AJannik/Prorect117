@@ -141,6 +141,8 @@ namespace Game.SceneSystem
 
             // Power Downs
             PowerDownFactory.Vulnerability(scene, new Vector2(28.5f, 13.5f));
+            PowerDownFactory.Vulnerability(scene, new Vector2(20.5f, 10.5f));
+            PowerDownFactory.Slowness(scene, new Vector2(18.5f, 7.5f));
 
             // Background
             GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);

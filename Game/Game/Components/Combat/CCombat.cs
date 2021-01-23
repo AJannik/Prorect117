@@ -35,7 +35,7 @@ namespace Game.Components.Combat
 
         public float CurrentHealth { get; set; } = 100f;
 
-        public float Armor { get; set; } = 10f;
+        public float Armor { get; set; } = 90f;
 
         public float InvincibleTime { get; set; } = 0f;
 

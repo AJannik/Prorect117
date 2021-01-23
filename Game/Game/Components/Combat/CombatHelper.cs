@@ -53,17 +53,13 @@ namespace Game.Components.Combat
         public float CalculateDamage(float dmgAmount, bool ignoreArmor, float armor)
         {
             float dmg;
-            if (ignoreArmor && armor > 0f)
+            if (ignoreArmor)
             {
                 dmg = dmgAmount;
             }
-            else if (armor >= 0f)
-            {
-                dmg = dmgAmount * (100 / (100 + armor));
-            }
             else
             {
-                dmg = dmgAmount * (2 - (100 / (100 - armor)));
+                dmg = dmgAmount * ((100f - armor) / 100f);
             }
 
             return dmg;

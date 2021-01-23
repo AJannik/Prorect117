@@ -59,7 +59,7 @@ namespace Game.GameObjectFactory
 
             powerDown.AddComponent<CPowerDownScript>();
             CPowerDownScript pdScript = powerDown.GetComponent<CPowerDownScript>();
-            pdScript.Effect = Tools.EffectType.Brittle;
+            pdScript.Effect = Tools.EffectType.Fragile;
             pdScript.SetupTrigger(powerDown.GetComponent<CCircleTrigger>());
 
             powerDown.AddComponent<CRender>();

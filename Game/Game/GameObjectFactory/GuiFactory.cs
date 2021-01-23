@@ -205,6 +205,21 @@ namespace Game.GameObjectFactory
             return controls;
         }
 
+        public static GameObject BuildShopPowerDown(Scene scene, CCanvas canvas, GameObject parent, Vector2 position, string text)
+        {
+            GameObject gameObject = new GameObject(scene, "ShopPowerDown", parent);
+            gameObject.Transform.Position = position;
+
+            gameObject.AddComponent<CGuiTextRender>();
+            CGuiTextRender textRender = gameObject.GetComponent<CGuiTextRender>();
+            textRender.Text = text;
+            textRender.Canvas = canvas;
+            textRender.SetSize(0.04f);
+            textRender.Layer = 31;
+
+            return gameObject;
+        }
+
         private static GameObject BuildPlayerHpHud(Scene scene, GameObject canvas, Vector2 position)
         {
             GameObject playerHp = new GameObject(scene, "PlayerHpHUD");

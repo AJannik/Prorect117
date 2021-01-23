@@ -1,9 +1,6 @@
-using System;
 using Game.Components.Collision;
 using Game.Components.Player;
 using Game.Interfaces;
-using Game.SceneSystem;
-using OpenTK.Graphics.OpenGL;
 
 namespace Game.Components
 {
@@ -45,23 +42,33 @@ namespace Game.Components
             {
                 if (MyGameObject.Name == "Coin")
                 {
-                    e.MyGameObject.Scene.GameManager.Coins++;
-                    PickupDisplay.AddCoins(1);
+                    AddCoins(e);
                 }
                 else if (MyGameObject.Name == "Key")
                 {
-                    if (!e.MyGameObject.Scene.GameManager.Key)
-                    {
-                        e.MyGameObject.Scene.GameManager.Key = true;
-                        PickupDisplay.AddKey();
-                    }
-
-                    e.MyGameObject.Scene.GameManager.Coins += 9;
-                    PickupDisplay.AddCoins(9);
+                    AddKey(e);
                 }
 
                 MyGameObject.Scene.RemoveGameObject(MyGameObject);
             }
+        }
+
+        private void AddKey(IComponent e)
+        {
+            if (!e.MyGameObject.Scene.GameManager.Key)
+            {
+                e.MyGameObject.Scene.GameManager.Key = true;
+                PickupDisplay.AddKey();
+            }
+
+            e.MyGameObject.Scene.GameManager.Coins += 9;
+            PickupDisplay.AddCoins(9);
+        }
+
+        private void AddCoins(IComponent e)
+        {
+            e.MyGameObject.Scene.GameManager.Coins++;
+            PickupDisplay.AddCoins(1);
         }
     }
 }

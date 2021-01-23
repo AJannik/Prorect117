@@ -10,13 +10,9 @@ namespace Game.Components
 
         public CCircleTrigger Trigger { get; set; }
 
-        public COpenWall OpenWall { get; set; } = null;
-
         public EffectType Effect { get; set; } = EffectType.Slow;
 
-        public float EffectDuration { get; set; } = 10f;
-
-        public int EffectStrength { get; set; } = 1;
+        private float EffectStrength { get; } = 0.15f;
 
         public void SetupTrigger(CCircleTrigger trigger)
         {
@@ -30,12 +26,7 @@ namespace Game.Components
             {
                 if (e.MyGameObject.GetComponent<CEffectSystem>() != null)
                 {
-                    e.MyGameObject.GetComponent<CEffectSystem>().AddEffect(Effect, EffectDuration, EffectStrength);
-                }
-
-                if (OpenWall != null)
-                {
-                    OpenWall.IsOpen = true;
+                    e.MyGameObject.GetComponent<CEffectSystem>().AddEffect(Effect, EffectStrength);
                 }
 
                 MyGameObject.Active = false;

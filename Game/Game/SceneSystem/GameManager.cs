@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using Game.Components;
 using Game.Interfaces;
+using Game.Tools;
 
 namespace Game.SceneSystem
 {
@@ -22,7 +21,7 @@ namespace Game.SceneSystem
 
         public bool PlayerWon { get; set; } = false;
 
-        public List<CPowerDownScript> PowerDowns { get; set; }
+        public List<Effect> Effects { get; private set; } = new List<Effect>();
 
         public void Update(float deltaTime)
         {
@@ -39,8 +38,22 @@ namespace Game.SceneSystem
             PlayerHealth = 100f;
             Key = false;
             PlayerWon = false;
-            PowerDowns = new List<CPowerDownScript>();
+            Effects = new List<Effect>();
             RestartGameEvent?.Invoke(this, 0);
+        }
+
+        public int NumEffectTypeInEffects(EffectType type)
+        {
+            int number = 0;
+            foreach (Effect effect in Effects)
+            {
+                if (effect.Type == type)
+                {
+                    number++;
+                }
+            }
+
+            return number;
         }
     }
 }
