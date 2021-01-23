@@ -91,7 +91,7 @@ namespace Game.Components
                     break;
             }
 
-            if (AnimationSystem.ActiveAnimation.Name == "Hurt" && LastInterrupt <= 0)
+            if (AnimationSystem.ActiveAnimation.Name == "Hurt" && LastInterrupt <= 0f && AnimationSystem.ActiveAnimation.Name != "Death")
             {
                 State = EnemyState.Idle;
                 LastInterrupt = 1f;
@@ -155,6 +155,11 @@ namespace Game.Components
             {
                 TimeInState -= deltaTime;
             }
+
+            if (LastInterrupt > 0f)
+            {
+                LastInterrupt -= deltaTime;
+            }
         }
 
         public void SetupLeftTrigger(CBoxTrigger trigger)
@@ -175,13 +180,13 @@ namespace Game.Components
         {
             State = EnemyState.Attacking;
             TimeInState = InAttackTime;
-            AnimationSystem.PlayAnimation("Attack", false, !FacingRight);
+            AnimationSystem.PlayAnimation("Attack", LastInterrupt > 0, !FacingRight);
             RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
         }
 
         private void TelegraphAttack()
         {
-            if (TimeInState < InAttackTime - HitTime && !AttackDisabled)
+            if (TimeInState < InAttackTime - HitTime && !AttackDisabled && AnimationSystem.ActiveAnimation.Name != "Death")
             {
                 Combat.Attack(FacingRight ? RightTrigger : LeftTrigger, 1, false);
                 AttackDisabled = true;

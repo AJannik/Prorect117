@@ -27,7 +27,7 @@ namespace Game.Components.Player
 
         public float PlayerSpeed { get; set; } = 10f;
 
-        public float JumpForce { get; set; } = 1000f;
+        public float JumpForce { get; set; } = 700f;
 
         public bool FacingRight { get; private set; } = true;
 
@@ -64,31 +64,23 @@ namespace Game.Components.Player
                 Jump();
             }
 
-            if (Jumping)
+            if (Jumping && RigidBody.Velocity.Y >= 0f)
             {
-                if (RigidBody.Velocity.Y < 0f)
-                {
-                    RigidBody.GravityScale = 1f;
-                }
-                else
-                {
-                    // falling after jump
-                    Jumping = false;
-                    RigidBody.GravityScale = 3f;
-                }
+                RigidBody.GravityScale = 1.5f;
             }
             else
             {
                 RigidBody.GravityScale = 3f;
+                Jumping = false;
             }
 
             // updating facingRight and animations
-            if (RigidBody.Velocity.X > 0.1f)
+            if (RigidBody.Velocity.X > 0.1f && !Jumping)
             {
                 FacingRight = true;
                 AnimationSystem.PlayAnimation("Run", false, !FacingRight);
             }
-            else if (RigidBody.Velocity.X < -0.1f)
+            else if (RigidBody.Velocity.X < -0.1f && !Jumping)
             {
                 FacingRight = false;
                 AnimationSystem.PlayAnimation("Run", false, !FacingRight);
@@ -99,7 +91,7 @@ namespace Game.Components.Player
                 AnimationSystem.PlayAnimation("Idle", false, !FacingRight);
             }
 
-            if (RigidBody.Velocity.Y < -2.5f && OnGround < 1)
+            if (RigidBody.Velocity.Y < 0f && OnGround < 1)
             {
                 AnimationSystem.PlayAnimation("Fall", false, !FacingRight);
             }
@@ -118,7 +110,7 @@ namespace Game.Components.Player
                 RigidBody.AddForce(new OpenTK.Vector2(0f, JumpForce));
                 Jumping = true;
                 JumpCooldown = 0.1f;
-                AnimationSystem.PlayAnimation("Jump", true, !FacingRight);
+                AnimationSystem.PlayAnimation("Jump", false, !FacingRight);
             }
         }
 
