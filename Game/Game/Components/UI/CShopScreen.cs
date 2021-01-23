@@ -1,4 +1,5 @@
-﻿using Game.GameObjectFactory;
+﻿using System.Collections.Generic;
+using Game.GameObjectFactory;
 using Game.Interfaces;
 using Game.Tools;
 using OpenTK;
@@ -13,7 +14,11 @@ namespace Game.Components.UI
 
         public GameObject HealButton { get; set; }
 
-        public int HealPrice { get; } = 15;
+        public List<GameObject> PowerDownDisplays { get; } = new List<GameObject>();
+
+        private int HealPrice { get; } = 10;
+
+        private int RemovePowerDownPrice { get; } = 15;
 
         public void OnContinue(object sender, int i)
         {
@@ -29,6 +34,14 @@ namespace Game.Components.UI
             if (MyGameObject.Scene.GameManager.Coins < HealPrice)
             {
                 HealButton.GetComponent<CButton>().Active = false;
+            }
+
+            if (MyGameObject.Scene.GameManager.Coins < RemovePowerDownPrice)
+            {
+                foreach (GameObject gameObject in PowerDownDisplays)
+                {
+                    gameObject.GetChild(0).GetComponent<CButton>().Active = false;
+                }
             }
 
             DisplayPowerDowns();
@@ -54,38 +67,26 @@ namespace Game.Components.UI
             }
         }
 
+        public void RemovePowerDown(object sender, int type)
+        {
+            if (MyGameObject.Scene.GameManager.Coins >= RemovePowerDownPrice)
+            {
+                MyGameObject.Scene.GameManager.Coins -= RemovePowerDownPrice;
+                MyGameObject.Scene.GameManager.RemoveEffectOfType((EffectType)type);
+                DisplayPowerDowns();
+            }
+        }
+
         private void DisplayPowerDowns()
         {
-            int i = 0;
-            if (MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Fragile) > 0)
+            for (int i = 0; i < PowerDownDisplays.Count; i++)
             {
-                string text = $"{MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Fragile)}x {EffectType.Fragile}";
-                Vector2 position = new Vector2(0.2f, 0.2f - (0.1f * i));
-                GuiFactory.BuildShopPowerDown(MyGameObject.Scene, HealButton.GetComponent<CButton>().Canvas, MyGameObject, position, text);
-                i++;
-            }
-
-            if (MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Silenced) > 0)
-            {
-                string text = $"{MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Silenced)}x {EffectType.Silenced}";
-                Vector2 position = new Vector2(0.2f, 0.2f - (0.1f * i));
-                GuiFactory.BuildShopPowerDown(MyGameObject.Scene, HealButton.GetComponent<CButton>().Canvas, MyGameObject, position, text);
-                i++;
-            }
-
-            if (MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Slow) > 0)
-            {
-                string text = $"{MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Slow)}x {EffectType.Slow}";
-                Vector2 position = new Vector2(0.2f, 0.2f - (0.1f * i));
-                GuiFactory.BuildShopPowerDown(MyGameObject.Scene, HealButton.GetComponent<CButton>().Canvas, MyGameObject, position, text);
-                i++;
-            }
-
-            if (MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Weakness) > 0)
-            {
-                string text = $"{MyGameObject.Scene.GameManager.NumEffectTypeInEffects(EffectType.Weakness)}x {EffectType.Weakness}";
-                Vector2 position = new Vector2(0.2f, 0.2f - (0.1f * i));
-                GuiFactory.BuildShopPowerDown(MyGameObject.Scene, HealButton.GetComponent<CButton>().Canvas, MyGameObject, position, text);
+                int num = MyGameObject.Scene.GameManager.NumEffectTypeInEffects((EffectType) i);
+                PowerDownDisplays[i].GetComponent<CGuiTextRender>().Text = $"{num}x {(EffectType)i}";
+                if (num == 0 || MyGameObject.Scene.GameManager.Coins < RemovePowerDownPrice)
+                {
+                    PowerDownDisplays[i].GetChild(0).GetComponent<CButton>().Active = false;
+                }
             }
         }
     }

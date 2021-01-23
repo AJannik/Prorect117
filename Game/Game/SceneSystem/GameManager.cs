@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Interfaces;
 using Game.Tools;
 
@@ -44,16 +45,22 @@ namespace Game.SceneSystem
 
         public int NumEffectTypeInEffects(EffectType type)
         {
-            int number = 0;
+            return Effects.Count(effect => effect.Type == type);
+        }
+
+        public void RemoveEffectOfType(EffectType type)
+        {
+            Effect delete = null;
             foreach (Effect effect in Effects)
             {
                 if (effect.Type == type)
                 {
-                    number++;
+                    delete = effect;
+                    break;
                 }
             }
 
-            return number;
+            Effects.Remove(delete);
         }
     }
 }

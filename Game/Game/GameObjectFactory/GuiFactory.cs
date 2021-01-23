@@ -2,6 +2,7 @@
 using Game.Components.Player;
 using Game.Components.UI;
 using Game.SceneSystem;
+using Game.Tools;
 using OpenTK;
 
 namespace Game.GameObjectFactory
@@ -139,7 +140,7 @@ namespace Game.GameObjectFactory
             textField.GetComponent<CGuiTextRender>().Centered = true;
             textField.SetParent(shopScreen);
 
-            GameObject textField2 = BuildTextField(scene, canvas, new Vector2(-0.3f, 0.3f), "BUY FOR 15 COINS:");
+            GameObject textField2 = BuildTextField(scene, canvas, new Vector2(-0.3f, 0.3f), "BUY FOR 10 COINS:");
             textField2.GetComponent<CGuiTextRender>().SetSize(0.03f);
             textField2.GetComponent<CGuiTextRender>().Layer = 33;
             textField2.GetComponent<CGuiTextRender>().Centered = true;
@@ -148,6 +149,13 @@ namespace Game.GameObjectFactory
             GameObject buyHealthButton = BuildButton(scene, canvas, new Vector2(-0.3f, 0.2f), new Vector2(0.4f, 0.1f), "HEAL 10 HP");
             buyHealthButton.GetComponent<CButton>().ButtonClicked += shopScreen.GetComponent<CShopScreen>().BuyHealth;
             buyHealthButton.SetParent(shopScreen);
+
+            for (int i = 0; i < 4; i++)
+            {
+                string text = $"x {(EffectType)i}";
+                Vector2 pos = new Vector2(0.05f, 0.2f - (0.15f * i));
+                shopScreen.GetComponent<CShopScreen>().PowerDownDisplays.Add(BuildShopPowerDown(scene, canvas, shopScreen, pos, text, i));
+            }
 
             shopScreen.GetComponent<CShopScreen>().HealButton = buyHealthButton;
 
@@ -205,7 +213,7 @@ namespace Game.GameObjectFactory
             return controls;
         }
 
-        public static GameObject BuildShopPowerDown(Scene scene, CCanvas canvas, GameObject parent, Vector2 position, string text)
+        private static GameObject BuildShopPowerDown(Scene scene, GameObject canvas, GameObject parent, Vector2 position, string text, int num)
         {
             GameObject gameObject = new GameObject(scene, "ShopPowerDown", parent);
             gameObject.Transform.Position = position;
@@ -213,9 +221,14 @@ namespace Game.GameObjectFactory
             gameObject.AddComponent<CGuiTextRender>();
             CGuiTextRender textRender = gameObject.GetComponent<CGuiTextRender>();
             textRender.Text = text;
-            textRender.Canvas = canvas;
+            textRender.Canvas = canvas.GetComponent<CCanvas>();
             textRender.SetSize(0.04f);
             textRender.Layer = 31;
+
+            GameObject button = BuildButton(scene, canvas, new Vector2(0.5f, 0f), new Vector2(0.8f, 0.1f), "REMOVE ONE FOR 15 COINS");
+            button.GetComponent<CButton>().Number = num;
+            button.GetComponent<CButton>().ButtonClicked += parent.GetComponent<CShopScreen>().RemovePowerDown;
+            button.SetParent(gameObject);
 
             return gameObject;
         }
