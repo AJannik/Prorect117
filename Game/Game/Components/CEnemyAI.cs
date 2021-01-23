@@ -54,6 +54,8 @@ namespace Game.Components
 
         private Random Randomizer { get; set; } = new Random();
 
+        private float LastInterrupt { get; set; } = 0f;
+
         public void Update(float deltaTime)
         {
             switch (State)
@@ -88,9 +90,10 @@ namespace Game.Components
                     break;
             }
 
-            if (AnimationSystem.ActiveAnimation.Name == "Hurt")
+            if (AnimationSystem.ActiveAnimation.Name == "Hurt" && LastInterrupt <= 0)
             {
                 State = EnemyState.Idle;
+                LastInterrupt = 1f;
             }
 
             if (TimeInState <= 0f)
@@ -171,7 +174,7 @@ namespace Game.Components
         {
             State = EnemyState.Attacking;
             TimeInState = InAttackTime;
-            AnimationSystem.PlayAnimation("Attack", true, !FacingRight);
+            AnimationSystem.PlayAnimation("Attack", false, !FacingRight);
             RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
         }
 

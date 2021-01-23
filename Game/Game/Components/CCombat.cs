@@ -198,7 +198,7 @@ namespace Game.Components
                     CurrentHealth -= dmg;
                 }
 
-                AnimationSystem?.PlayAnimation(dmgAnimationName, true);
+                AnimationSystem?.PlayAnimation(dmgAnimationName, false);
                 BleedTime = 0.1f;
 
                 if (MyGameObject.Name == "Player")

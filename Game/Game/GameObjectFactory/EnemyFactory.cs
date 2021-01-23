@@ -23,19 +23,19 @@ namespace Game.GameObjectFactory
             render.LoadAndSetTexture("Content.Skeleton.SkeletonIdle.png");
             render.SetTexCoords(new SimpleGeometry.Rect(0f, 0f, 1f / 11f, 1f));
             render.SetSize(2.4f, 2f);
-            render.SetOffset(0.8f, 0.22f);
+            render.SetOffset(0.5f, 0.22f);
             render.Layer = 20;
 
             // hitboxes and triggers
             enemy.AddComponent<CBoxCollider>();
             CBoxCollider hitbox = enemy.GetComponent<CBoxCollider>();
-            hitbox.Geometry.Size = new Vector2(1f, 1.6f);
+            hitbox.Geometry.Size = new Vector2(1.2f, 1.6f);
             enemy.AddComponent<CBoxTrigger>();
             CBoxTrigger left = enemy.GetComponent<CBoxTrigger>();
             enemy.AddComponent<CBoxTrigger>();
             CBoxTrigger right = enemy.GetComponents<CBoxTrigger>()[1];
-            left.Geometry.Size = new Vector2(0.8f, 1.8f);
-            right.Geometry.Size = new Vector2(0.8f, 1.8f);
+            left.Geometry.Size = new Vector2(1.3f, 1.8f);
+            right.Geometry.Size = new Vector2(1.3f, 1.8f);
             left.Offset = new Vector2(-0.7f, 0f);
             right.Offset = new Vector2(0.7f, 0f);
 
