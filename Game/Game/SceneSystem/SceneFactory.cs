@@ -738,13 +738,6 @@ namespace Game.SceneSystem
             return scene;
         }
 
-        private Scene BuildLevel3()
-        {
-            Scene scene = new Scene(GameManager);
-
-            return scene;
-        }
-
         private Scene BuildGameOverScene()
         {
             Scene scene = new Scene(GameManager);
