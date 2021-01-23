@@ -61,10 +61,7 @@ namespace Game.Components.UI
                 }
             }
 
-            if (MyGameObject.Scene.GameManager.Coins < HealPrice || MyGameObject.Scene.GameManager.PlayerHealth > 95f)
-            {
-                HealButton.GetComponent<CButton>().Active = false;
-            }
+            DeactivateButtons();
         }
 
         public void RemovePowerDown(object sender, int type)
@@ -75,6 +72,8 @@ namespace Game.Components.UI
                 MyGameObject.Scene.GameManager.RemoveEffectOfType((EffectType)type);
                 DisplayPowerDowns();
             }
+
+            DeactivateButtons();
         }
 
         private void DisplayPowerDowns()
@@ -86,6 +85,22 @@ namespace Game.Components.UI
                 if (num == 0 || MyGameObject.Scene.GameManager.Coins < RemovePowerDownPrice)
                 {
                     PowerDownDisplays[i].GetChild(0).GetComponent<CButton>().Active = false;
+                }
+            }
+        }
+
+        private void DeactivateButtons()
+        {
+            if (MyGameObject.Scene.GameManager.Coins < HealPrice)
+            {
+                HealButton.GetComponent<CButton>().Active = false;
+            }
+
+            if (MyGameObject.Scene.GameManager.Coins < RemovePowerDownPrice)
+            {
+                foreach (GameObject gameObject in PowerDownDisplays)
+                {
+                    gameObject.GetChild(0).GetComponent<CButton>().Active = false;
                 }
             }
         }
