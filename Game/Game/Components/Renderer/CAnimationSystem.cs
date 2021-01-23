@@ -42,6 +42,8 @@ namespace Game.Components.Renderer
 
         public int DefaultTexture { get; set; }
 
+        public bool ForceEnd { get; set; } = false;
+
         private int DefaultRows { get; set; } = 1;
 
         private int DefaultColumns { get; set; } = 1;
@@ -49,8 +51,6 @@ namespace Game.Components.Renderer
         private int Rows { get; set; } = 1;
 
         private int Columns { get; set; } = 1;
-
-        private bool ForceEnd { get; set; } = false;
 
         public void Update(float deltaTime)
         {

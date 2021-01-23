@@ -48,6 +48,8 @@ namespace Game.Components
 
         private Random Randomizer { get; set; } = new Random();
 
+        private float LastInterrupt { get; set; } = 0f;
+
         public void Update(float deltaTime)
         {
             switch (State)
@@ -82,9 +84,10 @@ namespace Game.Components
                     break;
             }
 
-            if (AnimationSystem.ActiveAnimation.Name == "Hurt")
+            if (AnimationSystem.ActiveAnimation.Name == "Hurt" && LastInterrupt <= 0f && AnimationSystem.ActiveAnimation.Name != "Death")
             {
                 State = EnemyState.Idle;
+                LastInterrupt = 1f;
             }
 
             if (TimeInState <= 0f)
@@ -145,6 +148,11 @@ namespace Game.Components
             {
                 TimeInState -= deltaTime;
             }
+
+            if (LastInterrupt > 0f)
+            {
+                LastInterrupt -= deltaTime;
+            }
         }
 
         public void SetupLeftTrigger(CBoxTrigger trigger)
@@ -165,13 +173,13 @@ namespace Game.Components
         {
             State = EnemyState.Attacking;
             TimeInState = InAttackTime;
-            AnimationSystem.PlayAnimation("Attack", true, !FacingRight);
+            AnimationSystem.PlayAnimation("Attack", LastInterrupt > 0, !FacingRight);
             RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
         }
 
         private void TelegraphAttack()
         {
-            if (TimeInState < InAttackTime - HitTime && !AttackDisabled)
+            if (TimeInState < InAttackTime - HitTime && !AttackDisabled && AnimationSystem.ActiveAnimation.Name != "Death")
             {
                 Combat.Attack(FacingRight ? RightTrigger : LeftTrigger, 1, false);
                 AttackDisabled = true;

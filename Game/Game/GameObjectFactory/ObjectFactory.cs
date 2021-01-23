@@ -127,8 +127,8 @@ namespace Game.GameObjectFactory
             // add ground trigger for playercontroller
             player.AddComponent<CBoxTrigger>();
             CBoxTrigger trigger = player.GetComponent<CBoxTrigger>();
-            trigger.Offset = new Vector2(0f, -0.77f);
-            trigger.Geometry.Size = new Vector2(0.84f, 0.3f);
+            trigger.Offset = new Vector2(0f, -0.8f);
+            trigger.Geometry.Size = new Vector2(0.84f, 0.2f);
             player.GetComponent<CPlayerController>().SetUpGroundTrigger(trigger);
 
             // add all animations
@@ -144,7 +144,7 @@ namespace Game.GameObjectFactory
             Animation run = new Animation("Run", 6, 8, true);
             controll.AddAnimation(run);
             Animation jump = new Animation("Jump", 2, 16, false);
-            jump.TimeBetweenTwoFrames = 1 / 3.3f;
+            jump.TimeBetweenTwoFrames = 1 / 2.5f;
             controll.AddAnimation(jump);
             Animation fall = new Animation("Fall", 2, 22, true);
             controll.AddAnimation(fall);

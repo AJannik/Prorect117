@@ -102,7 +102,7 @@ namespace Game.Components.Combat
                 dmg = CombatHelper.CalculateDamage(dmgAmount, ignoreArmor, Armor);
                 CurrentHealth -= dmg;
 
-                AnimationSystem?.PlayAnimation(dmgAnimationName, true);
+                AnimationSystem?.PlayAnimation(dmgAnimationName, false);
                 BleedTime = 0.1f;
 
                 // UI display of damage
