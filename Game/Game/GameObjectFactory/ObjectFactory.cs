@@ -361,7 +361,7 @@ namespace Game.GameObjectFactory
             CPeriodicMovement periodicMovement = spikes.GetComponent<CPeriodicMovement>();
             periodicMovement.Start = position;
             periodicMovement.End = goal;
-            periodicMovement.MoveSpeed = 2f;
+            periodicMovement.MoveSpeed = 3f;
 
             for (int i = 0; i < length; i++)
             {
@@ -381,7 +381,7 @@ namespace Game.GameObjectFactory
             CPeriodicMovement periodicMovement = deadlyArea.GetComponent<CPeriodicMovement>();
             periodicMovement.Start = position;
             periodicMovement.End = goal;
-            periodicMovement.MoveSpeed = 2f;
+            periodicMovement.MoveSpeed = 3f;
 
             deadlyArea.AddComponent<CBoxTrigger>();
             CBoxTrigger trigger = deadlyArea.GetComponent<CBoxTrigger>();
