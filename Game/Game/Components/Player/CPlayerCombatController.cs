@@ -1,8 +1,6 @@
 ﻿using Game.Components.Collision;
 using Game.Components.Combat;
 using Game.Components.Renderer;
-using Game.Components.UI;
-using Game.Components.UI.BaseComponents;
 using Game.Interfaces;
 using OpenTK.Input;
 
@@ -19,8 +17,6 @@ namespace Game.Components.Player
         public CBoxTrigger LeftHitbox { get; set; }
 
         public CBoxTrigger RightHitbox { get; set; }
-
-        public CGuiTextRender HpText { get; set; }
 
         public CPlayerController Controller { get; set; }
 
@@ -88,8 +84,6 @@ namespace Game.Components.Player
             {
                 RollCooldown -= deltaTime;
             }
-
-            HpText.Text = $"{(int)Combat.CurrentHealth}/{(int)Combat.MaxHealth}";
         }
 
         private void ComboAttack(bool leftSide)

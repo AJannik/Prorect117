@@ -8,7 +8,7 @@ using OpenTK;
 namespace Game.GameObjectFactory
 {
     [ExcludeFromCodeCoverage]
-    public class PowerDownFactory
+    public static class PowerDownFactory
     {
         public static GameObject Slowness(Scene scene, Vector2 position)
         {
@@ -26,7 +26,7 @@ namespace Game.GameObjectFactory
             powerDown.AddComponent<CRender>();
             CRender render = powerDown.GetComponent<CRender>();
             render.LoadAndSetTexture("Content.PowerDowns.slowness.png");
-            render.Layer = 30;
+            render.Layer = 22;
             render.SetSize(0.8f, 0.8f);
 
             powerDown.AddComponent<CParticleSystem>();
@@ -65,7 +65,7 @@ namespace Game.GameObjectFactory
             powerDown.AddComponent<CRender>();
             CRender render = powerDown.GetComponent<CRender>();
             render.LoadAndSetTexture("Content.PowerDowns.fragile.png");
-            render.Layer = 30;
+            render.Layer = 22;
             render.SetSize(0.8f, 0.8f);
 
             powerDown.AddComponent<CParticleSystem>();
@@ -104,7 +104,7 @@ namespace Game.GameObjectFactory
             powerDown.AddComponent<CRender>();
             CRender render = powerDown.GetComponent<CRender>();
             render.LoadAndSetTexture("Content.PowerDowns.silenced.png");
-            render.Layer = 30;
+            render.Layer = 22;
             render.SetSize(0.8f, 0.8f);
 
             powerDown.AddComponent<CParticleSystem>();
@@ -143,7 +143,7 @@ namespace Game.GameObjectFactory
             powerDown.AddComponent<CRender>();
             CRender render = powerDown.GetComponent<CRender>();
             render.LoadAndSetTexture("Content.PowerDowns.weakness.png");
-            render.Layer = 30;
+            render.Layer = 22;
             render.SetSize(0.8f, 0.8f);
 
             powerDown.AddComponent<CParticleSystem>();

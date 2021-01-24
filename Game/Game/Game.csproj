@@ -71,6 +71,8 @@
     <EmbeddedResource Include="Content\PowerDowns\silenced.png" />
     <EmbeddedResource Include="Content\PowerDowns\slowness.png" />
     <EmbeddedResource Include="Content\PowerDowns\weakness.png" />
+    <None Remove="Content\UI\hud_bg2.png" />
+    <EmbeddedResource Include="Content\UI\hud_bg2.png" />
   </ItemGroup>
 
   <ItemGroup>

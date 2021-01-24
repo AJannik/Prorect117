@@ -167,11 +167,18 @@ namespace Game.GameObjectFactory
         {
             GameObject hud = new GameObject(scene, "Hud");
 
-            BuildPlayerHpHud(scene, canvas, new Vector2(0.795f, -0.935f)).SetParent(hud);
+            BuildPlayerHpHud(scene, canvas, new Vector2(0.8f, -0.735f)).SetParent(hud);
             BuildCoinHud(scene, canvas, new Vector2(0.85f, 0.89f)).SetParent(hud);
-            BuildKeyHud(scene, canvas, new Vector2(0.7f, 0.89f)).SetParent(hud);
+            BuildKeyHud(scene, canvas, new Vector2(0.70f, 0.89f)).SetParent(hud);
 
-            playerCombatController.HpText = hud.GetChild(0).GetChild(0).GetComponent<CGuiTextRender>();
+            hud.AddComponent<CPlayerStatsHud>();
+            CPlayerStatsHud playerStatsHud = hud.GetComponent<CPlayerStatsHud>();
+            playerStatsHud.Combat = playerCombatController.Combat;
+            playerStatsHud.PlayerController = playerCombatController.MyGameObject.GetComponent<CPlayerController>();
+            playerStatsHud.HpText = hud.GetChild(0).GetChild(0).GetComponent<CGuiTextRender>();
+            playerStatsHud.AttackText = hud.GetChild(0).GetChild(1).GetComponent<CGuiTextRender>();
+            playerStatsHud.ArmorText = hud.GetChild(0).GetChild(2).GetComponent<CGuiTextRender>();
+            playerStatsHud.SpeedText = hud.GetChild(0).GetChild(3).GetComponent<CGuiTextRender>();
 
             return hud;
         }
@@ -239,13 +246,30 @@ namespace Game.GameObjectFactory
             GameObject playerHp = new GameObject(scene, "PlayerHpHUD");
             playerHp.Transform.Position = position;
 
-            GameObject textField = BuildTextField(scene, canvas, Vector2.Zero, "PlayerHP");
-            textField.GetComponent<CGuiTextRender>().SetSize(0.075f);
-            textField.GetComponent<CGuiTextRender>().Centered = true;
-            textField.SetParent(playerHp);
+            GameObject hpText = BuildTextField(scene, canvas, Vector2.Zero, "PlayerHP");
+            hpText.GetComponent<CGuiTextRender>().SetSize(0.075f);
+            hpText.GetComponent<CGuiTextRender>().Centered = true;
+            hpText.SetParent(playerHp);
 
-            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(0.8f, -0.893f), "UI.hud_bg.png");
-            bgImage.GetComponent<CImageRender>().SetSize(0.70f, 0.2f);
+            GameObject attackText = BuildTextField(scene, canvas, new Vector2(0f, -0.07f), "AttackText");
+            attackText.GetComponent<CGuiTextRender>().SetSize(0.03f);
+            attackText.GetComponent<CGuiTextRender>().Centered = true;
+            attackText.SetParent(playerHp);
+
+            GameObject armorText = BuildTextField(scene, canvas, new Vector2(0f, -0.14f), "ArmorText");
+            armorText.GetComponent<CGuiTextRender>().SetSize(0.03f);
+            armorText.GetComponent<CGuiTextRender>().Centered = true;
+            armorText.SetParent(playerHp);
+
+            GameObject speedText = BuildTextField(scene, canvas, new Vector2(0f, -0.21f), "SpeedText");
+            speedText.GetComponent<CGuiTextRender>().SetSize(0.03f);
+            speedText.GetComponent<CGuiTextRender>().Centered = true;
+            speedText.SetParent(playerHp);
+
+            const float sizeX = 0.7f;
+            const float sizeY = 0.4f;
+            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(position.X, -0.793f), "UI.hud_bg2.png");
+            bgImage.GetComponent<CImageRender>().SetSize(sizeX, sizeY);
             bgImage.GetComponent<CImageRender>().Layer = 29;
 
             return playerHp;
