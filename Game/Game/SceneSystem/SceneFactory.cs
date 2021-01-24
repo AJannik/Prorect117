@@ -343,6 +343,7 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(14.5f, -83.5f), 3);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(29f, -84.5f), 4);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(10.5f, -86.5f), 5);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(16.5f, -86.5f), 5);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(3.5f, -87.5f), 3);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(29f, -87.5f), 4);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(18.5f, -89.5f), 5);
@@ -524,6 +525,7 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(18.5f, -9.5f), 3);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(3.5f, -10.5f), 5);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(11f, -10.5f), 6);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(19.5f, -12.5f), 9);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(27f, -12.5f), 2);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(8.5f, -13.5f), 11);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(29.5f, -14.5f), 3);
@@ -648,7 +650,6 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(6.5f, -71.5f), 3);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(3.5f, -73f), 4);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(15.5f, -73.5f), 3);
-            StaticRigidbodyFactory.BuildWall(scene, new Vector2(22.5f, -73f), 2);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(9.5f, -74f), 2);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(12.5f, -74f), 2);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(25.5f, -74f), 2);
