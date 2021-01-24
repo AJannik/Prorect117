@@ -23,6 +23,8 @@ namespace Game.Components.Player
 
         public CPlayerController Controller { get; set; }
 
+        public bool RollEnabled { get; set; }
+
         private float ComboTime { get; set; } = 0f;
 
         private int ComboCount { get; set; } = 0;
@@ -162,7 +164,7 @@ namespace Game.Components.Player
 
         private void Roll()
         {
-            if (RollCooldown <= 0f)
+            if (RollCooldown <= 0f && RollEnabled)
             {
                 Controller.State = PlayerState.Blocked;
                 Combat.MakeInvincible(0.2f);
