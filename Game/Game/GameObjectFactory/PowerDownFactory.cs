@@ -16,7 +16,7 @@ namespace Game.GameObjectFactory
             powerDown.Transform.Position = position;
 
             powerDown.AddComponent<CCircleTrigger>();
-            powerDown.GetComponent<CCircleTrigger>().Geometry.Size = new Vector2(1, 1);
+            powerDown.GetComponent<CCircleTrigger>().Geometry.Size = new Vector2(0.7f, 0.7f);
 
             powerDown.AddComponent<CPowerDownScript>();
             CPowerDownScript pdScript = powerDown.GetComponent<CPowerDownScript>();
@@ -25,9 +25,9 @@ namespace Game.GameObjectFactory
 
             powerDown.AddComponent<CRender>();
             CRender render = powerDown.GetComponent<CRender>();
-            render.LoadAndSetTexture("Content.PowerDownRed.png");
+            render.LoadAndSetTexture("Content.PowerDowns.slowness.png");
             render.Layer = 30;
-            render.SetSize(1f, 1f);
+            render.SetSize(0.8f, 0.8f);
 
             powerDown.AddComponent<CParticleSystem>();
             CParticleSystem particleSystem = powerDown.GetComponent<CParticleSystem>();
@@ -49,13 +49,13 @@ namespace Game.GameObjectFactory
             return powerDown;
         }
 
-        public static GameObject Vulnerability(Scene scene, Vector2 position)
+        public static GameObject Fragile(Scene scene, Vector2 position)
         {
-            GameObject powerDown = new GameObject(scene, "Vulnerability");
+            GameObject powerDown = new GameObject(scene, "Fragile");
             powerDown.Transform.Position = position;
 
             powerDown.AddComponent<CCircleTrigger>();
-            powerDown.GetComponent<CCircleTrigger>().Geometry.Size = new Vector2(1, 1);
+            powerDown.GetComponent<CCircleTrigger>().Geometry.Size = new Vector2(0.7f, 0.7f);
 
             powerDown.AddComponent<CPowerDownScript>();
             CPowerDownScript pdScript = powerDown.GetComponent<CPowerDownScript>();
@@ -64,9 +64,9 @@ namespace Game.GameObjectFactory
 
             powerDown.AddComponent<CRender>();
             CRender render = powerDown.GetComponent<CRender>();
-            render.LoadAndSetTexture("Content.PowerDownGreen.png");
+            render.LoadAndSetTexture("Content.PowerDowns.fragile.png");
             render.Layer = 30;
-            render.SetSize(1f, 1f);
+            render.SetSize(0.8f, 0.8f);
 
             powerDown.AddComponent<CParticleSystem>();
             CParticleSystem particleSystem = powerDown.GetComponent<CParticleSystem>();
@@ -88,13 +88,13 @@ namespace Game.GameObjectFactory
             return powerDown;
         }
 
-        public static GameObject NoRoll(Scene scene, Vector2 position)
+        public static GameObject Silenced(Scene scene, Vector2 position)
         {
-            GameObject powerDown = new GameObject(scene, "NoRoll");
+            GameObject powerDown = new GameObject(scene, "Silenced");
             powerDown.Transform.Position = position;
 
             powerDown.AddComponent<CCircleTrigger>();
-            powerDown.GetComponent<CCircleTrigger>().Geometry.Size = new Vector2(1, 1);
+            powerDown.GetComponent<CCircleTrigger>().Geometry.Size = new Vector2(0.7f, 0.7f);
 
             powerDown.AddComponent<CPowerDownScript>();
             CPowerDownScript pdScript = powerDown.GetComponent<CPowerDownScript>();
@@ -103,9 +103,9 @@ namespace Game.GameObjectFactory
 
             powerDown.AddComponent<CRender>();
             CRender render = powerDown.GetComponent<CRender>();
-            render.LoadAndSetTexture("Content.PowerDownBlue.png");
+            render.LoadAndSetTexture("Content.PowerDowns.silenced.png");
             render.Layer = 30;
-            render.SetSize(1f, 1f);
+            render.SetSize(0.8f, 0.8f);
 
             powerDown.AddComponent<CParticleSystem>();
             CParticleSystem particleSystem = powerDown.GetComponent<CParticleSystem>();
@@ -133,7 +133,7 @@ namespace Game.GameObjectFactory
             powerDown.Transform.Position = position;
 
             powerDown.AddComponent<CCircleTrigger>();
-            powerDown.GetComponent<CCircleTrigger>().Geometry.Size = new Vector2(1, 1);
+            powerDown.GetComponent<CCircleTrigger>().Geometry.Size = new Vector2(0.7f, 0.7f);
 
             powerDown.AddComponent<CPowerDownScript>();
             CPowerDownScript pdScript = powerDown.GetComponent<CPowerDownScript>();
@@ -142,9 +142,9 @@ namespace Game.GameObjectFactory
 
             powerDown.AddComponent<CRender>();
             CRender render = powerDown.GetComponent<CRender>();
-            render.LoadAndSetTexture("Content.PowerDownYellow.png");
+            render.LoadAndSetTexture("Content.PowerDowns.weakness.png");
             render.Layer = 30;
-            render.SetSize(1f, 1f);
+            render.SetSize(0.8f, 0.8f);
 
             powerDown.AddComponent<CParticleSystem>();
             CParticleSystem particleSystem = powerDown.GetComponent<CParticleSystem>();

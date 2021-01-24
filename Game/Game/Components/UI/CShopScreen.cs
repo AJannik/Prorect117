@@ -80,7 +80,7 @@ namespace Game.Components.UI
         {
             for (int i = 0; i < PowerDownDisplays.Count; i++)
             {
-                int num = MyGameObject.Scene.GameManager.NumEffectTypeInEffects((EffectType) i);
+                int num = MyGameObject.Scene.GameManager.NumEffectTypeInEffects((EffectType)i);
                 PowerDownDisplays[i].GetComponent<CGuiTextRender>().Text = $"{num}x {(EffectType)i}";
                 if (num == 0 || MyGameObject.Scene.GameManager.Coins < RemovePowerDownPrice)
                 {

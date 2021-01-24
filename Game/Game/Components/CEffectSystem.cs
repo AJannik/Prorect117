@@ -50,26 +50,6 @@ namespace Game.Components
             ApplyEffect(newEffect);
         }
 
-        public void RemoveEffect(Effect effect)
-        {
-            switch (effect.Type)
-            {
-                case EffectType.Fragile:
-                    Combat.Armor *= 1f / (1f - effect.Strength);
-                    break;
-                case EffectType.Slow:
-                    PlayerController.PlayerSpeed *= 1f / (1f - effect.Strength);
-                    break;
-                case EffectType.Silenced:
-                    break;
-                case EffectType.Weakness:
-                    Combat.AttackDamage *= 1f / (1f - effect.Strength);
-                    break;
-                default:
-                    throw new NullReferenceException($"Effect of type {effect.Type} doesn't exist!");
-            }
-        }
-
         private void ApplyEffect(Effect effect)
         {
             switch (effect.Type)
