@@ -1,4 +1,5 @@
 ﻿using Game.Components.UI;
+using Game.Components.UI.BaseComponents;
 
 namespace Game.Interfaces
 {

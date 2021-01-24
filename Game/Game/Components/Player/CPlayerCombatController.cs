@@ -2,6 +2,7 @@
 using Game.Components.Combat;
 using Game.Components.Renderer;
 using Game.Components.UI;
+using Game.Components.UI.BaseComponents;
 using Game.Interfaces;
 using OpenTK.Input;
 

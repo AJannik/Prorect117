@@ -4,7 +4,7 @@ using Game.Tools;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game.Components.UI
+namespace Game.Components.UI.BaseComponents
 {
     public class CImageRender : IComponent, IDrawable, IGuiElement
     {

@@ -6,7 +6,7 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
-namespace Game.Components.UI
+namespace Game.Components.UI.BaseComponents
 {
     public class CButton : IComponent, IMouseListener, IGuiElement, IDebugDrawable, IUpdateable
     {
