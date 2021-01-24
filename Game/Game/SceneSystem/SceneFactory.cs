@@ -306,12 +306,12 @@ namespace Game.SceneSystem
             ObjectFactory.BuildCoin(scene, new Vector2(126.5f, 6.5f));
 
             // Power Downs
-            PowerDownFactory.NoRoll(scene, new Vector2(27.5f, 10.5f));
-            PowerDownFactory.Vulnerability(scene, new Vector2(31f, 2.5f));
+            PowerDownFactory.Silenced(scene, new Vector2(27.5f, 10.5f));
+            PowerDownFactory.Fragile(scene, new Vector2(31f, 2.5f));
             PowerDownFactory.Slowness(scene, new Vector2(60f, 14f));
             PowerDownFactory.Weakness(scene, new Vector2(72f, 14f));
-            PowerDownFactory.Vulnerability(scene, new Vector2(112.5f, 4.5f));
-            PowerDownFactory.NoRoll(scene, new Vector2(120f, 6.5f));
+            PowerDownFactory.Fragile(scene, new Vector2(112.5f, 4.5f));
+            PowerDownFactory.Silenced(scene, new Vector2(120f, 6.5f));
 
             // Level dead-zones
             StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(40f, -1f), new Vector2(4f, 1f), new Vector2(37f, 2.5f), 30);
@@ -492,9 +492,9 @@ namespace Game.SceneSystem
 
             // Power Downs
             PowerDownFactory.Weakness(scene, new Vector2(28f, -86f));
-            PowerDownFactory.NoRoll(scene, new Vector2(10.5f, -98.5f));
-            PowerDownFactory.Vulnerability(scene, new Vector2(18f, -103.5f));
-            PowerDownFactory.NoRoll(scene, new Vector2(9f, -106.5f));
+            PowerDownFactory.Silenced(scene, new Vector2(10.5f, -98.5f));
+            PowerDownFactory.Fragile(scene, new Vector2(18f, -103.5f));
+            PowerDownFactory.Silenced(scene, new Vector2(9f, -106.5f));
             PowerDownFactory.Weakness(scene, new Vector2(14f, -124.5f));
             PowerDownFactory.Slowness(scene, new Vector2(26f, -123f));
 
@@ -736,11 +736,11 @@ namespace Game.SceneSystem
             ObjectFactory.BuildKey(scene, new Vector2(26.5f, -74.5f));
 
             // Power Downs
-            PowerDownFactory.NoRoll(scene, new Vector2(27f, -2f));
+            PowerDownFactory.Silenced(scene, new Vector2(27f, -2f));
             PowerDownFactory.Slowness(scene, new Vector2(15f, -2.5f));
-            PowerDownFactory.Vulnerability(scene, new Vector2(13f, -40f));
+            PowerDownFactory.Fragile(scene, new Vector2(13f, -40f));
             PowerDownFactory.Weakness(scene, new Vector2(14f, -49f));
-            PowerDownFactory.Vulnerability(scene, new Vector2(25f, -65f));
+            PowerDownFactory.Fragile(scene, new Vector2(25f, -65f));
             PowerDownFactory.Slowness(scene, new Vector2(30f, -74f));
 
             // Level dead-zones
