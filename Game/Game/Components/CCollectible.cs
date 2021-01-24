@@ -14,20 +14,7 @@ namespace Game.Components
 
         public void Start()
         {
-            foreach (GameObject gameObject in MyGameObject.Scene.GetGameObjects())
-            {
-                if (gameObject.Name == "Player")
-                {
-                    foreach (GameObject child in gameObject.GetAllChildren())
-                    {
-                        if (child.GetComponent<CPickupDisplay>() != null)
-                        {
-                            PickupDisplay = child.GetComponent<CPickupDisplay>();
-                            return;
-                        }
-                    }
-                }
-            }
+            SetupPickupDisplay();
         }
 
         public void SetupTrigger(CBoxTrigger trigger)
@@ -38,19 +25,22 @@ namespace Game.Components
 
         private void Triggered(object sender, IComponent e)
         {
-            if (e.MyGameObject.Name == "Player")
+            if (e.MyGameObject.Name != "Player")
             {
-                if (MyGameObject.Name == "Coin")
-                {
-                    AddCoins(e);
-                }
-                else if (MyGameObject.Name == "Key")
-                {
-                    AddKey(e);
-                }
-
-                MyGameObject.Scene.RemoveGameObject(MyGameObject);
+                return;
             }
+
+            switch (MyGameObject.Name)
+            {
+                case "Coin":
+                    AddCoins(e);
+                    break;
+                case "Key":
+                    AddKey(e);
+                    break;
+            }
+
+            MyGameObject.Scene.RemoveGameObject(MyGameObject);
         }
 
         private void AddKey(IComponent e)
@@ -69,6 +59,28 @@ namespace Game.Components
         {
             e.MyGameObject.Scene.GameManager.Coins++;
             PickupDisplay.AddCoins(1);
+        }
+
+        private void SetupPickupDisplay()
+        {
+            foreach (GameObject gameObject in MyGameObject.Scene.GetGameObjects())
+            {
+                if (gameObject.Name != "Player")
+                {
+                    continue;
+                }
+
+                foreach (GameObject child in gameObject.GetAllChildren())
+                {
+                    if (child.GetComponent<CPickupDisplay>() == null)
+                    {
+                        continue;
+                    }
+
+                    PickupDisplay = child.GetComponent<CPickupDisplay>();
+                    return;
+                }
+            }
         }
     }
 }
