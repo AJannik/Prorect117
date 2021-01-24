@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using Game.Components.Combat;
 using Game.Components.Player;
 using Game.Interfaces;
@@ -10,108 +8,66 @@ using Game.Tools;
 
 namespace Game.Components
 {
-    public class CEffectSystem : IComponent, IUpdateable
+    public class CEffectSystem : IComponent, IOnStart
     {
-        private CPlayerController controller;
-
-        private CCombat combat;
-
         public GameObject MyGameObject { get; set; } = null;
 
-        public CCombat Combat
-        {
-            get
-            {
-                return combat;
-            }
+        public CCombat Combat { get; set; }
 
-            set
-            {
-                combat = value;
-                DefaultArmor = combat.Armor;
-                DefaultAttackDmg = combat.AttackDamage;
-            }
-        }
-
-        public CPlayerController PlayerController
-        {
-            get
-            {
-                return controller;
-            }
-
-            set
-            {
-                controller = value;
-                DefaultMoveSpeed = controller.PlayerSpeed;
-            }
-        }
-
-        private float DefaultMoveSpeed { get; set; }
-
-        private float DefaultArmor { get; set; }
-
-        private float DefaultAttackDmg { get; set; }
+        public CPlayerController PlayerController { get; set; }
 
         private List<Effect> Effects { get; set; } = new List<Effect>();
 
-        public void Update(float deltaTime)
+        public void Start()
         {
-            foreach (Effect effect in Effects.ToList())
+            if (MyGameObject.Scene.GameManager.Effects.Count == 0)
             {
-                if (effect.Update(deltaTime))
-                {
-                    Effects.Remove(effect);
-                    PlayerController.PlayerSpeed = DefaultMoveSpeed;
-                    Combat.Armor = DefaultArmor;
-                }
-                else
-                {
-                    switch (effect.Type)
-                    {
-                        case EffectType.Brittle:
-                            Combat.Armor = DefaultArmor - ((effect.Strength + 0.75f) * 15);
-                            break;
-                        case EffectType.Slow:
-                            PlayerController.PlayerSpeed = 1f / (effect.Strength + 1f) * DefaultMoveSpeed;
-                            break;
-                        case EffectType.Silenced:
-                            break;
-                        case EffectType.Weakness:
-                            Combat.AttackDamage = 1f / ((effect.Strength * 0.5f) + 1f) * DefaultAttackDmg;
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                return;
+            }
+
+            foreach (Effect effect in MyGameObject.Scene.GameManager.Effects)
+            {
+                Effects.Add(effect);
+                ApplyEffect(effect);
             }
         }
 
-        public void AddEffect(EffectType type)
+        public void AddEffect(EffectType type, float strength)
         {
-            AddEffect(type, 10, 1);
-        }
-
-        public void AddEffect(EffectType type, float duration, int strength)
-        {
-            // check if effect exists in list
-            foreach (Effect effect in Effects)
+            // check if silenced-effect exists in list
+            if (type == EffectType.Silenced)
             {
-                if (effect.Type == type && effect.Strength < strength)
+                if (Effects.Any(effect => effect.Type == EffectType.Silenced))
                 {
-                    effect.Strength = strength;
-                    effect.Duration = duration;
-                    return;
-                }
-                else if (effect.Type == type && effect.Duration < duration)
-                {
-                    effect.Duration = duration;
                     return;
                 }
             }
 
             // else add effect
-            Effects.Add(new Effect(type, duration, strength));
+            Effect newEffect = new Effect(type, strength);
+            Effects.Add(newEffect);
+            MyGameObject.Scene.GameManager.Effects.Add(newEffect);
+            ApplyEffect(newEffect);
+        }
+
+        private void ApplyEffect(Effect effect)
+        {
+            switch (effect.Type)
+            {
+                case EffectType.Fragile:
+                    Combat.Armor *= 1f - effect.Strength;
+                    break;
+                case EffectType.Slow:
+                    PlayerController.PlayerSpeed *= 1f - effect.Strength;
+                    break;
+                case EffectType.Silenced:
+                    break;
+                case EffectType.Weakness:
+                    Combat.AttackDamage *= 1f - effect.Strength;
+                    break;
+                default:
+                    throw new NullReferenceException($"Effect of type {effect.Type} doesn't exist!");
+            }
         }
     }
 }

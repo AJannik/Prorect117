@@ -19,7 +19,6 @@
     <None Remove="Content\Font.png" />
     <None Remove="Content\goldcoin1.png" />
     <None Remove="Content\goldcoin2.png" />
-    <None Remove="Content\GrassSpritesheet.png" />
     <None Remove="Content\GreenPowerDown.png" />
     <None Remove="Content\Key.png" />
     <None Remove="Content\KeyInactive.png" />
@@ -50,12 +49,8 @@
     <EmbeddedResource Include="Content\Environment\TreeSmall.png" />
     <EmbeddedResource Include="Content\Font.png" />
     <EmbeddedResource Include="Content\goldcoin1.png" />
-    <EmbeddedResource Include="Content\GrassSpritesheet.png" />
-    <EmbeddedResource Include="Content\PowerDownRed.png" />
-    <EmbeddedResource Include="Content\PowerDownGreen.png" />
-    <EmbeddedResource Include="Content\PowerDownBlue.png" />
-    <EmbeddedResource Include="Content\PowerDownYellow.png" />
     <EmbeddedResource Include="Content\Key.png" />
+	<EmbeddedResource Include="Content\GrassSpritesheet.png" />
     <EmbeddedResource Include="Content\KeyInactive.png" />
     <EmbeddedResource Include="Content\LightBandit.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonAttack.png" />
@@ -69,12 +64,15 @@
     <EmbeddedResource Include="Content\UI\ui_grey_unclicked.png" />
     <EmbeddedResource Include="Content\UI\ui_wood_sign.png" />
     <EmbeddedResource Include="Content\WallSpritesheet.png" />
-    <None Remove="Content\UI\hud_bg.png" />
     <EmbeddedResource Include="Content\UI\hud_bg.png" />
-    <None Remove="Content\Environment\spike.png" />
     <EmbeddedResource Include="Content\Environment\spike.png" />
-    <None Remove="Content\UI\ui_controls_bg.png" />
     <EmbeddedResource Include="Content\UI\ui_controls_bg.png" />
+    <EmbeddedResource Include="Content\PowerDowns\fragile.png" />
+    <EmbeddedResource Include="Content\PowerDowns\silenced.png" />
+    <EmbeddedResource Include="Content\PowerDowns\slowness.png" />
+    <EmbeddedResource Include="Content\PowerDowns\weakness.png" />
+    <None Remove="Content\UI\hud_bg2.png" />
+    <EmbeddedResource Include="Content\UI\hud_bg2.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,7 +2,7 @@
 using Game.Tools;
 using OpenTK;
 
-namespace Game.Components.UI
+namespace Game.Components.UI.BaseComponents
 {
     public class CCanvas : IComponent, IResizeable
     {

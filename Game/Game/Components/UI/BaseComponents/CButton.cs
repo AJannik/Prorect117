@@ -6,7 +6,7 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
-namespace Game.Components.UI
+namespace Game.Components.UI.BaseComponents
 {
     public class CButton : IComponent, IMouseListener, IGuiElement, IDebugDrawable, IUpdateable
     {
@@ -27,6 +27,8 @@ namespace Game.Components.UI
         public CImageRender InactiveImage { get; set; }
 
         public bool Active { get; set; } = true;
+
+        public int Number { get; set; } = 0;
 
         private ISimpleGeometry Geometry { get; set; } = new Rect(Vector2.Zero, new Vector2(1f, 1f));
 
@@ -62,7 +64,7 @@ namespace Game.Components.UI
 
         public void MouseEvent(MouseButtonEventArgs args)
         {
-            Geometry.Center = MyGameObject.Transform.Position;
+            Geometry.Center = MyGameObject.Transform.WorldPosition;
 
             Vector2 mouseCoords = new Vector2(args.X, args.Y);
             mouseCoords = mouseCoords.Transform(Canvas.CanvasMouseMatrix);
@@ -72,7 +74,7 @@ namespace Game.Components.UI
                 return;
             }
 
-            ButtonClicked?.Invoke(this, 0);
+            ButtonClicked?.Invoke(this, Number);
             InactiveImage.Visible = false;
             ClickedImage.Visible = true;
             UnClickedImage.Visible = false;
@@ -81,7 +83,7 @@ namespace Game.Components.UI
 
         public void DebugDraw()
         {
-            Geometry.Center = MyGameObject.Transform.Position;
+            Geometry.Center = MyGameObject.Transform.WorldPosition;
             matrix = Matrix4.Identity;
             GL.LoadMatrix(ref matrix);
 

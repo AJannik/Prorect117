@@ -74,8 +74,9 @@ namespace Game.GameObjectFactory
             enemy.AddComponent<CCombat>();
             CCombat combat = enemy.GetComponent<CCombat>();
             combat.AnimationSystem = animationSystem;
-            combat.MaxHealth = 40;
-            combat.AttackDamage = 25;
+            combat.Armor = 66f;
+            combat.AttackDamage = 80f;
+            combat.MaxHealth = 40f;
             ai.Combat = combat;
 
             // Hp Text
@@ -168,7 +169,9 @@ namespace Game.GameObjectFactory
             enemy.AddComponent<CCombat>();
             CCombat combat = enemy.GetComponent<CCombat>();
             combat.AnimationSystem = animationSystem;
-            combat.MaxHealth = 30;
+            combat.Armor = 33f;
+            combat.AttackDamage = 30f;
+            combat.MaxHealth = 30f;
             ai.Combat = combat;
 
             // Hp Text

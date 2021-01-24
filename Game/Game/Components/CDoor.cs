@@ -32,6 +32,7 @@ namespace Game.Components
                 if (!LastLevel)
                 {
                     ShopScreen.Show();
+                    Unlockable = false;
                 }
                 else
                 {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using Game.Interfaces;
 using Game.SimpleGeometry;
@@ -7,7 +6,7 @@ using Game.Tools;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
-namespace Game.Components.UI
+namespace Game.Components.UI.BaseComponents
 {
     public class CGuiTextRender : IComponent, IGuiElement, IDrawable
     {

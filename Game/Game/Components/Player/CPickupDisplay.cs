@@ -1,5 +1,6 @@
 using Game.Components.Renderer;
 using Game.Interfaces;
+using Game.Tools;
 
 namespace Game.Components.Player
 {
@@ -68,6 +69,13 @@ namespace Game.Components.Player
         {
             TextRenderKey.Text = $"+1";
             RenderKey.Visible = true;
+            TextRenderKey.Visible = true;
+            CurrentTimeKeys = DisplayTimeKeys;
+        }
+
+        public void AddPowerDown(EffectType type)
+        {
+            TextRenderKey.Text = $"+1x {type}";
             TextRenderKey.Visible = true;
             CurrentTimeKeys = DisplayTimeKeys;
         }

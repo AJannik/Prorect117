@@ -1,22 +1,21 @@
 ﻿using Game.Components.Collision;
+using Game.Components.Player;
 using Game.Interfaces;
 using Game.Tools;
 
 namespace Game.Components
 {
-    public class CPowerDownScript : IComponent
+    public class CPowerDownScript : IComponent, IOnStart
     {
         public GameObject MyGameObject { get; set; } = null;
 
         public CCircleTrigger Trigger { get; set; }
 
-        public COpenWall OpenWall { get; set; } = null;
-
         public EffectType Effect { get; set; } = EffectType.Slow;
 
-        public float EffectDuration { get; set; } = 10f;
+        private CPickupDisplay PickupDisplay { get; set; }
 
-        public int EffectStrength { get; set; } = 1;
+        private float EffectStrength { get; } = 0.15f;
 
         public void SetupTrigger(CCircleTrigger trigger)
         {
@@ -24,21 +23,48 @@ namespace Game.Components
             Trigger.TriggerEntered += OnTriggerEntered;
         }
 
+        public void Start()
+        {
+            SetupPickupDisplay();
+        }
+
         private void OnTriggerEntered(object sender, IComponent e)
         {
-            if (e.MyGameObject.Name == "Player" && MyGameObject.Active)
+            if (e.MyGameObject.Name != "Player" || !MyGameObject.Active)
             {
-                if (e.MyGameObject.GetComponent<CEffectSystem>() != null)
+                return;
+            }
+
+            if (e.MyGameObject.GetComponent<CEffectSystem>() != null)
+            {
+                e.MyGameObject.GetComponent<CEffectSystem>().AddEffect(Effect, EffectStrength);
+                MyGameObject.Scene.GameManager.Coins += 5;
+                PickupDisplay.AddCoins(5);
+                PickupDisplay.AddPowerDown(Effect);
+            }
+
+            MyGameObject.Scene.RemoveGameObject(MyGameObject);
+        }
+
+        private void SetupPickupDisplay()
+        {
+            foreach (GameObject gameObject in MyGameObject.Scene.GetGameObjects())
+            {
+                if (gameObject.Name != "Player")
                 {
-                    e.MyGameObject.GetComponent<CEffectSystem>().AddEffect(Effect, EffectDuration, EffectStrength);
+                    continue;
                 }
 
-                if (OpenWall != null)
+                foreach (GameObject child in gameObject.GetAllChildren())
                 {
-                    OpenWall.IsOpen = true;
-                }
+                    if (child.GetComponent<CPickupDisplay>() == null)
+                    {
+                        continue;
+                    }
 
-                MyGameObject.Active = false;
+                    PickupDisplay = child.GetComponent<CPickupDisplay>();
+                    return;
+                }
             }
         }
     }

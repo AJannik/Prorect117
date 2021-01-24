@@ -1,4 +1,9 @@
-﻿using Game.Interfaces;
+﻿using System.Collections.Generic;
+using Game.Components.UI.BaseComponents;
+using Game.GameObjectFactory;
+using Game.Interfaces;
+using Game.Tools;
+using OpenTK;
 
 namespace Game.Components.UI
 {
@@ -10,7 +15,11 @@ namespace Game.Components.UI
 
         public GameObject HealButton { get; set; }
 
-        public int HealPrice { get; } = 15;
+        public List<GameObject> PowerDownDisplays { get; } = new List<GameObject>();
+
+        private int HealPrice { get; } = 10;
+
+        private int RemovePowerDownPrice { get; } = 15;
 
         public void OnContinue(object sender, int i)
         {
@@ -27,14 +36,24 @@ namespace Game.Components.UI
             {
                 HealButton.GetComponent<CButton>().Active = false;
             }
+
+            if (MyGameObject.Scene.GameManager.Coins < RemovePowerDownPrice)
+            {
+                foreach (GameObject gameObject in PowerDownDisplays)
+                {
+                    gameObject.GetChild(0).GetComponent<CButton>().Active = false;
+                }
+            }
+
+            DisplayPowerDowns();
         }
 
         public void BuyHealth(object sender, int i)
         {
-            if (MyGameObject.Scene.GameManager.Coins >= HealPrice && MyGameObject.Scene.GameManager.PlayerHealth < 100f)
+            if (MyGameObject.Scene.GameManager.Coins >= HealPrice && MyGameObject.Scene.GameManager.PlayerHealth < 95f)
             {
                 MyGameObject.Scene.GameManager.PlayerHealth += 10f;
-                MyGameObject.Scene.GameManager.Coins -= 15;
+                MyGameObject.Scene.GameManager.Coins -= HealPrice;
 
                 // Clamp health to max
                 if (MyGameObject.Scene.GameManager.PlayerHealth > 100f)
@@ -43,9 +62,47 @@ namespace Game.Components.UI
                 }
             }
 
-            if (MyGameObject.Scene.GameManager.Coins < HealPrice || MyGameObject.Scene.GameManager.PlayerHealth > 95f)
+            DeactivateButtons();
+        }
+
+        public void RemovePowerDown(object sender, int type)
+        {
+            if (MyGameObject.Scene.GameManager.Coins >= RemovePowerDownPrice)
+            {
+                MyGameObject.Scene.GameManager.Coins -= RemovePowerDownPrice;
+                MyGameObject.Scene.GameManager.RemoveEffectOfType((EffectType)type);
+                DisplayPowerDowns();
+            }
+
+            DeactivateButtons();
+        }
+
+        private void DisplayPowerDowns()
+        {
+            for (int i = 0; i < PowerDownDisplays.Count; i++)
+            {
+                int num = MyGameObject.Scene.GameManager.NumEffectTypeInEffects((EffectType)i);
+                PowerDownDisplays[i].GetComponent<CGuiTextRender>().Text = $"{num}x {(EffectType)i}";
+                if (num == 0 || MyGameObject.Scene.GameManager.Coins < RemovePowerDownPrice)
+                {
+                    PowerDownDisplays[i].GetChild(0).GetComponent<CButton>().Active = false;
+                }
+            }
+        }
+
+        private void DeactivateButtons()
+        {
+            if (MyGameObject.Scene.GameManager.Coins < HealPrice)
             {
                 HealButton.GetComponent<CButton>().Active = false;
+            }
+
+            if (MyGameObject.Scene.GameManager.Coins < RemovePowerDownPrice)
+            {
+                foreach (GameObject gameObject in PowerDownDisplays)
+                {
+                    gameObject.GetChild(0).GetComponent<CButton>().Active = false;
+                }
             }
         }
     }

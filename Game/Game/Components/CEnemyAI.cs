@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
 using Game.Components.Collision;
 using Game.Components.Combat;
 using Game.Components.Renderer;
@@ -19,10 +16,6 @@ namespace Game.Components
 
     public class CEnemyAI : IComponent, IUpdateable
     {
-        public CEnemyAI()
-        {
-        }
-
         public GameObject MyGameObject { get; set; } = null;
 
         public CAnimationSystem AnimationSystem { get; set; } = null;

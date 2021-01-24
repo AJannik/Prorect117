@@ -48,7 +48,7 @@ namespace UnitTests
             gameObject1.AddComponent<DummyComponent1>();
             gameObject1.AddComponent<DummyComponent1>();
 
-            Assert.AreEqual(2, scene.GetUpdateables().Count);
+            Assert.AreEqual(2, scene.GetUpdatables().Count);
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace UnitTests
             gameObject1.AddComponent<DummyComponent1>();
             gameObject1.RemoveComponent<DummyComponent1>();
 
-            Assert.AreEqual(1, scene.GetUpdateables().Count);
+            Assert.AreEqual(1, scene.GetUpdatables().Count);
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace UnitTests
             scene.RemoveGameObject(gameObject2);
             scene.Update(0f);
             
-            Assert.AreEqual(1, scene.GetUpdateables().Count);            
+            Assert.AreEqual(1, scene.GetUpdatables().Count);            
         }
     }
 }
