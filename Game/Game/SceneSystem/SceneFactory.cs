@@ -30,7 +30,8 @@ namespace Game.SceneSystem
                 2 => BuildLevel1(),
                 3 => BuildLevel2(),
                 4 => BuildLevel3(),
-                5 => BuildGameOverScene(), // Last scene
+                5 => BuildLevel4(),
+                6 => BuildGameOverScene(), // Last scene
                 _ => throw new ArgumentOutOfRangeException($"There is no Scene numbered {num}!"),
             };
         }
@@ -840,7 +841,7 @@ namespace Game.SceneSystem
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
-            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.0f), new Vector2(1, 2));
+            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(124.5f, 28.5f), new Vector2(1, 2));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
@@ -882,12 +883,12 @@ namespace Game.SceneSystem
 
             // Coin, PlayerHP and Key HUD
             GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
-            
+
             // Collectables
             ObjectFactory.BuildKey(scene, new Vector2(124f, 24.5f));
             ObjectFactory.BuildKey(scene, new Vector2(97f, 16.5f));
             ObjectFactory.BuildKey(scene, new Vector2(72.5f, 3f));
-            
+
             ObjectFactory.BuildCoin(scene, new Vector2(3f, 8f));
             ObjectFactory.BuildCoin(scene, new Vector2(15f, 22f));
             ObjectFactory.BuildCoin(scene, new Vector2(22f, 22f));
@@ -909,8 +910,7 @@ namespace Game.SceneSystem
             PowerDownFactory.Slowness(scene, new Vector2(16.5f, 3f));
             PowerDownFactory.Weakness(scene, new Vector2(97f, 15f));
             PowerDownFactory.Silenced(scene, new Vector2(124f, 3f));
-
-         
+            
             // Background
             GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
             background.SetParent(camera);
