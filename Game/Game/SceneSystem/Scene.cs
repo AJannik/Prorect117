@@ -8,18 +8,18 @@ namespace Game.SceneSystem
 {
     public class Scene
     {
-        private List<GameObject> gameObjects = new List<GameObject>();
-        private List<IDrawable> drawables = new List<IDrawable>();
-        private List<IUpdateable> updateables = new List<IUpdateable>();
-        private List<IPhysicsComponent> physicsComponents = new List<IPhysicsComponent>();
-        private List<IDebugDrawable> debugDrawables = new List<IDebugDrawable>();
-        private List<IResizeable> resizeables = new List<IResizeable>();
-        private List<ICollider> colliders = new List<ICollider>();
-        private List<ITrigger> triggers = new List<ITrigger>();
-        private List<IMouseListener> mouseListeners = new List<IMouseListener>();
-        private List<IOnStart> onStarts = new List<IOnStart>();
+        private readonly List<GameObject> gameObjects = new List<GameObject>();
+        private readonly List<IDrawable> drawables = new List<IDrawable>();
+        private readonly List<IUpdateable> updatables = new List<IUpdateable>();
+        private readonly List<IPhysicsComponent> physicsComponents = new List<IPhysicsComponent>();
+        private readonly List<IDebugDrawable> debugDrawables = new List<IDebugDrawable>();
+        private readonly List<IResizeable> resizables = new List<IResizeable>();
+        private readonly List<ICollider> colliders = new List<ICollider>();
+        private readonly List<ITrigger> triggers = new List<ITrigger>();
+        private readonly List<IMouseListener> mouseListeners = new List<IMouseListener>();
+        private readonly List<IOnStart> onStarts = new List<IOnStart>();
 
-        private List<GameObject> deleteList = new List<GameObject>();
+        private readonly List<GameObject> deleteList = new List<GameObject>();
 
         public Scene(GameManager gameManager)
         {
@@ -30,9 +30,9 @@ namespace Game.SceneSystem
 
         public event EventHandler<int> ExitEvent;
 
-        public Debug Debug { get; } = new Debug();
-
         public GameManager GameManager { get; }
+
+        private Debug Debug { get; } = new Debug();
 
         public void InvokeLoadLevelEvent(int num)
         {
@@ -51,9 +51,9 @@ namespace Game.SceneSystem
         public void Update(float deltaTime)
         {
             SortRenderers();
-            foreach (IUpdateable updateAble in updateables)
+            foreach (IUpdateable updateAble in updatables)
             {
-                if ((updateAble as IComponent).MyGameObject.Active)
+                if (((IComponent)updateAble).MyGameObject.Active)
                 {
                     updateAble.Update(deltaTime);
                 }
@@ -70,7 +70,7 @@ namespace Game.SceneSystem
         {
             foreach (IPhysicsComponent physicsComponent in physicsComponents)
             {
-                if ((physicsComponent as IComponent).MyGameObject.Active)
+                if (((IComponent)physicsComponent).MyGameObject.Active)
                 {
                     physicsComponent.FixedUpdate(deltaTime);
                 }
@@ -79,9 +79,9 @@ namespace Game.SceneSystem
 
         public void Resize(int width, int height)
         {
-            foreach (IResizeable resizeable in resizeables)
+            foreach (IResizeable resizeable in resizables)
             {
-                if ((resizeable as IComponent).MyGameObject.Active)
+                if (((IComponent)resizeable).MyGameObject.Active)
                 {
                     resizeable.Resize(width, height);
                 }
@@ -94,7 +94,7 @@ namespace Game.SceneSystem
 
             foreach (IDrawable drawable in drawables)
             {
-                if ((drawable as IComponent).MyGameObject.Active)
+                if (((IComponent)drawable).MyGameObject.Active)
                 {
                     drawable.Draw(alpha);
                 }
@@ -102,28 +102,15 @@ namespace Game.SceneSystem
 
             if (debugMode)
             {
-                DebugDraw(alpha);
+                DebugDraw();
             }
-        }
-
-        public void DebugDraw(float alpha)
-        {
-            foreach (IDebugDrawable item in debugDrawables)
-            {
-                if ((item as IComponent).MyGameObject.Active)
-                {
-                    item.DebugDraw();
-                }
-            }
-
-            Debug.DebugDraw();
         }
 
         public void MouseEvent(MouseButtonEventArgs args)
         {
             foreach (IMouseListener mouseListener in mouseListeners)
             {
-                if ((mouseListener as IComponent).MyGameObject.Active)
+                if (((IComponent)mouseListener).MyGameObject.Active)
                 {
                     mouseListener.MouseEvent(args);
                 }
@@ -160,9 +147,9 @@ namespace Game.SceneSystem
             return colliders;
         }
 
-        public IReadOnlyList<IUpdateable> GetUpdateables()
+        public IReadOnlyList<IUpdateable> GetUpdatables()
         {
-            return updateables;
+            return updatables;
         }
 
         public IReadOnlyList<ITrigger> GetTriggers()
@@ -172,126 +159,139 @@ namespace Game.SceneSystem
 
         public void AddComponent(IComponent component)
         {
-            if (component is IPhysicsComponent)
+            if (component is IPhysicsComponent physicsComponent)
             {
-                if (!physicsComponents.Contains((IPhysicsComponent)component))
+                if (!physicsComponents.Contains(physicsComponent))
                 {
-                    physicsComponents.Add((IPhysicsComponent)component);
+                    physicsComponents.Add(physicsComponent);
                 }
             }
 
-            if (component is IDrawable)
+            if (component is IDrawable drawable1)
             {
-                if (!drawables.Contains((IDrawable)component))
+                if (!drawables.Contains(drawable1))
                 {
-                    int index = GetIndex((IDrawable)component);
-                    drawables.Insert(index, (IDrawable)component);
+                    int index = GetIndex(drawable1);
+                    drawables.Insert(index, drawable1);
                 }
             }
 
-            if (component is IUpdateable)
+            if (component is IUpdateable updateable)
             {
-                if (!updateables.Contains((IUpdateable)component))
+                if (!updatables.Contains(updateable))
                 {
-                    updateables.Add((IUpdateable)component);
+                    updatables.Add(updateable);
                 }
             }
 
-            if (component is IResizeable)
+            if (component is IResizeable resizeable)
             {
-                if (!resizeables.Contains((IResizeable)component))
+                if (!resizables.Contains(resizeable))
                 {
-                    resizeables.Add((IResizeable)component);
+                    resizables.Add(resizeable);
                 }
             }
 
-            if (component is IDebugDrawable)
+            if (component is IDebugDrawable drawable)
             {
-                if (!debugDrawables.Contains((IDebugDrawable)component))
+                if (!debugDrawables.Contains(drawable))
                 {
-                    debugDrawables.Add((IDebugDrawable)component);
+                    debugDrawables.Add(drawable);
                 }
             }
 
-            if (component is ICollider)
+            if (component is ICollider collider)
             {
-                if (!colliders.Contains((ICollider)component))
+                if (!colliders.Contains(collider))
                 {
-                    colliders.Add((ICollider)component);
+                    colliders.Add(collider);
                 }
             }
 
-            if (component is ITrigger)
+            if (component is ITrigger trigger)
             {
-                if (!triggers.Contains((ITrigger)component))
+                if (!triggers.Contains(trigger))
                 {
-                    triggers.Add((ITrigger)component);
+                    triggers.Add(trigger);
                 }
             }
 
-            if (component is IMouseListener)
+            if (component is IMouseListener listener)
             {
-                if (!mouseListeners.Contains((IMouseListener)component))
+                if (!mouseListeners.Contains(listener))
                 {
-                    mouseListeners.Add((IMouseListener)component);
+                    mouseListeners.Add(listener);
                 }
             }
 
-            if (component is IOnStart)
+            if (component is IOnStart start)
             {
-                if (!onStarts.Contains((IOnStart)component))
+                if (!onStarts.Contains(start))
                 {
-                    onStarts.Add((IOnStart)component);
+                    onStarts.Add(start);
                 }
             }
         }
 
         public void RemoveComponent(IComponent component)
         {
-            if (component is IPhysicsComponent)
+            if (component is IPhysicsComponent physicsComponent)
             {
-                physicsComponents.Remove((IPhysicsComponent)component);
+                physicsComponents.Remove(physicsComponent);
             }
 
-            if (component is IDrawable)
+            if (component is IDrawable drawable)
             {
-                drawables.Remove((IDrawable)component);
+                drawables.Remove(drawable);
             }
 
-            if (component is IUpdateable)
+            if (component is IUpdateable updateable)
             {
-                updateables.Remove((IUpdateable)component);
+                updatables.Remove(updateable);
             }
 
-            if (component is IResizeable)
+            if (component is IResizeable resizeable)
             {
-                resizeables.Remove((IResizeable)component);
+                resizables.Remove(resizeable);
             }
 
-            if (component is IDebugDrawable)
+            if (component is IDebugDrawable debugDrawable)
             {
-                debugDrawables.Remove((IDebugDrawable)component);
+                debugDrawables.Remove(debugDrawable);
             }
 
-            if (component is ICollider)
+            if (component is ICollider collider)
             {
-                colliders.Remove((ICollider)component);
+                colliders.Remove(collider);
             }
 
-            if (component is ITrigger)
+            if (component is ITrigger trigger)
             {
-                triggers.Remove((ITrigger)component);
+                triggers.Remove(trigger);
             }
 
-            if (component is IMouseListener)
+            if (component is IMouseListener listener)
             {
-                mouseListeners.Remove((IMouseListener)component);
+                mouseListeners.Remove(listener);
             }
 
-            if (component is IOnStart)
+            if (component is IOnStart start)
             {
-                onStarts.Remove((IOnStart)component);
+                onStarts.Remove(start);
             }
+        }
+
+        private void DebugDraw()
+        {
+            foreach (IDebugDrawable item in debugDrawables)
+            {
+                if (((IComponent)item).MyGameObject.Active)
+                {
+                    item.DebugDraw();
+                }
+            }
+
+            Debug.DebugDraw();
         }
 
         private void DeleteGameObjects()
