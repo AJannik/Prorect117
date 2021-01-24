@@ -814,7 +814,6 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(88.5f, 1.5f), 1);
 
             // Moving platforms and spikes
-
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(20.5f, 15f), new Vector2(30f, 15f), 3);
             ObjectFactory.BuildMovingSpikes(scene, new Vector2(21f, 16f), new Vector2(30.5f, 16f), 3);
             ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(20.5f, 16f), new Vector2(30f, 16f), new Vector2(3, 1), new Vector2(23, 20f), 30);
@@ -847,7 +846,6 @@ namespace Game.SceneSystem
             camera.GetComponent<CCamera>().Scale = 6f;
 
             // Enemies
-
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(10f, 1.5f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(3f, 6.5f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(19.5f, 21f));
@@ -871,7 +869,7 @@ namespace Game.SceneSystem
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(55f, 13.5f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(34f, 23.5f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(124.5f, 27.5f));
-            
+
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
@@ -886,8 +884,32 @@ namespace Game.SceneSystem
             GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
             
             // Collectables
-         
+            ObjectFactory.BuildKey(scene, new Vector2(124f, 24.5f));
+            ObjectFactory.BuildKey(scene, new Vector2(97f, 16.5f));
+            ObjectFactory.BuildKey(scene, new Vector2(72.5f, 3f));
+            
+            ObjectFactory.BuildCoin(scene, new Vector2(3f, 8f));
+            ObjectFactory.BuildCoin(scene, new Vector2(15f, 22f));
+            ObjectFactory.BuildCoin(scene, new Vector2(22f, 22f));
+            ObjectFactory.BuildCoin(scene, new Vector2(31f, 24.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(34.5f, 24.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(50.5f, 22.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(59.5f, 23.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(67.5f, 22.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(55.5f, 14.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(64.5f, 15.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(82.5f, 4.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(95.5f, 3.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(75.5f, 8.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(85.5f, 9.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(100.5f, 8.5f));
+
             // Power Downs
+            PowerDownFactory.Fragile(scene, new Vector2(98.5f, 3f));
+            PowerDownFactory.Slowness(scene, new Vector2(16.5f, 3f));
+            PowerDownFactory.Weakness(scene, new Vector2(97f, 15f));
+            PowerDownFactory.Silenced(scene, new Vector2(124f, 3f));
+
          
             // Background
             GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
