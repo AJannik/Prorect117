@@ -758,6 +758,119 @@ namespace Game.SceneSystem
 
             return scene;
         }
+ private Scene BuildLevel4()
+        {
+            Scene scene = new Scene(GameManager);
+
+            // Level border
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(64f, 0.5f), 128);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(64f, 31.5f), 128);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(0.5f, 16f), 32);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(127.5f, 16f), 32);
+
+
+            // Level platforms and walls
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(3f, 5.5f), 4);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(12.5f, 10f), 18);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(18f, 19.5f), 12);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(31f, 22.5f), 2);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(32.5f, 23f), 16);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(34f, 22.5f), 2);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(22.5f, 1.5f), new Vector2(3f, 1f), new Vector2(26.5f, 1.5f), 30);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(23f, 1.5f), 3);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(75f, 12.5f), 64);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(43.5f, 4f), 6);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(46f, 1.5f), 3);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(45.5f, 1.5f), new Vector2(3f, 1f), new Vector2(43.5f, 7.5f), 30);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(47.5f, 4f), 6);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(62f, 2f), 2);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(67.5f, 3f), 4);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(83f, 5.5f), 32);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(82.5f, 1.5f), 5);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(79f, 1.5f), 3);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(78.5f, 1.5f), new Vector2(3f, 1f), new Vector2(82.5f, 2f), 30);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(87f, 1.5f), 3);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(86.5f, 1.5f), new Vector2(3f, 1f), new Vector2(93.5f, 1.5f), 30);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(43.5f, 16f), 6);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(46f, 13.5f), 3);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(45.5f, 13.5f), new Vector2(3f, 1f), new Vector2(43.5f, 19.5f), 30);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(50.5f, 15f), 4);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(59.5f, 15.5f), 5);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(67.5f, 15f), 4);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(70.5f, 13.5f), 4);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(70f, 13.5f), new Vector2(4f, 1f), new Vector2(67.5f, 18.5f), 30);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(72.5f, 15f), 4);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(80.5f, 14.5f), 3);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(87.5f, 15.5f), 5);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(106.5f, 15f), 4);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(110f, 3f), 4);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(115f, 3f), 4);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(120f, 3f), 4);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(117.5f, 4.5f), 4);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(124.5f, 27f), 5);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(20.5f, 1.5f), 1);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(24.5f, 1.5f), 1);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(76.5f, 1.5f), 1);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(88.5f, 1.5f), 1);
+
+            // Moving platforms and spikes
+
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(20.5f, 15f), new Vector2(30f, 15f), 3);
+            ObjectFactory.BuildMovingSpikes(scene, new Vector2(21f, 16f), new Vector2(30.5f, 16f), 3);
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(20.5f, 16f), new Vector2(30f, 16f), new Vector2(3, 1), new Vector2(23, 20f), 30);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(22.5f, 2.5f), new Vector2(22.5f, 8.5f), 3);
+            ObjectFactory.BuildMovingSpikes(scene, new Vector2(23f, 3.5f), new Vector2(23f, 9.5f), 3);
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(22.5f, 3.5f), new Vector2(22.5f, 9.5f), new Vector2(2.75f, 1), new Vector2(26.5f, 1.5f), 30);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(40.5f, 3.5f), new Vector2(40.5f, 18.5f), 3);
+            ObjectFactory.BuildMovingSpikes(scene, new Vector2(90f, 13.5f), new Vector2(105f, 13.5f), 3);
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(89.5f, 13.5f), new Vector2(104.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
+            ObjectFactory.BuildMovingSpikes(scene, new Vector2(105f, 13.5f), new Vector2(90f, 13.5f), 3);
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(104.5f, 13.5f), new Vector2(89.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(110f, 7.5f), new Vector2(110f, 12.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(109.5f, 16.5f), new Vector2(110f, 27.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(115f, 9.5f), new Vector2(115f, 11.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(115f, 15.5f), new Vector2(115f, 25.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(120f, 12.5f), new Vector2(120f, 23.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(125f, 15.5f), new Vector2(125f, 19.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(117.5f, 23.5f), new Vector2(117.5f, 29.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(118f, 14.5f), new Vector2(118f, 20.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(113f, 13.5f), new Vector2(113f, 19.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(112.5f, 23.5f), new Vector2(112.5f, 28.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(11f, 3.5f), new Vector2(11f, 12.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, 8.5f), new Vector2(2f, 17.5f), 2);
+
+            // Player, exit and camera
+            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
+            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(15.5f, 5.0f), new Vector2(1, 2));
+            GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
+            camera.SetParent(player);
+            camera.GetComponent<CCamera>().Scale = 6f;
+
+            // Enemies
+
+            // Canvas
+            GameObject canvas = GuiFactory.BuildCanvas(scene);
+            canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
+
+            // Shop
+            GameObject shopScreen = GuiFactory.BuildShopScreen(scene, canvas, Vector2.Zero);
+            levelEnd.GetComponent<CDoor>().ShopScreen = shopScreen.GetComponent<CShopScreen>();
+            shopScreen.GetComponent<CShopScreen>().Player = player;
+            shopScreen.Active = false;
+
+            // Coin, PlayerHP and Key HUD
+            GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
+            
+            // Collectables
+         
+            // Power Downs
+         
+            // Background
+            GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
+            background.SetParent(camera);
+
+            return scene;
+        }
 
         private Scene BuildGameOverScene()
         {
