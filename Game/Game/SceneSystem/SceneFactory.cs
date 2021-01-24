@@ -848,6 +848,30 @@ namespace Game.SceneSystem
 
             // Enemies
 
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(10f, 1.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(3f, 6.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(19.5f, 21f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(21.5f, 21f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(15f, 1.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(26f, 1.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(29f, 1.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(50f, 1.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(55f, 1.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(75f, 1.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(70f, 1.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(82.5f, 2.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(72.5f, 6.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(82.5f, 6.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(90.5f, 6.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(100f, 1.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(118.5f, 6f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(78.5f, 13.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(83.5f, 13.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(60f, 13.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(55f, 13.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(34f, 23.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(124.5f, 27.5f));
+            
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
