@@ -20,7 +20,7 @@ namespace Game.Components.Player
 
         public CPlayerController Controller { get; set; }
 
-        public bool RollEnabled { get; set; }
+        public bool RollEnabled { get; set; } = true;
 
         private float ComboTime { get; set; } = 0f;
 

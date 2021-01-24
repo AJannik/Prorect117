@@ -199,6 +199,7 @@ namespace Game.GameObjectFactory
             player.AddComponent<CEffectSystem>();
             player.GetComponent<CEffectSystem>().PlayerController = player.GetComponent<CPlayerController>();
             player.GetComponent<CEffectSystem>().Combat = player.GetComponent<CCombat>();
+            player.GetComponent<CEffectSystem>().CombatController = player.GetComponent<CPlayerCombatController>();
 
             // add Particle System
             player.AddComponent<CParticleSystem>();

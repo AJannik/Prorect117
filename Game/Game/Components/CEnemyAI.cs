@@ -87,7 +87,7 @@ namespace Game.Components
             if (AnimationSystem.ActiveAnimation.Name == "Hurt" && LastInterrupt <= 0f && AnimationSystem.ActiveAnimation.Name != "Death")
             {
                 State = EnemyState.Idle;
-                LastInterrupt = 1f;
+                LastInterrupt = 3f;
             }
 
             if (TimeInState <= 0f)

@@ -230,6 +230,11 @@ namespace Game.Components.Renderer
             }
         }
 
+        public void UpdateFlipped(bool faceLeft)
+        {
+            Renderer.Flipped = FlippedAnimations ? !faceLeft : faceLeft;
+        }
+
         /// <summary>
         /// Returns the Animation with given Name. If not found returns null.
         /// </summary>

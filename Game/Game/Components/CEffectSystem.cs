@@ -16,6 +16,8 @@ namespace Game.Components
 
         public CPlayerController PlayerController { get; set; }
 
+        public CPlayerCombatController CombatController { get; set; }
+
         private List<Effect> Effects { get; set; } = new List<Effect>();
 
         public void Start()
@@ -61,6 +63,7 @@ namespace Game.Components
                     PlayerController.PlayerSpeed *= 1f - effect.Strength;
                     break;
                 case EffectType.Silenced:
+                    CombatController.RollEnabled = false;
                     break;
                 case EffectType.Weakness:
                     Combat.AttackDamage *= 1f - effect.Strength;
