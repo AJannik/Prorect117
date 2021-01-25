@@ -72,11 +72,6 @@ namespace Game.SceneSystem
             scenes[CurrentScene].MouseEvent(args);
         }
 
-        public void UnloadCurrentScene()
-        {
-            // TODO: Implement UnloadCurrentScene()
-        }
-
         public Scene GetScene(int index)
         {
             return scenes[index];
@@ -111,7 +106,6 @@ namespace Game.SceneSystem
             // GameManager detected Game End-condition
             if (sender == GameManager)
             {
-                UnloadCurrentScene();
                 CurrentScene = sceneFactory.NumScenes - 1;
 
                 Resize(screenWidth, screenHeight);
@@ -126,7 +120,6 @@ namespace Game.SceneSystem
 
             if (CurrentScene + index >= 0 && CurrentScene + index < sceneFactory.NumScenes)
             {
-                UnloadCurrentScene();
                 CurrentScene += index;
 
                 Resize(screenWidth, screenHeight);
