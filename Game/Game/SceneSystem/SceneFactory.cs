@@ -671,7 +671,6 @@ namespace Game.SceneSystem
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(27.5f, -76.9f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(7.5f, -2.5f), new Vector2(3, 3));
-            levelEnd.GetComponent<CDoor>().LastLevel = true;
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
@@ -701,6 +700,12 @@ namespace Game.SceneSystem
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
+
+            // Shop
+            GameObject shopScreen = GuiFactory.BuildShopScreen(scene, canvas, Vector2.Zero);
+            levelEnd.GetComponent<CDoor>().ShopScreen = shopScreen.GetComponent<CShopScreen>();
+            shopScreen.GetComponent<CShopScreen>().Player = player;
+            shopScreen.Active = false;
 
             // Coin, PlayerHP and Key HUD
             GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
@@ -759,7 +764,8 @@ namespace Game.SceneSystem
 
             return scene;
         }
- private Scene BuildLevel4()
+
+        private Scene BuildLevel4()
         {
             Scene scene = new Scene(GameManager);
 
@@ -842,6 +848,7 @@ namespace Game.SceneSystem
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(124.5f, 28.5f), new Vector2(1, 2));
+            levelEnd.GetComponent<CDoor>().LastLevel = true;
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
@@ -875,12 +882,6 @@ namespace Game.SceneSystem
             GameObject canvas = GuiFactory.BuildCanvas(scene);
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
-            // Shop
-            GameObject shopScreen = GuiFactory.BuildShopScreen(scene, canvas, Vector2.Zero);
-            levelEnd.GetComponent<CDoor>().ShopScreen = shopScreen.GetComponent<CShopScreen>();
-            shopScreen.GetComponent<CShopScreen>().Player = player;
-            shopScreen.Active = false;
-
             // Coin, PlayerHP and Key HUD
             GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
 
@@ -910,7 +911,7 @@ namespace Game.SceneSystem
             PowerDownFactory.Slowness(scene, new Vector2(16.5f, 3f));
             PowerDownFactory.Weakness(scene, new Vector2(97f, 15f));
             PowerDownFactory.Silenced(scene, new Vector2(124f, 3f));
-            
+
             // Background
             GameObject background = ObjectFactory.BuildBackground(scene, camera.Transform);
             background.SetParent(camera);
