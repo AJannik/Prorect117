@@ -1,21 +1,15 @@
-# Introduction 
-This is a game where you loose skills instead of earning them.
-You start with a very good charakter and power down over time.
+# Konzept
+Das Spiel ist ein 2D Jump'n Run. Das Ziel ist es, am Ende möglichst viele Münzen gesammelt zu haben und lebend die Level zu beenden.
+Ein Spiel Durchlauf besteht darin, alle Level zu beenden. Wenn man stirbt, ist der Durchlauf fehlgeschlagen und man muss neu beginnen.
+Besonderheit ist, dass man anstatt den eigenen Charackter hochzuleveln, man PowerDowns einsammeln kann welche den Spieler immer schwächer machen.
 
-# Getting Started
+# Installation
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
 1.	Installation process
 2.	Software dependencies
 3.	Latest releases
 4.	API references
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+# Build und Tests
+Das Buildverfahren ist klassisch mit einer beliebigen .Net IDE oder auf der Azure DevOps via CI durchführbar.
+Alle Tests sind in einem separaten Projekt Namens UnitTests gespeichert und können in der IDE ausgeführt werden.
