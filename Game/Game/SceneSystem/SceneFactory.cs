@@ -17,7 +17,7 @@ namespace Game.SceneSystem
             GameManager = gameManager;
         }
 
-        internal int NumScenes { get; } = 6;
+        internal int NumScenes { get; } = 7;
 
         private GameManager GameManager { get; }
 
