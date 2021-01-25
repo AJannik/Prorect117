@@ -27,7 +27,7 @@ namespace Game.Components.Player
 
         public float PlayerSpeed { get; set; } = 10f;
 
-        public float JumpForce { get; set; } = 800f;
+        public float JumpForce { get; set; } = 1200f;
 
         public bool FacingRight { get; private set; } = true;
 
@@ -66,7 +66,7 @@ namespace Game.Components.Player
 
             if (Jumping && RigidBody.Velocity.Y >= 0f)
             {
-                RigidBody.GravityScale = 2f;
+                RigidBody.GravityScale = 4f;
                 AnimationSystem.UpdateFlipped(!FacingRight);
             }
             else
