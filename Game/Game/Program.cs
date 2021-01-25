@@ -52,7 +52,6 @@ namespace Game
         {
             // Normal Update
             sceneManager.Update((float)frameTime);
-            Console.WriteLine(window.UpdateFrequency);
 
             // FixedUpdate for Physics
             accumulator += frameTime;

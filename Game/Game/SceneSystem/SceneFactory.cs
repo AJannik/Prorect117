@@ -775,7 +775,6 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(0.5f, 16f), 32);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(127.5f, 16f), 32);
 
-
             // Level platforms and walls
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(3f, 5.5f), 4);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(12.5f, 10f), 18);
