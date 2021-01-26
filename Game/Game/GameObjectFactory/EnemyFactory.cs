@@ -37,8 +37,8 @@ namespace Game.GameObjectFactory
             CBoxTrigger right = enemy.GetComponents<CBoxTrigger>()[1];
             left.Geometry.Size = new Vector2(1.3f, 1.8f);
             right.Geometry.Size = new Vector2(1.3f, 1.8f);
-            left.Offset = new Vector2(-0.7f, 0f);
-            right.Offset = new Vector2(0.7f, 0f);
+            left.Offset = new Vector2(-0.8f, 0f);
+            right.Offset = new Vector2(0.8f, 0f);
 
             enemy.AddComponent<CRigidBody>();
 

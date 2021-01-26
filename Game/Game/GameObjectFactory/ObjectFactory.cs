@@ -185,14 +185,14 @@ namespace Game.GameObjectFactory
             // add hitbox to combatcontroller
             player.AddComponent<CBoxTrigger>();
             CBoxTrigger attackHitboxLeft = player.GetComponents<CBoxTrigger>()[1];
-            attackHitboxLeft.Geometry.Size = new Vector2(1f, 1.5f);
-            attackHitboxLeft.Offset = new Vector2(-0.9f, 0f);
+            attackHitboxLeft.Geometry.Size = new Vector2(1.3f, 1.7f);
+            attackHitboxLeft.Offset = new Vector2(-0.8f, 0.1f);
             combatController.LeftHitbox = attackHitboxLeft;
 
             player.AddComponent<CBoxTrigger>();
             CBoxTrigger attackHitboxRight = player.GetComponents<CBoxTrigger>()[2];
-            attackHitboxRight.Geometry.Size = new Vector2(1f, 1.5f);
-            attackHitboxRight.Offset = new Vector2(0.9f, 0f);
+            attackHitboxRight.Geometry.Size = new Vector2(1.3f, 1.7f);
+            attackHitboxRight.Offset = new Vector2(0.8f, 0.1f);
             combatController.RightHitbox = attackHitboxRight;
 
             // add EffectSystem
