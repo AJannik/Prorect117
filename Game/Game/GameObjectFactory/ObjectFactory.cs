@@ -350,6 +350,34 @@ namespace Game.GameObjectFactory
             return floor;
         }
 
+        public static GameObject BuildMovingPlatform(Scene scene, Vector2 position1, Vector2 position2, int length, string tilemapPath)
+        {
+            GameObject floor = new GameObject(scene, "Floor");
+            Vector2 size = new Vector2(length, 1f);
+
+            floor.AddComponent<CPeriodicMovement>();
+            CPeriodicMovement periodicMovement = floor.GetComponent<CPeriodicMovement>();
+            periodicMovement.Start = position1;
+            periodicMovement.End = position2;
+            periodicMovement.MoveSpeed = 3f;
+
+            floor.Transform.Position = position1;
+
+            floor.AddComponent<CTileRenderer>();
+            floor.GetComponent<CTileRenderer>().Height = 1;
+            floor.GetComponent<CTileRenderer>().Width = length;
+            floor.GetComponent<CTileRenderer>().LoadAndSetTexture(tilemapPath);
+
+            floor.AddComponent<CBoxCollider>();
+            floor.GetComponent<CBoxCollider>().Geometry.Size = 0.9f * size;
+
+            floor.AddComponent<CRigidBody>();
+            CRigidBody rb = floor.GetComponent<CRigidBody>();
+            rb.Static = true;
+
+            return floor;
+        }
+
         public static GameObject BuildMovingSpikes(Scene scene, Vector2 position, Vector2 goal, int length)
         {
             GameObject spikes = new GameObject(scene, "Spikes");

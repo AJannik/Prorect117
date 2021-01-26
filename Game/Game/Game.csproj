@@ -28,6 +28,7 @@
     <None Remove="Content\Skeleton\SkeletonHit.png" />
     <None Remove="Content\Skeleton\SkeletonIdle.png" />
     <None Remove="Content\Skeleton\SkeletonWalk.png" />
+    <None Remove="Content\StoneBrickTilemap.png" />
     <None Remove="Content\UI\ui_bg.png" />
     <None Remove="Content\UI\ui_grey_clicked.png" />
     <None Remove="Content\UI\ui_grey_inactive.png" />
@@ -58,6 +59,7 @@
     <EmbeddedResource Include="Content\Skeleton\SkeletonHit.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonIdle.png" />
     <EmbeddedResource Include="Content\Skeleton\SkeletonWalk.png" />
+    <EmbeddedResource Include="Content\StoneBrickTilemap.png" />
     <EmbeddedResource Include="Content\UI\ui_bg.png" />
     <EmbeddedResource Include="Content\UI\ui_grey_clicked.png" />
     <EmbeddedResource Include="Content\UI\ui_grey_inactive.png" />
