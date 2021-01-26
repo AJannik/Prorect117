@@ -8,6 +8,7 @@
   <ItemGroup>
     <None Remove="Content\adventurer.png" />
     <None Remove="Content\AnimatedCoin.png" />
+    <None Remove="Content\DarkStoneBrickTilemap.png" />
     <None Remove="Content\default.png" />
     <None Remove="Content\DoorSprite.png" />
     <None Remove="Content\Environment\background_0.png" />
@@ -40,6 +41,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Content\adventurer.png" />
     <EmbeddedResource Include="Content\AnimatedCoin.png" />
+    <EmbeddedResource Include="Content\DarkStoneBrickTilemap.png" />
     <EmbeddedResource Include="Content\default.png" />
     <EmbeddedResource Include="Content\DoorSprite.png" />
     <EmbeddedResource Include="Content\Environment\background_0.png" />
