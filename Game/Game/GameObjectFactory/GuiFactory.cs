@@ -249,28 +249,32 @@ namespace Game.GameObjectFactory
             GameObject hpText = BuildTextField(scene, canvas, Vector2.Zero, "PlayerHP");
             hpText.GetComponent<CGuiTextRender>().SetSize(0.075f);
             hpText.GetComponent<CGuiTextRender>().Centered = true;
+            hpText.GetComponent<CGuiTextRender>().Layer = 29;
             hpText.SetParent(playerHp);
 
             GameObject attackText = BuildTextField(scene, canvas, new Vector2(0f, -0.07f), "AttackText");
             attackText.GetComponent<CGuiTextRender>().SetSize(0.03f);
             attackText.GetComponent<CGuiTextRender>().Centered = true;
+            attackText.GetComponent<CGuiTextRender>().Layer = 29;
             attackText.SetParent(playerHp);
 
             GameObject armorText = BuildTextField(scene, canvas, new Vector2(0f, -0.14f), "ArmorText");
             armorText.GetComponent<CGuiTextRender>().SetSize(0.03f);
             armorText.GetComponent<CGuiTextRender>().Centered = true;
+            armorText.GetComponent<CGuiTextRender>().Layer = 29;
             armorText.SetParent(playerHp);
 
             GameObject speedText = BuildTextField(scene, canvas, new Vector2(0f, -0.21f), "SpeedText");
             speedText.GetComponent<CGuiTextRender>().SetSize(0.03f);
             speedText.GetComponent<CGuiTextRender>().Centered = true;
+            speedText.GetComponent<CGuiTextRender>().Layer = 29;
             speedText.SetParent(playerHp);
 
             const float sizeX = 0.7f;
             const float sizeY = 0.4f;
             GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(position.X, -0.793f), "UI.hud_bg2.png");
             bgImage.GetComponent<CImageRender>().SetSize(sizeX, sizeY);
-            bgImage.GetComponent<CImageRender>().Layer = 29;
+            bgImage.GetComponent<CImageRender>().Layer = 28;
 
             return playerHp;
         }
@@ -281,12 +285,14 @@ namespace Game.GameObjectFactory
             keyUi.Transform.Position = position;
 
             keyUi.AddComponent<CImageRender>();
+            keyUi.GetComponent<CImageRender>().Layer = 29;
             CImageRender keyInactive = keyUi.GetComponent<CImageRender>();
             keyInactive.LoadAndSetTexture("Content.KeyInactive.png");
             keyInactive.SetSize(0.12f, 0.12f);
             keyInactive.Canvas = canvas.GetComponent<CCanvas>();
 
             keyUi.AddComponent<CImageRender>();
+            keyUi.GetComponents<CImageRender>()[1].Layer = 29;
             CImageRender keyActive = keyUi.GetComponents<CImageRender>()[1];
             keyActive.LoadAndSetTexture("Content.Key.png");
             keyActive.SetSize(0.12f, 0.12f);
@@ -307,9 +313,11 @@ namespace Game.GameObjectFactory
             GameObject coinImage = BuildGuiImage(scene, canvas, new Vector2(-0.05f, -0f), "goldcoin1.png");
 
             textField.GetComponent<CGuiTextRender>().SetSize(0.05f);
+            textField.GetComponent<CGuiTextRender>().Layer = 29;
             textField.SetParent(coinHud);
 
             coinImage.GetComponent<CImageRender>().SetSize(0.09f, 0.09f);
+            coinImage.GetComponent<CImageRender>().Layer = 29;
             coinImage.SetParent(coinHud);
 
             coinHud.AddComponent<CCoinUIUpdater>();
@@ -318,7 +326,7 @@ namespace Game.GameObjectFactory
 
             GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(0.8f, 0.893f), "UI.hud_bg.png");
             bgImage.GetComponent<CImageRender>().SetSize(0.70f, 0.2f);
-            bgImage.GetComponent<CImageRender>().Layer = 29;
+            bgImage.GetComponent<CImageRender>().Layer = 28;
 
             return coinHud;
         }

@@ -1,3 +1,4 @@
+using System;
 using Game.Components.Combat;
 using Game.Components.Player;
 using Game.Components.UI.BaseComponents;
@@ -23,7 +24,7 @@ namespace Game.Components.UI
 
         public void Update(float deltaTime)
         {
-            HpText.Text = $"{(int)Combat.CurrentHealth}/{(int)Combat.MaxHealth}";
+            HpText.Text = $"{MathF.Ceiling(Combat.CurrentHealth)}/{MathF.Ceiling(Combat.MaxHealth)}";
             AttackText.Text = $"Damage: {(int)Combat.AttackDamage}";
             ArmorText.Text = $"Armor: {(int)Combat.Armor}";
             SpeedText.Text = $"Speed: {(int)PlayerController.PlayerSpeed}";
