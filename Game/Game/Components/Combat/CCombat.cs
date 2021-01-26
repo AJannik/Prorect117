@@ -1,4 +1,5 @@
-﻿using Game.Components.Player;
+﻿using System;
+using Game.Components.Player;
 using Game.Components.Renderer;
 using Game.Interfaces;
 using OpenTK;
@@ -78,7 +79,7 @@ namespace Game.Components.Combat
 
             if (HpText != null)
             {
-                HpText.Text = $"{(int)CurrentHealth} HP";
+                HpText.Text = $"{MathF.Ceiling(CurrentHealth)} HP";
             }
 
             if (InvincibleTime >= 0f)
@@ -109,11 +110,11 @@ namespace Game.Components.Combat
                 if (MyGameObject.Name == "Player")
                 {
                     MyGameObject.Scene.GameManager.PlayerHealth = CurrentHealth;
-                    DamageDisplay?.DisplayDamage($"{(int)CurrentHealth}/{MaxHealth}", Color.White);
+                    DamageDisplay?.DisplayDamage($"{MathF.Ceiling(CurrentHealth)}/{MaxHealth}", Color.White);
                 }
                 else
                 {
-                    DamageDisplay?.DisplayDamage($"-{(int)dmg}", Color.DarkRed);
+                    DamageDisplay?.DisplayDamage($"-{MathF.Ceiling(dmg)}", Color.DarkRed);
                 }
             }
         }

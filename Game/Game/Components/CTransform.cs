@@ -8,7 +8,7 @@ namespace Game.Components
     {
         private Vector2 pos = new Vector2(0f, 0f); // local coordinates
         private Vector2 scale = new Vector2(1f, 1f); // local scale
-        private Vector2 rotation = new Vector2(0f, 0f); // local roation
+        private Vector2 rotation = new Vector2(0f, 0f); // local rotation
 
         public CTransform()
         {
@@ -20,10 +20,7 @@ namespace Game.Components
         /// </summary>
         public Vector2 Position // local coordinates
         {
-            get
-            {
-                return pos;
-            }
+            get => pos;
 
             set
             {

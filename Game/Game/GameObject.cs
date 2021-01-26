@@ -8,8 +8,8 @@ namespace Game
 {
     public class GameObject
     {
+        private readonly List<IComponent> components = new List<IComponent>();
         private bool active;
-        private List<IComponent> components = new List<IComponent>();
 
         public GameObject(Scene scene)
             : this(scene, "GameObject", null)
@@ -49,18 +49,15 @@ namespace Game
             }
         }
 
-        public CTransform Transform { get; private set; } = new CTransform();
+        public CTransform Transform { get; } = new CTransform();
 
         public Scene Scene { get; set; }
 
-        public string Name { get; set; } = "GameObject";
+        public string Name { get; }
 
         public bool Active
         {
-            get
-            {
-                return active;
-            }
+            get => active;
 
             set
             {
@@ -72,10 +69,7 @@ namespace Game
             }
         }
 
-        public int ChildCount
-        {
-            get { return Children.Count; }
-        }
+        public int ChildCount => Children.Count;
 
         private GameObject Parent { get; set; } = null;
 
