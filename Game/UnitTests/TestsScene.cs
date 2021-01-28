@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;
 using UnitTests.DummyClasses;
 using Game.SceneSystem;
+using Game.Entity;
 
 namespace UnitTests
 {

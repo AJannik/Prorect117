@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using OpenTK;
 using System;
 using Game.SceneSystem;
+using Game.Entity;
 
 namespace UnitTests
 {
