@@ -1,4 +1,5 @@
 ﻿using Game.Components.Player;
+using Game.Entity;
 using Game.Interfaces;
 
 namespace Game.Components.Combat

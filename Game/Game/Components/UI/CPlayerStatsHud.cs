@@ -2,6 +2,7 @@ using System;
 using Game.Components.Combat;
 using Game.Components.Player;
 using Game.Components.UI.BaseComponents;
+using Game.Entity;
 using Game.Interfaces;
 
 namespace Game.Components.UI

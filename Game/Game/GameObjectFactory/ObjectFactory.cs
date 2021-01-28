@@ -1,16 +1,13 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
+﻿using System.Diagnostics.CodeAnalysis;
 using Game.Components;
 using Game.Components.Collision;
 using Game.Components.Combat;
 using Game.Components.Player;
 using Game.Components.Renderer;
-using Game.Components.UI;
+using Game.Entity;
 using Game.SceneSystem;
 using Game.Tools;
 using OpenTK;
-using OpenTK.Graphics.OpenGL;
 
 namespace Game.GameObjectFactory
 {

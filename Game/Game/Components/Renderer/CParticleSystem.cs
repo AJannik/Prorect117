@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Game.Entity;
 using Game.Interfaces;
 using Game.Tools;
 using OpenTK;

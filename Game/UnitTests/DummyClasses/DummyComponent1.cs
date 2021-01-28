@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Game;
+using Game.Entity;
 using Game.Interfaces;
 
 namespace UnitTests.DummyClasses

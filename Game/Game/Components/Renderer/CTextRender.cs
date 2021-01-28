@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Game.Entity;
 using Game.Interfaces;
 using Game.SimpleGeometry;
 using Game.Tools;

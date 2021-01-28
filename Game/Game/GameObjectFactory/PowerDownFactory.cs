@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Game.Components;
 using Game.Components.Collision;
 using Game.Components.Renderer;
+using Game.Entity;
 using Game.SceneSystem;
 using OpenTK;
 

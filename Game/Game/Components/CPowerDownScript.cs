@@ -1,5 +1,6 @@
 ﻿using Game.Components.Collision;
 using Game.Components.Player;
+using Game.Entity;
 using Game.Interfaces;
 using Game.Tools;
 

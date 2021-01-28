@@ -4,6 +4,7 @@ using Game.Components;
 using Game.Components.Player;
 using Game.Components.UI;
 using Game.Components.UI.BaseComponents;
+using Game.Entity;
 using Game.GameObjectFactory;
 using OpenTK;
 

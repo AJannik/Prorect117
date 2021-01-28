@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Game.Components.UI.BaseComponents;
-using Game.GameObjectFactory;
+using Game.Entity;
 using Game.Interfaces;
 using Game.Tools;
-using OpenTK;
 
 namespace Game.Components.UI
 {

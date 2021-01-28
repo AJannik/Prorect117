@@ -1,4 +1,5 @@
-﻿using OpenTK;
+﻿using Game.Entity;
+using OpenTK;
 
 namespace Game.Physics.RaycastSystem
 {

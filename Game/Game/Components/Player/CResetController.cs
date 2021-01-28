@@ -1,5 +1,6 @@
 using System;
 using Game.Components.Combat;
+using Game.Entity;
 using Game.Interfaces;
 using OpenTK;
 

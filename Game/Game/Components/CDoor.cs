@@ -1,5 +1,6 @@
 using Game.Components.Renderer;
 using Game.Components.UI;
+using Game.Entity;
 using Game.Interfaces;
 using OpenTK.Input;
 
