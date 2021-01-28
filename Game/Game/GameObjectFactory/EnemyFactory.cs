@@ -3,9 +3,9 @@ using Game.Components;
 using Game.Components.Collision;
 using Game.Components.Combat;
 using Game.Components.Renderer;
+using Game.Components.Renderer.Animations;
 using Game.Entity;
 using Game.SceneSystem;
-using Game.Tools;
 using OpenTK;
 
 namespace Game.GameObjectFactory

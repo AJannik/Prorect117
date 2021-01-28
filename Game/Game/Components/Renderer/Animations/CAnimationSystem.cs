@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using Game.Entity;
 using Game.Interfaces;
 using Game.SimpleGeometry;
-using Game.Tools;
 
-namespace Game.Components.Renderer
+namespace Game.Components.Renderer.Animations
 {
     public class CAnimationSystem : IComponent, IUpdateable
     {

@@ -1,4 +1,5 @@
-﻿using Game.Entity;
+﻿using Game.Components.Renderer;
+using Game.Entity;
 using Game.Interfaces;
 using Game.SimpleGeometry;
 using Game.Tools;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using Game.Components.Renderer;
 using Game.Entity;
 using Game.Interfaces;
 using Game.SimpleGeometry;

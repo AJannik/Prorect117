@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Game.Components;
-
-namespace Game.Tools
+﻿namespace Game.Components.Renderer.Animations
 {
     public class Animation
     {

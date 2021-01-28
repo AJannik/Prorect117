@@ -1,9 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using UnitTests.DummyClasses;
-using Game.Components.Renderer;
+using Game.Components.Renderer.Animations;
 
 namespace UnitTests
 {
