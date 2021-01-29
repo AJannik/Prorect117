@@ -22,6 +22,8 @@ namespace Game.Components.UI
             else
             {
                 Title.Text = "YOU DIED!";
+                CoinsText.MyGameObject.Active = false;
+                CoinsText.MyGameObject.GetParent().GetChild(0).GetComponent<CGuiTextRender>().Text = "ALL YOUR COINS HAVE BEEN LOST";
             }
         }
 
