@@ -20,9 +20,13 @@ namespace Game.Components.UI
 
         public CGuiTextRender SpeedText { get; set; }
 
+        public CGuiTextRender SilencedText { get; set; }
+
         public CCombat Combat { get; set; }
 
         public CPlayerController PlayerController { get; set; }
+
+        public CPlayerCombatController PlayerCombatController { get; set; }
 
         private float Timer { get; set; } = 0f;
 
@@ -40,6 +44,7 @@ namespace Game.Components.UI
             LastAttackDamage = Combat.AttackDamage;
             LastArmor = Combat.Armor;
             LastSpeed = PlayerController.PlayerSpeed;
+            SilencedText.Text = "CAN ROLL";
             HpText.Text = $"{MathF.Ceiling(Combat.CurrentHealth)}/{MathF.Ceiling(Combat.MaxHealth)}";
             AttackText.Text = $"Damage: {MathF.Ceiling(Combat.AttackDamage)}";
             ArmorText.Text = $"Armor: {MathF.Ceiling(Combat.Armor)}";
@@ -58,6 +63,7 @@ namespace Game.Components.UI
                 AttackText.FontColor = Color.White;
                 ArmorText.FontColor = Color.White;
                 SpeedText.FontColor = Color.White;
+                SilencedText.FontColor = Color.White;
             }
 
             if (Combat.CurrentHealth != LastHealth)
@@ -78,6 +84,11 @@ namespace Game.Components.UI
             if (PlayerController.PlayerSpeed != LastSpeed)
             {
                 ChangeSpeedText();
+            }
+
+            if (!PlayerCombatController.RollEnabled)
+            {
+                ChangeSilencedText();
             }
         }
 
@@ -110,6 +121,13 @@ namespace Game.Components.UI
             SpeedText.FontColor = Color.Red;
             SpeedText.Text = $"Speed: {MathF.Ceiling(PlayerController.PlayerSpeed)}";
             LastSpeed = PlayerController.PlayerSpeed;
+            Timer = 1f;
+        }
+
+        private void ChangeSilencedText()
+        {
+            SilencedText.FontColor = Color.Red;
+            SilencedText.Text = "CAN NOT ROLL";
             Timer = 1f;
         }
     }

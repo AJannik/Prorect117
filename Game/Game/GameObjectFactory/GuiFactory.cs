@@ -168,18 +168,21 @@ namespace Game.GameObjectFactory
         {
             GameObject hud = new GameObject(scene, "Hud");
 
-            BuildPlayerHpHud(scene, canvas, new Vector2(0.8f, -0.735f)).SetParent(hud);
+            BuildPlayerHpHud(scene, canvas, new Vector2(0.8f, -0.67f)).SetParent(hud);
             BuildCoinHud(scene, canvas, new Vector2(0.85f, 0.89f)).SetParent(hud);
             BuildKeyHud(scene, canvas, new Vector2(0.70f, 0.89f)).SetParent(hud);
 
+            // Setup references
             hud.AddComponent<CPlayerStatsHud>();
             CPlayerStatsHud playerStatsHud = hud.GetComponent<CPlayerStatsHud>();
             playerStatsHud.Combat = playerCombatController.Combat;
             playerStatsHud.PlayerController = playerCombatController.MyGameObject.GetComponent<CPlayerController>();
+            playerStatsHud.PlayerCombatController = playerCombatController;
             playerStatsHud.HpText = hud.GetChild(0).GetChild(0).GetComponent<CGuiTextRender>();
             playerStatsHud.AttackText = hud.GetChild(0).GetChild(1).GetComponent<CGuiTextRender>();
             playerStatsHud.ArmorText = hud.GetChild(0).GetChild(2).GetComponent<CGuiTextRender>();
             playerStatsHud.SpeedText = hud.GetChild(0).GetChild(3).GetComponent<CGuiTextRender>();
+            playerStatsHud.SilencedText = hud.GetChild(0).GetChild(4).GetComponent<CGuiTextRender>();
 
             return hud;
         }
@@ -271,9 +274,15 @@ namespace Game.GameObjectFactory
             speedText.GetComponent<CGuiTextRender>().Layer = 29;
             speedText.SetParent(playerHp);
 
+            GameObject silencedText = BuildTextField(scene, canvas, new Vector2(0f, -0.28f), "SilencedText");
+            silencedText.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            silencedText.GetComponent<CGuiTextRender>().Centered = true;
+            silencedText.GetComponent<CGuiTextRender>().Layer = 29;
+            silencedText.SetParent(playerHp);
+
             const float sizeX = 0.7f;
-            const float sizeY = 0.4f;
-            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(position.X, -0.793f), "UI.hud_bg2.png");
+            const float sizeY = 0.5f;
+            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(position.X, -0.76f), "UI.hud_bg2.png");
             bgImage.GetComponent<CImageRender>().SetSize(sizeX, sizeY);
             bgImage.GetComponent<CImageRender>().Layer = 28;
 
