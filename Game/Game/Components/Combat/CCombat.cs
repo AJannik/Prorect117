@@ -112,11 +112,11 @@ namespace Game.Components.Combat
                 if (MyGameObject.Name == "Player")
                 {
                     MyGameObject.Scene.GameManager.PlayerHealth = CurrentHealth;
-                    DamageDisplay?.DisplayDamage($"{MathF.Ceiling(CurrentHealth)}/{MaxHealth}", Color.White);
+                    DamageDisplay?.DisplayDamage($"{MathF.Ceiling(CurrentHealth)}/{MaxHealth}", Color.Red);
                 }
                 else
                 {
-                    DamageDisplay?.DisplayDamage($"-{MathF.Ceiling(dmg)}", Color.DarkRed);
+                    DamageDisplay?.DisplayDamage($"-{MathF.Ceiling(dmg)}", Color.Red);
                 }
             }
         }
