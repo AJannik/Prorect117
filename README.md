@@ -6,11 +6,11 @@ Besonderheit ist, dass man anstatt den eigenen Charackter hochzuleveln, man Powe
 # Dependencies
 - .NetCoreApp 3.1
 - OpenTKNetStandard v1.0.5
-- .NET Core Desktop Runtime 3.1.11
+- .NET Core 3.1 Runtime for desktop apps
 
 # Starten
-Um die Software zu starten wird die [.NET Core Desktop Runtime 3.1.11](https://dotnet.microsoft.com/download/dotnet-core/3.1) benötigt.
+Um die Software zu starten wird die [.NET Core 3.1 Runtime for dektop apps](https://dotnet.microsoft.com/download/dotnet-core/current/runtime) benötigt.
 
 # Build und Tests
-Das Buildverfahren ist klassisch mit einer beliebigen .Net IDE oder auf der Azure DevOps via CI durchführbar.
+Das Buildverfahren ist klassisch mit einer beliebigen .Net IDE oder auf der Azure DevOps via CI durchführbar. Man benötigt dafür noch die .Net Core 3.1 SDK.
 Alle Tests sind in einem separaten Projekt Namens UnitTests gespeichert und können in der IDE ausgeführt werden.
