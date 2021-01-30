@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using Game.Components;
+using Game.Components.Collision;
 using Game.Components.Player;
 using Game.Components.UI;
 using Game.Components.UI.BaseComponents;
@@ -133,19 +134,24 @@ namespace Game.SceneSystem
             // Coin, PlayerHP and Key HUD
             GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
 
-            // Controls
+            // Tutorial Windows
             GuiFactory.BuildControls(scene, canvas);
+            GameObject goalWindow = GuiFactory.BuildGoalWindow(scene, canvas);
+            GameObject boxTrigger = ObjectFactory.BuildBoxTrigger(scene, new Vector2(10f, 9f));
+            boxTrigger.GetComponent<CBoxTrigger>().TriggerEntered += goalWindow.GetComponent<CTutorialWindow>().Open;
+            GameObject powerDownWindow = GuiFactory.BuildPowerDownWindow(scene, canvas);
 
             // Collectables
             ObjectFactory.BuildKey(scene, new Vector2(30.5f, 1.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(3.5f, 13.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(11.5f, 11.5f));
-            ObjectFactory.BuildCoin(scene, new Vector2(20.5f, 12.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(18.5f, 12.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(30.5f, 13.5f));
 
             // Power Downs
-            PowerDownFactory.Fragile(scene, new Vector2(28.5f, 13.5f));
-            PowerDownFactory.Weakness(scene, new Vector2(20.5f, 10.5f));
+            GameObject fragile = PowerDownFactory.Fragile(scene, new Vector2(20.5f, 13f));
+            fragile.GetComponent<CCircleTrigger>().TriggerEntered += powerDownWindow.GetComponent<CTutorialWindow>().Open;
+            PowerDownFactory.Weakness(scene, new Vector2(28.5f, 13.5f));
             PowerDownFactory.Slowness(scene, new Vector2(18.5f, 7.5f));
 
             // Background

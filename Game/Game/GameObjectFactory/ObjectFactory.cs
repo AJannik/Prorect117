@@ -81,6 +81,17 @@ namespace Game.GameObjectFactory
             return background;
         }
 
+        public static GameObject BuildBoxTrigger(Scene scene, Vector2 position)
+        {
+            GameObject boxTrigger = new GameObject(scene, "BoxTrigger");
+            boxTrigger.Transform.Position = position;
+
+            boxTrigger.AddComponent<CBoxTrigger>();
+            boxTrigger.GetComponent<CBoxTrigger>().Geometry.Size = new Vector2(1.5f, 1.8f);
+
+            return boxTrigger;
+        }
+
         public static GameObject BuildCamera(Scene scene, Vector2 position)
         {
             GameObject camera = new GameObject(scene, "Camera");
