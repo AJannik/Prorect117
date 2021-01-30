@@ -29,7 +29,7 @@ namespace Game.Components.Player
 
         public float PlayerSpeed { get; set; } = 10f;
 
-        public float JumpForce { get; set; } = 1200f;
+        public float JumpForce { get; set; } = 1200f * 0.66f;
 
         public bool FacingRight { get; private set; } = true;
 
