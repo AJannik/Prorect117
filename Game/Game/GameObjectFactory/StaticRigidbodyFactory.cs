@@ -3,6 +3,7 @@ using Game.Components;
 using Game.Components.Collision;
 using Game.Components.Player;
 using Game.Components.Renderer;
+using Game.Entity;
 using Game.SceneSystem;
 using OpenTK;
 

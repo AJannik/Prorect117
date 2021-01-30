@@ -1,4 +1,4 @@
-﻿using Game;
+﻿using Game.Entity;
 using Game.Interfaces;
 using System;
 using System.Diagnostics.CodeAnalysis;

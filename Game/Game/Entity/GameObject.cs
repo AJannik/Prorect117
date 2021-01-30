@@ -4,7 +4,7 @@ using Game.Components;
 using Game.Interfaces;
 using Game.SceneSystem;
 
-namespace Game
+namespace Game.Entity
 {
     public class GameObject
     {

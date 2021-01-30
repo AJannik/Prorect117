@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Game.Components.UI.BaseComponents;
-using Game.GameObjectFactory;
+using Game.Entity;
 using Game.Interfaces;
 using Game.Tools;
-using OpenTK;
 
 namespace Game.Components.UI
 {
@@ -46,6 +45,7 @@ namespace Game.Components.UI
             }
 
             DisplayPowerDowns();
+            DeactivateButtons();
         }
 
         public void BuyHealth(object sender, int i)
@@ -92,7 +92,7 @@ namespace Game.Components.UI
 
         private void DeactivateButtons()
         {
-            if (MyGameObject.Scene.GameManager.Coins < HealPrice)
+            if (MyGameObject.Scene.GameManager.Coins < HealPrice || MyGameObject.Scene.GameManager.PlayerHealth > 95f)
             {
                 HealButton.GetComponent<CButton>().Active = false;
             }

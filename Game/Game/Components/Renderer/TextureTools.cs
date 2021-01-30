@@ -4,7 +4,7 @@ using System.Reflection;
 using ImageMagick;
 using OpenTK.Graphics.OpenGL4;
 
-namespace Game.Tools
+namespace Game.Components.Renderer
 {
     internal static class TextureTools
     {

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
+﻿using System.Diagnostics.CodeAnalysis;
 using Game.Components;
 using Game.Components.Collision;
 using Game.Components.Combat;
 using Game.Components.Player;
 using Game.Components.Renderer;
-using Game.Components.UI;
+using Game.Components.Renderer.Animations;
+using Game.Entity;
 using Game.SceneSystem;
-using Game.Tools;
 using OpenTK;
-using OpenTK.Graphics.OpenGL;
 
 namespace Game.GameObjectFactory
 {
@@ -82,6 +79,17 @@ namespace Game.GameObjectFactory
             */
 
             return background;
+        }
+
+        public static GameObject BuildBoxTrigger(Scene scene, Vector2 position)
+        {
+            GameObject boxTrigger = new GameObject(scene, "BoxTrigger");
+            boxTrigger.Transform.Position = position;
+
+            boxTrigger.AddComponent<CBoxTrigger>();
+            boxTrigger.GetComponent<CBoxTrigger>().Geometry.Size = new Vector2(1.5f, 1.8f);
+
+            return boxTrigger;
         }
 
         public static GameObject BuildCamera(Scene scene, Vector2 position)

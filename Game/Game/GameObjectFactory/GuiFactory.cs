@@ -2,6 +2,7 @@
 using Game.Components.Player;
 using Game.Components.UI;
 using Game.Components.UI.BaseComponents;
+using Game.Entity;
 using Game.SceneSystem;
 using Game.Tools;
 using OpenTK;
@@ -167,18 +168,21 @@ namespace Game.GameObjectFactory
         {
             GameObject hud = new GameObject(scene, "Hud");
 
-            BuildPlayerHpHud(scene, canvas, new Vector2(0.8f, -0.735f)).SetParent(hud);
+            BuildPlayerHpHud(scene, canvas, new Vector2(0.8f, -0.67f)).SetParent(hud);
             BuildCoinHud(scene, canvas, new Vector2(0.85f, 0.89f)).SetParent(hud);
             BuildKeyHud(scene, canvas, new Vector2(0.70f, 0.89f)).SetParent(hud);
 
+            // Setup references
             hud.AddComponent<CPlayerStatsHud>();
             CPlayerStatsHud playerStatsHud = hud.GetComponent<CPlayerStatsHud>();
             playerStatsHud.Combat = playerCombatController.Combat;
             playerStatsHud.PlayerController = playerCombatController.MyGameObject.GetComponent<CPlayerController>();
+            playerStatsHud.PlayerCombatController = playerCombatController;
             playerStatsHud.HpText = hud.GetChild(0).GetChild(0).GetComponent<CGuiTextRender>();
             playerStatsHud.AttackText = hud.GetChild(0).GetChild(1).GetComponent<CGuiTextRender>();
             playerStatsHud.ArmorText = hud.GetChild(0).GetChild(2).GetComponent<CGuiTextRender>();
             playerStatsHud.SpeedText = hud.GetChild(0).GetChild(3).GetComponent<CGuiTextRender>();
+            playerStatsHud.SilencedText = hud.GetChild(0).GetChild(4).GetComponent<CGuiTextRender>();
 
             return hud;
         }
@@ -186,7 +190,7 @@ namespace Game.GameObjectFactory
         public static GameObject BuildControls(Scene scene, GameObject canvas)
         {
             GameObject controls = new GameObject(scene, "Controls");
-            controls.AddComponent<CControlsWindow>();
+            controls.AddComponent<CTutorialWindow>();
 
             GameObject bgImage = BuildGuiImage(scene, canvas, Vector2.Zero, "UI.ui_controls_bg.png");
             bgImage.GetComponent<CImageRender>().SetSize(1.5f, 1f);
@@ -215,10 +219,136 @@ namespace Game.GameObjectFactory
             attack.SetParent(controls);
 
             GameObject btnClose = BuildButton(scene, canvas, new Vector2(0f, -0.33f), new Vector2(0.5f, 0.1f), "GOT IT!");
-            btnClose.GetComponent<CButton>().ButtonClicked += controls.GetComponent<CControlsWindow>().OnBtnClick;
+            btnClose.GetComponent<CButton>().ButtonClicked += controls.GetComponent<CTutorialWindow>().Close;
             btnClose.SetParent(controls);
 
             return controls;
+        }
+
+        public static GameObject BuildGoalWindow(Scene scene, GameObject canvas)
+        {
+            GameObject goalWindow = new GameObject(scene, "GoalWindow");
+            goalWindow.AddComponent<CTutorialWindow>();
+
+            GameObject bgImage = BuildGuiImage(scene, canvas, Vector2.Zero, "UI.ui_controls_bg.png");
+            bgImage.GetComponent<CImageRender>().SetSize(2f, 1.5f);
+            bgImage.GetComponent<CImageRender>().Layer = 29;
+            bgImage.SetParent(goalWindow);
+
+            GameObject titel = BuildTextField(scene, canvas, new Vector2(-0.48f, 0.55f), "WELCOME ADVENTURER,");
+            titel.GetComponent<CGuiTextRender>().SetSize(0.05f);
+            titel.SetParent(goalWindow);
+
+            GameObject line1 = BuildTextField(scene, canvas, new Vector2(-0.48f, 0.43f), " THOUGH THE PROMISES OF WEALTH BROUGHT YOU");
+            line1.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line1.SetParent(goalWindow);
+
+            GameObject line2 = BuildTextField(scene, canvas, new Vector2(-0.48f, 0.31f), " HERE YOU NOTICE FROM NOW ON THERE WILL BE NO");
+            line2.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line2.SetParent(goalWindow);
+
+            GameObject line3 = BuildTextField(scene, canvas, new Vector2(-0.48f, 0.19f), " RETURN, YOU CAN ONLY ADVANCE AND HOPEFULLY");
+            line3.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line3.SetParent(goalWindow);
+
+            GameObject line4 = BuildTextField(scene, canvas, new Vector2(-0.48f, 0.07f), " FIND THE EXIT WHILE ALSO COLLECTING AS");
+            line4.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line4.SetParent(goalWindow);
+
+            GameObject line5 = BuildTextField(scene, canvas, new Vector2(-0.48f, -0.05f), " MANY COINS AS POSSIBLE. BUT BEWARE THERE");
+            line5.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line5.SetParent(goalWindow);
+
+            GameObject line6 = BuildTextField(scene, canvas, new Vector2(-0.48f, -0.17f), " ARE MANY DANGERS LURKING AROUND FOR YOU!");
+            line6.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line6.SetParent(goalWindow);
+
+            GameObject line7 = BuildTextField(scene, canvas, new Vector2(-0.48f, -0.34f), "TREAD CAREFULLY,");
+            line7.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line7.SetParent(goalWindow);
+
+            GameObject closing = BuildTextField(scene, canvas, new Vector2(-0.48f, -0.42f), "B.");
+            closing.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            closing.SetParent(goalWindow);
+
+            GameObject btnClose = BuildButton(scene, canvas, new Vector2(0f, -0.61f), new Vector2(0.5f, 0.1f), "I AM READY!");
+            btnClose.GetComponent<CButton>().ButtonClicked += goalWindow.GetComponent<CTutorialWindow>().Close;
+            btnClose.SetParent(goalWindow);
+
+            goalWindow.Active = false;
+
+            return goalWindow;
+        }
+
+        public static GameObject BuildPowerDownWindow(Scene scene, GameObject canvas)
+        {
+            GameObject powerDownWindow = new GameObject(scene, "PowerDownWindow");
+            powerDownWindow.AddComponent<CTutorialWindow>();
+
+            GameObject bgImage = BuildGuiImage(scene, canvas, Vector2.Zero, "UI.ui_controls_bg.png");
+            bgImage.GetComponent<CImageRender>().SetSize(2f, 1.5f);
+            bgImage.GetComponent<CImageRender>().Layer = 29;
+            bgImage.SetParent(powerDownWindow);
+
+            GameObject powerDown1 = BuildGuiImage(scene, canvas, new Vector2(-0.4f, 0.6f), "PowerDowns.silenced.png");
+            powerDown1.GetComponent<CImageRender>().SetSize(0.15f, 0.15f);
+            powerDown1.GetComponent<CImageRender>().Layer = 30;
+            powerDown1.SetParent(powerDownWindow);
+
+            GameObject powerDown2 = BuildGuiImage(scene, canvas, new Vector2(-0.15f, 0.6f), "PowerDowns.slowness.png");
+            powerDown2.GetComponent<CImageRender>().SetSize(0.15f, 0.15f);
+            powerDown2.GetComponent<CImageRender>().Layer = 30;
+            powerDown2.SetParent(powerDownWindow);
+
+            GameObject powerDown3 = BuildGuiImage(scene, canvas, new Vector2(0.15f, 0.6f), "PowerDowns.fragile.png");
+            powerDown3.GetComponent<CImageRender>().SetSize(0.15f, 0.15f);
+            powerDown3.GetComponent<CImageRender>().Layer = 30;
+            powerDown3.SetParent(powerDownWindow);
+
+            GameObject powerDown4 = BuildGuiImage(scene, canvas, new Vector2(0.4f, 0.6f), "PowerDowns.weakness.png");
+            powerDown4.GetComponent<CImageRender>().SetSize(0.15f, 0.15f);
+            powerDown4.GetComponent<CImageRender>().Layer = 30;
+            powerDown4.SetParent(powerDownWindow);
+
+            GameObject line1 = BuildTextField(scene, canvas, new Vector2(-0.48f, 0.45f), "WHAT IS THIS? LOOKS LIKE SOME KIND OF");
+            line1.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line1.SetParent(powerDownWindow);
+
+            GameObject line2 = BuildTextField(scene, canvas, new Vector2(-0.48f, 0.33f), "ARTIFACT... SEEMS SOMEWHAT VALUABLE BUT");
+            line2.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line2.SetParent(powerDownWindow);
+
+            GameObject line3 = BuildTextField(scene, canvas, new Vector2(-0.48f, 0.21f), "YOU FEEL DIFFERENT, WEAKER... COULD IT BE?");
+            line3.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line3.SetParent(powerDownWindow);
+
+            GameObject line4 = BuildTextField(scene, canvas, new Vector2(-0.48f, 0.09f), "COULD THAT ARTIFACT HAVE STOLEN SOME OF YOUR");
+            line4.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line4.SetParent(powerDownWindow);
+
+            GameObject line5 = BuildTextField(scene, canvas, new Vector2(-0.48f, -0.03f), "STRENGH? IF ONLY THERE WAS A WAY TO REMOVE");
+            line5.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line5.SetParent(powerDownWindow);
+
+            GameObject line6 = BuildTextField(scene, canvas, new Vector2(-0.48f, -0.15f), "THE EFFECT AGAIN... YOU DECIDE TO KEEP A");
+            line6.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line6.SetParent(powerDownWindow);
+
+            GameObject line7 = BuildTextField(scene, canvas, new Vector2(-0.48f, -0.27f), "CLOSE EYE ON YOUR STRENGH FROM NOW ON AND");
+            line7.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line7.SetParent(powerDownWindow);
+
+            GameObject line8 = BuildTextField(scene, canvas, new Vector2(-0.48f, -0.39f), "MONITOR IT IN THE BOTTOM RIGHT CORNER.");
+            line8.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            line8.SetParent(powerDownWindow);
+
+            GameObject btnClose = BuildButton(scene, canvas, new Vector2(0f, -0.6f), new Vector2(0.5f, 0.1f), "WEIRD...");
+            btnClose.GetComponent<CButton>().ButtonClicked += powerDownWindow.GetComponent<CTutorialWindow>().Close;
+            btnClose.SetParent(powerDownWindow);
+
+            powerDownWindow.Active = false;
+
+            return powerDownWindow;
         }
 
         private static GameObject BuildShopPowerDown(Scene scene, GameObject canvas, GameObject parent, Vector2 position, string text, int num)
@@ -270,9 +400,15 @@ namespace Game.GameObjectFactory
             speedText.GetComponent<CGuiTextRender>().Layer = 29;
             speedText.SetParent(playerHp);
 
+            GameObject silencedText = BuildTextField(scene, canvas, new Vector2(0f, -0.28f), "SilencedText");
+            silencedText.GetComponent<CGuiTextRender>().SetSize(0.04f);
+            silencedText.GetComponent<CGuiTextRender>().Centered = true;
+            silencedText.GetComponent<CGuiTextRender>().Layer = 29;
+            silencedText.SetParent(playerHp);
+
             const float sizeX = 0.7f;
-            const float sizeY = 0.4f;
-            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(position.X, -0.793f), "UI.hud_bg2.png");
+            const float sizeY = 0.5f;
+            GameObject bgImage = BuildGuiImage(scene, canvas, new Vector2(position.X, -0.76f), "UI.hud_bg2.png");
             bgImage.GetComponent<CImageRender>().SetSize(sizeX, sizeY);
             bgImage.GetComponent<CImageRender>().Layer = 28;
 

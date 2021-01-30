@@ -1,4 +1,6 @@
-﻿namespace Game.Interfaces
+﻿using Game.Entity;
+
+namespace Game.Interfaces
 {
     public interface IComponent
     {

@@ -1,4 +1,5 @@
-﻿using Game.Interfaces;
+﻿using Game.Entity;
+using Game.Interfaces;
 using Game.SimpleGeometry;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;

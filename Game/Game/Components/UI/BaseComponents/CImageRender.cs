@@ -1,4 +1,6 @@
-﻿using Game.Interfaces;
+﻿using Game.Components.Renderer;
+using Game.Entity;
+using Game.Interfaces;
 using Game.SimpleGeometry;
 using Game.Tools;
 using OpenTK;

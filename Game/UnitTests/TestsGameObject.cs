@@ -1,4 +1,5 @@
 ﻿using Game;
+using Game.Entity;
 using Game.SceneSystem;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics.CodeAnalysis;

@@ -1,3 +1,4 @@
+using Game.Entity;
 using Game.Interfaces;
 using OpenTK;
 

@@ -1,6 +1,7 @@
 ﻿using Game.Components.Collision;
 using Game.Components.Combat;
-using Game.Components.Renderer;
+using Game.Components.Renderer.Animations;
+using Game.Entity;
 using Game.Interfaces;
 using OpenTK.Input;
 
