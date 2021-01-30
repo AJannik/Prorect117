@@ -45,6 +45,7 @@ namespace Game.Components.UI
             }
 
             DisplayPowerDowns();
+            DeactivateButtons();
         }
 
         public void BuyHealth(object sender, int i)
@@ -91,7 +92,7 @@ namespace Game.Components.UI
 
         private void DeactivateButtons()
         {
-            if (MyGameObject.Scene.GameManager.Coins < HealPrice)
+            if (MyGameObject.Scene.GameManager.Coins < HealPrice || MyGameObject.Scene.GameManager.PlayerHealth > 95f)
             {
                 HealButton.GetComponent<CButton>().Active = false;
             }
