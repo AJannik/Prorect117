@@ -8,7 +8,7 @@ using OpenTK;
 
 namespace Game.Components.Actor.Bandit
 {
-    public class BanditStateHandler : IActorStateHandler
+    public class BanditStateBehavior : IActorStateBehavior
     {
         public CAnimationSystem AnimationSystem { get; set; }
 

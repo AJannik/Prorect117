@@ -21,7 +21,7 @@ namespace Game.Interfaces.ActorInterfaces
 
         public IActorCombatBehavior ActorCombatBehavior { get; }
 
-        public IActorStateHandler ActorStateHandler { get; }
+        public IActorStateBehavior ActorStateBehavior { get; }
 
         public CCombat Combat { get; set; }
 

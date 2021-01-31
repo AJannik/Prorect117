@@ -23,7 +23,7 @@ namespace Game.Components.Actor
 
         public int RightOnGround { get; set; } = 0;
 
-        public IActorStateHandler ActorStateHandler { get; } = new BanditStateHandler();
+        public IActorStateBehavior ActorStateBehavior { get; } = new BanditStateBehavior();
 
         public IActorMovementBehavior ActorMovementBehavior { get; } = new BanditMovementBehavior();
 
@@ -35,8 +35,8 @@ namespace Game.Components.Actor
         {
             ActorCombatBehavior.Actor = this;
             ActorMovementBehavior.Actor = this;
-            ActorStateHandler.Actor = this;
-            ActorStateHandler.SetupPickupDisplay(MyGameObject);
+            ActorStateBehavior.Actor = this;
+            ActorStateBehavior.SetupPickupDisplay(MyGameObject);
         }
 
         public void Update(float deltaTime)
@@ -47,19 +47,19 @@ namespace Game.Components.Actor
             switch (State)
             {
                 case ActorState.Idle:
-                    ActorStateHandler.Idle();
+                    ActorStateBehavior.Idle();
                     break;
                 case ActorState.Running:
-                    ActorStateHandler.Running(ActorMovementBehavior.MoveSpeed);
+                    ActorStateBehavior.Running(ActorMovementBehavior.MoveSpeed);
                     break;
                 case ActorState.Attacking:
-                    ActorStateHandler.Attacking(FacingRight ? RightTrigger : LeftTrigger);
+                    ActorStateBehavior.Attacking(FacingRight ? RightTrigger : LeftTrigger);
                     break;
                 case ActorState.Dying:
-                    ActorStateHandler.Dying();
+                    ActorStateBehavior.Dying();
                     break;
                 case ActorState.Dead:
-                    ActorStateHandler.Dead();
+                    ActorStateBehavior.Dead();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

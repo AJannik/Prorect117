@@ -4,7 +4,7 @@ using Game.Entity;
 
 namespace Game.Interfaces.ActorInterfaces
 {
-    public interface IActorStateHandler
+    public interface IActorStateBehavior
     {
         public CAnimationSystem AnimationSystem { get; set; }
 
