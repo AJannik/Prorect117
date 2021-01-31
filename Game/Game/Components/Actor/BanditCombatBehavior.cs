@@ -51,33 +51,44 @@ namespace Game.Components.Actor
                     currentState = EnemyState.Idle;
                 }
 
-                foreach (IComponent component in Bandit.LeftTrigger.GetTriggerHits())
-                {
-                    if (component.MyGameObject.Name == "Player")
-                    {
-                        Bandit.FacingRight = false;
-                        Bandit.BanditMovementBehavior.ClearTimeInState();
-                        AttackTime = AttackSpeed;
-                        currentState = EnemyState.Attacking;
-                    }
-                }
-
-                foreach (IComponent component in Bandit.RightTrigger.GetTriggerHits())
-                {
-                    if (component.MyGameObject.Name == "Player")
-                    {
-                        Bandit.FacingRight = true;
-                        Bandit.BanditMovementBehavior.ClearTimeInState();
-                        AttackTime = AttackSpeed;
-                        currentState = EnemyState.Attacking;
-                    }
-                }
+                currentState = CheckAttackState(currentState);
             }
             else
             {
                 AttackTime -= deltaTime;
             }
 
+            return currentState;
+        }
+
+        private EnemyState CheckAttackState(EnemyState currentState)
+        {
+            foreach (IComponent component in Bandit.LeftTrigger.GetTriggerHits())
+            {
+                if (component.MyGameObject.Name == "Player")
+                {
+                    Bandit.FacingRight = false;
+                    currentState = SetAttackState();
+                }
+            }
+
+            foreach (IComponent component in Bandit.RightTrigger.GetTriggerHits())
+            {
+                if (component.MyGameObject.Name == "Player")
+                {
+                    Bandit.FacingRight = true;
+                    currentState = SetAttackState();
+                }
+            }
+
+            return currentState;
+        }
+
+        private EnemyState SetAttackState()
+        {
+            Bandit.BanditMovementBehavior.ClearTimeInState();
+            AttackTime = AttackSpeed;
+            const EnemyState currentState = EnemyState.Attacking;
             return currentState;
         }
 
