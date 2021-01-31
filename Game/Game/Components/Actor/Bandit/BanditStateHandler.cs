@@ -3,17 +3,18 @@ using Game.Components.Player;
 using Game.Components.Renderer.Animations;
 using Game.Entity;
 using Game.Interfaces;
+using Game.Interfaces.ActorInterfaces;
 using OpenTK;
 
 namespace Game.Components.Actor
 {
-    public class BanditStateHandler
+    public class BanditStateHandler : IActorStateHandler
     {
         public CAnimationSystem AnimationSystem { get; set; }
 
         public CRigidBody RigidBody { get; set; }
 
-        public CBandit Bandit { get; set; }
+        public IActor Actor { get; set; }
 
         private CPickupDisplay PickupDisplay { get; set; }
 
@@ -23,40 +24,40 @@ namespace Game.Components.Actor
 
         public void Idle()
         {
-            AnimationSystem.PlayAnimation("Idle", false, !Bandit.FacingRight);
+            AnimationSystem.PlayAnimation("Idle", false, !Actor.FacingRight);
             RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
         }
 
         public void Running(float moveSpeed)
         {
-            if (Bandit.RightOnGround < 1)
+            if (Actor.RightOnGround < 1)
             {
-                Bandit.FacingRight = false;
+                Actor.FacingRight = false;
             }
 
-            if (Bandit.LeftOnGround < 1)
+            if (Actor.LeftOnGround < 1)
             {
-                Bandit.FacingRight = true;
+                Actor.FacingRight = true;
             }
 
-            RigidBody.Velocity = new Vector2((Bandit.FacingRight ? 1 : -1) * moveSpeed, RigidBody.Velocity.Y);
-            AnimationSystem.PlayAnimation("Walk", false, !Bandit.FacingRight);
+            RigidBody.Velocity = new Vector2((Actor.FacingRight ? 1 : -1) * moveSpeed, RigidBody.Velocity.Y);
+            AnimationSystem.PlayAnimation("Walk", false, !Actor.FacingRight);
         }
 
         public void Attacking(ITrigger attackTrigger)
         {
             // Start attack animation
-            if (!Attacked && Math.Abs(Bandit.BanditCombatBehavior.AttackTime - Bandit.BanditCombatBehavior.AttackSpeed) < 0.05f)
+            if (!Attacked && Math.Abs(Actor.ActorCombatBehavior.AttackTime - Actor.ActorCombatBehavior.AttackSpeed) < 0.05f)
             {
-                AnimationSystem.PlayAnimation("Attack", false, !Bandit.FacingRight);
+                AnimationSystem.PlayAnimation("Attack", false, !Actor.FacingRight);
                 RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
                 Attacked = true;
             }
 
             // compute attack hit
-            if (Attacked && Bandit.BanditCombatBehavior.AttackTime <= Bandit.BanditCombatBehavior.AttackSpeed - Bandit.BanditCombatBehavior.TimeToHit)
+            if (Attacked && Actor.ActorCombatBehavior.AttackTime <= Actor.ActorCombatBehavior.AttackSpeed - Actor.ActorCombatBehavior.TimeToHit)
             {
-                Bandit.Combat.Attack(attackTrigger, 1, false);
+                Actor.Combat.Attack(attackTrigger, 1, false);
                 Attacked = false;
             }
         }
@@ -64,9 +65,9 @@ namespace Game.Components.Actor
         public void Dying()
         {
             AnimationSystem.PlayAnimation("Death", true);
-            if (!Died && Bandit.MyGameObject.Name != "Player")
+            if (!Died && Actor.MyGameObject.Name != "Player")
             {
-                Bandit.MyGameObject.Scene.GameManager.Coins += 2;
+                Actor.MyGameObject.Scene.GameManager.Coins += 2;
                 PickupDisplay?.AddCoins(2);
                 Died = true;
             }
@@ -74,11 +75,11 @@ namespace Game.Components.Actor
 
         public void Dead()
         {
-            Bandit.MyGameObject.Scene.RemoveGameObject(Bandit.MyGameObject);
-            if (Bandit.MyGameObject.Name == "Player")
+            Actor.MyGameObject.Scene.RemoveGameObject(Actor.MyGameObject);
+            if (Actor.MyGameObject.Name == "Player")
             {
-                Bandit.MyGameObject.Scene.GameManager.EndGame();
-                Bandit.MyGameObject.Scene.GameManager.PlayerWon = false;
+                Actor.MyGameObject.Scene.GameManager.EndGame();
+                Actor.MyGameObject.Scene.GameManager.PlayerWon = false;
             }
         }
 

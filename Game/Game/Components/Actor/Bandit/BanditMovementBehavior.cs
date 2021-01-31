@@ -1,20 +1,21 @@
 using System;
+using Game.Interfaces.ActorInterfaces;
 
 namespace Game.Components.Actor
 {
-    public class BanditMovementBehavior
+    public class BanditMovementBehavior : IActorMovementBehavior
     {
         public float MoveSpeed { get; set; } = 1.5f;
 
-        public CBandit Bandit { get; set; }
+        public IActor Actor { get; set; }
 
         private Random Randomizer { get; set; } = new Random();
 
         private float TimeInState { get; set; } = 0f;
 
-        public EnemyState UpdateMovementBehavior(EnemyState currentState, float deltaTime)
+        public ActorState UpdateMovementBehavior(ActorState currentState, float deltaTime)
         {
-            if (currentState == EnemyState.Attacking)
+            if (currentState == ActorState.Attacking)
             {
                 return currentState;
             }
@@ -35,17 +36,17 @@ namespace Game.Components.Actor
             TimeInState = 0f;
         }
 
-        private EnemyState SetMovementState(EnemyState currentState)
+        private ActorState SetMovementState(ActorState currentState)
         {
-            if (currentState == EnemyState.Idle)
+            if (currentState == ActorState.Idle)
             {
                 TimeInState = Randomizer.Next(3, 15) + (float) Randomizer.NextDouble();
-                currentState = EnemyState.Running;
+                currentState = ActorState.Running;
             }
             else
             {
                 TimeInState = Randomizer.Next(1, 7) + (float) Randomizer.NextDouble();
-                currentState = EnemyState.Idle;
+                currentState = ActorState.Idle;
             }
 
             return currentState;

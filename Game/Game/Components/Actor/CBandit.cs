@@ -1,87 +1,78 @@
 using System;
-using Game.Components.Collision;
 using Game.Components.Combat;
 using Game.Entity;
 using Game.Interfaces;
+using Game.Interfaces.ActorInterfaces;
 
 namespace Game.Components.Actor
 {
-    public enum EnemyState
-    {
-        Idle,
-        Running,
-        Attacking,
-        Dying,
-        Dead,
-    }
-
-    public class CBandit : IComponent, IUpdateable, IOnStart
+    public class CBandit : IActor
     {
         public GameObject MyGameObject { get; set; }
 
-        public EnemyState State { get; private set; } = EnemyState.Idle;
+        public ActorState State { get; set; } = ActorState.Idle;
 
         public bool FacingRight { get; set; } = false;
 
-        public CBoxTrigger LeftTrigger { get; set; }
+        public ITrigger LeftTrigger { get; set; }
 
-        public CBoxTrigger RightTrigger { get; set; }
+        public ITrigger RightTrigger { get; set; }
 
         public int LeftOnGround { get; set; } = 0;
 
         public int RightOnGround { get; set; } = 0;
 
-        public BanditStateHandler BanditStateHandler { get; } = new BanditStateHandler();
+        public IActorStateHandler ActorStateHandler { get; } = new BanditStateHandler();
 
-        public BanditMovementBehavior BanditMovementBehavior { get; } = new BanditMovementBehavior();
+        public IActorMovementBehavior ActorMovementBehavior { get; } = new BanditMovementBehavior();
 
-        public BanditCombatBehavior BanditCombatBehavior { get; } = new BanditCombatBehavior();
+        public IActorCombatBehavior ActorCombatBehavior { get; } = new BanditCombatBehavior();
 
         public CCombat Combat { get; set; }
 
         public void Start()
         {
-            BanditCombatBehavior.Bandit = this;
-            BanditMovementBehavior.Bandit = this;
-            BanditStateHandler.Bandit = this;
-            BanditStateHandler.SetupPickupDisplay(MyGameObject);
+            ActorCombatBehavior.Actor = this;
+            ActorMovementBehavior.Actor = this;
+            ActorStateHandler.Actor = this;
+            ActorStateHandler.SetupPickupDisplay(MyGameObject);
         }
 
         public void Update(float deltaTime)
         {
-            State = BanditCombatBehavior.UpdateCombatBehavior(State, deltaTime);
-            State = BanditMovementBehavior.UpdateMovementBehavior(State, deltaTime);
+            State = ActorCombatBehavior.UpdateCombatBehavior(State, deltaTime);
+            State = ActorMovementBehavior.UpdateMovementBehavior(State, deltaTime);
 
             switch (State)
             {
-                case EnemyState.Idle:
-                    BanditStateHandler.Idle();
+                case ActorState.Idle:
+                    ActorStateHandler.Idle();
                     break;
-                case EnemyState.Running:
-                    BanditStateHandler.Running(BanditMovementBehavior.MoveSpeed);
+                case ActorState.Running:
+                    ActorStateHandler.Running(ActorMovementBehavior.MoveSpeed);
                     break;
-                case EnemyState.Attacking:
-                    BanditStateHandler.Attacking(FacingRight ? RightTrigger : LeftTrigger);
+                case ActorState.Attacking:
+                    ActorStateHandler.Attacking(FacingRight ? RightTrigger : LeftTrigger);
                     break;
-                case EnemyState.Dying:
-                    BanditStateHandler.Dying();
+                case ActorState.Dying:
+                    ActorStateHandler.Dying();
                     break;
-                case EnemyState.Dead:
-                    BanditStateHandler.Dead();
+                case ActorState.Dead:
+                    ActorStateHandler.Dead();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        public void SetupLeftTrigger(CBoxTrigger trigger)
+        public void SetupLeftTrigger(ITrigger trigger)
         {
             LeftTrigger = trigger;
             LeftTrigger.TriggerExited += LeftFootExited;
             LeftTrigger.TriggerEntered += LeftEntered;
         }
 
-        public void SetupRightTrigger(CBoxTrigger trigger)
+        public void SetupRightTrigger(ITrigger trigger)
         {
             RightTrigger = trigger;
             RightTrigger.TriggerExited += RightFootExited;
