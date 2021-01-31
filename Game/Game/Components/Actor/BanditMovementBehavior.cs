@@ -25,16 +25,7 @@ namespace Game.Components.Actor
                 return currentState;
             }
 
-            if (currentState == EnemyState.Idle)
-            {
-                TimeInState = Randomizer.Next(3, 15) + (float)Randomizer.NextDouble();
-                currentState = EnemyState.Running;
-            }
-            else
-            {
-                TimeInState = Randomizer.Next(1, 7) + (float)Randomizer.NextDouble();
-                currentState = EnemyState.Idle;
-            }
+            currentState = SetMovementState(currentState);
 
             return currentState;
         }
@@ -42,6 +33,22 @@ namespace Game.Components.Actor
         public void ClearTimeInState()
         {
             TimeInState = 0f;
+        }
+
+        private EnemyState SetMovementState(EnemyState currentState)
+        {
+            if (currentState == EnemyState.Idle)
+            {
+                TimeInState = Randomizer.Next(3, 15) + (float) Randomizer.NextDouble();
+                currentState = EnemyState.Running;
+            }
+            else
+            {
+                TimeInState = Randomizer.Next(1, 7) + (float) Randomizer.NextDouble();
+                currentState = EnemyState.Idle;
+            }
+
+            return currentState;
         }
     }
 }

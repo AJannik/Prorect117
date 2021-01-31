@@ -28,20 +28,18 @@ namespace Game.Components.Actor
 
         public float AttackTime { get; private set; } = 0f;
 
+        public float TimeToHit { get; set; } = 0.33f;
+
         private float DyingTime { get; set; } = 0.75f;
 
         public EnemyState UpdateCombatBehavior(EnemyState currentState, float deltaTime)
         {
-            if (currentState == EnemyState.Dying)
+            if (IsDead(currentState, deltaTime))
             {
-                if (DyingTime <= 0f)
-                {
-                    return EnemyState.Dead;
-                }
-
-                DyingTime -= deltaTime;
+                return EnemyState.Dead;
             }
-            else if (Bandit.Combat.CurrentHealth <= 0f)
+
+            if (IsDying())
             {
                 return EnemyState.Dying;
             }
@@ -81,6 +79,26 @@ namespace Game.Components.Actor
             }
 
             return currentState;
+        }
+
+        private bool IsDying()
+        {
+            return Bandit.Combat.CurrentHealth <= 0f;
+        }
+
+        private bool IsDead(EnemyState currentState, float deltaTime)
+        {
+            if (currentState == EnemyState.Dying)
+            {
+                if (DyingTime <= 0f)
+                {
+                    return true;
+                }
+
+                DyingTime -= deltaTime;
+            }
+
+            return false;
         }
     }
 }

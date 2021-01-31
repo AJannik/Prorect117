@@ -61,7 +61,7 @@ namespace Game.Components.Actor
                     BanditStateHandler.Running(BanditMovementBehavior.MoveSpeed);
                     break;
                 case EnemyState.Attacking:
-                    BanditStateHandler.Attacking(RightTrigger, LeftTrigger);
+                    BanditStateHandler.Attacking(FacingRight ? RightTrigger : LeftTrigger);
                     break;
                 case EnemyState.Dying:
                     BanditStateHandler.Dying();
@@ -90,19 +90,19 @@ namespace Game.Components.Actor
 
         private void LeftEntered(object sender, IComponent e)
         {
-            switch (e.MyGameObject.Name)
+            if (e.MyGameObject.Name == "Player")
             {
-                case "Player":
-                    FacingRight = false;
-                    BanditCombatBehavior.UpdateCombatBehavior(State, 0f);
-                    break;
-                case "Wall":
-                case "Enemy" when e.MyGameObject != MyGameObject:
-                    FacingRight = true;
-                    break;
-                case "Floor":
-                    LeftOnGround++;
-                    break;
+                FacingRight = false;
+            }
+
+            if (e.MyGameObject.Name == "Wall" || (e.MyGameObject.Name == "Enemy" && e.MyGameObject != MyGameObject))
+            {
+                FacingRight = true;
+            }
+
+            if (e.MyGameObject.Name == "Floor")
+            {
+                LeftOnGround++;
             }
         }
 
@@ -116,19 +116,19 @@ namespace Game.Components.Actor
 
         private void RightEntered(object sender, IComponent e)
         {
-            switch (e.MyGameObject.Name)
+            if (e.MyGameObject.Name == "Player")
             {
-                case "Player":
-                    FacingRight = true;
-                    BanditCombatBehavior.UpdateCombatBehavior(State, 0f);
-                    break;
-                case "Wall":
-                case "Enemy" when e.MyGameObject != MyGameObject:
-                    FacingRight = false;
-                    break;
-                case "Floor":
-                    RightOnGround++;
-                    break;
+                FacingRight = true;
+            }
+
+            if (e.MyGameObject.Name == "Wall" || (e.MyGameObject.Name == "Enemy" && e.MyGameObject != MyGameObject))
+            {
+                FacingRight = false;
+            }
+
+            if (e.MyGameObject.Name == "Floor")
+            {
+                RightOnGround++;
             }
         }
 

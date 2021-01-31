@@ -19,6 +19,8 @@ namespace Game.Components.Actor
 
         private bool Attacked { get; set; } = false;
 
+        private bool Died { get; set; } = false;
+
         public void Idle()
         {
             AnimationSystem.PlayAnimation("Idle", false, !Bandit.FacingRight);
@@ -41,20 +43,20 @@ namespace Game.Components.Actor
             AnimationSystem.PlayAnimation("Walk", false, !Bandit.FacingRight);
         }
 
-        public void Attacking(ITrigger rightTrigger, ITrigger leftTrigger)
+        public void Attacking(ITrigger attackTrigger)
         {
             // Start attack animation
             if (!Attacked && Math.Abs(Bandit.BanditCombatBehavior.AttackTime - Bandit.BanditCombatBehavior.AttackSpeed) < 0.05f)
             {
-                AnimationSystem.PlayAnimation("Attack", !Bandit.FacingRight);
+                AnimationSystem.PlayAnimation("Attack", false, !Bandit.FacingRight);
                 RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
                 Attacked = true;
             }
 
             // compute attack hit
-            if (Attacked && Bandit.BanditCombatBehavior.AttackTime <= Bandit.BanditCombatBehavior.AttackSpeed - 0.33f)
+            if (Attacked && Bandit.BanditCombatBehavior.AttackTime <= Bandit.BanditCombatBehavior.AttackSpeed - Bandit.BanditCombatBehavior.TimeToHit)
             {
-                Bandit.Combat.Attack(Bandit.FacingRight ? rightTrigger : leftTrigger, 1, false);
+                Bandit.Combat.Attack(attackTrigger, 1, false);
                 Attacked = false;
             }
         }
@@ -62,10 +64,11 @@ namespace Game.Components.Actor
         public void Dying()
         {
             AnimationSystem.PlayAnimation("Death", true);
-            if (Bandit.MyGameObject.Name != "Player")
+            if (!Died && Bandit.MyGameObject.Name != "Player")
             {
                 Bandit.MyGameObject.Scene.GameManager.Coins += 2;
                 PickupDisplay?.AddCoins(2);
+                Died = true;
             }
         }
 
