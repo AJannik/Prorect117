@@ -1,7 +1,7 @@
 using Game.Interfaces;
 using Game.Interfaces.ActorInterfaces;
 
-namespace Game.Components.Actor
+namespace Game.Components.Actor.Bandit
 {
     public class BanditCombatBehavior : IActorCombatBehavior
     {

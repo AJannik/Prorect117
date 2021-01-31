@@ -6,7 +6,7 @@ using Game.Interfaces;
 using Game.Interfaces.ActorInterfaces;
 using OpenTK;
 
-namespace Game.Components.Actor
+namespace Game.Components.Actor.Bandit
 {
     public class BanditStateHandler : IActorStateHandler
     {
