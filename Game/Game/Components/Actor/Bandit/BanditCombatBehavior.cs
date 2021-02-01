@@ -69,7 +69,7 @@ namespace Game.Components.Actor.Bandit
 
         private bool IsDying()
         {
-            return Actor.Combat.CurrentHealth <= 0f;
+            return Actor.ActorStats.CurrentHealth <= 0f;
         }
 
         private bool IsDead(ActorState currentState, float deltaTime)

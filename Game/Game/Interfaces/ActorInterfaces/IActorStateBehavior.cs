@@ -1,4 +1,6 @@
 using Game.Components;
+using Game.Components.Combat;
+using Game.Components.Renderer;
 using Game.Components.Renderer.Animations;
 using Game.Entity;
 
@@ -9,6 +11,12 @@ namespace Game.Interfaces.ActorInterfaces
         public CAnimationSystem AnimationSystem { get; set; }
 
         public CRigidBody RigidBody { get; set; }
+
+        public CParticleSystem BloodParticles { get; set; }
+
+        public CDamageDisplay DamageDisplay { get; set; }
+
+        public CTextRender HpText { get; set; }
 
         public IActor Actor { get; set; }
 
@@ -22,6 +30,10 @@ namespace Game.Interfaces.ActorInterfaces
 
         public void Dead();
 
+        public void TakeDamage(float dmgAmount, bool ignoreArmor);
+
         public void SetupPickupDisplay(GameObject myGameObject);
+
+        public void HandleBloodEffect(float deltaTime);
     }
 }

@@ -31,13 +31,14 @@ namespace Game.Components.Actor
 
         public IActorStats ActorStats { get; } = new BanditStats();
 
-        public CCombat Combat { get; set; }
+        public CombatController CombatController { get; } = new CombatController();
 
         public void Start()
         {
             ActorCombatBehavior.Actor = this;
             ActorMovementBehavior.Actor = this;
             ActorStateBehavior.Actor = this;
+            CombatController.Actor = this;
             ActorStateBehavior.SetupPickupDisplay(MyGameObject);
         }
 
@@ -66,6 +67,9 @@ namespace Game.Components.Actor
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            ActorStateBehavior.HandleBloodEffect(deltaTime);
+            ActorStateBehavior.HpText.Text = $"{MathF.Ceiling(ActorStats.CurrentHealth)} HP";
         }
 
         public void SetupLeftTrigger(ITrigger trigger)

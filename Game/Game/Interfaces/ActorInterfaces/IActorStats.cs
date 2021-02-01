@@ -15,5 +15,15 @@ namespace Game.Interfaces.ActorInterfaces
         public float AttackTime { get; set; }
 
         public float MoveSpeed { get; set; }
+
+        public float Armor { get; set; }
+
+        public float BleedTime { get; set; }
+
+        public float AttackCooldown { get; set; }
+
+        public float AttackDamage { get; set; }
+
+        public float InvincibleTime { get; set; }
     }
 }

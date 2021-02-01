@@ -25,7 +25,7 @@ namespace Game.Interfaces.ActorInterfaces
 
         public IActorStats ActorStats { get; }
 
-        public CCombat Combat { get; set; }
+        public CombatController CombatController { get; }
 
         public void SetupLeftTrigger(ITrigger trigger);
 

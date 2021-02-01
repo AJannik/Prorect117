@@ -31,5 +31,15 @@ namespace Game.Components.Actor.Bandit
         public float AttackTime { get; set; } = 0f;
 
         public float MoveSpeed { get; set; } = 1.5f;
+
+        public float Armor { get; set; } = 90f;
+
+        public float BleedTime { get; set; } = 0f;
+
+        public float AttackCooldown { get; set; } = 0f;
+
+        public float AttackDamage { get; set; } = 10f;
+
+        public float InvincibleTime { get; set; } = 0f;
     }
 }

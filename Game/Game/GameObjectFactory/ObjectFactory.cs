@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Game.Components;
+using Game.Components.Actor;
 using Game.Components.Collision;
 using Game.Components.Combat;
 using Game.Components.Player;
@@ -229,24 +230,9 @@ namespace Game.GameObjectFactory
             particleSystem.PositionYRandomness = 1.1f;
 
             player.GetComponent<CCombat>().BloodParticles = particleSystem;
+            player.AddComponent<CPlayer>();
 
             return player;
-        }
-
-        public static GameObject BuildPowerDown(Scene scene, Vector2 position)
-        {
-            GameObject powerDown = new GameObject(scene, "PowerDown");
-            powerDown.Transform.Position = position;
-
-            powerDown.AddComponent<CRender>();
-            powerDown.GetComponent<CRender>().LoadAndSetTexture("Content.default.png");
-            powerDown.GetComponent<CRender>().Layer = 19;
-            powerDown.AddComponent<CCircleTrigger>();
-            CCircleTrigger trigger = powerDown.GetComponent<CCircleTrigger>();
-            powerDown.AddComponent<CPowerDownScript>();
-            powerDown.GetComponent<CPowerDownScript>().Trigger = trigger;
-
-            return powerDown;
         }
 
         public static GameObject BuildCoin(Scene scene, Vector2 position)

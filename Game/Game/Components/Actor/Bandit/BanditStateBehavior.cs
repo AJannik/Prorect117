@@ -1,5 +1,7 @@
 using System;
+using Game.Components.Combat;
 using Game.Components.Player;
+using Game.Components.Renderer;
 using Game.Components.Renderer.Animations;
 using Game.Entity;
 using Game.Interfaces;
@@ -15,6 +17,12 @@ namespace Game.Components.Actor.Bandit
         public CRigidBody RigidBody { get; set; }
 
         public IActor Actor { get; set; }
+
+        public CParticleSystem BloodParticles { get; set; }
+
+        public CTextRender HpText { get; set; }
+
+        public CDamageDisplay DamageDisplay { get; set; }
 
         private CPickupDisplay PickupDisplay { get; set; }
 
@@ -57,7 +65,7 @@ namespace Game.Components.Actor.Bandit
             // compute attack hit
             if (Attacked && Actor.ActorStats.AttackTime <= Actor.ActorStats.AttackSpeed - Actor.ActorStats.TimeToHit)
             {
-                Actor.Combat.Attack(attackTrigger, 1, false);
+                Actor.CombatController.Attack(attackTrigger, 1, false);
                 Attacked = false;
             }
         }
@@ -99,6 +107,39 @@ namespace Game.Components.Actor.Bandit
                         PickupDisplay = child.GetComponent<CPickupDisplay>();
                     }
                 }
+            }
+        }
+
+        public void TakeDamage(float dmgAmount, bool ignoreArmor)
+        {
+            float dmg = Actor.CombatController.CalculateDamage(dmgAmount, ignoreArmor, Actor.ActorStats.Armor);
+            Actor.ActorStats.CurrentHealth -= dmg;
+            Actor.ActorStats.BleedTime = 0.1f;
+
+            Actor.ActorStats.BleedTime = 0.1f;
+
+            // UI display of damage
+            if (Actor.MyGameObject.Name == "Player")
+            {
+                Actor.MyGameObject.Scene.GameManager.PlayerHealth = Actor.ActorStats.CurrentHealth;
+                DamageDisplay?.DisplayDamage($"{MathF.Ceiling(Actor.ActorStats.CurrentHealth)}/{Actor.ActorStats.MaxHealth}", Color.Red);
+            }
+            else
+            {
+                DamageDisplay?.DisplayDamage($"-{MathF.Ceiling(dmg)}", Color.Red);
+            }
+        }
+
+        public void HandleBloodEffect(float deltaTime)
+        {
+            if (Actor.ActorStats.BleedTime > 0f && BloodParticles != null)
+            {
+                Actor.ActorStats.BleedTime -= deltaTime;
+                BloodParticles.Actice = true;
+            }
+            else if (BloodParticles != null)
+            {
+                BloodParticles.Actice = false;
             }
         }
     }
