@@ -5,33 +5,7 @@ namespace Game.Components.Actor.Bandit
 {
     public class BanditCombatBehavior : IActorCombatBehavior
     {
-        private float maxHp = 100f;
-
-        public float MaxHealth
-        {
-            get => maxHp;
-
-            set
-            {
-                maxHp = value;
-                if (CurrentHealth > maxHp)
-                {
-                    CurrentHealth = maxHp;
-                }
-            }
-        }
-
-        public float CurrentHealth { get; set; } = 100f;
-
-        public float AttackSpeed { get; set; } = 1f;
-
         public IActor Actor { get; set; }
-
-        public float AttackTime { get; set; } = 0f;
-
-        public float TimeToHit { get; set; } = 0.33f;
-
-        private float DyingTime { get; set; } = 0.75f;
 
         public ActorState UpdateCombatBehavior(ActorState currentState, float deltaTime)
         {
@@ -45,7 +19,7 @@ namespace Game.Components.Actor.Bandit
                 return ActorState.Dying;
             }
 
-            if (AttackTime <= 0f)
+            if (Actor.ActorStats.AttackTime <= 0f)
             {
                 if (currentState == ActorState.Attacking)
                 {
@@ -56,7 +30,7 @@ namespace Game.Components.Actor.Bandit
             }
             else
             {
-                AttackTime -= deltaTime;
+                Actor.ActorStats.AttackTime -= deltaTime;
             }
 
             return currentState;
@@ -88,7 +62,7 @@ namespace Game.Components.Actor.Bandit
         private ActorState SetAttackState()
         {
             Actor.ActorMovementBehavior.ClearTimeInState();
-            AttackTime = AttackSpeed;
+            Actor.ActorStats.AttackTime = Actor.ActorStats.AttackSpeed;
             const ActorState currentState = ActorState.Attacking;
             return currentState;
         }
@@ -102,12 +76,12 @@ namespace Game.Components.Actor.Bandit
         {
             if (currentState == ActorState.Dying)
             {
-                if (DyingTime <= 0f)
+                if (Actor.ActorStats.DyingTime <= 0f)
                 {
                     return true;
                 }
 
-                DyingTime -= deltaTime;
+                Actor.ActorStats.DyingTime -= deltaTime;
             }
 
             return false;

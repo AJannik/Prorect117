@@ -23,6 +23,8 @@ namespace Game.Interfaces.ActorInterfaces
 
         public IActorStateBehavior ActorStateBehavior { get; }
 
+        public IActorStats ActorStats { get; }
+
         public CCombat Combat { get; set; }
 
         public void SetupLeftTrigger(ITrigger trigger);

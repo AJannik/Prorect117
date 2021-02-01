@@ -5,8 +5,6 @@ namespace Game.Components.Actor.Bandit
 {
     public class BanditMovementBehavior : IActorMovementBehavior
     {
-        public float MoveSpeed { get; set; } = 1.5f;
-
         public IActor Actor { get; set; }
 
         private Random Randomizer { get; set; } = new Random();

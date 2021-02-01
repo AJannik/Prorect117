@@ -29,6 +29,8 @@ namespace Game.Components.Actor
 
         public IActorCombatBehavior ActorCombatBehavior { get; } = new BanditCombatBehavior();
 
+        public IActorStats ActorStats { get; } = new BanditStats();
+
         public CCombat Combat { get; set; }
 
         public void Start()
@@ -50,7 +52,7 @@ namespace Game.Components.Actor
                     ActorStateBehavior.Idle();
                     break;
                 case ActorState.Running:
-                    ActorStateBehavior.Running(ActorMovementBehavior.MoveSpeed);
+                    ActorStateBehavior.Running(ActorStats.MoveSpeed);
                     break;
                 case ActorState.Attacking:
                     ActorStateBehavior.Attacking(FacingRight ? RightTrigger : LeftTrigger);

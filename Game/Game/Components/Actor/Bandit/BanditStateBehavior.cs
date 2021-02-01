@@ -47,7 +47,7 @@ namespace Game.Components.Actor.Bandit
         public void Attacking(ITrigger attackTrigger)
         {
             // Start attack animation
-            if (!Attacked && Math.Abs(Actor.ActorCombatBehavior.AttackTime - Actor.ActorCombatBehavior.AttackSpeed) < 0.05f)
+            if (!Attacked && Math.Abs(Actor.ActorStats.AttackTime - Actor.ActorStats.AttackSpeed) < 0.05f)
             {
                 AnimationSystem.PlayAnimation("Attack", false, !Actor.FacingRight);
                 RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
@@ -55,7 +55,7 @@ namespace Game.Components.Actor.Bandit
             }
 
             // compute attack hit
-            if (Attacked && Actor.ActorCombatBehavior.AttackTime <= Actor.ActorCombatBehavior.AttackSpeed - Actor.ActorCombatBehavior.TimeToHit)
+            if (Attacked && Actor.ActorStats.AttackTime <= Actor.ActorStats.AttackSpeed - Actor.ActorStats.TimeToHit)
             {
                 Actor.Combat.Attack(attackTrigger, 1, false);
                 Attacked = false;
