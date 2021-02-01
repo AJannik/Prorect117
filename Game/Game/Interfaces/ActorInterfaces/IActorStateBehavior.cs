@@ -3,6 +3,7 @@ using Game.Components.Combat;
 using Game.Components.Renderer;
 using Game.Components.Renderer.Animations;
 using Game.Entity;
+using OpenTK;
 
 namespace Game.Interfaces.ActorInterfaces
 {
@@ -22,7 +23,7 @@ namespace Game.Interfaces.ActorInterfaces
 
         public void Idle();
 
-        public void Running(float moveSpeed);
+        public void Running(Vector2 moveSpeed);
 
         public void Attacking(ITrigger attackTrigger);
 

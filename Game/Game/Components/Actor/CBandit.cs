@@ -4,6 +4,7 @@ using Game.Components.Combat;
 using Game.Entity;
 using Game.Interfaces;
 using Game.Interfaces.ActorInterfaces;
+using OpenTK;
 
 namespace Game.Components.Actor
 {
@@ -53,7 +54,7 @@ namespace Game.Components.Actor
                     ActorStateBehavior.Idle();
                     break;
                 case ActorState.Running:
-                    ActorStateBehavior.Running(ActorStats.MoveSpeed);
+                    ActorStateBehavior.Running(new Vector2(ActorStats.MoveSpeed, 0f));
                     break;
                 case ActorState.Attacking:
                     ActorStateBehavior.Attacking(FacingRight ? RightTrigger : LeftTrigger);

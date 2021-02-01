@@ -25,5 +25,11 @@ namespace Game.Interfaces.ActorInterfaces
         public float AttackDamage { get; set; }
 
         public float InvincibleTime { get; set; }
+
+        public float JumpForce { get; set; }
+
+        public float JumpCooldown { get; set; }
+
+        public bool RollEnabled { get; set; }
     }
 }

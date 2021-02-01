@@ -36,7 +36,7 @@ namespace Game.Components.Actor.Bandit
             RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
         }
 
-        public void Running(float moveSpeed)
+        public void Running(Vector2 moveSpeed)
         {
             if (Actor.RightOnGround < 1)
             {
@@ -48,7 +48,7 @@ namespace Game.Components.Actor.Bandit
                 Actor.FacingRight = true;
             }
 
-            RigidBody.Velocity = new Vector2((Actor.FacingRight ? 1 : -1) * moveSpeed, RigidBody.Velocity.Y);
+            RigidBody.Velocity = new Vector2((Actor.FacingRight ? 1 : -1) * moveSpeed.X, RigidBody.Velocity.Y);
             AnimationSystem.PlayAnimation("Walk", false, !Actor.FacingRight);
         }
 
@@ -114,8 +114,6 @@ namespace Game.Components.Actor.Bandit
         {
             float dmg = Actor.CombatController.CalculateDamage(dmgAmount, ignoreArmor, Actor.ActorStats.Armor);
             Actor.ActorStats.CurrentHealth -= dmg;
-            Actor.ActorStats.BleedTime = 0.1f;
-
             Actor.ActorStats.BleedTime = 0.1f;
 
             // UI display of damage

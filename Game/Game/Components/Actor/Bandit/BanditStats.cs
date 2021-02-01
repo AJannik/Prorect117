@@ -41,5 +41,11 @@ namespace Game.Components.Actor.Bandit
         public float AttackDamage { get; set; } = 10f;
 
         public float InvincibleTime { get; set; } = 0f;
+
+        public float JumpForce { get; set; } = 0f;
+
+        public float JumpCooldown { get; set; } = 0f;
+
+        public bool RollEnabled { get; set; }
     }
 }
