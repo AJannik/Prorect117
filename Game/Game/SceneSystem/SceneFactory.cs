@@ -831,16 +831,8 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(70f, 13.5f), new Vector2(4f, 1f), new Vector2(67.5f, 18.5f), 30);
             StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(22.5f, 1.5f), new Vector2(3f, 1f), new Vector2(26.5f, 3.5f), 30);
 
-            
-            // Moving platforms and moving spikes
+            // Moving platforms
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(20.5f, 15f), new Vector2(30f, 15f), 3);
-            ObjectFactory.BuildMovingSpikes(scene, new Vector2(21f, 16f), new Vector2(30.5f, 16f), 3);
-            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(20.5f, 16f), new Vector2(30f, 16f), new Vector2(3, 1), new Vector2(23, 23f), 30);
-            ObjectFactory.BuildMovingPlatform(scene, new Vector2(40.5f, 3.5f), new Vector2(40.5f, 18.5f), 3);
-            ObjectFactory.BuildMovingSpikes(scene, new Vector2(90f, 13.5f), new Vector2(105f, 13.5f), 3);
-            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(89.5f, 13.5f), new Vector2(104.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
-            ObjectFactory.BuildMovingSpikes(scene, new Vector2(105f, 13.5f), new Vector2(90f, 13.5f), 3);
-            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(104.5f, 13.5f), new Vector2(89.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(110f, 7.5f), new Vector2(110f, 12.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(109.5f, 16.5f), new Vector2(110f, 27.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(115f, 9.5f), new Vector2(115f, 11.5f), 2);
@@ -853,6 +845,14 @@ namespace Game.SceneSystem
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(112.5f, 23.5f), new Vector2(112.5f, 28.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(10.5f, 3f), new Vector2(10.5f, 12.5f), 3);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(2.5f, 8f), new Vector2(2.5f, 17.5f), 3);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(40.5f, 3.5f), new Vector2(40.5f, 18.5f), 3);
+
+            ObjectFactory.BuildMovingSpikes(scene, new Vector2(21f, 16f), new Vector2(30.5f, 16f), 3);
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(20.5f, 16f), new Vector2(30f, 16f), new Vector2(3, 1), new Vector2(23, 23f), 30);
+            ObjectFactory.BuildMovingSpikes(scene, new Vector2(90f, 13.5f), new Vector2(105f, 13.5f), 3);
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(89.5f, 13.5f), new Vector2(104.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
+            ObjectFactory.BuildMovingSpikes(scene, new Vector2(105f, 13.5f), new Vector2(90f, 13.5f), 3);
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(104.5f, 13.5f), new Vector2(89.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
