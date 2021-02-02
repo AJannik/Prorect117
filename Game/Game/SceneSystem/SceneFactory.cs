@@ -29,7 +29,7 @@ namespace Game.SceneSystem
             {
                 0 => BuildMainMenu(),
                 1 => BuildTutorialLevel(),
-                2 => BuildLevel3(),
+                2 => BuildLevel4(),
                 3 => BuildLevel2(),
                 4 => BuildLevel3(),
                 5 => BuildLevel4(),
@@ -716,13 +716,12 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(12.5f, -74f), 2, "Content.DarkStoneBrickTilemap.png");
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(25.5f, -74f), 2, "Content.DarkStoneBrickTilemap.png");
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(18.5f, -76f), 4, "Content.DarkStoneBrickTilemap.png");
-            
+
             // Decorations
             ObjectFactory.BuildSprite(scene, new Vector2(14f, -55f), new Vector2(4, 4), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(25f, -58f), new Vector2(4, 4), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(20f, -29.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(14f, -2.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
-            
             ObjectFactory.BuildSprite(scene, new Vector2(2f, -6f), new Vector2(2, 2), "Environment.Rock.png");
             ObjectFactory.BuildSprite(scene, new Vector2(16f, -11f), new Vector2(2, 2), "Environment.Rock.png");
             ObjectFactory.BuildSprite(scene, new Vector2(5f, -15f), new Vector2(2, 2), "Environment.Rock.png");
@@ -942,13 +941,24 @@ namespace Game.SceneSystem
             ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(89.5f, 13.5f), new Vector2(104.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
             ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(104.5f, 13.5f), new Vector2(89.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
 
+            // Decorations
+            ObjectFactory.BuildSprite(scene, new Vector2(3f, 3f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(18f, 3f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(30f, 3f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(55f, 15f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(20f, 22f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(50f, 3f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(75f, 15f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(90f, 8f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(115f, 7f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(124.5f, 28.5f), new Vector2(1, 2));
             levelEnd.GetComponent<CDoor>().LastLevel = true;
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 6f;
+            camera.GetComponent<CCamera>().Scale = 30f;
 
             // Enemies
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(10f, 1.5f));
