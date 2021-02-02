@@ -104,10 +104,10 @@ namespace Game.Components.Actor.Player
             AnimationSystem.PlayAnimation("Roll", true);
         }
 
-        public void Attacking(ITrigger attackTrigger)
+        public bool Attacking(ITrigger attackTrigger, string animationName, float damageMultiplier)
         {
-            Actor.CombatController.Attack(attackTrigger, 1f, false);
-            AnimationSystem.PlayAnimation("Attack1", true, !Actor.FacingRight);
+            AnimationSystem.PlayAnimation(animationName, true, !Actor.FacingRight);
+            return Actor.CombatController.Attack(attackTrigger, damageMultiplier, false);
         }
 
         public void Dying()

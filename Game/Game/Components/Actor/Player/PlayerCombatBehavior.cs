@@ -1,5 +1,4 @@
 using System;
-using Game.Interfaces;
 using Game.Interfaces.ActorInterfaces;
 using OpenTK.Input;
 
@@ -47,9 +46,8 @@ namespace Game.Components.Actor.Player
             {
                 if (mouse.IsButtonDown(MouseButton.Left))
                 {
-                    //ComboAttack(true);
-                    Actor.ActorStateBehavior.Attacking(Actor.FacingRight ? Actor.RightTrigger : Actor.LeftTrigger);
                     Actor.ActorStats.AttackTime = Actor.ActorStats.AttackSpeed;
+                    ComboAttack();
                 }
             }
             else
@@ -57,73 +55,36 @@ namespace Game.Components.Actor.Player
                 Actor.ActorStats.AttackTime -= deltaTime;
             }
         }
-/*
-        private void ComboAttack(bool leftSide)
+
+        private void ComboAttack()
         {
             bool successful;
-            ITrigger trigger = Actor.RightTrigger;
-            if (leftSide)
-            {
-                trigger = Actor.LeftTrigger;
-            }
 
             switch (ComboCount)
             {
                 case 0:
-                    successful = Attack1(trigger, leftSide);
+                    successful = Actor.ActorStateBehavior.Attacking(Actor.FacingRight ? Actor.RightTrigger : Actor.LeftTrigger, "Attack1", 1f);
                     break;
                 case 1:
-                    successful = Attack2(trigger, leftSide);
+                    successful = Actor.ActorStateBehavior.Attacking(Actor.FacingRight ? Actor.RightTrigger : Actor.LeftTrigger, "Attack2", 1.5f);
                     break;
                 case 2:
-                    successful = Attack3(trigger, leftSide);
+                    successful = Actor.ActorStateBehavior.Attacking(Actor.FacingRight ? Actor.RightTrigger : Actor.LeftTrigger, "Attack3", 2f);
                     break;
                 default:
                     ComboCount = 0;
-                    successful = Attack1(trigger, leftSide);
+                    successful = Actor.ActorStateBehavior.Attacking(Actor.FacingRight ? Actor.RightTrigger : Actor.LeftTrigger, "Attack1", 1f);
                     break;
             }
 
+            LockTime = Actor.ActorStats.AttackSpeed * 0.75f;
+            ((PlayerMovementBehavior)Actor.ActorMovementBehavior).State = PlayerState.Blocked;
+            ((PlayerStateBehavior)Actor.ActorStateBehavior).SetXVelocity(0f);
             if (successful)
             {
                 ComboCount++;
                 ComboTime = 2f;
-                ((PlayerMovementBehavior)Actor.ActorMovementBehavior).State = PlayerState.Blocked;
-                ((PlayerStateBehavior)Actor.ActorStateBehavior).SetXVelocity(0f);
-                LockTime = 0.5f / Actor.ActorStats.AttackSpeed;
             }
         }
-        private bool Attack1(ITrigger hitbox, bool leftSide)
-        {
-            if (Combat.Attack(hitbox, 1f, false))
-            {
-                AnimationSystem.PlayAnimation("Attack1", true, leftSide);
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool Attack2(ITrigger hitbox, bool leftSide)
-        {
-            if (Combat.Attack(hitbox, 1.2f, false))
-            {
-                AnimationSystem.PlayAnimation("Attack2", true, leftSide);
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool Attack3(ITrigger hitbox, bool leftSide)
-        {
-            if (Combat.Attack(hitbox, 1.8f, false))
-            {
-                AnimationSystem.PlayAnimation("Attack3", true, leftSide);
-                return true;
-            }
-
-            return false;
-        }*/
     }
 }

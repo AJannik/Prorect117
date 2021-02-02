@@ -22,7 +22,7 @@ namespace Game.Components.Actor.Player
 
         public float CurrentHealth { get; set; } = 100f;
 
-        public float AttackSpeed { get; set; } = 1f;
+        public float AttackSpeed { get; set; } = 0.6f;
 
         public float TimeToHit { get; set; } = 0.33f;
 

@@ -1,5 +1,3 @@
-using System;
-using Game.Components.Actor.Bandit;
 using Game.Components.Actor.Player;
 using Game.Entity;
 using Game.Interfaces;
