@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Entity;
 using Game.Interfaces;
 using Game.Physics;
@@ -27,6 +28,7 @@ namespace Game.Components.Collision
         {
             Geometry.Center = MyGameObject.Transform.WorldPosition + Offset;
             CheckForColliders();
+            RemoveDeletedColliders();
         }
 
         public void DebugDraw()
@@ -74,6 +76,26 @@ namespace Game.Components.Collision
                         TriggerHits.Remove(collider);
                     }
                 }
+            }
+        }
+
+        private void RemoveDeletedColliders()
+        {
+            List<IComponent> deleteList = new List<IComponent>();
+
+            foreach (IComponent component in TriggerHits)
+            {
+                if (MyGameObject.Scene.GetColliders().Contains(component))
+                {
+                    continue;
+                }
+
+                deleteList.Add(component);
+            }
+
+            foreach (IComponent component in deleteList)
+            {
+                TriggerHits.Remove(component);
             }
         }
     }
