@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Components.Collision;
-using Game.Components.Combat;
 using Game.Entity;
 using Game.Interfaces;
+using Game.Interfaces.ActorInterfaces;
 using Game.Physics;
 using OpenTK;
 
@@ -38,7 +38,7 @@ namespace Game.Components
         public void Start()
         {
             SetColliders();
-            if (MyGameObject.GetComponent<CCombat>() != null)
+            if (MyGameObject.GetComponent<IActor>() != null)
             {
                 IgnoreCollision = true;
             }

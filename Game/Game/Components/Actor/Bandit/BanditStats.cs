@@ -4,7 +4,7 @@ namespace Game.Components.Actor.Bandit
 {
     public class BanditStats : IActorStats
     {
-        private float maxHp = 100f;
+        private float maxHp = 30f;
 
         public float MaxHealth
         {
@@ -20,7 +20,7 @@ namespace Game.Components.Actor.Bandit
             }
         }
 
-        public float CurrentHealth { get; set; } = 100f;
+        public float CurrentHealth { get; set; } = 30f;
 
         public float AttackSpeed { get; set; } = 1f;
 
@@ -32,13 +32,13 @@ namespace Game.Components.Actor.Bandit
 
         public float MoveSpeed { get; set; } = 1.5f;
 
-        public float Armor { get; set; } = 90f;
+        public float Armor { get; set; } = 33f;
 
         public float BleedTime { get; set; } = 0f;
 
         public float AttackCooldown { get; set; } = 0f;
 
-        public float AttackDamage { get; set; } = 10f;
+        public float AttackDamage { get; set; } = 30f;
 
         public float InvincibleTime { get; set; } = 0f;
 

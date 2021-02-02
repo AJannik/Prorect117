@@ -1,10 +1,9 @@
-using System;
-using Game.Components.Combat;
 using Game.Entity;
 using Game.Interfaces;
+using Game.Interfaces.ActorInterfaces;
 using OpenTK;
 
-namespace Game.Components.Player
+namespace Game.Components.Actor
 {
     public class CResetController : IComponent
     {
@@ -24,7 +23,7 @@ namespace Game.Components.Player
             if (e.MyGameObject.Name == "Player")
             {
                 e.MyGameObject.Transform.Position = PreviousPos;
-                e.MyGameObject.GetComponent<CCombat>().TakeDamage(Damage, true, e.MyGameObject.GetComponent<CCombat>().HurtAnimationName);
+                e.MyGameObject.GetComponent<IActor>().ActorStateBehavior.TakeDamage(Damage, true);
             }
         }
     }

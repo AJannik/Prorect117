@@ -1,6 +1,4 @@
 using System;
-using Game.Components.Combat;
-using Game.Components.Player;
 using Game.Components.Renderer;
 using Game.Components.Renderer.Animations;
 using Game.Entity;

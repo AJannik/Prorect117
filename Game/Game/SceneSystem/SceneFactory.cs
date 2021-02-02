@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using Game.Components;
+using Game.Components.Actor;
 using Game.Components.Collision;
-using Game.Components.Player;
 using Game.Components.UI;
 using Game.Components.UI.BaseComponents;
 using Game.Entity;
@@ -19,7 +19,7 @@ namespace Game.SceneSystem
             GameManager = gameManager;
         }
 
-        internal int NumScenes { get; } = 7;
+        internal int NumScenes { get; } = 2;
 
         private GameManager GameManager { get; }
 
@@ -119,7 +119,7 @@ namespace Game.SceneSystem
 
             // Enemies
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));
-            EnemyFactory.BuildBanditEnemy(scene, new Vector2(27.5f, 2f));
+            //EnemyFactory.BuildBanditEnemy(scene, new Vector2(27.5f, 2f));
 
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);
@@ -132,7 +132,7 @@ namespace Game.SceneSystem
             shopScreen.Active = false;
 
             // Coin, PlayerHP and Key HUD
-            GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
+            GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayer>());
 
             // Tutorial Windows
             GuiFactory.BuildControls(scene, canvas);
@@ -288,7 +288,7 @@ namespace Game.SceneSystem
             shopScreen.Active = false;
 
             // Coin, PlayerHP and Key HUD
-            GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
+            GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayer>());
 
             // Collectables
             ObjectFactory.BuildCoin(scene, new Vector2(10.5f, 3.5f));
@@ -470,7 +470,7 @@ namespace Game.SceneSystem
             shopScreen.Active = false;
 
             // Coin, PlayerHP and Key HUD
-            GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
+            GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayer>());
 
             // Collectables
             ObjectFactory.BuildCoin(scene, new Vector2(14.5f, -85.5f));
@@ -715,7 +715,7 @@ namespace Game.SceneSystem
             shopScreen.Active = false;
 
             // Coin, PlayerHP and Key HUD
-            GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
+            GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayer>());
 
             // Collectables
             ObjectFactory.BuildCoin(scene, new Vector2(21.5f, -2.5f));
@@ -889,7 +889,7 @@ namespace Game.SceneSystem
             canvas.GetComponent<CCanvas>().Camera = camera.GetComponent<CCamera>();
 
             // Coin, PlayerHP and Key HUD
-            GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
+            GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayer>());
 
             // Collectables
             ObjectFactory.BuildKey(scene, new Vector2(124f, 24.5f));

@@ -1,4 +1,3 @@
-using System;
 using Game.Interfaces.ActorInterfaces;
 using OpenTK.Input;
 
@@ -77,13 +76,13 @@ namespace Game.Components.Actor.Player
                     break;
             }
 
-            LockTime = Actor.ActorStats.AttackSpeed * 0.75f;
+            LockTime = Actor.ActorStats.AttackSpeed * 0.4f;
             ((PlayerMovementBehavior)Actor.ActorMovementBehavior).State = PlayerState.Blocked;
             ((PlayerStateBehavior)Actor.ActorStateBehavior).SetXVelocity(0f);
             if (successful)
             {
                 ComboCount++;
-                ComboTime = 2f;
+                ComboTime = 1.3f;
             }
         }
     }

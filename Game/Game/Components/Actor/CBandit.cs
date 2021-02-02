@@ -1,6 +1,5 @@
 using System;
 using Game.Components.Actor.Bandit;
-using Game.Components.Combat;
 using Game.Entity;
 using Game.Interfaces;
 using Game.Interfaces.ActorInterfaces;

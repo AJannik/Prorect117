@@ -1,4 +1,3 @@
-using System;
 using Game.Interfaces;
 using Game.Interfaces.ActorInterfaces;
 using OpenTK;

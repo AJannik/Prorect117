@@ -1,5 +1,5 @@
-﻿using Game.Components.Collision;
-using Game.Components.Player;
+﻿using Game.Components.Actor;
+using Game.Components.Collision;
 using Game.Entity;
 using Game.Interfaces;
 using Game.Tools;

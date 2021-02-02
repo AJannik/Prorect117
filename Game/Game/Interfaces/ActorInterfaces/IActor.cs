@@ -1,5 +1,4 @@
 using Game.Components.Actor;
-using Game.Components.Combat;
 
 namespace Game.Interfaces.ActorInterfaces
 {
