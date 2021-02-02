@@ -814,20 +814,24 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(83f, 5.5f), 32);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(82.5f, 1.5f), 5);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(10.5f, 17f), 3);
-            
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(22.5f, 1.5f), new Vector2(3f, 1f), new Vector2(26.5f, 3.5f), 30);
+
+            // Level spikes
             StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(23f, 1.5f), 3);
             StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(46f, 1.5f), 3);
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(45.5f, 1.5f), new Vector2(3f, 1f), new Vector2(43.5f, 7.5f), 30);
-            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(80f, 1.5f), 1);
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(79.5f, 1.5f), new Vector2(1f, 1f), new Vector2(82.5f, 2f), 30);
-            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(86f, 1.5f), 1);
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(85.5f, 1.5f), new Vector2(1f, 1f), new Vector2(93.5f, 1.5f), 30);
-            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(46f, 13.5f), 3);
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(45.5f, 13.5f), new Vector2(3f, 1f), new Vector2(43.5f, 19.5f), 30);
             StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(70.5f, 13.5f), 4);
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(70f, 13.5f), new Vector2(4f, 1f), new Vector2(67.5f, 18.5f), 30);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(80f, 1.5f), 1);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(46f, 13.5f), 3);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(86f, 1.5f), 1);
 
+            // Level Deadly area
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(45.5f, 1.5f), new Vector2(3f, 1f), new Vector2(43.5f, 7.5f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(79.5f, 1.5f), new Vector2(1f, 1f), new Vector2(82.5f, 2f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(85.5f, 1.5f), new Vector2(1f, 1f), new Vector2(93.5f, 1.5f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(45.5f, 13.5f), new Vector2(3f, 1f), new Vector2(43.5f, 19.5f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(70f, 13.5f), new Vector2(4f, 1f), new Vector2(67.5f, 18.5f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(22.5f, 1.5f), new Vector2(3f, 1f), new Vector2(26.5f, 3.5f), 30);
+
+            
             // Moving platforms and moving spikes
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(20.5f, 15f), new Vector2(30f, 15f), 3);
             ObjectFactory.BuildMovingSpikes(scene, new Vector2(21f, 16f), new Vector2(30.5f, 16f), 3);
