@@ -865,7 +865,7 @@ namespace Game.SceneSystem
 
             // Level  walls
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(12.5f, 10f), 18);
-            StaticRigidbodyFactory.BuildWall(scene, new Vector2(32.5f, 23f), 16);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(32.5f, 20f), 22);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(43.5f, 4f), 6);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(47.5f, 4f), 6);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(62f, 2f), 2);
@@ -898,6 +898,7 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(117.5f, 4.5f), 4);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(112.5f, 4.5f), 4);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(124.5f, 27f), 5);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(25f, 8.5f), 16);
 
             // Level spikes
             StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(23f, 1.5f), 3);
@@ -952,6 +953,15 @@ namespace Game.SceneSystem
             ObjectFactory.BuildSprite(scene, new Vector2(90f, 8f), new Vector2(4, 4), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(115f, 7f), new Vector2(4, 4), "Environment.TreeSmall.png");
             
+            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
+            
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(124.5f, 28.5f), new Vector2(1, 2));
@@ -984,6 +994,9 @@ namespace Game.SceneSystem
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(55f, 13.5f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(34f, 23.5f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(124.5f, 27.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(20f, 9.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(25f, 9.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(30f, 9.5f));
 
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);
