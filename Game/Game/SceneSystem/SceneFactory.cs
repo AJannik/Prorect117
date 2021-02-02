@@ -29,7 +29,7 @@ namespace Game.SceneSystem
             {
                 0 => BuildMainMenu(),
                 1 => BuildTutorialLevel(),
-                2 => BuildLevel2(),
+                2 => BuildLevel1(),
                 3 => BuildLevel2(),
                 4 => BuildLevel3(),
                 5 => BuildLevel4(),
@@ -476,13 +476,20 @@ namespace Game.SceneSystem
             ObjectFactory.BuildSprite(scene, new Vector2(20, -97f), new Vector2(2, 2), "Environment.Rock.png");
             ObjectFactory.BuildSprite(scene, new Vector2(25, -126), new Vector2(2, 2), "Environment.Rock.png");
             ObjectFactory.BuildSprite(scene, new Vector2(20, -81), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(7.5f, -118f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(8.5f, -112f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(9.5f, -89f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16f, -120f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16.5f, -92f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(15f, -126f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(24f, -81f), new Vector2(3, 2), "Environment.Bush.png");
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(10.5f, -125.9f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(29.5f, -82.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 30f;
+            camera.GetComponent<CCamera>().Scale = 6f;
 
             // Enemies
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(22.5f, -81f));
