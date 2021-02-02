@@ -722,30 +722,47 @@ namespace Game.SceneSystem
             ObjectFactory.BuildSprite(scene, new Vector2(25f, -58f), new Vector2(4, 4), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(20f, -29.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(14f, -2.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(2, -6), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(16, -11), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(5, -15), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(22, -15), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(10, -22), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(25, -23), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(4, -31), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(16, -33), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(22, -39), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(10, -42), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(28, -49), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(10, -56), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(13, -59), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(22, -59), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(18, -62), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(22, -70), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(12, -77), new Vector2(2, 2), "Environment.Rock.png");
+            
+            ObjectFactory.BuildSprite(scene, new Vector2(2f, -6f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16f, -11f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(5f, -15f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(22f, -15f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(10f, -22f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(25f, -23f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(4f, -31f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16f, -33f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(22f, -39f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(10f, -42f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(28f, -49f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(10f, -56f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(13f, -59f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(22f, -59f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(18f, -62f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(22f, -70f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(12f, -77f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(6f, -6f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(12f, -9f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(19f, -11f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(8f, -19f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(23f, -20f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(24f, -28f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(8f, -39f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16f, -39f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(12f, -46f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(14f, -49f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(25f, -45f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(5f, -62f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(17f, -70f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(24f, -74f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(28f, -77f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(4f, -77f), new Vector2(3, 2), "Environment.Bush.png");
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(27.5f, -76.9f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(7.5f, -2.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 30f;
+            camera.GetComponent<CCamera>().Scale = 6f;
 
             // Enemies
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(5.5f, -6f));
