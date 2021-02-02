@@ -952,15 +952,14 @@ namespace Game.SceneSystem
             ObjectFactory.BuildSprite(scene, new Vector2(75f, 15f), new Vector2(4, 4), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(90f, 8f), new Vector2(4, 4), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(115f, 7f), new Vector2(4, 4), "Environment.TreeSmall.png");
-            
+            ObjectFactory.BuildSprite(scene, new Vector2(6, 2), new Vector2(2, 2), "Environment.Rock.png");
             ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
-            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(34, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(55, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(95, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(24, 10f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(83, 14), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(124, 2), new Vector2(2, 2), "Environment.Rock.png");
             
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
