@@ -29,7 +29,7 @@ namespace Game.SceneSystem
             {
                 0 => BuildMainMenu(),
                 1 => BuildTutorialLevel(),
-                2 => BuildLevel1(),
+                2 => BuildLevel2(),
                 3 => BuildLevel2(),
                 4 => BuildLevel3(),
                 5 => BuildLevel4(),
@@ -464,12 +464,19 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(17.5f, -123f), 2, "Content.StoneBrickTilemap.png");
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(27.5f, -123f), 2, "Content.StoneBrickTilemap.png");
 
+            // Decorations
+            ObjectFactory.BuildSprite(scene, new Vector2(15.5f, -110.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(8f, -81f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(5f, -114.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(23.5f, -96.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(26.5f, -119.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(10.5f, -125.9f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(29.5f, -82.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 6f;
+            camera.GetComponent<CCamera>().Scale = 30f;
 
             // Enemies
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(22.5f, -81f));
