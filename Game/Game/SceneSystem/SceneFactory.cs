@@ -271,7 +271,9 @@ namespace Game.SceneSystem
             ObjectFactory.BuildSprite(scene, new Vector2(23f, 13f), new Vector2(3, 2), "Environment.Bush.png");
             ObjectFactory.BuildSprite(scene, new Vector2(31f, 2f), new Vector2(3, 2), "Environment.Bush.png");
             ObjectFactory.BuildSprite(scene, new Vector2(43f, 13f), new Vector2(3, 2), "Environment.Bush.png");
-            
+            ObjectFactory.BuildSprite(scene, new Vector2(85f, 5f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(120f, 14f), new Vector2(3, 2), "Environment.Bush.png");
+
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
