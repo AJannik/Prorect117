@@ -57,7 +57,7 @@ namespace Game.Components.Actor
                     ActorStateBehavior.Running(new Vector2(ActorStats.MoveSpeed, 0f));
                     break;
                 case ActorState.Attacking:
-                    ActorStateBehavior.Attacking(FacingRight ? RightTrigger : LeftTrigger);
+                    ActorStateBehavior.Attacking(FacingRight ? RightTrigger : LeftTrigger, "", 1f);
                     break;
                 case ActorState.Dying:
                     ActorStateBehavior.Dying();

@@ -15,9 +15,9 @@ namespace Game.Components.Actor
         /// <param name="dmgMultiplier">Multiplies the base damage by this value.</param>
         /// <param name="ignoreArmor">Whether to ignore Armor or not.</param>
         /// <returns>Returns False if attack still on cooldown.</returns>
-        public void Attack(ITrigger hitbox, float dmgMultiplier, bool ignoreArmor)
+        public bool Attack(ITrigger hitbox, float dmgMultiplier, bool ignoreArmor)
         {
-            ApplyDamage(hitbox, dmgMultiplier, ignoreArmor, Actor.MyGameObject.Name, Actor.ActorStats.AttackDamage);
+            return ApplyDamage(hitbox, dmgMultiplier, ignoreArmor, Actor.MyGameObject.Name, Actor.ActorStats.AttackDamage);
         }
 
         public void MakeInvincible(float time)
@@ -43,15 +43,18 @@ namespace Game.Components.Actor
             return dmg;
         }
 
-        private void ApplyDamage(ITrigger hitbox, float dmgMultiplier, bool ignoreArmor, string name, float attackDamage)
+        private bool ApplyDamage(ITrigger hitbox, float dmgMultiplier, bool ignoreArmor, string name, float attackDamage)
         {
             foreach (IComponent hit in hitbox.GetTriggerHits())
             {
                 if (hit.MyGameObject.GetAllComponents().Any(component => component is IActor))
                 {
                     hit.MyGameObject.GetComponent<IActor>().ActorStateBehavior.TakeDamage(dmgMultiplier * attackDamage, ignoreArmor);
+                    return true;
                 }
             }
+
+            return false;
         }
     }
 }

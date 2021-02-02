@@ -52,7 +52,7 @@ namespace Game.Components.Actor.Bandit
             AnimationSystem.PlayAnimation("Walk", false, !Actor.FacingRight);
         }
 
-        public void Attacking(ITrigger attackTrigger)
+        public bool Attacking(ITrigger attackTrigger, string animationName, float damageMultiplier)
         {
             // Start attack animation
             if (!Attacked && Math.Abs(Actor.ActorStats.AttackTime - Actor.ActorStats.AttackSpeed) < 0.05f)
@@ -65,9 +65,11 @@ namespace Game.Components.Actor.Bandit
             // compute attack hit
             if (Attacked && Actor.ActorStats.AttackTime <= Actor.ActorStats.AttackSpeed - Actor.ActorStats.TimeToHit)
             {
-                Actor.CombatController.Attack(attackTrigger, 1, false);
+                Actor.CombatController.Attack(attackTrigger, 1f, false);
                 Attacked = false;
             }
+
+            return true;
         }
 
         public void Dying()

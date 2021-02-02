@@ -25,7 +25,7 @@ namespace Game.Interfaces.ActorInterfaces
 
         public void Running(Vector2 moveSpeed);
 
-        public void Attacking(ITrigger attackTrigger);
+        public bool Attacking(ITrigger attackTrigger, string animationName, float damageMultiplier);
 
         public void Dying();
 
