@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Components.Combat;
-using Game.Components.Player;
+using Game.Components.Actor;
 using Game.Entity;
 using Game.Interfaces;
 using Game.Tools;
@@ -13,11 +12,7 @@ namespace Game.Components
     {
         public GameObject MyGameObject { get; set; } = null;
 
-        public CCombat Combat { get; set; }
-
-        public CPlayerController PlayerController { get; set; }
-
-        public CPlayerCombatController CombatController { get; set; }
+        public CPlayer Player { get; set; }
 
         private List<Effect> Effects { get; set; } = new List<Effect>();
 
@@ -58,16 +53,16 @@ namespace Game.Components
             switch (effect.Type)
             {
                 case EffectType.Fragile:
-                    Combat.Armor *= 1f - effect.Strength;
+                    Player.ActorStats.Armor *= 1f - effect.Strength;
                     break;
                 case EffectType.Slow:
-                    PlayerController.PlayerSpeed *= 1f - effect.Strength;
+                    Player.ActorStats.MoveSpeed *= 1f - effect.Strength;
                     break;
                 case EffectType.Silenced:
-                    CombatController.RollEnabled = false;
+                    Player.ActorStats.RollEnabled = false;
                     break;
                 case EffectType.Weakness:
-                    Combat.AttackDamage *= 1f - effect.Strength;
+                    Player.ActorStats.AttackDamage *= 1f - effect.Strength;
                     break;
                 default:
                     throw new NullReferenceException($"Effect of type {effect.Type} doesn't exist!");

@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Game.Components.Actor;
-using Game.Components.Player;
 using Game.Components.UI;
 using Game.Components.UI.BaseComponents;
 using Game.Entity;

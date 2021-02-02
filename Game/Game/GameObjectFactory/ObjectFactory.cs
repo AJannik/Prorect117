@@ -129,16 +129,15 @@ namespace Game.GameObjectFactory
             player.AddComponent<CBoxCollider>();
             player.GetComponent<CBoxCollider>().Geometry.Size = new Vector2(0.85f, 1.6f);
             player.AddComponent<CRigidBody>();
-            player.AddComponent<CPlayerController>();
-            player.GetComponent<CPlayerController>().RigidBody = player.GetComponent<CRigidBody>();
-            player.GetComponent<CPlayerController>().Render = player.GetComponent<CRender>();
+            player.AddComponent<CPlayer>();
+            player.GetComponent<CPlayer>().ActorStateBehavior.RigidBody = player.GetComponent<CRigidBody>();
 
             // add ground trigger for playercontroller
             player.AddComponent<CBoxTrigger>();
             CBoxTrigger trigger = player.GetComponent<CBoxTrigger>();
             trigger.Offset = new Vector2(0f, -0.8f);
             trigger.Geometry.Size = new Vector2(0.84f, 0.2f);
-            player.GetComponent<CPlayerController>().SetUpGroundTrigger(trigger);
+            player.GetComponent<CPlayer>().SetUpGroundTrigger(trigger);
 
             // add all animations
             player.AddComponent<CAnimationSystem>();
@@ -172,21 +171,11 @@ namespace Game.GameObjectFactory
             Animation roll = new Animation("Roll", 4, 18, false);
             roll.TimeBetweenTwoFrames = 1 / 20f;
             controll.AddAnimation(roll);
-            player.GetComponent<CPlayerController>().AnimationSystem = controll;
-
-            // add Combat Components
-            player.AddComponent<CCombat>();
-            player.GetComponent<CCombat>().AnimationSystem = controll;
-            player.GetComponent<CCombat>().CurrentHealth = player.Scene.GameManager.PlayerHealth;
-            player.AddComponent<CPlayerCombatController>();
-            CPlayerCombatController combatController = player.GetComponent<CPlayerCombatController>();
-            combatController.AnimationSystem = controll;
-            combatController.Combat = player.GetComponent<CCombat>();
-            combatController.Controller = player.GetComponent<CPlayerController>();
+            player.GetComponent<CPlayer>().ActorStateBehavior.AnimationSystem = controll;
 
             // display player damage
             GameObject damageUi = BuildDisplayPlayerDamage(scene, player, new Vector2(0f, 1.4f));
-            player.GetComponent<CCombat>().DamageDisplay = damageUi.GetComponent<CDamageDisplay>();
+            player.GetComponent<CPlayer>().ActorStateBehavior.DamageDisplay = damageUi.GetComponent<CDamageDisplay>();
 
             // displays pickups like coins and keys
             GameObject pickupDisplay = BuildPickupDisplay(scene, player, new Vector2(0f, 2f));
@@ -196,19 +185,17 @@ namespace Game.GameObjectFactory
             CBoxTrigger attackHitboxLeft = player.GetComponents<CBoxTrigger>()[1];
             attackHitboxLeft.Geometry.Size = new Vector2(1.3f, 1.7f);
             attackHitboxLeft.Offset = new Vector2(-0.8f, 0.1f);
-            combatController.LeftHitbox = attackHitboxLeft;
+            player.GetComponent<CPlayer>().SetupLeftTrigger(attackHitboxLeft);
 
             player.AddComponent<CBoxTrigger>();
             CBoxTrigger attackHitboxRight = player.GetComponents<CBoxTrigger>()[2];
             attackHitboxRight.Geometry.Size = new Vector2(1.3f, 1.7f);
             attackHitboxRight.Offset = new Vector2(0.8f, 0.1f);
-            combatController.RightHitbox = attackHitboxRight;
+            player.GetComponent<CPlayer>().SetupRightTrigger(attackHitboxRight);
 
             // add EffectSystem
             player.AddComponent<CEffectSystem>();
-            player.GetComponent<CEffectSystem>().PlayerController = player.GetComponent<CPlayerController>();
-            player.GetComponent<CEffectSystem>().Combat = player.GetComponent<CCombat>();
-            player.GetComponent<CEffectSystem>().CombatController = player.GetComponent<CPlayerCombatController>();
+            player.GetComponent<CEffectSystem>().Player = player.GetComponent<CPlayer>();
 
             // add Particle System
             player.AddComponent<CParticleSystem>();
@@ -229,8 +216,7 @@ namespace Game.GameObjectFactory
             particleSystem.PositionXRandomness = 0.1f;
             particleSystem.PositionYRandomness = 1.1f;
 
-            player.GetComponent<CCombat>().BloodParticles = particleSystem;
-            player.AddComponent<CPlayer>();
+            player.GetComponent<CPlayer>().ActorStateBehavior.BloodParticles = particleSystem;
 
             return player;
         }
