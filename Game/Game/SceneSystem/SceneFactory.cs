@@ -470,6 +470,12 @@ namespace Game.SceneSystem
             ObjectFactory.BuildSprite(scene, new Vector2(5f, -114.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(23.5f, -96.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(26.5f, -119.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(6, -125f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(8, -95), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(12, -107), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(20, -97f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(25, -126), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(20, -81), new Vector2(2, 2), "Environment.Rock.png");
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(10.5f, -125.9f));
