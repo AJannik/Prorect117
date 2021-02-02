@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Game.Components.Actor;
 using Game.Components.Player;
 using Game.Components.UI;
 using Game.Components.UI.BaseComponents;
@@ -164,7 +165,7 @@ namespace Game.GameObjectFactory
             return shopScreen;
         }
 
-        public static GameObject BuildHudElements(Scene scene, GameObject canvas, CPlayerCombatController playerCombatController)
+        public static GameObject BuildHudElements(Scene scene, GameObject canvas, CPlayer player)
         {
             GameObject hud = new GameObject(scene, "Hud");
 
@@ -175,9 +176,7 @@ namespace Game.GameObjectFactory
             // Setup references
             hud.AddComponent<CPlayerStatsHud>();
             CPlayerStatsHud playerStatsHud = hud.GetComponent<CPlayerStatsHud>();
-            playerStatsHud.Combat = playerCombatController.Combat;
-            playerStatsHud.PlayerController = playerCombatController.MyGameObject.GetComponent<CPlayerController>();
-            playerStatsHud.PlayerCombatController = playerCombatController;
+            playerStatsHud.Player = player;
             playerStatsHud.HpText = hud.GetChild(0).GetChild(0).GetComponent<CGuiTextRender>();
             playerStatsHud.AttackText = hud.GetChild(0).GetChild(1).GetComponent<CGuiTextRender>();
             playerStatsHud.ArmorText = hud.GetChild(0).GetChild(2).GetComponent<CGuiTextRender>();

@@ -1,4 +1,5 @@
 using System;
+using Game.Components.Actor;
 using Game.Components.Combat;
 using Game.Components.Player;
 using Game.Components.UI.BaseComponents;
@@ -22,11 +23,7 @@ namespace Game.Components.UI
 
         public CGuiTextRender SilencedText { get; set; }
 
-        public CCombat Combat { get; set; }
-
-        public CPlayerController PlayerController { get; set; }
-
-        public CPlayerCombatController PlayerCombatController { get; set; }
+        public CPlayer Player { get; set; }
 
         private float Timer { get; set; } = 0f;
 
@@ -40,15 +37,15 @@ namespace Game.Components.UI
 
         public void Start()
         {
-            LastHealth = Combat.CurrentHealth;
-            LastAttackDamage = Combat.AttackDamage;
-            LastArmor = Combat.Armor;
-            LastSpeed = PlayerController.PlayerSpeed;
+            LastHealth = Player.ActorStats.CurrentHealth;
+            LastAttackDamage = Player.ActorStats.AttackDamage;
+            LastArmor = Player.ActorStats.Armor;
+            LastSpeed = Player.ActorStats.MoveSpeed;
             SilencedText.Text = "CAN ROLL";
-            HpText.Text = $"{MathF.Ceiling(Combat.CurrentHealth)}/{MathF.Ceiling(Combat.MaxHealth)}";
-            AttackText.Text = $"Damage: {MathF.Ceiling(Combat.AttackDamage)}";
-            ArmorText.Text = $"Armor: {MathF.Ceiling(Combat.Armor)}";
-            SpeedText.Text = $"Speed: {MathF.Ceiling(PlayerController.PlayerSpeed)}";
+            HpText.Text = $"{MathF.Ceiling(Player.ActorStats.CurrentHealth)}/{MathF.Ceiling(Player.ActorStats.MaxHealth)}";
+            AttackText.Text = $"Damage: {MathF.Ceiling(Player.ActorStats.AttackDamage)}";
+            ArmorText.Text = $"Armor: {MathF.Ceiling(Player.ActorStats.Armor)}";
+            SpeedText.Text = $"Speed: {MathF.Ceiling(Player.ActorStats.MoveSpeed)}";
         }
 
         public void Update(float deltaTime)
@@ -66,27 +63,27 @@ namespace Game.Components.UI
                 SilencedText.FontColor = Color.White;
             }
 
-            if (Combat.CurrentHealth != LastHealth)
+            if (Math.Abs(Player.ActorStats.CurrentHealth - LastHealth) > 0.01f)
             {
                 ChangeHpText();
             }
 
-            if (Combat.AttackDamage != LastAttackDamage)
+            if (Math.Abs(Player.ActorStats.AttackDamage - LastAttackDamage) > 0.01f)
             {
                 ChangeAttackText();
             }
 
-            if (Combat.Armor != LastArmor)
+            if (Math.Abs(Player.ActorStats.Armor - LastArmor) > 0.01f)
             {
                 ChangeArmorText();
             }
 
-            if (PlayerController.PlayerSpeed != LastSpeed)
+            if (Math.Abs(Player.ActorStats.MoveSpeed - LastSpeed) > 0.01f)
             {
                 ChangeSpeedText();
             }
 
-            if (!PlayerCombatController.RollEnabled)
+            if (!Player.ActorStats.RollEnabled)
             {
                 ChangeSilencedText();
             }
@@ -95,32 +92,32 @@ namespace Game.Components.UI
         private void ChangeHpText()
         {
             HpText.FontColor = Color.Red;
-            HpText.Text = $"{MathF.Ceiling(Combat.CurrentHealth)}/{MathF.Ceiling(Combat.MaxHealth)}";
-            LastHealth = Combat.CurrentHealth;
+            HpText.Text = $"{MathF.Ceiling(Player.ActorStats.CurrentHealth)}/{MathF.Ceiling(Player.ActorStats.MaxHealth)}";
+            LastHealth = Player.ActorStats.CurrentHealth;
             Timer = 1f;
         }
 
         private void ChangeAttackText()
         {
             AttackText.FontColor = Color.Red;
-            AttackText.Text = $"Damage: {MathF.Ceiling(Combat.AttackDamage)}";
-            LastAttackDamage = Combat.AttackDamage;
+            AttackText.Text = $"Damage: {MathF.Ceiling(Player.ActorStats.AttackDamage)}";
+            LastAttackDamage = Player.ActorStats.AttackDamage;
             Timer = 1f;
         }
 
         private void ChangeArmorText()
         {
             ArmorText.FontColor = Color.Red;
-            ArmorText.Text = $"Armor: {MathF.Ceiling(Combat.Armor)}";
-            LastArmor = Combat.Armor;
+            ArmorText.Text = $"Armor: {MathF.Ceiling(Player.ActorStats.Armor)}";
+            LastArmor = Player.ActorStats.Armor;
             Timer = 1f;
         }
 
         private void ChangeSpeedText()
         {
             SpeedText.FontColor = Color.Red;
-            SpeedText.Text = $"Speed: {MathF.Ceiling(PlayerController.PlayerSpeed)}";
-            LastSpeed = PlayerController.PlayerSpeed;
+            SpeedText.Text = $"Speed: {MathF.Ceiling(Player.ActorStats.MoveSpeed)}";
+            LastSpeed = Player.ActorStats.MoveSpeed;
             Timer = 1f;
         }
 
