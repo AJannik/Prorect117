@@ -834,6 +834,9 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(83f, 5.5f), 32);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(82.5f, 1.5f), 5);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(10.5f, 17f), 3);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(117.5f, 4.5f), 4);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(112.5f, 4.5f), 4);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(124.5f, 27f), 5);
 
             // Level spikes
             StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(23f, 1.5f), 3);
