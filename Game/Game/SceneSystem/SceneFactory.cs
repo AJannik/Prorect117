@@ -257,7 +257,18 @@ namespace Game.SceneSystem
             ObjectFactory.BuildSprite(scene, new Vector2(23f, 7f), new Vector2(4, 4), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(68f, 12f), new Vector2(4, 4), "Environment.TreeSmall.png");
             ObjectFactory.BuildSprite(scene, new Vector2(98f, 13f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            
+            ObjectFactory.BuildSprite(scene, new Vector2(2, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(7, 14), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(20, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(33, 14), new Vector2(2, 2), "Environment.Rock.png");
+            
+            ObjectFactory.BuildSprite(scene, new Vector2(80, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(50, 13), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(74, 11), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(122, 10), new Vector2(2, 2), "Environment.Rock.png");
 
+            
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
