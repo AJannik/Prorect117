@@ -125,9 +125,6 @@ namespace Game.Components.Actor.Bandit
             float dmg = Actor.CombatController.CalculateDamage(dmgAmount, ignoreArmor, Actor.ActorStats.Armor);
             Actor.ActorStats.CurrentHealth -= dmg;
             Actor.ActorStats.BleedTime = 0.1f;
-            Console.WriteLine(Actor.ActorStats.CurrentHealth);
-            Console.WriteLine(Actor.MyGameObject.Transform.Position);
-            Console.WriteLine(Actor.MyGameObject.Scene.GetColliders().Count);
 
             // UI display of damage
             if (Actor.MyGameObject.Name == "Player")

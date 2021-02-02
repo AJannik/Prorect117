@@ -33,12 +33,15 @@ namespace Game.Components.UI
 
         private float LastSpeed { get; set; }
 
+        private bool OldSilenced { get; set; }
+
         public void Start()
         {
             LastHealth = Player.ActorStats.CurrentHealth;
             LastAttackDamage = Player.ActorStats.AttackDamage;
             LastArmor = Player.ActorStats.Armor;
             LastSpeed = Player.ActorStats.MoveSpeed;
+            OldSilenced = Player.ActorStats.RollEnabled;
             SilencedText.Text = "CAN ROLL";
             HpText.Text = $"{MathF.Ceiling(Player.ActorStats.CurrentHealth)}/{MathF.Ceiling(Player.ActorStats.MaxHealth)}";
             AttackText.Text = $"Damage: {MathF.Ceiling(Player.ActorStats.AttackDamage)}";
@@ -81,7 +84,7 @@ namespace Game.Components.UI
                 ChangeSpeedText();
             }
 
-            if (!Player.ActorStats.RollEnabled)
+            if (OldSilenced != Player.ActorStats.RollEnabled)
             {
                 ChangeSilencedText();
             }
@@ -123,6 +126,7 @@ namespace Game.Components.UI
         {
             SilencedText.FontColor = Color.Red;
             SilencedText.Text = "CAN NOT ROLL";
+            OldSilenced = Player.ActorStats.RollEnabled;
             Timer = 1f;
         }
     }
