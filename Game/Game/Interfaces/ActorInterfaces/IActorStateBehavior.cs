@@ -1,5 +1,6 @@
 using Game.Components;
 using Game.Components.Actor;
+using Game.Components.Actor.Displays;
 using Game.Components.Renderer;
 using Game.Components.Renderer.Animations;
 using Game.Entity;
@@ -25,7 +26,7 @@ namespace Game.Interfaces.ActorInterfaces
 
         public void Running(Vector2 moveSpeed);
 
-        public bool Attacking(ITrigger attackTrigger, string animationName, float damageMultiplier);
+        public bool Attacking(string animationName, float damageMultiplier);
 
         public void Dying();
 

@@ -1,8 +1,8 @@
 using System;
+using Game.Components.Actor.Displays;
 using Game.Components.Renderer;
 using Game.Components.Renderer.Animations;
 using Game.Entity;
-using Game.Interfaces;
 using Game.Interfaces.ActorInterfaces;
 using OpenTK;
 
@@ -28,6 +28,10 @@ namespace Game.Components.Actor.Bandit
 
         private bool Died { get; set; } = false;
 
+        private bool PlayDyingAnimation { get; set; } = true;
+
+        private bool AttackRight { get; set; } = true;
+
         public void Idle()
         {
             AnimationSystem.PlayAnimation("Idle", false, !Actor.FacingRight);
@@ -50,20 +54,21 @@ namespace Game.Components.Actor.Bandit
             AnimationSystem.PlayAnimation("Walk", false, !Actor.FacingRight);
         }
 
-        public bool Attacking(ITrigger attackTrigger, string animationName, float damageMultiplier)
+        public bool Attacking(string animationName, float damageMultiplier)
         {
             // Start attack animation
             if (!Attacked && Math.Abs(Actor.ActorStats.AttackTime - Actor.ActorStats.AttackSpeed) < 0.05f)
             {
                 AnimationSystem.PlayAnimation("Attack", false, !Actor.FacingRight);
                 RigidBody.Velocity = new Vector2(0, RigidBody.Velocity.Y);
+                AttackRight = Actor.FacingRight;
                 Attacked = true;
             }
 
             // compute attack hit
             if (Attacked && Actor.ActorStats.AttackTime <= Actor.ActorStats.AttackSpeed - Actor.ActorStats.TimeToHit)
             {
-                Actor.CombatController.Attack(attackTrigger, 1f, false);
+                Actor.CombatController.Attack(AttackRight ? Actor.RightTrigger : Actor.LeftTrigger, 1f, false);
                 Attacked = false;
             }
 
@@ -72,7 +77,12 @@ namespace Game.Components.Actor.Bandit
 
         public void Dying()
         {
-            AnimationSystem.PlayAnimation("Death", true);
+            if (PlayDyingAnimation)
+            {
+                AnimationSystem.PlayAnimation("Death", true);
+                PlayDyingAnimation = false;
+            }
+
             if (!Died && Actor.MyGameObject.Name != "Player")
             {
                 Actor.MyGameObject.Scene.GameManager.Coins += 2;
@@ -115,6 +125,9 @@ namespace Game.Components.Actor.Bandit
             float dmg = Actor.CombatController.CalculateDamage(dmgAmount, ignoreArmor, Actor.ActorStats.Armor);
             Actor.ActorStats.CurrentHealth -= dmg;
             Actor.ActorStats.BleedTime = 0.1f;
+            Console.WriteLine(Actor.ActorStats.CurrentHealth);
+            Console.WriteLine(Actor.MyGameObject.Transform.Position);
+            Console.WriteLine(Actor.MyGameObject.Scene.GetColliders().Count);
 
             // UI display of damage
             if (Actor.MyGameObject.Name == "Player")

@@ -96,4 +96,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\Player" />
+  </ItemGroup>
+
 </Project>

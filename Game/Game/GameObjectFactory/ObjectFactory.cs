@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Game.Components;
 using Game.Components.Actor;
+using Game.Components.Actor.Displays;
+using Game.Components.Actor.Player;
 using Game.Components.Collision;
 using Game.Components.Renderer;
 using Game.Components.Renderer.Animations;

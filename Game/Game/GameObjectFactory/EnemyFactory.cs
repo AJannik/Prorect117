@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Game.Components;
+using Game.Components.Actor;
+using Game.Components.Actor.Displays;
 using Game.Components.Collision;
-using Game.Components.Combat;
 using Game.Components.Renderer;
 using Game.Components.Renderer.Animations;
 using Game.Entity;
+using Game.Interfaces.ActorInterfaces;
 using Game.SceneSystem;
 using OpenTK;
 
@@ -43,13 +45,11 @@ namespace Game.GameObjectFactory
 
             enemy.AddComponent<CRigidBody>();
 
-            enemy.AddComponent<CEnemyAI>();
-            CEnemyAI ai = enemy.GetComponent<CEnemyAI>();
-            ai.SetupLeftTrigger(left);
-            ai.SetupRightTrigger(right);
-            ai.RigidBody = enemy.GetComponent<CRigidBody>();
-            ai.HitTime = 0.8f;
-            ai.InAttackTime = 1.8f;
+            enemy.AddComponent<CSkeleton>();
+            CSkeleton skeleton = enemy.GetComponent<CSkeleton>();
+            skeleton.SetupLeftTrigger(left);
+            skeleton.SetupRightTrigger(right);
+            skeleton.ActorStateBehavior.RigidBody = enemy.GetComponent<CRigidBody>();
 
             // animations
             enemy.AddComponent<CAnimationSystem>();
@@ -69,20 +69,11 @@ namespace Game.GameObjectFactory
             Animation death = new Animation("Death", 15, 0, false, true, "Content.Skeleton.SkeletonDead.png", 15, 1);
             death.TimeBetweenTwoFrames = 1f / 15f;
             animationSystem.AddAnimation(death);
-            ai.AnimationSystem = animationSystem;
-
-            // combat
-            enemy.AddComponent<CCombat>();
-            CCombat combat = enemy.GetComponent<CCombat>();
-            combat.AnimationSystem = animationSystem;
-            combat.Armor = 66f;
-            combat.AttackDamage = 80f;
-            combat.MaxHealth = 40f;
-            ai.Combat = combat;
+            skeleton.ActorStateBehavior.AnimationSystem = animationSystem;
 
             // Hp Text
             GameObject damageUi = BuildEnemyHpText(scene, enemy, new Vector2(0f, 1.1f));
-            combat.DamageDisplay = damageUi.GetComponent<CDamageDisplay>();
+            skeleton.ActorStateBehavior.DamageDisplay = damageUi.GetComponent<CDamageDisplay>();
 
             // add Particle System
             enemy.AddComponent<CParticleSystem>();
@@ -103,7 +94,7 @@ namespace Game.GameObjectFactory
             particleSystem.PositionXRandomness = 0.1f;
             particleSystem.PositionYRandomness = 1.1f;
 
-            enemy.GetComponent<CCombat>().BloodParticles = particleSystem;
+            enemy.GetComponent<CSkeleton>().ActorStateBehavior.BloodParticles = particleSystem;
 
             return enemy;
         }
@@ -138,11 +129,11 @@ namespace Game.GameObjectFactory
 
             enemy.AddComponent<CRigidBody>();
 
-            enemy.AddComponent<CEnemyAI>();
-            CEnemyAI ai = enemy.GetComponent<CEnemyAI>();
-            ai.SetupLeftTrigger(left);
-            ai.SetupRightTrigger(right);
-            ai.RigidBody = enemy.GetComponent<CRigidBody>();
+            enemy.AddComponent<CBandit>();
+            CBandit bandit = enemy.GetComponent<CBandit>();
+            bandit.SetupLeftTrigger(left);
+            bandit.SetupRightTrigger(right);
+            bandit.ActorStateBehavior.RigidBody = enemy.GetComponent<CRigidBody>();
 
             // animations
             enemy.AddComponent<CAnimationSystem>();
@@ -164,20 +155,11 @@ namespace Game.GameObjectFactory
             Animation death = new Animation("Death", 1, 36, false);
             death.TimeBetweenTwoFrames = 100f;
             animationSystem.AddAnimation(death);
-            ai.AnimationSystem = animationSystem;
-
-            // combat
-            enemy.AddComponent<CCombat>();
-            CCombat combat = enemy.GetComponent<CCombat>();
-            combat.AnimationSystem = animationSystem;
-            combat.Armor = 33f;
-            combat.AttackDamage = 30f;
-            combat.MaxHealth = 30f;
-            ai.Combat = combat;
+            bandit.ActorStateBehavior.AnimationSystem = animationSystem;
 
             // Hp Text
             GameObject damageUi = BuildEnemyHpText(scene, enemy, new Vector2(0f, 1.1f));
-            combat.DamageDisplay = damageUi.GetComponent<CDamageDisplay>();
+            enemy.GetComponent<CBandit>().ActorStateBehavior.DamageDisplay = damageUi.GetComponent<CDamageDisplay>();
 
             // add Particle System
             enemy.AddComponent<CParticleSystem>();
@@ -198,7 +180,7 @@ namespace Game.GameObjectFactory
             particleSystem.PositionXRandomness = 0.1f;
             particleSystem.PositionYRandomness = 1.1f;
 
-            enemy.GetComponent<CCombat>().BloodParticles = particleSystem;
+            enemy.GetComponent<CBandit>().ActorStateBehavior.BloodParticles = particleSystem;
 
             return enemy;
         }
@@ -211,7 +193,7 @@ namespace Game.GameObjectFactory
             enemyHpText.AddComponent<CTextRender>();
             enemyHpText.GetComponent<CTextRender>().Size = 0.2f;
             enemyHpText.GetComponent<CTextRender>().Centered = true;
-            parent.GetComponent<CCombat>().HpText = enemyHpText.GetComponent<CTextRender>();
+            parent.GetComponent<IActor>().ActorStateBehavior.HpText = enemyHpText.GetComponent<CTextRender>();
 
             enemyHpText.AddComponent<CDamageDisplay>();
             enemyHpText.AddComponent<CTextRender>();

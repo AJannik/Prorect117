@@ -1,4 +1,5 @@
 using System;
+using Game.Components.Actor.Helper;
 using Game.Interfaces.ActorInterfaces;
 
 namespace Game.Components.Actor.Bandit

@@ -1,3 +1,4 @@
+using Game.Components.Actor.Helper;
 using Game.Interfaces.ActorInterfaces;
 using OpenTK.Input;
 
@@ -24,6 +25,11 @@ namespace Game.Components.Actor.Player
             else
             {
                 ComboCount = 0;
+            }
+
+            if (Actor.ActorStats.InvincibleTime > 0f)
+            {
+                Actor.ActorStats.InvincibleTime -= deltaTime;
             }
 
             if (LockTime > 0f)
@@ -62,17 +68,17 @@ namespace Game.Components.Actor.Player
             switch (ComboCount)
             {
                 case 0:
-                    successful = Actor.ActorStateBehavior.Attacking(Actor.FacingRight ? Actor.RightTrigger : Actor.LeftTrigger, "Attack1", 1f);
+                    successful = Actor.ActorStateBehavior.Attacking("Attack1", 1f);
                     break;
                 case 1:
-                    successful = Actor.ActorStateBehavior.Attacking(Actor.FacingRight ? Actor.RightTrigger : Actor.LeftTrigger, "Attack2", 1.5f);
+                    successful = Actor.ActorStateBehavior.Attacking("Attack2", 1.5f);
                     break;
                 case 2:
-                    successful = Actor.ActorStateBehavior.Attacking(Actor.FacingRight ? Actor.RightTrigger : Actor.LeftTrigger, "Attack3", 2f);
+                    successful = Actor.ActorStateBehavior.Attacking("Attack3", 2f);
                     break;
                 default:
                     ComboCount = 0;
-                    successful = Actor.ActorStateBehavior.Attacking(Actor.FacingRight ? Actor.RightTrigger : Actor.LeftTrigger, "Attack1", 1f);
+                    successful = Actor.ActorStateBehavior.Attacking("Attack1", 1f);
                     break;
             }
 

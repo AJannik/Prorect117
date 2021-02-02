@@ -1,4 +1,4 @@
-namespace Game.Components.Actor
+namespace Game.Components.Actor.Helper
 {
     public enum ActorState
     {

@@ -1,6 +1,7 @@
 using System;
 using Game.Components.Actor.Bandit;
 using Game.Components.Actor.Helper;
+using Game.Components.Actor.Skeleton;
 using Game.Entity;
 using Game.Interfaces;
 using Game.Interfaces.ActorInterfaces;
@@ -8,29 +9,29 @@ using OpenTK;
 
 namespace Game.Components.Actor
 {
-    public class CBandit : IActor
+    public class CSkeleton : IActor
     {
         public GameObject MyGameObject { get; set; }
 
         public ActorState State { get; set; } = ActorState.Idle;
 
-        public bool FacingRight { get; set; } = false;
+        public bool FacingRight { get; set; }
 
         public ITrigger LeftTrigger { get; set; }
 
         public ITrigger RightTrigger { get; set; }
 
-        public int LeftOnGround { get; set; } = 0;
+        public int LeftOnGround { get; set; }
 
-        public int RightOnGround { get; set; } = 0;
-
-        public IActorStateBehavior ActorStateBehavior { get; } = new BanditStateBehavior();
+        public int RightOnGround { get; set; }
 
         public IActorMovementBehavior ActorMovementBehavior { get; } = new BanditMovementBehavior();
 
         public IActorCombatBehavior ActorCombatBehavior { get; } = new BanditCombatBehavior();
 
-        public IActorStats ActorStats { get; } = new BanditStats();
+        public IActorStateBehavior ActorStateBehavior { get; } = new BanditStateBehavior();
+
+        public IActorStats ActorStats { get; } = new SkeletonStats();
 
         public CombatController CombatController { get; } = new CombatController();
 

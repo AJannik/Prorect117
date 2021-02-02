@@ -1,8 +1,9 @@
+using System;
 using System.Linq;
 using Game.Interfaces;
 using Game.Interfaces.ActorInterfaces;
 
-namespace Game.Components.Actor
+namespace Game.Components.Actor.Helper
 {
     public class CombatController
     {

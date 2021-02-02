@@ -1,4 +1,5 @@
 using System;
+using Game.Components.Actor.Displays;
 using Game.Components.Renderer;
 using Game.Components.Renderer.Animations;
 using Game.Entity;
@@ -27,6 +28,8 @@ namespace Game.Components.Actor.Player
         private CPickupDisplay PickupDisplay { get; set; }
 
         private bool Died { get; set; } = false;
+
+        private bool PlayDyingAnimation { get; set; } = true;
 
         public void Idle()
         {
@@ -102,15 +105,20 @@ namespace Game.Components.Actor.Player
             AnimationSystem.PlayAnimation("Roll", true);
         }
 
-        public bool Attacking(ITrigger attackTrigger, string animationName, float damageMultiplier)
+        public bool Attacking(string animationName, float damageMultiplier)
         {
             AnimationSystem.PlayAnimation(animationName, true, !Actor.FacingRight);
-            return Actor.CombatController.Attack(attackTrigger, damageMultiplier, false);
+            return Actor.CombatController.Attack(Actor.FacingRight ? Actor.RightTrigger : Actor.LeftTrigger, damageMultiplier, false);
         }
 
         public void Dying()
         {
-            AnimationSystem.PlayAnimation("Death", true);
+            if (PlayDyingAnimation)
+            {
+                AnimationSystem.PlayAnimation("Death", true);
+                PlayDyingAnimation = false;
+            }
+
             if (!Died && Actor.MyGameObject.Name != "Player")
             {
                 Actor.MyGameObject.Scene.GameManager.Coins += 2;
@@ -131,6 +139,11 @@ namespace Game.Components.Actor.Player
 
         public void TakeDamage(float dmgAmount, bool ignoreArmor)
         {
+            if (Actor.ActorStats.InvincibleTime > 0f)
+            {
+                return;
+            }
+
             float dmg = Actor.CombatController.CalculateDamage(dmgAmount, ignoreArmor, Actor.ActorStats.Armor);
             Actor.ActorStats.CurrentHealth -= dmg;
             Actor.ActorStats.BleedTime = 0.1f;

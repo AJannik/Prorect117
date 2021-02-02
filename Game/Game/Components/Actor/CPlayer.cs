@@ -1,3 +1,5 @@
+using System;
+using Game.Components.Actor.Helper;
 using Game.Components.Actor.Player;
 using Game.Entity;
 using Game.Interfaces;
@@ -38,6 +40,8 @@ namespace Game.Components.Actor
             ActorStateBehavior.Actor = this;
             CombatController.Actor = this;
             ActorStateBehavior.SetupPickupDisplay(MyGameObject);
+            ActorStats.CurrentHealth = MyGameObject.Scene.GameManager.PlayerHealth;
+            ActorStateBehavior.RigidBody.GravityScale = 4f;
         }
 
         public void Update(float deltaTime)

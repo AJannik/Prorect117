@@ -3,7 +3,7 @@ using Game.Entity;
 using Game.Interfaces;
 using OpenTK;
 
-namespace Game.Components.Actor
+namespace Game.Components.Actor.Displays
 {
     public class CDamageDisplay : IComponent, IUpdateable
     {

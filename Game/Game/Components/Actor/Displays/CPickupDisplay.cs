@@ -3,7 +3,7 @@ using Game.Entity;
 using Game.Interfaces;
 using Game.Tools;
 
-namespace Game.Components.Actor
+namespace Game.Components.Actor.Displays
 {
     public class CPickupDisplay : IComponent, IOnStart, IUpdateable
     {
