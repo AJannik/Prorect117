@@ -1027,6 +1027,8 @@ namespace Game.SceneSystem
             ObjectFactory.BuildCoin(scene, new Vector2(75.5f, 8.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(85.5f, 9.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(100.5f, 8.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(25f, 10.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(20f, 10.5f));
 
             // Power Downs
             PowerDownFactory.Fragile(scene, new Vector2(98.5f, 3f));
