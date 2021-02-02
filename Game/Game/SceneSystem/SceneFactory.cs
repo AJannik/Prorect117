@@ -19,7 +19,7 @@ namespace Game.SceneSystem
             GameManager = gameManager;
         }
 
-        internal int NumScenes { get; } = 2;
+        internal int NumScenes { get; } = 7;
 
         private GameManager GameManager { get; }
 
@@ -119,7 +119,7 @@ namespace Game.SceneSystem
 
             // Enemies
             EnemyFactory.BuildBanditEnemy(scene, new Vector2(22.5f, 2f));
-            //EnemyFactory.BuildBanditEnemy(scene, new Vector2(27.5f, 2f));
+            EnemyFactory.BuildBanditEnemy(scene, new Vector2(27.5f, 2f));
 
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);
@@ -263,7 +263,7 @@ namespace Game.SceneSystem
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(7.5f, 14f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(16.5f, 2f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(23.5f, 2f));
-            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(27.5f, 2f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(26.5f, 2f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(29.5f, 14f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(59.5f, 14f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(66.5f, 11f));
