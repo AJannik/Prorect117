@@ -29,7 +29,7 @@ namespace Game.SceneSystem
             {
                 0 => BuildMainMenu(),
                 1 => BuildTutorialLevel(),
-                2 => BuildLevel1(),
+                2 => BuildLevel3(),
                 3 => BuildLevel2(),
                 4 => BuildLevel3(),
                 5 => BuildLevel4(),
@@ -716,13 +716,20 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(12.5f, -74f), 2, "Content.DarkStoneBrickTilemap.png");
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(25.5f, -74f), 2, "Content.DarkStoneBrickTilemap.png");
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(18.5f, -76f), 4, "Content.DarkStoneBrickTilemap.png");
+            
+            // Decorations
+            ObjectFactory.BuildSprite(scene, new Vector2(14f, -55f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(25f, -58f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(20f, -29.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(14f, -2.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
 
             // Player, exit and camera
-            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(27.5f, -76.9f));
+            // GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(27.5f, -76.9f));
+            GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(27.5f, -40.9f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(7.5f, -2.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 6f;
+            camera.GetComponent<CCamera>().Scale = 30f;
 
             // Enemies
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(5.5f, -6f));
