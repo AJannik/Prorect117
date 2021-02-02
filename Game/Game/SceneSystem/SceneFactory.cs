@@ -252,12 +252,18 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(117.5f, 8.5f), 7);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(124.5f, 4.5f), 7);
 
+            // Decorations
+            ObjectFactory.BuildSprite(scene, new Vector2(5f, 9f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(23f, 7f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(68f, 12f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(98f, 13f), new Vector2(4, 4), "Environment.TreeSmall.png");
+
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 6f;
+            camera.GetComponent<CCamera>().Scale = 30f;
 
             // Enemies
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(7.5f, 14f));
