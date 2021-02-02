@@ -29,7 +29,7 @@ namespace Game.SceneSystem
             {
                 0 => BuildMainMenu(),
                 1 => BuildTutorialLevel(),
-                2 => BuildLevel4(),
+                2 => BuildLevel1(),
                 3 => BuildLevel2(),
                 4 => BuildLevel3(),
                 5 => BuildLevel4(),
@@ -960,14 +960,24 @@ namespace Game.SceneSystem
             ObjectFactory.BuildSprite(scene, new Vector2(24, 10f), new Vector2(2, 2), "Environment.Rock.png");
             ObjectFactory.BuildSprite(scene, new Vector2(83, 14), new Vector2(2, 2), "Environment.Rock.png");
             ObjectFactory.BuildSprite(scene, new Vector2(124, 2), new Vector2(2, 2), "Environment.Rock.png");
-            
+            ObjectFactory.BuildSprite(scene, new Vector2(2f, 7f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16f, 21f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(19f, 10f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(36f, 24f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(72f, 2f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(80f, 7f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(91f, 7f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(64f, 14f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(105f, 2f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(111f, 6f), new Vector2(3, 2), "Environment.Bush.png");
+
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
             GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(124.5f, 28.5f), new Vector2(1, 2));
             levelEnd.GetComponent<CDoor>().LastLevel = true;
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
-            camera.GetComponent<CCamera>().Scale = 30f;
+            camera.GetComponent<CCamera>().Scale = 6f;
 
             // Enemies
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(10f, 1.5f));
