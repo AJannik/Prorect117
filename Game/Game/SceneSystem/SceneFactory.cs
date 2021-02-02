@@ -847,11 +847,14 @@ namespace Game.SceneSystem
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(2.5f, 8f), new Vector2(2.5f, 17.5f), 3);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(40.5f, 3.5f), new Vector2(40.5f, 18.5f), 3);
 
+            // Moving spikes
             ObjectFactory.BuildMovingSpikes(scene, new Vector2(21f, 16f), new Vector2(30.5f, 16f), 3);
-            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(20.5f, 16f), new Vector2(30f, 16f), new Vector2(3, 1), new Vector2(23, 23f), 30);
             ObjectFactory.BuildMovingSpikes(scene, new Vector2(90f, 13.5f), new Vector2(105f, 13.5f), 3);
-            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(89.5f, 13.5f), new Vector2(104.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
             ObjectFactory.BuildMovingSpikes(scene, new Vector2(105f, 13.5f), new Vector2(90f, 13.5f), 3);
+
+            // Moving deadly area
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(20.5f, 16f), new Vector2(30f, 16f), new Vector2(3, 1), new Vector2(23, 23f), 30);
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(89.5f, 13.5f), new Vector2(104.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
             ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(104.5f, 13.5f), new Vector2(89.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
 
             // Player, exit and camera
@@ -895,10 +898,12 @@ namespace Game.SceneSystem
             GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayerCombatController>());
 
             // Collectables
+            // Keys
             ObjectFactory.BuildKey(scene, new Vector2(124f, 24.5f));
             ObjectFactory.BuildKey(scene, new Vector2(97f, 16.5f));
             ObjectFactory.BuildKey(scene, new Vector2(72.5f, 3f));
 
+            // Coins
             ObjectFactory.BuildCoin(scene, new Vector2(3f, 7f));
             ObjectFactory.BuildCoin(scene, new Vector2(15f, 22f));
             ObjectFactory.BuildCoin(scene, new Vector2(22f, 22f));
