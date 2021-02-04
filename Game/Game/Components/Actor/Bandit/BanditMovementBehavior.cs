@@ -39,12 +39,12 @@ namespace Game.Components.Actor.Bandit
         {
             if (currentState == ActorState.Idle)
             {
-                TimeInState = Randomizer.Next(3, 15) + (float) Randomizer.NextDouble();
+                TimeInState = Randomizer.Next(3, 15) + (float)Randomizer.NextDouble();
                 currentState = ActorState.Running;
             }
             else
             {
-                TimeInState = Randomizer.Next(1, 7) + (float) Randomizer.NextDouble();
+                TimeInState = Randomizer.Next(1, 7) + (float)Randomizer.NextDouble();
                 currentState = ActorState.Idle;
             }
 

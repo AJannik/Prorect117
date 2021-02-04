@@ -76,21 +76,6 @@ namespace Game.Components.Actor.Player
             return ActorState.Idle;
         }
 
-        private void ControlRollVelocity(float deltaTime)
-        {
-            if (RollTelegraph > 0f)
-            {
-                RollTelegraph -= deltaTime;
-                ((PlayerStateBehavior)Actor.ActorStateBehavior).SetXVelocity(Actor.FacingRight ? 20f : -20f);
-            }
-            else if (!CanRoll)
-            {
-                CanRoll = true;
-                State = PlayerState.Free;
-                ((PlayerStateBehavior)Actor.ActorStateBehavior).SetXVelocity(0f);
-            }
-        }
-
         public void ClearTimeInState()
         {
         }
@@ -109,6 +94,21 @@ namespace Game.Components.Actor.Player
             {
                 OnGround++;
                 ((PlayerStateBehavior)Actor.ActorStateBehavior).Jumping = false;
+            }
+        }
+
+        private void ControlRollVelocity(float deltaTime)
+        {
+            if (RollTelegraph > 0f)
+            {
+                RollTelegraph -= deltaTime;
+                ((PlayerStateBehavior)Actor.ActorStateBehavior).SetXVelocity(Actor.FacingRight ? 20f : -20f);
+            }
+            else if (!CanRoll)
+            {
+                CanRoll = true;
+                State = PlayerState.Free;
+                ((PlayerStateBehavior)Actor.ActorStateBehavior).SetXVelocity(0f);
             }
         }
     }

@@ -331,7 +331,7 @@
     <Node Id="@296" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Net.WebSockets, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DelayedChildNodesState="NotFetched" FilePath="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Net.WebSockets.dll" Group="Collapsed" Label="System.Net.WebSockets.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@298" Category="CodeSchema_Assembly" Bounds="143.474778017481,-91.901623021759,123.133333333333,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(797190bf-9d81-4c34-8b04-346bb943c812.OutputPath)" Group="Collapsed" Label="UnitTests.dll">
+    <Node Id="@298" Category="CodeSchema_Assembly" Bounds="543.474778017481,332.650660647532,123.133333333333,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(797190bf-9d81-4c34-8b04-346bb943c812.OutputPath)" Group="Collapsed" Label="UnitTests.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@30" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Diagnostics.StackTrace, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DelayedChildNodesState="NotFetched" FilePath="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Diagnostics.StackTrace.dll" Group="Collapsed" Label="System.Diagnostics.StackTrace.dll" UseManualLocation="True">
@@ -415,7 +415,7 @@
     <Node Id="@346" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Reflection.DispatchProxy, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DelayedChildNodesState="NotFetched" FilePath="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Reflection.DispatchProxy.dll" Group="Collapsed" Label="System.Reflection.DispatchProxy.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@347" Category="CodeSchema_Namespace" Bounds="23.6475518625761,17.0212291949025,87.9533333333336,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game" UseManualLocation="True" />
+    <Node Id="@347" Category="CodeSchema_Namespace" Bounds="20.1468635372265,17.0212291949025,87.9533333333336,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game" UseManualLocation="True" />
     <Node Id="@349" Category="CodeSchema_Namespace" Bounds="120.519179801286,121.929314633853,158.45,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Components" UseManualLocation="True" />
     <Node Id="@350" Category="CodeSchema_Namespace" Bounds="244.270546762191,192.759902053416,206.05,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Components‎.Collision" UseManualLocation="True" />
     <Node Id="@351" Category="CodeSchema_Namespace" Bounds="10.7588800955239,192.759902053416,203.073333333333,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Components‎.Combat" UseManualLocation="True" />
@@ -424,16 +424,16 @@
     <Node Id="@354" Category="CodeSchema_Namespace" Bounds="110.653526701239,132.837185029596,271.276666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Components‎.Renderer‎.Animations" UseManualLocation="True" />
     <Node Id="@355" Category="CodeSchema_Namespace" Bounds="58.0522134288569,79.3849020534159,172.486666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Components‎.UI" UseManualLocation="True" />
     <Node Id="@356" Category="CodeSchema_Namespace" Bounds="386.075557883347,-105.236529978634,267.34,25" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Components‎.UI‎.BaseComponents" UseManualLocation="True" />
-    <Node Id="@357" Category="CodeSchema_Namespace" Bounds="313.435223422443,6.18834583253977,120.26,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Entity" UseManualLocation="True" />
-    <Node Id="@358" Category="CodeSchema_Namespace" Bounds="358.692477122415,233.796304453229,194.576666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.GameObjectFactory" UseManualLocation="True" />
+    <Node Id="@357" Category="CodeSchema_Namespace" Bounds="309.934535097094,6.18834583253976,120.26,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Entity" UseManualLocation="True" />
+    <Node Id="@358" Category="CodeSchema_Namespace" Bounds="460.194535097094,37.796304453229,194.576666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.GameObjectFactory" UseManualLocation="True" />
     <Node Id="@36" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DelayedChildNodesState="NotFetched" FilePath="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll" Group="Collapsed" Label="System.Runtime.CompilerServices.Unsafe.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@360" Category="CodeSchema_Namespace" Bounds="141.60088519591,7.24678003421334,141.834338226533,25.0153600512" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Interfaces" UseManualLocation="True" />
+    <Node Id="@360" Category="CodeSchema_Namespace" Bounds="138.100196870561,7.24678003421336,141.834338226533,25.0153600512" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Interfaces" UseManualLocation="True" />
     <Node Id="@361" Category="CodeSchema_Namespace" Bounds="-10.2799437879102,205.660059747289,128.506666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Physics" UseManualLocation="True" />
     <Node Id="@363" Category="CodeSchema_Namespace" Bounds="250.603934724572,28.5849462551599,208.61,85" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="Game‎.Physics‎.RaycastSystem" UseManualLocation="True" />
     <Node Id="@365" Category="CodeSchema_Namespace" Bounds="-107.512452875233,72.0213291949025,159.416666666667,25" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.SceneSystem" UseManualLocation="True" />
-    <Node Id="@366" Category="CodeSchema_Namespace" Bounds="447.241142034455,118.192140413821,178.606666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.SimpleGeometry" UseManualLocation="True" />
+    <Node Id="@366" Category="CodeSchema_Namespace" Bounds="446.241142034455,206.192140413821,178.606666666667,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.SimpleGeometry" UseManualLocation="True" />
     <Node Id="@367" Category="CodeSchema_Namespace" Bounds="160.559151999262,222.595109245308,117.73,25" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Game‎.Tools" UseManualLocation="True" />
     <Node Id="@368" Category="CodeSchema_Class" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="CCanvas" />
     <Node Id="@370" Category="CodeSchema_Class" Bounds="343.430013235672,-11.7621759670622,96.5999999999999,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Debug" UseManualLocation="True" />
@@ -473,7 +473,7 @@
     <Node Id="@48" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" DelayedChildNodesState="NotFetched" FilePath="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.ValueTuple.dll" Group="Collapsed" Label="System.ValueTuple.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
-    <Node Id="@50" Category="CodeSchema_Assembly" Bounds="-127.512452875233,-33.8117541674602,773.360261576355,312.608158620689" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="17" FilePath="$(a689b4f3-1d03-4fbb-94f8-01c96128db2f.OutputPath)" Group="Expanded" Label="Game.dll" UseManualLocation="True">
+    <Node Id="@50" Category="CodeSchema_Assembly" Bounds="-127.512452875233,-33.8117541674602,802.283654638994,301.406963412768" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="17" FilePath="$(a689b4f3-1d03-4fbb-94f8-01c96128db2f.OutputPath)" Group="Expanded" Label="Game.dll" UseManualLocation="True">
       <Category Ref="FileSystem.Category.FileOfType.dll" />
     </Node>
     <Node Id="@52" Category="CodeSchema_Assembly" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_StrongName="System.Dynamic.Runtime, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DelayedChildNodesState="NotFetched" FilePath="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1\System.Dynamic.Runtime.dll" Group="Collapsed" Label="System.Dynamic.Runtime.dll" UseManualLocation="True">
@@ -700,14 +700,14 @@
     <Link Source="@298" Target="@354" Category="References" Bounds="97.8066126006576,-288.4377,138.816408282488,458.199314106705" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="27">
       <Category Ref="CodeSchema_Calls" />
     </Link>
-    <Link Source="@298" Target="@357" Category="References" Bounds="226.944536615119,-63.8118541674602,114.841010412556,65.5392688247403" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="139">
+    <Link Source="@298" Target="@357" Category="References" Bounds="384.31924992812,38.4929607155197,211.725103096298,294.157699932012" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="139">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
       <Category Ref="InheritsFrom" />
     </Link>
     <Link Source="@298" Target="@36" Category="CodeMap_ExternalReference" />
-    <Link Source="@298" Target="@361" Category="CodeSchema_Calls" Bounds="64.3936653507516,-66.901623021759,134.301697836405,264.536663096929" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="9" />
-    <Link Source="@298" Target="@366" Category="CodeSchema_Calls" Bounds="224.764961535785,-66.901623021759,284.454095953091,180.275973405753" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="44" />
+    <Link Source="@298" Target="@361" Category="CodeSchema_Calls" Bounds="116.986530137501,232.68109124926,433.811918290214,99.9695693982715" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="9" />
+    <Link Source="@298" Target="@366" Category="CodeSchema_Calls" Bounds="546.748641767425,239.079537408077,51.4232609131552,93.5711232394543" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="44" />
     <Link Source="@298" Target="@38" Category="CodeMap_ExternalReference" />
     <Link Source="@298" Target="@4" Category="CodeMap_ExternalReference" />
     <Link Source="@298" Target="@40" Category="CodeMap_ExternalReference" />
@@ -756,7 +756,7 @@
     <Link Source="@298" Target="@98" Category="CodeMap_ExternalReference" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1">
       <Category Ref="CodeSchema_AttributeUse" />
     </Link>
-    <Link Source="@347" Target="@361" Category="CodeSchema_Calls" Bounds="55.5275361532114,42.0212291949025,11.1921212005932,154.662303452997" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="4" />
+    <Link Source="@347" Target="@361" Category="CodeSchema_Calls" Bounds="55.1295463603387,42.0212291949025,8.32139295725952,154.651830830974" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="4" />
     <Link Source="@347" Target="@54" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="19">
       <Category Ref="CodeSchema_AttributeUse" />
       <Category Ref="CodeSchema_Calls" />
@@ -1000,7 +1000,7 @@
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="@357" Target="@349" Category="References" Bounds="232.875274658203,31.1883449554443,140.546142578125,85.9498081207275" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="5">
+    <Link Source="@357" Target="@349" Category="References" Bounds="233.745330810547,31.1883449554443,136.447082519531,86.0624408721924" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="5">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
@@ -1035,11 +1035,11 @@
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_FunctionPointer" />
     </Link>
-    <Link Source="@358" Target="@357" Category="References" Bounds="381.155565203284,39.6506693463228,70.2990641638976,194.145635106906" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="593">
+    <Link Source="@358" Target="@357" Category="References" Bounds="438.384565404002,30.2104667077921,44.9799711600572,7.58583774543694" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="593">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="@358" Target="@366" Category="CodeSchema_Calls" Bounds="464.69196562709,150.575991594449,57.9956046976336,83.2203128587802" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="5" />
+    <Link Source="@358" Target="@366" Category="CodeSchema_Calls" Bounds="538.335642402967,62.796304453229,17.5187420942403,134.471253729226" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="5" />
     <Link Source="@358" Target="@368" Category="References" IsSourceVirtualized="True" Weight="6" />
     <Link Source="@358" Target="@54" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="31">
       <Category Ref="CodeSchema_Calls" />
