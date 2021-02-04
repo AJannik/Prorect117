@@ -252,9 +252,31 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(117.5f, 8.5f), 7);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(124.5f, 4.5f), 7);
 
+            // Decorations
+            ObjectFactory.BuildSprite(scene, new Vector2(5f, 9f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(23f, 7f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(68f, 12f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(98f, 13f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(2, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(7, 14), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(20, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(33, 14), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(80, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(50, 13), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(74, 11), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(122, 10), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(74, 11), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(12f, 14f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(14f, 2f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(23f, 13f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(31f, 2f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(43f, 13f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(85f, 5f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(120f, 14f), new Vector2(3, 2), "Environment.Bush.png");
+
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(4.5f, 5.1f));
-            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13.5f), new Vector2(3, 3));
+            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(125.5f, 13f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
@@ -442,9 +464,29 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(17.5f, -123f), 2, "Content.StoneBrickTilemap.png");
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(27.5f, -123f), 2, "Content.StoneBrickTilemap.png");
 
+            // Decorations
+            ObjectFactory.BuildSprite(scene, new Vector2(15.5f, -110.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(8f, -81f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(5f, -114.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(23.5f, -96.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(26.5f, -119.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(6, -125f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(8, -95), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(12, -107), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(20, -97f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(25, -126), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(20, -81), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(7.5f, -118f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(8.5f, -112f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(9.5f, -89f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16f, -120f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16.5f, -92f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(15f, -126f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(24f, -81f), new Vector2(3, 2), "Environment.Bush.png");
+
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(10.5f, -125.9f));
-            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(29.5f, -82.5f), new Vector2(3, 3));
+            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(29.5f, -83f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
@@ -675,9 +717,48 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(25.5f, -74f), 2, "Content.DarkStoneBrickTilemap.png");
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(18.5f, -76f), 4, "Content.DarkStoneBrickTilemap.png");
 
+            // Decorations
+            ObjectFactory.BuildSprite(scene, new Vector2(14f, -55f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(25f, -58f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(20f, -29.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(14f, -2.5f), new Vector2(3, 3), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(2f, -6f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16f, -11f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(5f, -15f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(22f, -15f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(10f, -22f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(25f, -23f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(4f, -31f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16f, -33f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(22f, -39f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(10f, -42f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(28f, -49f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(10f, -56f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(13f, -59f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(22f, -59f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(18f, -62f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(22f, -70f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(12f, -77f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(6f, -6f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(12f, -9f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(19f, -11f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(8f, -19f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(23f, -20f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(24f, -28f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(8f, -39f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16f, -39f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(12f, -46f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(14f, -49f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(25f, -45f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(5f, -62f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(17f, -70f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(24f, -74f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(28f, -77f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(4f, -77f), new Vector2(3, 2), "Environment.Bush.png");
+
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(27.5f, -76.9f));
-            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(7.5f, -2.5f), new Vector2(3, 3));
+            GameObject levelEnd = StaticRigidbodyFactory.BuildLevelEnd(scene, new Vector2(7.5f, -3f), new Vector2(3, 3));
             GameObject camera = ObjectFactory.BuildCamera(scene, Vector2.Zero);
             camera.SetParent(player);
             camera.GetComponent<CCamera>().Scale = 6f;
@@ -779,39 +860,20 @@ namespace Game.SceneSystem
             // Level border
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(64f, 0.5f), 128);
             StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(64f, 31.5f), 128);
-            StaticRigidbodyFactory.BuildWall(scene, new Vector2(0.5f, 16f), 32);
-            StaticRigidbodyFactory.BuildWall(scene, new Vector2(127.5f, 16f), 32);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(0.5f, 16f), 30);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(127.5f, 16f), 30);
 
-            // Level platforms and walls
-            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(3f, 5.5f), 4);
+            // Level  walls
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(12.5f, 10f), 18);
-            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(18f, 19.5f), 12);
-            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(31f, 22.5f), 2);
-            StaticRigidbodyFactory.BuildWall(scene, new Vector2(32.5f, 23f), 16);
-            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(34f, 22.5f), 2);
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(22.5f, 1.5f), new Vector2(3f, 1f), new Vector2(26.5f, 1.5f), 30);
-            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(23f, 1.5f), 3);
-            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(75f, 12.5f), 64);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(32.5f, 20f), 22);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(43.5f, 4f), 6);
-            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(46f, 1.5f), 3);
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(45.5f, 1.5f), new Vector2(3f, 1f), new Vector2(43.5f, 7.5f), 30);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(47.5f, 4f), 6);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(62f, 2f), 2);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(67.5f, 3f), 4);
-            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(83f, 5.5f), 32);
-            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(82.5f, 1.5f), 5);
-            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(79f, 1.5f), 3);
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(78.5f, 1.5f), new Vector2(3f, 1f), new Vector2(82.5f, 2f), 30);
-            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(87f, 1.5f), 3);
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(86.5f, 1.5f), new Vector2(3f, 1f), new Vector2(93.5f, 1.5f), 30);
-            StaticRigidbodyFactory.BuildWall(scene, new Vector2(43.5f, 16f), 6);
-            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(46f, 13.5f), 3);
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(45.5f, 13.5f), new Vector2(3f, 1f), new Vector2(43.5f, 19.5f), 30);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(50.5f, 15f), 4);
-            StaticRigidbodyFactory.BuildWall(scene, new Vector2(59.5f, 15.5f), 5);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(59.5f, 15f), 4);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(67.5f, 15f), 4);
-            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(70.5f, 13.5f), 4);
-            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(70f, 13.5f), new Vector2(4f, 1f), new Vector2(67.5f, 18.5f), 30);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(43.5f, 16f), 6);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(72.5f, 15f), 4);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(80.5f, 14.5f), 3);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(87.5f, 15.5f), 5);
@@ -819,25 +881,43 @@ namespace Game.SceneSystem
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(110f, 3f), 4);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(115f, 3f), 4);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(120f, 3f), 4);
-            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(117.5f, 4.5f), 4);
-            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(124.5f, 27f), 5);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(20.5f, 1.5f), 1);
             StaticRigidbodyFactory.BuildWall(scene, new Vector2(24.5f, 1.5f), 1);
-            StaticRigidbodyFactory.BuildWall(scene, new Vector2(76.5f, 1.5f), 1);
-            StaticRigidbodyFactory.BuildWall(scene, new Vector2(88.5f, 1.5f), 1);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(78.5f, 1.5f), 1);
+            StaticRigidbodyFactory.BuildWall(scene, new Vector2(86.5f, 1.5f), 1);
 
-            // Moving platforms and spikes
+            // Level Platforms
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(3f, 5.5f), 4);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(18f, 19.5f), 12);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(30.5f, 22.5f), 3);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(75f, 12.5f), 64);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(35.5f, 22.5f), 5);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(83f, 5.5f), 32);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(82.5f, 1.5f), 5);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(10.5f, 17f), 3);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(117.5f, 4.5f), 4);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(112.5f, 4.5f), 4);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(124.5f, 27f), 5);
+            StaticRigidbodyFactory.BuildPlatform(scene, new Vector2(25f, 8.5f), 16);
+
+            // Level spikes
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(23f, 1.5f), 3);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(46f, 1.5f), 3);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(70.5f, 13.5f), 4);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(80f, 1.5f), 1);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(46f, 13.5f), 3);
+            StaticRigidbodyFactory.BuildSpikes(scene, new Vector2(86f, 1.5f), 1);
+
+            // Level Deadly area
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(45.5f, 1.5f), new Vector2(3f, 1f), new Vector2(43.5f, 7.5f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(79.5f, 1.5f), new Vector2(1f, 1f), new Vector2(82.5f, 2f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(85.5f, 1.5f), new Vector2(1f, 1f), new Vector2(93.5f, 1.5f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(45.5f, 13.5f), new Vector2(3f, 1f), new Vector2(43.5f, 19.5f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(70f, 13.5f), new Vector2(4f, 1f), new Vector2(67.5f, 18.5f), 30);
+            StaticRigidbodyFactory.BuildDeadlyArea(scene, new Vector2(22.5f, 1.5f), new Vector2(3f, 1f), new Vector2(26.5f, 3.5f), 30);
+
+            // Moving platforms
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(20.5f, 15f), new Vector2(30f, 15f), 3);
-            ObjectFactory.BuildMovingSpikes(scene, new Vector2(21f, 16f), new Vector2(30.5f, 16f), 3);
-            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(20.5f, 16f), new Vector2(30f, 16f), new Vector2(3, 1), new Vector2(23, 20f), 30);
-            ObjectFactory.BuildMovingPlatform(scene, new Vector2(22.5f, 2.5f), new Vector2(22.5f, 8.5f), 3);
-            ObjectFactory.BuildMovingSpikes(scene, new Vector2(23f, 3.5f), new Vector2(23f, 9.5f), 3);
-            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(22.5f, 3.5f), new Vector2(22.5f, 9.5f), new Vector2(2.75f, 1), new Vector2(26.5f, 1.5f), 30);
-            ObjectFactory.BuildMovingPlatform(scene, new Vector2(40.5f, 3.5f), new Vector2(40.5f, 18.5f), 3);
-            ObjectFactory.BuildMovingSpikes(scene, new Vector2(90f, 13.5f), new Vector2(105f, 13.5f), 3);
-            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(89.5f, 13.5f), new Vector2(104.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
-            ObjectFactory.BuildMovingSpikes(scene, new Vector2(105f, 13.5f), new Vector2(90f, 13.5f), 3);
-            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(104.5f, 13.5f), new Vector2(89.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(110f, 7.5f), new Vector2(110f, 12.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(109.5f, 16.5f), new Vector2(110f, 27.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(115f, 9.5f), new Vector2(115f, 11.5f), 2);
@@ -848,8 +928,48 @@ namespace Game.SceneSystem
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(118f, 14.5f), new Vector2(118f, 20.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(113f, 13.5f), new Vector2(113f, 19.5f), 2);
             ObjectFactory.BuildMovingPlatform(scene, new Vector2(112.5f, 23.5f), new Vector2(112.5f, 28.5f), 2);
-            ObjectFactory.BuildMovingPlatform(scene, new Vector2(11f, 3.5f), new Vector2(11f, 12.5f), 2);
-            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2f, 8.5f), new Vector2(2f, 17.5f), 2);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(10.5f, 3f), new Vector2(10.5f, 12.5f), 3);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(2.5f, 8f), new Vector2(2.5f, 17.5f), 3);
+            ObjectFactory.BuildMovingPlatform(scene, new Vector2(40.5f, 3.5f), new Vector2(40.5f, 18.5f), 3);
+
+            // Moving spikes
+            ObjectFactory.BuildMovingSpikes(scene, new Vector2(21f, 16f), new Vector2(30.5f, 16f), 3);
+            ObjectFactory.BuildMovingSpikes(scene, new Vector2(90f, 13.5f), new Vector2(105f, 13.5f), 3);
+            ObjectFactory.BuildMovingSpikes(scene, new Vector2(105f, 13.5f), new Vector2(90f, 13.5f), 3);
+
+            // Moving deadly area
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(20.5f, 16f), new Vector2(30f, 16f), new Vector2(3, 1), new Vector2(23, 23f), 30);
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(89.5f, 13.5f), new Vector2(104.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
+            ObjectFactory.BuildMovingDeadlyArea(scene, new Vector2(104.5f, 13.5f), new Vector2(89.5f, 13.5f), new Vector2(3, 1), new Vector2(87.5f, 19.5f), 30);
+
+            // Decorations
+            ObjectFactory.BuildSprite(scene, new Vector2(3f, 3f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(18f, 3f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(30f, 3f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(55f, 15f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(20f, 22f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(50f, 3f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(75f, 15f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(90f, 8f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(115f, 7f), new Vector2(4, 4), "Environment.TreeSmall.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(6, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(34, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(55, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(95, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(24, 10f), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(83, 14), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(124, 2), new Vector2(2, 2), "Environment.Rock.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(2f, 7f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(16f, 21f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(19f, 10f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(36f, 24f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(72f, 2f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(80f, 7f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(91f, 7f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(64f, 14f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(105f, 2f), new Vector2(3, 2), "Environment.Bush.png");
+            ObjectFactory.BuildSprite(scene, new Vector2(111f, 6f), new Vector2(3, 2), "Environment.Bush.png");
 
             // Player, exit and camera
             GameObject player = ObjectFactory.BuildPlayer(scene, new Vector2(2.5f, 2.5f));
@@ -883,6 +1003,9 @@ namespace Game.SceneSystem
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(55f, 13.5f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(34f, 23.5f));
             EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(124.5f, 27.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(20f, 9.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(25f, 9.5f));
+            EnemyFactory.BuildSkeletonEnemy(scene, new Vector2(30f, 9.5f));
 
             // Canvas
             GameObject canvas = GuiFactory.BuildCanvas(scene);
@@ -892,11 +1015,13 @@ namespace Game.SceneSystem
             GuiFactory.BuildHudElements(scene, canvas, player.GetComponent<CPlayer>());
 
             // Collectables
+            // Keys
             ObjectFactory.BuildKey(scene, new Vector2(124f, 24.5f));
             ObjectFactory.BuildKey(scene, new Vector2(97f, 16.5f));
             ObjectFactory.BuildKey(scene, new Vector2(72.5f, 3f));
 
-            ObjectFactory.BuildCoin(scene, new Vector2(3f, 8f));
+            // Coins
+            ObjectFactory.BuildCoin(scene, new Vector2(3f, 7f));
             ObjectFactory.BuildCoin(scene, new Vector2(15f, 22f));
             ObjectFactory.BuildCoin(scene, new Vector2(22f, 22f));
             ObjectFactory.BuildCoin(scene, new Vector2(31f, 24.5f));
@@ -911,6 +1036,8 @@ namespace Game.SceneSystem
             ObjectFactory.BuildCoin(scene, new Vector2(75.5f, 8.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(85.5f, 9.5f));
             ObjectFactory.BuildCoin(scene, new Vector2(100.5f, 8.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(25f, 10.5f));
+            ObjectFactory.BuildCoin(scene, new Vector2(20f, 10.5f));
 
             // Power Downs
             PowerDownFactory.Fragile(scene, new Vector2(98.5f, 3f));
